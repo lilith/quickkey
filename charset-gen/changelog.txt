@@ -1,0 +1,8 @@
+1-24-06
+Added Generate Generic Listing feature
+Fixed multiple bugs
+Changed file specification from #### - #### name t, to ######..######; name
+This allows 5-digit hexadecimal codes to work.
+Used this tool to update the unicode ranges packaged with quick key
+Also added a failed lines report. 
+NOTE! surrogates cannot be generated!
