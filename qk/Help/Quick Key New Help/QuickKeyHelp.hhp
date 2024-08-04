@@ -1,0 +1,25 @@
+[OPTIONS]
+Auto Index=Yes
+Compatibility=1.1 or later
+Compiled file=QuickKeyHelp.chm
+Contents file=toc.hhc
+Default Window=Main
+Default topic=Introducing Quick Key 51.htm
+Display compile progress=Yes
+Index file=Index.hhk
+Language=0x409 English (United States)
+Title=Quick Key Help
+
+[WINDOWS]
+Main="Quick Key Help","toc.hhc",,"QuickKey Overview.htm","QuickKey Overview.htm",,,,,0x2100,,0x204e,[365,269,938,690],,0x8,,,,,0
+
+
+[FILES]
+QuickKey Overview.htm
+Using the taskbar icon menu.htm
+Displaying the Quick Key Character Grid.htm
+Introducing Quick Key 51.htm
+Starting Quick Key 5.htm
+
+[INFOTYPES]
+
