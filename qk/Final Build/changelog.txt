@@ -1,0 +1,99 @@
+4-30-06
+Updated the Help file
+
+4-20-06
+The Character Grid lock button now affects both form locations and character set editing
+Changed the character grid lock icon
+The Character Grid no longer changes size when a character is sent to "last window"
+Last window is now handled properly for all languages. 
+Changed the Lock Both button tool-tip and pop-up. Need to get these translated
+The Character Grid now saves its place more reliably.
+Fixed the minimum load size problem
+Fixed the about dialog version number
+Overhauled the form resizing and titlbar code in the Autohide feature and in the Character Grid
+
+
+2-22-06
+Added Send Delay setting for find adjustment
+Added Send API setting
+Added Last Window Keyword and made it default (Uses the most recent window instead of a keyword)
+A click on the system tray icon now displays  Quick Key
+Fixed Clipboard key shortcut bug for the Toolbar.
+Improved key shortcut behavior in general.
+Added Clipboard+SendKeys method for interaction with GTK+ applications
+Added Copy HTML code feature, and added support for pasting such
+Added AutoSize and SendToEnd settings stubs.
+Changed color scheme, tooltips, redrawing code
+When Settings.QuickKey is set to true, QuickKeyForm now gets the focus
+Modified code for easy localization
+All media files are now embedded resources
+Changed the default mouse settings.
+Quick Key now supports German!
+Added /Language:de argument support
+
+2-6-06
+Changed prerequisite settings.
+The textbox in the Edit As Text window is the first control to recieve focus.
+Added Tips section to Toolbar help menu
+Added more keywords
+Modified the tooltips to include HTML codes
+(Updated the version of JCL used)
+Modified the intro tip
+
+
+1-25-06
+Included missing charset files in the new setup
+Fixed the titles on the character orientation menu
+Stopped the delete key from working in when the Toolbar has focus
+Made the Options dialog a little larger
+Rewrote the error handler
+Updated the version of the JCL being used:
+Modified PasteFocused() code to watch out for when no characters are loaded, so that focus is not applied to control (-1)
+Modified tooltip listing
+Modified “Do you want to display” dialog, and its conditions. Also changed “No Characters!” to “Click to display characters”
+Fixed multiple problems with pasting into a character set.
+Fixed pop-under warning message
+Solved more sending problems… Now using SendInput()
+
+1-24-06
+Charsetgenerator and FindKeyword are now separate packages
+All character sets were rebuilt to be compliant with the latest Unicode specification, as well as reorganized
+Made all icons embedded resources
+Upgraded toolbar icons
+Rebuilt Setup
+Defaulted the installation type to “everyone”
+Defaulted the toolbar to “on”
+
+1/23/2006
+Options dialog bug fixed
+Inserted delay to fix keystroke sending
+
+1/19/2004
+System Shutdown Bug mitigated
+
+5.1.0 5/17/2004
+Better error handling for missing resources and access denied scenarios. 
+Improved clipboard code. Menu items disabled when unusable
+Tips System
+
+5.1.0 1/17/2004
+Font change error – When selecting a font for the first time, the font name in the font box may appear normal, but the characters will not change their appearance. 
+
+5.0.1 1/4/2004
+Window Error – While using one of the import dialog boxes, you may encounter an error stating “Cannot create window handle” or “Cannot reference to disposed object”.  If This happens, click abort and restart the program. 
+
+5.0.1 12/29/2003
+Unreliability in character sending due to the antiquated system API’s dictated by the format of the .NET Framework
+Character Operations Bug on Bottom and Right Character Orientation – dragging and dropping or cut and paste operations may have unexpected results if performed while character orientation is set to bottom or right. To modify the character list, select a different orientation until all necessary modifications are complete. 
+Event Log Viewer – Here is the event Log Viewer at last. Not exactly as I envisioned it, but it should work as a temporary bug tracking utility.
+
+5.0.1 11/24/2003
+Keyword Support and character sending
+Larger Help File
+System Startup Bug Fix
+
+Once again, please notify me of any problems Quick Key may exhibit and send any suggestions or comments to nathanaeljones@users.sourceforge.net  
+
+			Thank You,
+				Nathanael Jones
+

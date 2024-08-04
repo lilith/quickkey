@@ -1,0 +1,8 @@
+Quick Key supports two command-line switches:
+/Debug 		enables detailed logging of application events
+/Language:en 	changes the application interface language to english
+/Language:de 	changes the application interface language to german
+/Show		Displays the Character Grid on startup
+
+To open a .charset file
+QuickKey.exe "filename"

@@ -21,7 +21,6 @@
 '
 'Please report bugs to nathanaeljones@users.sourceforge.net
 
-
 #Region "Compile Options"
 
 Option Strict On
@@ -48,9 +47,14 @@ Public Class ToolbarForm
     Public Sub New()
         MyBase.New()
 
+        'Don't know why this is needed
         Me.Visible = False
+
+        Dim t As Date = Now
         'This is the custom control and component intitialization subroutine
         InitializeComponents()
+
+		Log.LogMajorInfo("ToolbarForm initialized components in " & Date.op_Subtraction(Now, t).ToString)
 
         'Add any initialization after the InitializeComponent() call
         RecentFilesChanged()
@@ -58,6 +62,10 @@ Public Class ToolbarForm
         FilterSettingsChanged()
         KeywordsChanged()
         KeywordChanged()
+		Log.LogMajorInfo("ToolbarForm initialized in " & Date.op_Subtraction(Now, t).ToString)
+
+
+
     End Sub
 
 #End Region
@@ -253,6 +261,12 @@ Public Class ToolbarForm
 
 #End Region
 
+#Region "Exit Menu"
+
+    Friend WithEvents mnuFileExit As System.Windows.Forms.MenuItem
+
+#End Region
+
 #End Region
 
 #Region "Edit Menu Declaration"
@@ -274,6 +288,13 @@ Public Class ToolbarForm
     Friend WithEvents mnuEditCopy As System.Windows.Forms.MenuItem
 
 #End Region
+
+#Region "CopyHTML Menu"
+
+    Friend WithEvents mnuEditCopyHTML As System.Windows.Forms.MenuItem
+
+#End Region
+
 
 #Region "Paste Menu"
 
@@ -570,6 +591,14 @@ Public Class ToolbarForm
 
 #End Region
 
+
+#Region "Get Characters from Unicode Value"
+
+    Friend WithEvents mnuToolsGetUnicodeChars As MenuItem
+
+#End Region
+
+
 #Region "SortAsc"
 
     Friend WithEvents mnuToolsSortAsc As MenuItem
@@ -598,6 +627,24 @@ Public Class ToolbarForm
 #End Region
 
 #Region "Help Menu Declaration"
+
+#Region "Tips Menu"
+
+    Friend WithEvents mnuHelpTips As System.Windows.Forms.MenuItem
+
+#End Region
+
+#Region "Reset Tips Menu"
+
+    Friend WithEvents mnuHelpTipsReset As System.Windows.Forms.MenuItem
+
+#End Region
+
+#Region "Hide Tips Menu"
+
+    Friend WithEvents mnuHelpTipsHide As System.Windows.Forms.MenuItem
+
+#End Region
 
 #Region "Help Menu"
 
@@ -769,193 +816,187 @@ Public Class ToolbarForm
 #End Region
 
 #Region "Component Initialization Pocedure"
-
 #Region "Menu Inintialization Procedures"
 
 #Region "Menu Initialization Procedure"
 
-    Private Sub InitializeMenus()
+	Private Sub InitializeMenus()
 
-        mnuMain = New MainMenu()
+		mnuMain = New MainMenu()
 
-        InitFileMenu()
+		InitFileMenu()
 
-        InitEditMenu()
+		InitEditMenu()
+		InitFontMenu()
 
-        InitFontMenu()
+		InitFilterMenu()
 
-        InitFilterMenu()
+		InitKeywordsMenu()
 
-        InitKeywordsMenu()
+		InitViewMenu()
 
-        InitViewMenu()
+		InitToolsMenu()
 
-        InitToolsMenu()
+		InitHelpMenu()
 
-        InitHelpMenu()
-
-        Me.Menu = mnuMain
-    End Sub
+		Me.Menu = mnuMain
+	End Sub
 
 #End Region
 
 #Region "File Menu Initialization Procedure"
 
-    Private Sub InitFileMenu()
-        mnuFile = New MenuItem()
-        mnuFile.Text = "&File"
-  
+	Private Sub InitFileMenu()
+		mnuFile = New MenuItem()
+		mnuFile.Text = My.Resources.FileMenu
 
-        mnuFileNew = New MenuItem("&New")
-        mnuFileOpen = New MenuItem("&Open")
-        mnuFileSave = New MenuItem("&Save")
-        mnuFileSaveAs = New MenuItem("Save &As...")
-        mnuFileSaveFont = New MenuItem("Save Font")
-        mnuFileSaveSize = New MenuItem("Save Font Size")
-        mnuFileSaveFontAttrs = New MenuItem("Save Font Attributes")
-        mnuFileSaveFilters = New MenuItem("Save Filters")
-        mnuFileSaveCharacters = New MenuItem("Save Characters")
-        mnuFileSaveOnlyCharacters = New MenuItem("Save Characters Only")
-        mnuFileSaveAllInfo = New MenuItem("Save All Information")
-        mnuFileReadOnly = New MenuItem("Save Read-Only")
-        mnuFileImport = New MenuItem("&Import")
-        mnuFileExport = New MenuItem("&Export to Report...")
-        mnuFileRecent = New MenuItem("&Recent")
-        mnuFileRecentSep = New MenuItem("-")
-        mnuFileDocked = New MenuItem("&Auto-hide")
-        mnuFileLocked = New MenuItem("&Locked")
-        mnuFileCharsLocked = New MenuItem("&Chars Locked")
-        mnuFileHide = New MenuItem("&Hide Toolbar")
-        mnuFileHideQuickKey = New MenuItem("Hide All")
+		mnuFileNew = New MenuItem(My.Resources.FileNew)
+		mnuFileOpen = New MenuItem(My.Resources.FileOpen)
+		mnuFileSave = New MenuItem(My.Resources.FileSave)
+		mnuFileSaveAs = New MenuItem(My.Resources.FileSaveAs)
+		mnuFileSaveFont = New MenuItem(My.Resources.FileSaveFont)
+		mnuFileSaveSize = New MenuItem(My.Resources.FileSaveSize)
+		mnuFileSaveFontAttrs = New MenuItem(My.Resources.FileSaveFontAttrs)
+		mnuFileSaveFilters = New MenuItem(My.Resources.FileSaveFilters)
+		mnuFileSaveCharacters = New MenuItem(My.Resources.FileSaveCharacters)
+		mnuFileSaveOnlyCharacters = New MenuItem(My.Resources.FileSaveOnlyCharacters)
+		mnuFileSaveAllInfo = New MenuItem(My.Resources.FileSaveAllInfo)
+		mnuFileReadOnly = New MenuItem(My.Resources.FileReadOnly)
+		mnuFileImport = New MenuItem(My.Resources.FileImport)
+		mnuFileExport = New MenuItem(My.Resources.FileExport)
+		mnuFileRecent = New MenuItem(My.Resources.FileRecent)
+		mnuFileRecentSep = New MenuItem("-")
+		mnuFileDocked = New MenuItem(My.Resources.FileDocked)
+		mnuFileLocked = New MenuItem(My.Resources.FileLocked)
+		mnuFileCharsLocked = New MenuItem(My.Resources.FileCharsLocked)
+		mnuFileHide = New MenuItem(My.Resources.FileHide)
+		mnuFileHideQuickKey = New MenuItem(My.Resources.FileHideQuickKey)
+		mnuFileExit = New MenuItem(My.Resources.FileExit)
 
-
-        mnuFileOpen.Shortcut = Shortcut.CtrlO
-
-
-        'Instantaniate Third-Level MenuItems
-        mnuFileNewBlank = New MenuItem("&Blank Charset")
-        mnuFileNewCopy = New MenuItem("&Copy of this Charset")
-        mnuFileNewCopyAttrs = New MenuItem("Copy of these &Attributes")
-
-        mnuFileNew.MenuItems.Add(mnuFileNewBlank)
-        mnuFileNew.MenuItems.Add(mnuFileNewCopy)
-        mnuFileNew.MenuItems.Add(mnuFileNewCopyAttrs)
-
-        mnuFileImportCharset = New MenuItem("From C&harset...")
-        mnuFileImportCharsetAttrs = New MenuItem("All &Attributes from Charset")
-        mnuFileImportFile = New MenuItem("From &File...")
-        mnuFileImportClipboard = New MenuItem("From &Clipboard...")
+		mnuFileOpen.Shortcut = Shortcut.CtrlO
 
 
-        mnuFileImport.MenuItems.Add(mnuFileImportCharset)
-        mnuFileImport.MenuItems.Add(mnuFileImportFile)
-        mnuFileImport.MenuItems.Add(mnuFileImportClipboard)
-        mnuFileImport.MenuItems.Add(mnuFileImportCharsetAttrs)
+		'Instantaniate Third-Level MenuItems
+		mnuFileNewBlank = New MenuItem(My.Resources.FileNewBlank)
+		mnuFileNewCopy = New MenuItem(My.Resources.FileNewCopy)
+		mnuFileNewCopyAttrs = New MenuItem(My.Resources.FileNewCopyAttrs)
 
-        mnuFileSave.Shortcut = Shortcut.CtrlS
-        mnuFileNewBlank.Shortcut = Shortcut.CtrlN
-        
-        mnuFileHideQuickKey.Shortcut = Shortcut.AltF4
-        mnuFileExport.Enabled = False
+		mnuFileNew.MenuItems.Add(mnuFileNewBlank)
+		mnuFileNew.MenuItems.Add(mnuFileNewCopy)
+		mnuFileNew.MenuItems.Add(mnuFileNewCopyAttrs)
 
-        mnuFile.MenuItems.Add(mnuFileNew)
-        mnuFile.MenuItems.Add(mnuFileOpen)
-        mnuFile.MenuItems.Add("-")
-        mnuFile.MenuItems.Add(mnuFileSave)
-        mnuFile.MenuItems.Add(mnuFileSaveAs)
-        mnuFile.MenuItems.Add("-")
-        mnuFile.MenuItems.Add(mnuFileSaveFont)
-        mnuFile.MenuItems.Add(mnuFileSaveSize)
-        mnuFile.MenuItems.Add(mnuFileSaveFontAttrs)
-        mnuFile.MenuItems.Add(mnuFileSaveFilters)
-        mnuFile.MenuItems.Add(mnuFileSaveCharacters)
-        mnuFile.MenuItems.Add("-")
-        mnuFile.MenuItems.Add(mnuFileSaveOnlyCharacters)
-        mnuFile.MenuItems.Add(mnuFileSaveAllInfo)
-        'mnuFile.MenuItems.Add("-")
-        mnuFile.MenuItems.Add(mnuFileReadOnly)
-        mnuFile.MenuItems.Add("-")
-        mnuFile.MenuItems.Add(mnuFileImport)
-        mnuFile.MenuItems.Add("-")
-        'mnuFile.MenuItems.Add(mnuFileExport)
-        'mnuFile.MenuItems.Add("-")
-        mnuFile.MenuItems.Add(mnuFileRecent)
-        mnuFile.MenuItems.Add(mnuFileRecentSep)
-        mnuFile.MenuItems.Add(mnuFileDocked)
-        mnuFile.MenuItems.Add("-")
-        mnuFile.MenuItems.Add(mnuFileHide)
-        mnuFile.MenuItems.Add("-")
-        mnuFile.MenuItems.Add(mnuFileLocked)
-        mnuFile.MenuItems.Add(mnuFileCharsLocked)
-        mnuFile.MenuItems.Add("-")
-        mnuFile.MenuItems.Add(mnuFileHideQuickKey)
+		mnuFileImportCharset = New MenuItem(My.Resources.FileImportCharset)
+		mnuFileImportCharsetAttrs = New MenuItem(My.Resources.FileImportCharsetAttrs)
+		mnuFileImportFile = New MenuItem(My.Resources.FileImportFile)
+		mnuFileImportClipboard = New MenuItem(My.Resources.FileImportClipboard)
 
-        mnuMain.MenuItems.Add(mnuFile)
-    End Sub
+
+		mnuFileImport.MenuItems.Add(mnuFileImportCharset)
+		mnuFileImport.MenuItems.Add(mnuFileImportFile)
+		mnuFileImport.MenuItems.Add(mnuFileImportClipboard)
+		mnuFileImport.MenuItems.Add(mnuFileImportCharsetAttrs)
+
+		mnuFileSave.Shortcut = Shortcut.CtrlS
+		mnuFileNewBlank.Shortcut = Shortcut.CtrlN
+
+		mnuFileHideQuickKey.Shortcut = Shortcut.AltF4
+		mnuFileExport.Enabled = False
+
+		mnuFile.MenuItems.Add(mnuFileNew)
+		mnuFile.MenuItems.Add(mnuFileOpen)
+		mnuFile.MenuItems.Add("-")
+		mnuFile.MenuItems.Add(mnuFileSave)
+		mnuFile.MenuItems.Add(mnuFileSaveAs)
+		mnuFile.MenuItems.Add("-")
+		mnuFile.MenuItems.Add(mnuFileSaveFont)
+		mnuFile.MenuItems.Add(mnuFileSaveSize)
+		mnuFile.MenuItems.Add(mnuFileSaveFontAttrs)
+		mnuFile.MenuItems.Add(mnuFileSaveFilters)
+		mnuFile.MenuItems.Add(mnuFileSaveCharacters)
+		mnuFile.MenuItems.Add("-")
+		mnuFile.MenuItems.Add(mnuFileSaveOnlyCharacters)
+		mnuFile.MenuItems.Add(mnuFileSaveAllInfo)
+		'mnuFile.MenuItems.Add("-")
+		mnuFile.MenuItems.Add(mnuFileReadOnly)
+		mnuFile.MenuItems.Add("-")
+		mnuFile.MenuItems.Add(mnuFileImport)
+		mnuFile.MenuItems.Add("-")
+		'mnuFile.MenuItems.Add(mnuFileExport)
+		'mnuFile.MenuItems.Add("-")
+		mnuFile.MenuItems.Add(mnuFileRecent)
+		mnuFile.MenuItems.Add(mnuFileRecentSep)
+		mnuFile.MenuItems.Add(mnuFileDocked)
+		mnuFile.MenuItems.Add("-")
+		mnuFile.MenuItems.Add(mnuFileHide)
+		mnuFile.MenuItems.Add(mnuFileHideQuickKey)
+		mnuFile.MenuItems.Add("-")
+		mnuFile.MenuItems.Add(mnuFileLocked)
+		mnuFile.MenuItems.Add(mnuFileCharsLocked)
+		mnuFile.MenuItems.Add("-")
+		mnuFile.MenuItems.Add(mnuFileExit)
+
+		mnuMain.MenuItems.Add(mnuFile)
+	End Sub
 
 #End Region
 
 #Region "Edit Menu Initialization Procedure"
 
-    Private Sub InitEditMenu()
-        mnuEdit = New MenuItem()
-        mnuEdit.Text = "&Edit"
+	Private Sub InitEditMenu()
+		mnuEdit = New MenuItem()
+		mnuEdit.Text = My.Resources.EditMenu
 
 
-        mnuEditCut = New MenuItem("Cut Character")
-        mnuEditCopy = New MenuItem("Copy Character")
-        mnuEditPaste = New MenuItem("Paste Character(s)")
-        mnuEditDelete = New MenuItem("Delete Character")
-        mnuEditSend = New MenuItem("Send Character")
-        mnuEditCopyAllChars = New MenuItem("Copy All Characters")
-        mnuEditCopyVisibleChars = New MenuItem("Copy Visible Chars")
-        'mnuEditSend.Enabled = False
-        mnuEditCut.Shortcut = Shortcut.CtrlX
-        mnuEditCopy.Shortcut = Shortcut.CtrlC
-        mnuEditPaste.Shortcut = Shortcut.CtrlV
-        'mnuEditDelete.Shortcut = Shortcut.Del
-        mnuEditSend.Shortcut = Shortcut.CtrlT
+		mnuEditCut = New MenuItem(My.Resources.EditCut)
+		mnuEditCopy = New MenuItem(My.Resources.EditCopy)
+		mnuEditCopyHTML = New MenuItem(My.Resources.EditCopyHTML)
+		mnuEditPaste = New MenuItem(My.Resources.EditPaste)
+		mnuEditDelete = New MenuItem(My.Resources.EditDelete)
+		mnuEditSend = New MenuItem(My.Resources.EditSend)
+		mnuEditCopyAllChars = New MenuItem(My.Resources.EditCopyAllChars)
+		mnuEditCopyVisibleChars = New MenuItem(My.Resources.EditCopyVisibleChars)
+		'mnuEditSend.Shortcut = Shortcut.CtrlT
 
-        mnuEdit.MenuItems.Add(mnuEditCut)
-        mnuEdit.MenuItems.Add(mnuEditCopy)
-        mnuEdit.MenuItems.Add(mnuEditPaste)
-        mnuEdit.MenuItems.Add(mnuEditDelete)
-        mnuEdit.MenuItems.Add("-")
-        mnuEdit.MenuItems.Add(mnuEditSend)
-        mnuEdit.MenuItems.Add("-")
-        mnuEdit.MenuItems.Add(mnuEditCopyAllChars)
-        mnuEdit.MenuItems.Add(mnueditcopyvisiblechars)
-        mnuMain.MenuItems.Add(mnuEdit)
-    End Sub
+		mnuEdit.MenuItems.Add(mnuEditCut)
+		mnuEdit.MenuItems.Add(mnuEditCopy)
+		mnuEdit.MenuItems.Add(mnuEditPaste)
+		mnuEdit.MenuItems.Add(mnuEditDelete)
+		mnuEdit.MenuItems.Add("-")
+		mnuEdit.MenuItems.Add(mnuEditSend)
+		mnuEdit.MenuItems.Add("-")
+		mnuEdit.MenuItems.Add(mnuEditCopyAllChars)
+		mnuEdit.MenuItems.Add(mnuEditCopyVisibleChars)
+		mnuMain.MenuItems.Add(mnuEdit)
+	End Sub
 
 #End Region
 
 #Region "Font Menu Initialization Procedure"
 
-    Private Sub InitFontMenu()
-        mnuFont = New MenuItem()
-        mnuFont.Text = "&Font"
+	Private Sub InitFontMenu()
+		mnuFont = New MenuItem()
+		mnuFont.Text = My.Resources.FontMenu
 
 
-        mnuFontName = New MenuItem("Font: ")
-        mnuFontSize = New MenuItem("Size: ")
-        mnuFontBold = New MenuItem("&Bold")
-        mnuFontItalic = New MenuItem("&Italic")
-        mnuFontUnderline = New MenuItem("&Underline")
-        mnuFontStrikeout = New MenuItem("&Strikeout")
+		mnuFontName = New MenuItem(My.Resources.FontName)
+		mnuFontSize = New MenuItem(My.Resources.FontSize)
+		mnuFontBold = New MenuItem(My.Resources.FontBold)
+		mnuFontItalic = New MenuItem(My.Resources.FontItalic)
+		mnuFontUnderline = New MenuItem(My.Resources.FontUnderline)
+		mnuFontStrikeout = New MenuItem(My.Resources.FontStrikeout)
 
-        Dim objG As System.Drawing.Graphics = Me.CreateGraphics
+		Dim objG As System.Drawing.Graphics = Me.CreateGraphics
 
-        Dim objFamilies() As FontFamily
-        objFamilies = System.Drawing.FontFamily.GetFamilies(objG)
-        'ReDim objFamilies(2)
-        'objFamilies(0) = FontFamily.GenericMonospace
-        'objFamilies(1) = FontFamily.GenericSansSerif
-        'objFamilies(2) = FontFamily.GenericSerif
+		Dim objFamilies() As FontFamily
+		'objFamilies = System.Drawing.FontFamily.GetFamilies(objG)
+		ReDim objFamilies(1)
+		objFamilies(0) = FontFamily.GenericMonospace
+		objFamilies(1) = FontFamily.GenericSansSerif
+
 		Dim mnuItem As MenuItem
-        Dim intFamilyIndex As Integer
+		Dim intFamilyIndex As Integer
 		For intFamilyIndex = 0 To objFamilies.GetUpperBound(0)
-			If intFamilyIndex / 25 = Math.Round(intFamilyIndex / 25) Then
+			If intFamilyIndex / 32 = Math.Round(intFamilyIndex / 32) And intFamilyIndex > 0 Then
 				mnuItem = New MenuItem(objFamilies(intFamilyIndex).Name, AddressOf FontNameClick)
 				mnuItem.Break = True
 				mnuFontName.MenuItems.Add(mnuItem)
@@ -996,220 +1037,229 @@ Public Class ToolbarForm
 
 
 		mnuMain.MenuItems.Add(mnuFont)
-    End Sub
+	End Sub
 
 #End Region
 
 #Region "Filter Menu Initialization Procedure"
 
-    Private Sub InitFilterMenu()
-        mnuFilter = New MenuItem()
-        mnuFilter.Text = "F&ilter"
+	Private Sub InitFilterMenu()
+		mnuFilter = New MenuItem()
+		mnuFilter.Text = My.Resources.FilterMenu
 
-        mnuFilterImport = New MenuItem("Import Filters...")
-        mnuFilterExport = New MenuItem("Export Filters...")
-        mnuFilterDefaults = New MenuItem("Select Default Filters")
-        mnuFilterSelAll = New MenuItem("Select All Filters")
-        mnuFilterDeSelAll = New MenuItem("Deselect All Filters")
-        mnuFilterReadOnly = New MenuItem("Export (Read-Only) Filters...")
-        mnuFilter.MenuItems.Add(mnuFilterImport)
-        mnuFilter.MenuItems.Add(mnuFilterExport)
-        mnuFilter.MenuItems.Add(mnuFilterReadonly)
-        mnuFilter.MenuItems.Add("-")
-        mnuFilter.MenuItems.Add(mnuFilterDefaults)
-        mnuFilter.MenuItems.Add("-")
-        mnuFilter.MenuItems.Add(mnuFilterSelAll)
-        mnuFilter.MenuItems.Add(mnuFilterDeSelAll)
-        mnuFilter.MenuItems.Add("-")
+		mnuFilterImport = New MenuItem(My.Resources.FilterImport)
+		mnuFilterExport = New MenuItem(My.Resources.FilterExport)
+		mnuFilterDefaults = New MenuItem(My.Resources.FilterDefaults)
+		mnuFilterSelAll = New MenuItem(My.Resources.FilterSelAll)
+		mnuFilterDeSelAll = New MenuItem(My.Resources.FilterDeSelAll)
+		mnuFilterReadOnly = New MenuItem(My.Resources.FilterReadOnly)
+		mnuFilter.MenuItems.Add(mnuFilterImport)
+		mnuFilter.MenuItems.Add(mnuFilterExport)
+		mnuFilter.MenuItems.Add(mnuFilterReadOnly)
+		mnuFilter.MenuItems.Add("-")
+		mnuFilter.MenuItems.Add(mnuFilterDefaults)
+		mnuFilter.MenuItems.Add("-")
+		mnuFilter.MenuItems.Add(mnuFilterSelAll)
+		mnuFilter.MenuItems.Add(mnuFilterDeSelAll)
+		mnuFilter.MenuItems.Add("-")
 
-        Dim intFilterLoop As Integer
-        For intFilterLoop = 0 To UnicodeFilters.FilterTitles.GetUpperBound(0)
-            mnuFilter.MenuItems.Add(UnicodeFilters.FilterTitles(intFilterLoop), AddressOf FilterItem_Click)
-        Next
+		Dim intFilterLoop As Integer
+		For intFilterLoop = 0 To UnicodeFilters.FilterTitles.GetUpperBound(0)
+			mnuFilter.MenuItems.Add(UnicodeFilters.FilterTitles(intFilterLoop), AddressOf FilterItem_Click)
+		Next
 
 
 
-        mnuMain.MenuItems.Add(mnuFilter)
-    End Sub
+		mnuMain.MenuItems.Add(mnuFilter)
+	End Sub
 
 #End Region
 
 #Region "Keywords Initialization Procedure"
 
-    Private Sub InitKeywordsMenu()
+	Private Sub InitKeywordsMenu()
 
-        mnuKeywords = New MenuItem("&Keywords")
-        'mnuKeywords.Visible = False
+		mnuKeywords = New MenuItem(My.Resources.KeywordsMenu)
+		'mnuKeywords.Visible = False
 
-        mnuKeywordsEdit = New MenuItem("&Edit Keyword List...")
+		mnuKeywordsEdit = New MenuItem(My.Resources.KeywordsEdit)
 
-        mnuKeywordsAddTop = New MenuItem("Add Item to Top")
-        mnuKeywordsAddBottom = New MenuItem("Add Item to Bottom")
-        mnuKeywordsDelTop = New MenuItem("Delete Top Item")
-        mnuKeywordsDelBottom = New MenuItem("DeleteBottomItem")
+		mnuKeywordsAddTop = New MenuItem(My.Resources.KeywordsAddTop)
+		mnuKeywordsAddBottom = New MenuItem(My.Resources.KeywordsAddBottom)
+		mnuKeywordsDelTop = New MenuItem(My.Resources.KeywordsDelTop)
+		mnuKeywordsDelBottom = New MenuItem(My.Resources.KeywordsDelBottom)
 
-        mnuKeywords.MenuItems.Add(mnuKeywordsEdit)
-        'mnuKeywords.MenuItems.Add("-")
-        'mnuKeywords.MenuItems.Add(mnuKeywordsAddTop)
-        'mnuKeywords.MenuItems.Add(mnuKeywordsAddBottom)
-        'mnuKeywords.MenuItems.Add(mnuKeywordsDelTop)
-        'mnuKeywords.MenuItems.Add(mnuKeywordsDelBottom)
-        mnuKeywords.MenuItems.Add("-")
-
-
+		mnuKeywords.MenuItems.Add(mnuKeywordsEdit)
+		'mnuKeywords.MenuItems.Add("-")
+		'mnuKeywords.MenuItems.Add(mnuKeywordsAddTop)
+		'mnuKeywords.MenuItems.Add(mnuKeywordsAddBottom)
+		'mnuKeywords.MenuItems.Add(mnuKeywordsDelTop)
+		'mnuKeywords.MenuItems.Add(mnuKeywordsDelBottom)
+		mnuKeywords.MenuItems.Add("-")
 
 
-        mnuMain.MenuItems.Add(mnuKeywords)
-    End Sub
+
+
+		mnuMain.MenuItems.Add(mnuKeywords)
+	End Sub
 
 #End Region
 
 #Region "Private Menu Updating Procedure for the keywords"
 
-    Private Sub DoKeywordsMenu()
-        Dim intMenuItemLoop As Integer
-        For intMenuItemLoop = 2 To mnuKeywords.MenuItems.Count - 1
-            mnuKeywords.MenuItems.RemoveAt(2)
-        Next
+	Private Sub DoKeywordsMenu()
+		Dim intMenuItemLoop As Integer
+		For intMenuItemLoop = 2 To mnuKeywords.MenuItems.Count - 1
+			mnuKeywords.MenuItems.RemoveAt(2)
+		Next
 
-        'mnuKeywords.MenuItems.Add(Settings.Keyword)
-        'mnuKeywords.MenuItems.Add("-")
+		'mnuKeywords.MenuItems.Add(Settings.Keyword)
+		'mnuKeywords.MenuItems.Add("-")
 
-        For intMenuItemLoop = 0 To Settings.Keywords.GetUpperBound(0)
-            mnuKeywords.MenuItems.Add(Settings.Keywords(intMenuItemLoop))
-            If mnuKeywords.MenuItems(mnuKeywords.MenuItems.Count - 1).Text = Settings.Keyword Then
-                mnuKeywords.MenuItems(mnuKeywords.MenuItems.Count - 1).RadioCheck = True
-                mnuKeywords.MenuItems(mnuKeywords.MenuItems.Count - 1).Checked = True
-            End If
-            AddHandler mnuKeywords.MenuItems(mnuKeywords.MenuItems.Count - 1).Click, AddressOf KeywordClick
-        Next
-    End Sub
+		For intMenuItemLoop = 0 To Settings.Keywords.GetUpperBound(0)
+			mnuKeywords.MenuItems.Add(Settings.Keywords(intMenuItemLoop))
+			If mnuKeywords.MenuItems(mnuKeywords.MenuItems.Count - 1).Text = Settings.Keyword Then
+				mnuKeywords.MenuItems(mnuKeywords.MenuItems.Count - 1).RadioCheck = True
+				mnuKeywords.MenuItems(mnuKeywords.MenuItems.Count - 1).Checked = True
+			End If
+			AddHandler mnuKeywords.MenuItems(mnuKeywords.MenuItems.Count - 1).Click, AddressOf KeywordClick
+		Next
+	End Sub
 
 #End Region
 
 #Region "Intitialize View Menu Proc"
 
-    Private Sub InitViewMenu()
-        mnuView = New MenuItem()
-        mnuView.Text = "&View"
+	Private Sub InitViewMenu()
+		mnuView = New MenuItem()
+		mnuView.Text = My.Resources.ViewMenu
 
-        mnuViewCommandBar = New MenuItem("Command Bar")
-        mnuViewKeywords = New MenuItem("Keywords")
-        mnuViewFontName = New MenuItem("Font Name")
-        mnuViewFontSize = New MenuItem("Font Size")
-        mnuViewFontAttrs = New MenuItem("Font Styles")
-        mnuViewStatus = New MenuItem("Status Bar")
+		mnuViewCommandBar = New MenuItem(My.Resources.ViewCommandBar)
+		mnuViewKeywords = New MenuItem(My.Resources.ViewKeywords)
+		mnuViewFontName = New MenuItem(My.Resources.ViewFontName)
+		mnuViewFontSize = New MenuItem(My.Resources.ViewFontSize)
+		mnuViewFontAttrs = New MenuItem(My.Resources.ViewFontAttrs)
+		mnuViewStatus = New MenuItem(My.Resources.ViewStatus)
 
-        mnuView.MenuItems.Add(mnuViewCommandBar)
-        mnuView.MenuItems.Add(mnuViewKeywords)
-        mnuView.MenuItems.Add("-")
-        mnuView.MenuItems.Add(mnuViewFontName)
-        mnuView.MenuItems.Add(mnuViewFontSize)
-        mnuView.MenuItems.Add(mnuViewFontAttrs)
-        mnuView.MenuItems.Add("-")
-        mnuView.MenuItems.Add(mnuViewStatus)
+		mnuView.MenuItems.Add(mnuViewCommandBar)
+		mnuView.MenuItems.Add(mnuViewKeywords)
+		mnuView.MenuItems.Add("-")
+		mnuView.MenuItems.Add(mnuViewFontName)
+		mnuView.MenuItems.Add(mnuViewFontSize)
+		mnuView.MenuItems.Add(mnuViewFontAttrs)
+		mnuView.MenuItems.Add("-")
+		mnuView.MenuItems.Add(mnuViewStatus)
 
-        mnuViewOrientation = New MenuItem("Character Grid Titlebar Position")
-        mnuViewCharsOrientation = New MenuItem("Character Sorting Orientation")
-
-
-        mnuViewOrientationLeft = New MenuItem("&Left")
-        mnuViewOrientationTop = New MenuItem("&Top")
-        mnuViewOrientationRight = New MenuItem("&Right")
-        mnuViewOrientationBottom = New MenuItem("&Bottom")
-
-        mnuViewCharsOrientationLeft = New MenuItem("Left-to-right (Rows going downward)")
-        mnuViewCharsOrientationTop = New MenuItem("Bottom-to-top (Rows going left)")
-        mnuViewCharsOrientationRight = New MenuItem("Right-to-left (Rows going upward)")
-        mnuViewCharsOrientationBottom = New MenuItem("Top-to-bottom (Rows going right)")
-
-        mnuViewOrientation.MenuItems.Add(mnuViewOrientationTop)
-        mnuViewOrientation.MenuItems.Add(mnuViewOrientationLeft)
-        mnuViewOrientation.MenuItems.Add(mnuViewOrientationRight)
-        mnuViewOrientation.MenuItems.Add(mnuViewOrientationBottom)
-
-        mnuViewCharsOrientation.MenuItems.Add(mnuViewCharsOrientationTop)
-        mnuViewCharsOrientation.MenuItems.Add(mnuViewCharsOrientationLeft)
-        mnuViewCharsOrientation.MenuItems.Add(mnuViewCharsOrientationRight)
-        mnuViewCharsOrientation.MenuItems.Add(mnuViewCharsOrientationBottom)
+		mnuViewOrientation = New MenuItem(My.Resources.ViewOrientation)
+		mnuViewCharsOrientation = New MenuItem(My.Resources.ViewCharsOrientation)
 
 
-        'mnuView.MenuItems.Add("-")
-        'mnuView.MenuItems.Add(mnuViewOrientation)
-        'mnuView.MenuItems.Add(mnuViewCharsOrientation)
+		mnuViewOrientationLeft = New MenuItem(My.Resources.ViewOrientationLeft)
+		mnuViewOrientationTop = New MenuItem(My.Resources.ViewOrientationTop)
+		mnuViewOrientationRight = New MenuItem(My.Resources.ViewOrientationRight)
+		mnuViewOrientationBottom = New MenuItem(My.Resources.ViewOrientationBottom)
 
-        mnuMain.MenuItems.Add(mnuView)
-    End Sub
+		mnuViewCharsOrientationLeft = New MenuItem(My.Resources.ViewCharsOrientationLeft)
+		mnuViewCharsOrientationTop = New MenuItem(My.Resources.ViewCharsOrientationTop)
+		mnuViewCharsOrientationRight = New MenuItem(My.Resources.ViewCharsOrientationRight)
+		mnuViewCharsOrientationBottom = New MenuItem(My.Resources.ViewCharsOrientationBottom)
+
+		mnuViewOrientation.MenuItems.Add(mnuViewOrientationTop)
+		mnuViewOrientation.MenuItems.Add(mnuViewOrientationLeft)
+		mnuViewOrientation.MenuItems.Add(mnuViewOrientationRight)
+		mnuViewOrientation.MenuItems.Add(mnuViewOrientationBottom)
+
+		mnuViewCharsOrientation.MenuItems.Add(mnuViewCharsOrientationTop)
+		mnuViewCharsOrientation.MenuItems.Add(mnuViewCharsOrientationLeft)
+		mnuViewCharsOrientation.MenuItems.Add(mnuViewCharsOrientationRight)
+		mnuViewCharsOrientation.MenuItems.Add(mnuViewCharsOrientationBottom)
+
+
+		'mnuView.MenuItems.Add("-")
+		'mnuView.MenuItems.Add(mnuViewOrientation)
+		'mnuView.MenuItems.Add(mnuViewCharsOrientation)
+
+		mnuMain.MenuItems.Add(mnuView)
+	End Sub
 
 #End Region
 
 #Region "Tools Menu Initialization Procedure"
 
-    Private Sub InitToolsMenu()
-        mnuTools = New MenuItem()
-        mnuTools.Text = "&Tools"
+	Private Sub InitToolsMenu()
+		mnuTools = New MenuItem()
+		mnuTools.Text = My.Resources.ToolsMenu
 
-        mnuToolsGetUnicodeChar = New MenuItem("Get Character from Unicode")
-        mnuToolsSortAsc = New MenuItem("Sort Characters by Unicode Value (Ascending)")
-        mnuToolsSortDes = New MenuItem("Sort Characters by Unicode Value (Descending)")
-        mnuToolsEditText = New MenuItem("&Edit Characters as Text")
-        mnuToolsOptions = New MenuItem("&Options")
-        mnuToolsEditText.Shortcut = Shortcut.CtrlShiftE
-        mnuToolsGetUnicodeChar.Shortcut = Shortcut.CtrlShiftU
+		mnuToolsGetUnicodeChar = New MenuItem(My.Resources.ToolsGetUnicodeChar)
+		mnuToolsGetUnicodeChars = New MenuItem(My.Resources.ToolsGetUnicodeChars)
+		mnuToolsSortAsc = New MenuItem(My.Resources.ToolsSortAsc)
+		mnuToolsSortDes = New MenuItem(My.Resources.ToolsSortDes)
+		mnuToolsEditText = New MenuItem(My.Resources.ToolsEditText)
+		mnuToolsOptions = New MenuItem(My.Resources.ToolsOptions)
+		mnuToolsEditText.Shortcut = Shortcut.CtrlShiftE
+		mnuToolsGetUnicodeChar.Shortcut = Shortcut.CtrlShiftU
 
 
-        mnuTools.MenuItems.Add(mnuToolsGetUnicodeChar)
-        mnuTools.MenuItems.Add("-")
-        mnuTools.MenuItems.Add(mnuToolsSortAsc)
-        mnuTools.MenuItems.Add(mnuToolsSortDes)
-        mnuTools.MenuItems.Add("-")
-        mnuTools.MenuItems.Add(mnuToolsEditText)
-        mnuTools.MenuItems.Add("-")
-        mnuTools.MenuItems.Add(mnuToolsOptions)
+		mnuTools.MenuItems.Add(mnuToolsGetUnicodeChar)
+		mnuTools.MenuItems.Add(mnuToolsGetUnicodeChars)
+		mnuTools.MenuItems.Add("-")
+		mnuTools.MenuItems.Add(mnuToolsSortAsc)
+		mnuTools.MenuItems.Add(mnuToolsSortDes)
+		mnuTools.MenuItems.Add("-")
+		mnuTools.MenuItems.Add(mnuToolsEditText)
+		mnuTools.MenuItems.Add("-")
+		mnuTools.MenuItems.Add(mnuToolsOptions)
 
-        mnuMain.MenuItems.Add(mnuTools)
-    End Sub
+		mnuMain.MenuItems.Add(mnuTools)
+	End Sub
 
 #End Region
 
 #Region "Help Menu Initialization procedure"
 
-    Private Sub InitHelpMenu()
-        mnuHelp = New MenuItem("&Help")
+	Private Sub InitHelpMenu()
+		mnuHelp = New MenuItem(My.Resources.HelpMenu)
 
 
-        mnuHelpAbout = New MenuItem("&About")
-        mnuHelpHelpTopics = New MenuItem("&Help Topics")
-        mnuHelpHelpTopics.Shortcut = Shortcut.F1
+		mnuHelpAbout = New MenuItem(My.Resources.HelpAbout)
+		mnuHelpHelpTopics = New MenuItem(My.Resources.HelpHelpTopics)
+		mnuHelpHelpTopics.Shortcut = Shortcut.F1
 
-        mnuHelp.MenuItems.Add(mnuHelpAbout)
-        mnuHelp.MenuItems.Add("-")
-        mnuHelp.MenuItems.Add(mnuHelpHelpTopics)
-        mnuMain.MenuItems.Add(mnuHelp)
-    End Sub
+		mnuHelpTips = New MenuItem(My.Resources.HelpTips)
+		mnuHelpTipsReset = New MenuItem(My.Resources.HelpTipsReset)
+		mnuHelpTipsHide = New MenuItem(My.Resources.HelpTipsHide)
+
+		mnuHelpTips.MenuItems.Add(mnuHelpTipsHide)
+		mnuHelpTips.MenuItems.Add(mnuHelpTipsReset)
+
+		mnuHelp.MenuItems.Add(mnuHelpAbout)
+		mnuHelp.MenuItems.Add("-")
+		mnuHelp.MenuItems.Add(mnuHelpTips)
+		mnuHelp.MenuItems.Add(mnuHelpHelpTopics)
+		mnuMain.MenuItems.Add(mnuHelp)
+	End Sub
 
 #End Region
 
 #End Region
-
 #Region "Component Initialization Procedures"
 
     Private Sub InitializeComponents()
 		Me.SuspendLayout()
+
+		Me.Owner = Main.frmQuickKey
         Me.Name = "frmToolbar"
-		Me.ShowInTaskbar = False
+        Me.ShowInTaskbar = False
 
-		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
 
-		Me.Size = New System.Drawing.Size(500, Windows.Forms.SystemInformation.MenuHeight + 26 + 26 + 21 + 2 + 21 + (Me.Height - Me.ClientSize.Height))
-		Me.StartPosition = FormStartPosition.Manual
-		Me.MinimumSize = Me.ClientSize
-		Me.MaximumSize = New Size(Screen.PrimaryScreen.Bounds.Width, Me.MinimumSize.Height)
+        Me.Size = New System.Drawing.Size(500, Windows.Forms.SystemInformation.MenuHeight + 26 + 26 + 21 + 2 + 21 + (Me.Height - Me.ClientSize.Height))
+        Me.StartPosition = FormStartPosition.Manual
 		Me.HelpButton = True
 
+		Me.TopMost = True
+        Me.Text = My.Resources.ToolbarTitle
 
-        Me.Text = "Quick Key Toolbar"
-        Me.TopMost = True
 
         InitializeMenus()
 
@@ -1308,7 +1358,6 @@ Public Class ToolbarForm
         pnlBottomGroup.Controls.Add(pnlFontSize)
         pnlBottomGroup.Controls.Add(pnlFontToolbar)
 
-
         'pnlFontName.Width = 150
 
         'splFont.SplitPosition = 75 + pnlFontToolbar.Width
@@ -1318,7 +1367,7 @@ Public Class ToolbarForm
 
         pnlFontName.Controls.Add(fddFontName)
 
-        ttTips.SetToolTip(fddFontName, "This changes the font")
+        ttTips.SetToolTip(fddFontName, My.Resources.FontBoxTooltip)
 
         sddFontSize = New SizeDropDown()
         sddFontSize.Name = "sddFontsize"
@@ -1326,7 +1375,7 @@ Public Class ToolbarForm
 
         pnlFontSize.Controls.Add(sddFontSize)
 
-        ttTips.SetToolTip(sddFontSize, "This changes the font size")
+        ttTips.SetToolTip(sddFontSize, My.Resources.FontSizeTooltip)
 
         tlbFont = New ToolBar()
         tlbFont.Dock = DockStyle.Top
@@ -1359,7 +1408,7 @@ Public Class ToolbarForm
         tlbFont.Buttons.Add(tbbUnderline)
         tlbFont.Buttons.Add(tbbStrikeout)
 
-        ttTips.SetToolTip(tlbFont, "This toolbar controls the graphical attributes of the font")
+        ttTips.SetToolTip(tlbFont, My.Resources.FontStyleTooltip)
 
         pnlFontToolbar.Controls.Add(tlbFont)
 
@@ -1385,8 +1434,7 @@ Public Class ToolbarForm
         'cmbKeywords.Enabled = False
         pnlKeywords.Controls.Add(cmbKeywords)
 
-        ttTips.SetToolTip(cmbKeywords, "Change the destination appliction for sending characters")
-
+        ttTips.SetToolTip(cmbKeywords, My.Resources.KeywordBoxTooltip)
 
         tlbCommands = New ToolBar()
         tlbCommands.Dock = DockStyle.Top
@@ -1435,7 +1483,7 @@ Public Class ToolbarForm
         'tlbCommands.Buttons.Add(tbbSeparator)
 
 
-        ttTips.SetToolTip(tlbCommands, "These buttons control character set file operations and clipboard actions")
+        ttTips.SetToolTip(tlbCommands, My.Resources.CommandsToolbarTooltip)
 
 
         pnlCommandBar.Controls.Add(tlbCommands)
@@ -1487,7 +1535,7 @@ Public Class ToolbarForm
 
 
 
-        ttTips.SetToolTip(stbMain, "This status bar displays information about the character under the mouse cursor")
+        ttTips.SetToolTip(stbMain, My.Resources.StatusBarTooltip)
 
         stbMain.ShowPanels = False
 
@@ -1500,117 +1548,93 @@ Public Class ToolbarForm
         ofdImportOpen = New OpenFileDialog()
         sfdSaveReport = New SaveFileDialog()
 
-        RepositionFormControls()
+		lblDark.BringToFront()
+		lblLight.BringToFront()
+		pnlFontToolbar.BringToFront()
+		pnlFontSize.BringToFront()
+		splFont.BringToFront()
+		pnlFontName.BringToFront()
+		stbMain.BringToFront()
 
-        frmToolbar_Resize(Me, Nothing)
-        Me.ResumeLayout()
+		Me.ResumeLayout()
+
     End Sub
 
 #End Region
-
 #End Region
 
-#Region "Form Control Relocator"
+#Region "ToolbarForm_Layout"
 
-    Public Sub RepositionFormControls()
-        If Not Me Is Nothing And Not pnlBottomGroup Is Nothing And Not pnlTopGroup Is Nothing _
-        And Not lblLight Is Nothing And Not stbMain Is Nothing And Not lblDark Is Nothing Then
+	Private Sub ToolbarForm_Layout(ByVal sender As Object, ByVal e As System.Windows.Forms.LayoutEventArgs) Handles Me.Layout
+		If Not Me Is Nothing And Not pnlBottomGroup Is Nothing And Not pnlTopGroup Is Nothing _
+		  And Not lblLight Is Nothing And Not stbMain Is Nothing And Not lblDark Is Nothing Then
 
 
-            lblDark.BringToFront()
-            lblLight.BringToFront()
 
-            lblDark.Visible = (Settings.ViewCommandBar Or Settings.ViewFontAttrsBar Or _
-                Settings.ViewFontBar Or Settings.ViewFontSizeBar Or Settings.ViewKeywordsBar)
-            lblLight.Visible = lblDark.Visible
+			lblDark.Visible = (Settings.ViewCommandBar Or Settings.ViewFontAttrsBar Or _
+			 Settings.ViewFontBar Or Settings.ViewFontSizeBar Or Settings.ViewKeywordsBar)
 
-            pnlTopGroup.Visible = (Settings.ViewCommandBar Or Settings.ViewKeywordsBar)
-            pnlBottomGroup.Visible = (Settings.ViewFontBar Or Settings.ViewFontSizeBar Or Settings.ViewFontAttrsBar)
+			lblLight.Visible = lblDark.Visible
 
-            pnlTopGroup.BringToFront()
-            pnlBottomGroup.BringToFront()
+			pnlTopGroup.Visible = (Settings.ViewCommandBar Or Settings.ViewKeywordsBar)
+			pnlBottomGroup.Visible = (Settings.ViewFontBar Or Settings.ViewFontSizeBar Or Settings.ViewFontAttrsBar)
 
-            If Settings.ViewFontBar Then
-                pnlFontName.Dock = DockStyle.Fill
-                pnlFontName.Visible = True
-            Else
-                pnlFontName.Visible = False
-            End If
+			pnlTopGroup.BringToFront()
+			pnlBottomGroup.BringToFront()
 
-            If Settings.ViewFontSizeBar Then
-                If Not Settings.ViewFontBar Then
-                    pnlFontSize.Dock = DockStyle.Fill
-                Else
-                    pnlFontSize.Dock = DockStyle.Right
-                End If
-                pnlFontSize.Visible = True
-            Else
-                pnlFontSize.Visible = False
-            End If
+			If Settings.ViewFontBar Then
+				pnlFontName.Dock = DockStyle.Fill
+				pnlFontName.Visible = True
+			Else
+				pnlFontName.Visible = False
+			End If
 
-            splFont.Visible = (Settings.ViewFontBar And Settings.ViewFontSizeBar)
+			If Settings.ViewFontSizeBar Then
+				If Not Settings.ViewFontBar Then
+					pnlFontSize.Dock = DockStyle.Fill
+				Else
+					pnlFontSize.Dock = DockStyle.Right
+				End If
+				pnlFontSize.Visible = True
+			Else
+				pnlFontSize.Visible = False
+			End If
 
-            If Settings.ViewFontAttrsBar Then
-                pnlFontToolbar.Dock = DockStyle.Right
-                pnlFontToolbar.Visible = True
-            Else
-                pnlFontToolbar.Visible = False
-            End If
-            pnlFontToolbar.BringToFront()
-            pnlFontSize.BringToFront()
-            splFont.BringToFront()
-            pnlFontName.BringToFront()
+			splFont.Visible = (Settings.ViewFontBar And Settings.ViewFontSizeBar)
 
-            pnlKeywords.Dock = DockStyle.Fill
-            pnlCommandBar.Dock = DockStyle.Left
-            pnlKeywords.Visible = Settings.ViewKeywordsBar
-            pnlCommandBar.Visible = Settings.ViewCommandBar
+			If Settings.ViewFontAttrsBar Then
+				pnlFontToolbar.Dock = DockStyle.Right
+				pnlFontToolbar.Visible = True
+			Else
+				pnlFontToolbar.Visible = False
+			End If
+			pnlKeywords.Dock = DockStyle.Fill
+			pnlCommandBar.Dock = DockStyle.Left
+			pnlKeywords.Visible = Settings.ViewKeywordsBar
+			pnlCommandBar.Visible = Settings.ViewCommandBar
 
-            stbMain.Visible = Settings.ViewStatusBar
-            stbMain.BringToFront()
+			stbMain.Visible = Settings.ViewStatusBar
+		End If
 
-            frmToolbar_Resize(Me, Nothing)
-        End If
-    End Sub
-
+	End Sub
 #End Region
-
 #Region "Public Readonly MouseOver Property"
     Public ReadOnly Property MouseOver() As Boolean
         Get
-
-            If Control.MousePosition.X < Me.Left Or Control.MousePosition.Y < Me.Top Or _
-            Control.MousePosition.X > Me.Width + Me.Left Or Control.MousePosition.Y > Me.Height + Me.Top Then
-
-                Return False
-            Else
-
-                Return True
-            End If
-        End Get
+			If Control.MousePosition.X < Me.Left Or Control.MousePosition.Y < Me.Top Or _
+			Control.MousePosition.X > Me.Width + Me.Left Or Control.MousePosition.Y > Me.Height + Me.Top Then
+				Return False
+			Else
+				Return True
+			End If
+		End Get
     End Property
 
 
 #End Region
-
 #Region "Changed Settings Events"
 
-    Public Sub OpenFileDialogDirChanged()
-
-    End Sub
-
-    Public Sub SaveFileDialogDirChanged()
-
-    End Sub
-
-    Public Sub ImportDialogDirChanged()
-
-    End Sub
-
-    Public Sub SaveReportDialogDirChanged()
-
-    End Sub
-
+    'I should use real events here. This is VB6 era.
     Public Sub ToolbarSettingsChanged()
         mnuViewFontName.Checked = Settings.ViewFontBar
         mnuViewFontSize.Checked = Settings.ViewFontSizeBar
@@ -1618,109 +1642,116 @@ Public Class ToolbarForm
         mnuViewKeywords.Checked = Settings.ViewKeywordsBar
         mnuViewCommandBar.Checked = Settings.ViewCommandBar
         mnuViewStatus.Checked = Settings.ViewStatusBar
-        RepositionFormControls()
-
+		Me.PerformLayout()
+		ToolbarForm_ResizeEnd(Me, Nothing)
     End Sub
 
-
-    Friend Sub OrientationChanged()
-
-    End Sub
-
-    Friend Sub CharsOrientationChanged()
-
-    End Sub
 
     Friend Sub QuickKeyChanged()
         If Settings.QuickKey Then
             If Settings.Toolbar Then
                 Me.Visible = True
+                If frmQuickKey.Visible And Not Object.ReferenceEquals(Form.ActiveForm, frmQuickKey) Then frmQuickKey.Activate()
             End If
         Else
             Me.Visible = False
         End If
-    End Sub
+	End Sub
 
-    Friend Sub FileNameChanged()
-        If Settings.FileName.Length > 0 Then
+	Friend Sub DockedChanged()
+		mnuFileDocked.Checked = Settings.Docked
+	End Sub
 
-            If Settings.FileName.Length > 25 Then
-                Me.Text = "Quick Key [Toolbar] - " & IO.Path.GetPathRoot(Settings.FileName) & "..." & _
-                    IO.Path.DirectorySeparatorChar & IO.Path.GetFileName(Settings.FileName)
-            Else
-                Me.Text = "Quick Key [Toolbar] - " & Settings.FileName
-            End If
+	Friend Sub LockedChanged()
+		mnuFileLocked.Checked = Settings.Locked
+		If Settings.Locked Then
+			Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedToolWindow
+		Else
+			Me.FormBorderStyle = Windows.Forms.FormBorderStyle.SizableToolWindow
+		End If
+	End Sub
 
-            If Settings.FileChanged Then
-                Me.Text &= "*"
-            End If
-        Else
-            If Settings.FileChanged Then
-                Me.Text = "Quick Key [Toolbar] - New Charset*"
-            Else
-                Me.Text = "Quick Key [Toolbar] - New Charset"
-            End If
-        End If
+	Friend Sub CharsLockedChanged()
+		mnuFileCharsLocked.Checked = Settings.CharsLocked
+	End Sub
+	Friend Sub ToolbarBoundsChanged()
+		Me.Bounds = Settings.ToolbarBounds
+	End Sub
+	Friend Sub ToolbarChanged()
+		If Settings.Toolbar Then
+			If Settings.QuickKey Then
+				Me.Visible = True
+			End If
+		Else
+			Me.Visible = False
+		End If
+	End Sub
+
+	Friend Sub FileReadOnlyChanged()
+		mnuFileReadOnly.Checked = Settings.FileReadOnly
+	End Sub
 
 
-    End Sub
+	Friend Sub FileChangedChanged()
+		FileNameChanged()
+	End Sub
+	Friend Sub FileNameChanged()
+		If Settings.FileName.Length > 0 Then
 
-    Friend Sub FileChangedChanged()
-        FileNameChanged()
-    End Sub
+			If Settings.FileName.Length > 25 Then
+				Me.Text = My.Resources.ToolbarTitlePrefix & IO.Path.GetPathRoot(Settings.FileName) & "..." & _
+					IO.Path.DirectorySeparatorChar & IO.Path.GetFileName(Settings.FileName)
+			Else
+				Me.Text = My.Resources.ToolbarTitlePrefix & Settings.FileName
+			End If
+
+			If Settings.FileChanged Then
+				Me.Text &= "*"
+			End If
+		Else
+			If Settings.FileChanged Then
+				Me.Text = My.Resources.ToolbarTitleNewCharset & "*"
+			Else
+				Me.Text = My.Resources.ToolbarTitleNewCharset
+			End If
+		End If
+	End Sub
+
 
     Friend Sub FileSavePropertiesChanged()
+		mnuFileSaveFont.Checked = Settings.SaveFont
+		mnuFileSaveSize.Checked = Settings.SaveFontSize
+		mnuFileSaveFontAttrs.Checked = Settings.SaveFontAttrs
+		mnuFileSaveFilters.Checked = Settings.SaveFilters
+		mnuFileSaveCharacters.Checked = Settings.SaveCharacters
+		If Settings.SaveFont And Settings.SaveFontSize And Settings.SaveFontAttrs And Settings.SaveFilters And Settings.SaveCharacters Then
+			mnuFileSaveAllInfo.Checked = True
+			mnuFileSaveAllInfo.Enabled = False
 
-        mnuFileSaveFont.Checked = Settings.SaveFont
-        mnuFileSaveSize.Checked = Settings.SaveFontSize
-        mnuFileSaveFontAttrs.Checked = Settings.SaveFontAttrs
-        mnuFileSaveFilters.Checked = Settings.SaveFilters
-        mnuFileSaveCharacters.Checked = Settings.SaveCharacters
-        If Settings.SaveFont And Settings.SaveFontSize And Settings.SaveFontAttrs And Settings.SaveFilters And Settings.SaveCharacters Then
-            mnuFileSaveAllInfo.Checked = True
-            mnuFileSaveAllInfo.Enabled = False
+		Else
+			mnuFileSaveAllInfo.Checked = False
+			mnuFileSaveAllInfo.Enabled = True
+		End If
+		If Settings.SaveFont = False And Settings.SaveFontSize = False And Settings.SaveFontAttrs = False And Settings.SaveFilters = False And Settings.SaveCharacters = True Then
+			mnuFileSaveOnlyCharacters.Checked = True
+			mnuFileSaveOnlyCharacters.Enabled = False
+		Else
+			mnuFileSaveOnlyCharacters.Checked = False
+			mnuFileSaveOnlyCharacters.Enabled = True
+		End If
+	End Sub
 
-        Else
-            mnuFileSaveAllInfo.Checked = False
-            mnuFileSaveAllInfo.Enabled = True
+	Public Sub FilterSettingsChanged()
+		Dim intFilterLoop As Integer
+		For intFilterLoop = 0 To Settings.Charset.Filters.Filters.GetUpperBound(0)
+			If intFilterLoop + 9 <= mnuFilter.MenuItems.Count - 1 Then
+				mnuFilter.MenuItems(intFilterLoop + 9).Checked = Settings.Charset.Filters.Filters(intFilterLoop)
+			End If
+		Next
 
-        End If
-        If Settings.SaveFont = False And Settings.SaveFontSize = False And Settings.SaveFontAttrs = False And Settings.SaveFilters = False And Settings.SaveCharacters = True Then
-            mnuFileSaveOnlyCharacters.Checked = True
-            mnuFileSaveOnlyCharacters.Enabled = False
-
-        Else
-            mnuFileSaveOnlyCharacters.Checked = False
-            mnuFileSaveOnlyCharacters.Enabled = True
-        End If
-    End Sub
-
-
-
-    Friend Sub MouseSettingsChanged()
-
-    End Sub
-
-    Friend Sub FilterSettingsChanged()
-
-
-        Dim intFilterLoop As Integer
-        For intFilterLoop = 0 To Settings.Charset.Filters.Filters.GetUpperBound(0)
-            If intFilterLoop + 9 <= mnuFilter.MenuItems.Count - 1 Then
-                mnuFilter.MenuItems(intFilterLoop + 9).Checked = Settings.Charset.Filters.Filters(intFilterLoop)
-            End If
-        Next
+	End Sub
 
 
-    End Sub
-
-    Friend Sub ToolbarBoundsChanged()
-        Me.Bounds = Settings.ToolbarBounds
-    End Sub
-
-    Friend Sub CharactersChanged()
-
-    End Sub
 
     Friend Sub RecentFilesChanged()
 
@@ -1765,16 +1796,24 @@ Public Class ToolbarForm
     Friend Sub FontPropertiesChanged()
 
 
-        mnuFontName.Text = "Font: " & Settings.Charset.FontName
+        mnuFontName.Text = My.Resources.FontPrefix & Settings.Charset.FontName
 
+        Dim blnFound As Boolean = False
         Dim intLoop As Integer
         For intLoop = 0 To mnuFontName.MenuItems.Count - 1
-            mnuFontName.MenuItems(intLoop).Checked = False
             mnuFontName.MenuItems(intLoop).RadioCheck = True
+            mnuFontName.MenuItems(intLoop).Checked = False
             If mnuFontName.MenuItems(intLoop).Text = Settings.Charset.FontName Then
                 mnuFontName.MenuItems(intLoop).Checked = True
+                blnFound = True
             End If
         Next
+        If Not blnFound Then
+            Dim item As MenuItem = mnuFontName.MenuItems.Add(Settings.Charset.FontName, AddressOf FontNameClick)
+            item.Checked = True
+            item.RadioCheck = True
+        End If
+
 
         If Not fddFontName.SelectedFontName = Settings.Charset.FontName Then
             fddFontName.SelectedFontName = Settings.Charset.FontName
@@ -1785,11 +1824,11 @@ Public Class ToolbarForm
 
         End If
 
-        mnuFontSize.Text = "Size: " & CStr(Settings.Charset.FontSize)
+        mnuFontSize.Text = My.Resources.SizePrefix & CStr(Settings.Charset.FontSize)
 
         For intLoop = 0 To mnuFontSize.MenuItems.Count - 1
-            mnuFontSize.MenuItems(intLoop).Checked = False
             mnuFontSize.MenuItems(intLoop).RadioCheck = True
+            mnuFontSize.MenuItems(intLoop).Checked = False
             If mnuFontSize.MenuItems(intLoop).Text = CStr(Settings.Charset.FontSize) Then
                 mnuFontSize.MenuItems(intLoop).Checked = True
             End If
@@ -1825,137 +1864,64 @@ Public Class ToolbarForm
         cmbKeywords.Items.Clear()
         Dim intItemLoop As Integer
         For intItemLoop = 0 To Settings.Keywords.GetUpperBound(0)
+
             cmbKeywords.Items.Add(Settings.Keywords(intItemLoop))
         Next
         cmbKeywords.Text = Settings.Keyword
         DoKeywordsMenu()
     End Sub
 
-    Friend Sub DockedChanged()
-        mnuFileDocked.Checked = Settings.Docked
-    End Sub
-
-    Friend Sub LockedChanged()
-        mnuFileLocked.Checked = Settings.Locked
-        frmToolbar_Resize(Me, Nothing)
-    End Sub
-
-    Friend Sub CharsLockedChanged()
-        mnuFileCharsLocked.Checked = Settings.CharsLocked
-    End Sub
-
-    Friend Sub ToolbarChanged()
-        If Settings.Toolbar Then
-            If Settings.QuickKey Then
-                Me.Visible = True
-            End If
-        Else
-            Me.Visible = False
-        End If
-    End Sub
-    Friend Sub FileReadOnlyChanged()
-        mnuFileReadOnly.Checked = Settings.FileReadOnly
-    End Sub
 
 
 #End Region
-
 #Region "Form Handling"
-
 #Region "Form Closing Event Cancels close but sets settings.toolbar false"
 
-    Private Sub frmToolbar_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
-		e.Cancel = Not ShuttingDown
-		If Not ShuttingDown Then Settings.Toolbar = False
+	Private Sub ToolbarForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+		If (e.CloseReason = CloseReason.UserClosing) Then
+			e.Cancel = True
+			Settings.Toolbar = False
+		End If
 	End Sub
 
 #End Region
-
-#Region "ShutDown Code"
-	Public Const WM_QUERYENDSESSION As Integer = &H11
-	Public Const WM_ENDSESSION As Integer = &H16
-	Public ShuttingDown As Boolean = False
-	<System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.Demand, Name:="FullTrust")> _
-	   Protected Overrides Sub WndProc(ByRef m As Message)
-		' Listen for operating system messages
-		Select Case (m.Msg)
-			Case WM_QUERYENDSESSION
-				ShuttingDown = True
-                'FinishProgram()
-                'blnClose = True
-		End Select
-		MyBase.WndProc(m)
-	End Sub
-#End Region
-
-#Region "Form Resize Event Handler"
-
-	Private Sub frmToolbar_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
-
+#Region "Form ResizeEnd Event Handler"
+	Private Sub ToolbarForm_ResizeEnd(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ResizeEnd
+		If Settings.Locked Then
+			'This solves the location change via titlbar problem
+			Me.Bounds = Settings.ToolbarBounds
+		End If
 		If Not Me Is Nothing And Not pnlBottomGroup Is Nothing And Not pnlTopGroup Is Nothing _
-		  And Not lblLight Is Nothing And Not stbMain Is Nothing And Not lblDark Is Nothing Then
-
-
-
+	And Not lblLight Is Nothing And Not stbMain Is Nothing And Not lblDark Is Nothing Then
+			'This part adjusts the height of the toolbar window
 			Dim intHeight As Integer = (Me.Height - Me.ClientSize.Height)
-
 			If stbMain.Visible Then
 				intHeight += stbMain.Height
 			End If
-
 			If pnlTopGroup.Visible Then
 				intHeight += pnlTopGroup.Height
 			End If
-
 			If pnlBottomGroup.Visible Then
 				intHeight += pnlBottomGroup.Height
 			End If
-
 			If lblDark.Visible Then
 				intHeight += lblDark.Height
 			End If
-
 			If lblLight.Visible Then
 				intHeight += lblLight.Height
 			End If
-
 			Me.Height = intHeight
-			If Settings.Locked Then
-				Me.MinimumSize = New Size(Me.Width, intHeight)
-				Me.MaximumSize = New Size(Me.Width, intHeight)
-
-			Else
-				If pnlFontName.Visible And pnlFontSize.Visible Then
-					splFont.SplitPosition = CInt(Math.Round((pnlFontName.Width + pnlFontSize.Width) * m_dblFontSplitterRelative))
-				End If
-
-				Me.MinimumSize = New Size(0, intHeight)
-				Me.MaximumSize = New Size(Screen.PrimaryScreen.Bounds.Width, intHeight)
-
+			If pnlFontName.Visible And pnlFontSize.Visible Then
+				splFont.SplitPosition = CInt(Math.Round((pnlFontName.Width + pnlFontSize.Width) * m_dblFontSplitterRelative))
 			End If
-
 		End If
-
 		Settings.m_bToolbar = Me.Bounds
-
 	End Sub
-
 #End Region
-
-#Region "Form Load Handler Positions Controls"
-
-	Private Sub frmToolbar_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-		RepositionFormControls()
-	End Sub
-
-#End Region
-
 #End Region
 
 #Region "Toolbar Handling"
-
 #Region "Font Bar Handlers"
-
 #Region "Drop Down Handler"
 
 	Private Sub fddFontName_SelectedFontChangedByClick(ByVal sender As Object, ByVal NewFontName As String, ByVal NewFontFamily As System.Drawing.FontFamily) Handles fddFontName.SelectedFontChangedByClick
@@ -1975,9 +1941,7 @@ Public Class ToolbarForm
 	End Sub
 
 #End Region
-
 #End Region
-
 #Region "Command Bar Handlers"
 
 	Private Sub tlbCommands_ButtonClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolBarButtonClickEventArgs) Handles tlbCommands.ButtonClick
@@ -2001,7 +1965,6 @@ Public Class ToolbarForm
 	End Sub
 
 #End Region
-
 #Region "Font Toolbar Handlers"
 
 	Private Sub tlbFont_ButtonClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolBarButtonClickEventArgs) Handles tlbFont.ButtonClick
@@ -2017,27 +1980,20 @@ Public Class ToolbarForm
 	End Sub
 
 #End Region
-
 #End Region
-
 #Region "Status Bar Handling"
-
-	Public Sub StatusBarCharacterOn(ByVal c As Char, ByVal AnsiiCode As String, ByVal UnicodeCode As String, ByVal UnicodeCategory As String, ByVal UnicodeDefinition As String)
+	Public Sub StatusBarCharacterOn(ByVal c As String, ByVal AnsiiCode As String, ByVal UnicodeCode As String, ByVal UnicodeCategory As String, ByVal UnicodeDefinition As String)
 		stbMain.ShowPanels = True
 		pnlChar.Text = c
 		pnlAnsii.Text = AnsiiCode
 		pnlUnicode.Text = UnicodeCode
-        pnlUnicodeCat.Text = UnicodeCategory
+		pnlUnicodeCat.Text = UnicodeCategory
 	End Sub
-
 	Public Sub StatusBarOff()
 		stbMain.ShowPanels = False
 	End Sub
-
 #End Region
-
 #Region "Menu Handling"
-
 #Region "File Menu Handling"
 
 #Region "New Menu Handling"
@@ -2231,30 +2187,30 @@ Public Class ToolbarForm
 			ofdImportOpen.ShowHelp = True
 			ofdImportOpen.Multiselect = False
 			'TODO - Give these ther own strings
-			ofdImportOpen.Filter = Constants.DialogStrings.ImportCharsetDialogFilter
+			ofdImportOpen.Filter = My.Resources.ImportCharsetDialogFilter
 			ofdImportOpen.ShowReadOnly = False
-			ofdImportOpen.Title = Constants.DialogStrings.ImportCharsetDialogCaption
+			ofdImportOpen.Title = My.Resources.ImportCharsetDialogCaption
 			ofdImportOpen.DereferenceLinks = True
 
 
 			ofdImportOpen.FileName = ""
 
-            If ofdImportOpen.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                If IO.File.Exists(ofdImportOpen.FileName) Then
-                    c = Charset.LoadFile(ofdImportOpen.FileName)
-                End If
-                If IO.Directory.Exists(IO.Path.GetDirectoryName(ofdImportOpen.FileName)) Then
-                    Settings.ImportDialogDir = IO.Path.GetDirectoryName(ofdImportOpen.FileName)
-                End If
-            End If
+			If ofdImportOpen.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+				If IO.File.Exists(ofdImportOpen.FileName) Then
+					c = Charset.LoadFile(ofdImportOpen.FileName)
+				End If
+				If IO.Directory.Exists(IO.Path.GetDirectoryName(ofdImportOpen.FileName)) Then
+					Settings.ImportDialogDir = IO.Path.GetDirectoryName(ofdImportOpen.FileName)
+				End If
+			End If
 
 
 			If c.Characters.Length > 0 Then
 
 				If frmImportCharset Is Nothing Then
-					frmImportCharset = New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), Constants.DialogStrings.ImportCharsetDialogCaption, c.Characters)
+					frmImportCharset = New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), My.Resources.ImportCharsetDialogCaption, c.Characters)
 				Else
-					Dim f As New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), Constants.DialogStrings.ImportCharsetDialogCaption, c.Characters)
+					Dim f As New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), My.Resources.ImportCharsetDialogCaption, c.Characters)
 					f.Hide()
 					f.Location = frmImportCharset.Location
 					f.Bounds = frmImportCharset.Bounds
@@ -2282,9 +2238,9 @@ Public Class ToolbarForm
 
 
 		Catch ax As ArgumentException
-			Log.HandleError("An invalid path was entered. Please try again with a valid filename.", ax, ofdImportOpen.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.InvalidPath, ax, ofdImportOpen.FileName, MessageBoxButtons.OK)
 		Catch ex As Exception
-			Log.HandleError("There was an error importing the file. File may be corrupted or unavailable.", ex, ofdImportOpen.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.ErrorOpeningFile, ex, ofdImportOpen.FileName, MessageBoxButtons.OK)
 		Finally
 			Log.LogMinorInfo("-Operation Completed")
 		End Try
@@ -2314,28 +2270,28 @@ Public Class ToolbarForm
 			ofdImportOpen.ShowHelp = True
 			ofdImportOpen.Multiselect = False
 
-			ofdImportOpen.Filter = Constants.DialogStrings.ImportCharsetAttrsDialogFilter
+			ofdImportOpen.Filter = My.Resources.ImportCharsetAttrsDialogFilter
 			ofdImportOpen.ShowReadOnly = False
-			ofdImportOpen.Title = Constants.DialogStrings.ImportCharsetAttrsDialogCaption
+			ofdImportOpen.Title = My.Resources.ImportCharsetAttrsDialogCaption
 			ofdImportOpen.DereferenceLinks = True
 
 
 			ofdImportOpen.FileName = ""
 
-            If ofdImportOpen.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                c = Charset.LoadFile(ofdImportOpen.FileName)
-                If IO.Directory.Exists(IO.Path.GetDirectoryName(ofdImportOpen.FileName)) Then
-                    Settings.ImportDialogDir = IO.Path.GetDirectoryName(ofdImportOpen.FileName)
-                End If
-            End If
+			If ofdImportOpen.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+				c = Charset.LoadFile(ofdImportOpen.FileName)
+				If IO.Directory.Exists(IO.Path.GetDirectoryName(ofdImportOpen.FileName)) Then
+					Settings.ImportDialogDir = IO.Path.GetDirectoryName(ofdImportOpen.FileName)
+				End If
+			End If
 
 			c.Characters = Settings.Charset.Characters
 			Settings.Charset = c
 
 		Catch ax As ArgumentException
-			Log.HandleError("An invalid path was entered. Please try again with a valid filename.", ax, ofdImportOpen.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.InvalidPath, ax, ofdImportOpen.FileName, MessageBoxButtons.OK)
 		Catch ex As Exception
-			Log.HandleError("There was an error importing the file. File may be corrupted or unavailable.", ex, ofdImportOpen.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.ErrorOpeningFile, ex, ofdImportOpen.FileName, MessageBoxButtons.OK)
 		Finally
 			Log.LogMinorInfo("-Operation Completed")
 		End Try
@@ -2365,44 +2321,44 @@ Public Class ToolbarForm
 			ofdImportOpen.ShowHelp = True
 			ofdImportOpen.Multiselect = False
 
-			ofdImportOpen.Filter = Constants.DialogStrings.ImportFileDialogFilter
+			ofdImportOpen.Filter = My.Resources.ImportFileDialogFilter
 			ofdImportOpen.ShowReadOnly = False
-			ofdImportOpen.Title = Constants.DialogStrings.ImportFileDialogCaption
+			ofdImportOpen.Title = My.Resources.ImportFileDialogCaption
 			ofdImportOpen.DereferenceLinks = True
 
 
 			ofdImportOpen.FileName = ""
 
-            If ofdImportOpen.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                If IO.File.Exists(ofdImportOpen.FileName) Then
-                    Dim fs As IO.FileStream = Nothing
-                    Try
-                        fs = New IO.FileStream(ofdImportOpen.FileName, IO.FileMode.Open, IO.FileAccess.Read)
-                        If fs.CanRead Then
+			If ofdImportOpen.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+				If IO.File.Exists(ofdImportOpen.FileName) Then
+					Dim fs As IO.FileStream = Nothing
+					Try
+						fs = New IO.FileStream(ofdImportOpen.FileName, IO.FileMode.Open, IO.FileAccess.Read)
+						If fs.CanRead Then
 
-                            Do Until fs.Position = fs.Length
-                                strbFile.Append(ChrW(fs.ReadByte()))
-                            Loop
+							Do Until fs.Position = fs.Length
+								strbFile.Append(ChrW(fs.ReadByte()))
+							Loop
 
-                        End If
-                    Catch ex As Exception
-                        MessageBox.Show("Sorry, this file cannot be read. Please close all programs using the file and try again.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Finally
-                        If Not fs Is Nothing Then
-                            fs.Close()
-                        End If
+						End If
+					Catch ex As Exception
+						MessageBox.Show(My.Resources.ReadFileError, My.Resources.PermissionDenied, MessageBoxButtons.OK, MessageBoxIcon.Error)
+					Finally
+						If Not fs Is Nothing Then
+							fs.Close()
+						End If
 
-                    End Try
-                End If
-                If IO.Directory.Exists(IO.Path.GetDirectoryName(ofdImportOpen.FileName)) Then
-                    Settings.ImportDialogDir = IO.Path.GetDirectoryName(ofdImportOpen.FileName)
-                End If
-            End If
+					End Try
+				End If
+				If IO.Directory.Exists(IO.Path.GetDirectoryName(ofdImportOpen.FileName)) Then
+					Settings.ImportDialogDir = IO.Path.GetDirectoryName(ofdImportOpen.FileName)
+				End If
+			End If
 			If strbFile.Length > 0 Then
 				If frmImportFile Is Nothing Then
-					frmImportFile = New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), Constants.DialogStrings.ImportFileDialogCaption, strbFile.ToString)
+					frmImportFile = New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), My.Resources.ImportFileDialogCaption, strbFile.ToString)
 				Else
-					Dim f As New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), Constants.DialogStrings.ImportFileDialogCaption, strbFile.ToString)
+					Dim f As New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), My.Resources.ImportFileDialogCaption, strbFile.ToString)
 					f.Hide()
 					f.Location = frmImportFile.Location
 					f.Bounds = frmImportFile.Bounds
@@ -2424,9 +2380,9 @@ Public Class ToolbarForm
 			End If
 
 		Catch ax As ArgumentException
-			Log.HandleError("An invalid path was entered. Please try again with a valid filename.", ax, ofdImportOpen.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.InvalidPath, ax, ofdImportOpen.FileName, MessageBoxButtons.OK)
 		Catch ex As Exception
-			Log.HandleError("There was an error importing the file. File may be corrupted or unavailable.", ex, ofdImportOpen.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.ErrorOpeningFile, ex, ofdImportOpen.FileName, MessageBoxButtons.OK)
 		Finally
 			Log.LogMinorInfo("-Operation Completed")
 		End Try
@@ -2443,9 +2399,9 @@ Public Class ToolbarForm
 			If Not Utils.GetStringFromData(Clipboard.GetDataObject) Is Nothing Then
 
 				If frmImportClipboard Is Nothing Then
-					frmImportClipboard = New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), Constants.DialogStrings.ImportClipboardDialogCaption, Utils.GetStringFromData(Clipboard.GetDataObject))
+					frmImportClipboard = New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), My.Resources.ImportClipboardDialogCaption, Utils.GetStringFromData(Clipboard.GetDataObject))
 				Else
-					Dim f As New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), Constants.DialogStrings.ImportClipboardDialogCaption, Utils.GetStringFromData(Clipboard.GetDataObject))
+					Dim f As New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), My.Resources.ImportClipboardDialogCaption, Utils.GetStringFromData(Clipboard.GetDataObject))
 					f.Hide()
 					f.Location = frmImportClipboard.Location
 					f.Bounds = frmImportClipboard.Bounds
@@ -2476,14 +2432,6 @@ Public Class ToolbarForm
 
 #End Region
 
-#Region "Export Menu Handling"
-
-	'Private Sub mnuFileExport_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuFileExport.Click
-	'    'TODO: Implement Menu File Export!
-	'    m_NotYetImplemented()
-	'End Sub
-
-#End Region
 
 #Region "Recent Menu Handling"
 
@@ -2505,15 +2453,15 @@ Public Class ToolbarForm
 
 
 			Catch ax As ArgumentException
-				MessageBox.Show("Sorry, this character set cannot be found. The file may have be moved or deleted.", "Could not load Charset", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-				Log.LogError("Sorry, this character set cannot be found. The file may have been moved or deleted", ax, strRecentFile)
+				MessageBox.Show(My.Resources.CharsetNotFoundMessageText, My.Resources.CharsetNotFoundMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+				Log.LogError(My.Resources.CharsetNotFoundMessageText, ax, strRecentFile)
 			Catch ex As Exception
-				Log.HandleError("There was an error opening the file. File may be corrupted or unavailable.", ex, strRecentFile, MessageBoxButtons.OK)
+				Log.HandleError(My.Resources.ErrorOpeningFile, ex, strRecentFile, MessageBoxButtons.OK)
 
 			End Try
 		Else
-			MessageBox.Show("Sorry, this character set cannot be found. The file may have be moved or deleted.", "Could not load Charset", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-			Log.LogError("Sorry, this character set cannot be found. The file may have been moved or deleted", strRecentFile)
+			MessageBox.Show(My.Resources.CharsetNotFoundMessageText, My.Resources.CharsetNotFoundMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+			Log.LogError(My.Resources.CharsetNotFoundMessageText, strRecentFile)
 
 		End If
 		Log.LogMinorInfo("-Operation Completed")
@@ -2528,11 +2476,8 @@ Public Class ToolbarForm
 		Settings.Docked = Not Settings.Docked
 		Log.LogMinorInfo("-Operation Completed")
 		If Settings.Docked Then
-			ShowTip("You have enabled the Auto-Hide Feature. When you are not using the Toolbar or Character Grid, they will disappear; however, the Auto-Hide Window will remain. If you move the mouse over the Auto-Hide Window, the Character Grid and the Toolbar will reappear.", _
-			"Auto-hide Tip", , AppWinStyle.NormalNoFocus, "Tips\Autohide.jpg", DockStyle.Top)
-            'Else
-            'ShowTip("You have disabled the Auto-Hide Window. The Character Grid and the Toolbar will stay visible even when not in use.", _
-            '"Auto-hide Tip", , AppWinStyle.NormalNoFocus, "Tips\Nohide.jpg", DockStyle.Top)
+			ShowTip(My.Resources.DockedText, My.Resources.DockedTitle, , AppWinStyle.NormalNoFocus, My.Resources.Autohide, DockStyle.Top)
+
 		End If
 	End Sub
 
@@ -2545,11 +2490,10 @@ Public Class ToolbarForm
 		Settings.Locked = Not Settings.Locked
 		Log.LogMinorInfo("-Operation Completed")
 		If Settings.Locked Then
-			ShowTip("You have locked the Character Grid, the Toolbar, and the Auto-Hide Window. You will not be able to resize or move these windows until you unlock Quick Key.", _
-			  , AppWinStyle.NormalFocus, "Tips\Locked.jpg", DockStyle.Left)
+			ShowTip(My.Resources.LockedText, My.Resources.LockedTitle, , AppWinStyle.NormalFocus, My.Resources.Locked2, DockStyle.Left)
+
 		Else
-            'ShowTip("You have unlocked Quick Key. You may now move and resize the Character Grid, the Toolbar, and the Auto-Hide Window.", _
-            ', AppWinStyle.NormalFocus, "Tips\Unlocked.jpg", DockStyle.Left)
+
 		End If
 	End Sub
 
@@ -2561,11 +2505,9 @@ Public Class ToolbarForm
 		Log.LogMinorInfo("+File>Chars Locked Clicked...")
 		Settings.CharsLocked = Not Settings.CharsLocked
 		If Settings.CharsLocked Then
-			ShowTip("You have locked the characters in the character grid. You will not be able to move or change the characters until you unlock them.", _
-			  , AppWinStyle.NormalFocus, "Tips\Locked.jpg", DockStyle.Left)
+			ShowTip(My.Resources.CharsLockedText, My.Resources.CharsLockedTitle, , AppWinStyle.NormalFocus, My.Resources.Locked2, DockStyle.Left)
 		Else
-            'ShowTip("You have unlocked the characters in the Charcter Grid. You may now move and edit them.", _
-            ', AppWinStyle.NormalFocus, "Tips\Unlocked.jpg", DockStyle.Left)
+
 		End If
 		Log.LogMinorInfo("-Operation Completed")
 	End Sub
@@ -2584,16 +2526,22 @@ Public Class ToolbarForm
 
 #Region "Hide Quick Key Handling"
 
+	Private Sub mnuFileExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuFileExit.Click
+		blnClose = True
+	End Sub
+
+#End Region
+
+
+#Region "Hide Quick Key Handling"
+
 	Private Sub mnuFileHideQuickKey_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuFileHideQuickKey.Click
-		Log.LogMinorInfo("+File>Hide Character Grid Clicked...")
 		Settings.QuickKey = False
-		Log.LogMinorInfo("-Operation Completed")
 	End Sub
 
 #End Region
 
 #End Region
-
 #Region "Edit Menu Handling"
 
 #Region "Edit Menu Handler"
@@ -2605,6 +2553,7 @@ Public Class ToolbarForm
 		End If
 		mnuEditCut.Enabled = blnCharSelected
 		mnuEditCopy.Enabled = blnCharSelected
+		mnuEditCopyHTML.Enabled = blnCharSelected
 		mnuEditDelete.Enabled = blnCharSelected
 		mnuEditCopyVisibleChars.Enabled = (Settings.Charset.FilteredCharacters.Length > 0)
 		mnuEditSend.Enabled = blnCharSelected
@@ -2642,6 +2591,15 @@ Public Class ToolbarForm
 
 	Private Sub mnuEditCopy_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuEditCopy.Click
 		frmQuickKey.cdCharacters.CopyFocused()
+	End Sub
+
+#End Region
+
+
+#Region "Copy HTML Menu Handling"
+
+	Private Sub mnuEditCopyHTML_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuEditCopyHTML.Click
+		frmQuickKey.cdCharacters.CopyHTMLFocused()
 	End Sub
 
 #End Region
@@ -2690,7 +2648,6 @@ Public Class ToolbarForm
 #End Region
 
 #End Region
-
 #Region "Font Menu Handlers"
 
 #Region "Font Name Menu Handler"
@@ -2730,7 +2687,6 @@ Public Class ToolbarForm
 #End Region
 
 #End Region
-
 #Region "Filter Menu Handlers"
 
 #Region "Import Filters Handler"
@@ -2759,23 +2715,23 @@ Public Class ToolbarForm
 			ofdImportOpen.ShowHelp = True
 			ofdImportOpen.Multiselect = False
 
-			ofdImportOpen.Filter = Constants.DialogStrings.ImportFiltersDialogFilter
+			ofdImportOpen.Filter = My.Resources.ImportFiltersDialogFilter
 			ofdImportOpen.ShowReadOnly = False
-			ofdImportOpen.Title = Constants.DialogStrings.ImportFiltersDialogCaption
+			ofdImportOpen.Title = My.Resources.ImportFiltersDialogCaption
 			ofdImportOpen.DereferenceLinks = True
 
 
 			ofdImportOpen.FileName = ""
 
-            If ofdImportOpen.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                c = Charset.LoadFile(ofdImportOpen.FileName)
+			If ofdImportOpen.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+				c = Charset.LoadFile(ofdImportOpen.FileName)
 
-                If IO.Directory.Exists(IO.Path.GetDirectoryName(ofdImportOpen.FileName)) Then
-                    Settings.ImportDialogDir = IO.Path.GetDirectoryName(ofdImportOpen.FileName)
+				If IO.Directory.Exists(IO.Path.GetDirectoryName(ofdImportOpen.FileName)) Then
+					Settings.ImportDialogDir = IO.Path.GetDirectoryName(ofdImportOpen.FileName)
 
-                End If
+				End If
 
-            End If
+			End If
 
 			'Dim intFiltersLoop As Integer
 			'For intFiltersLoop = 0 To Settings.Charset.Filters.Count - 1
@@ -2789,9 +2745,9 @@ Public Class ToolbarForm
 
 
 		Catch ax As ArgumentException
-			Log.HandleError("An invalid path was entered. Please try again with a valid filename.", ax, ofdImportOpen.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.InvalidPath, ax, ofdImportOpen.FileName, MessageBoxButtons.OK)
 		Catch ex As Exception
-			Log.HandleError("There was an error importing the file. File may be corrupted or unavailable.", ex, ofdImportOpen.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.ErrorOpeningFile, ex, ofdImportOpen.FileName, MessageBoxButtons.OK)
 		Finally
 			Log.LogMinorInfo("-Operation Completed")
 		End Try
@@ -2812,8 +2768,8 @@ Public Class ToolbarForm
 			sfdSave.InitialDirectory = Settings.FileDialogDir
 			sfdSave.ValidateNames = True
 			sfdSave.ShowHelp = True
-			sfdSave.Filter = Constants.DialogStrings.ExportFiltersDialogFilter
-			sfdSave.Title = Constants.DialogStrings.ExportFiltersDialogCaption
+			sfdSave.Filter = My.Resources.ExportFiltersDialogFilter
+			sfdSave.Title = My.Resources.ExportFiltersDialogCaption
 			sfdSave.DereferenceLinks = True
 			sfdSave.OverwritePrompt = True
 
@@ -2822,49 +2778,49 @@ Public Class ToolbarForm
 			'    sfdSave.InitialDirectory = BasePath & Constants.Resources.FiltersDir
 			'Else
 			sfdSave.InitialDirectory = Settings.ImportDialogDir
-            'End If
+			'End If
 
 
-            If sfdSave.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                Dim c As New Charset
-                'c.Filters.Filters = Settings.Charset.Filters.Filters
-                Dim intFiltersLoop As Integer
-                For intFiltersLoop = 0 To UnicodeFilters.Count - 1
+			If sfdSave.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+				Dim c As New Charset
+				'c.Filters.Filters = Settings.Charset.Filters.Filters
+				Dim intFiltersLoop As Integer
+				For intFiltersLoop = 0 To UnicodeFilters.Count - 1
 
-                    c.Filters.Filters(intFiltersLoop) = Settings.Charset.Filters.Filters(intFiltersLoop)
+					c.Filters.Filters(intFiltersLoop) = Settings.Charset.Filters.Filters(intFiltersLoop)
 
 
-                Next
-                If IO.File.Exists(sfdSave.FileName) Then
+				Next
+				If IO.File.Exists(sfdSave.FileName) Then
 
-                    If ((IO.File.GetAttributes(sfdSave.FileName) And IO.FileAttributes.ReadOnly) <> 0) Then
-                        If MessageBox.Show(Constants.DialogStrings.ExportFiltersReadOnlyErrorText, _
-                          Constants.DialogStrings.ExportFiltersReadOnlyErrorCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.Yes Then
-                            c.SaveFileToDisk(sfdSave.FileName, False, False, False, False, True, True)
+					If ((IO.File.GetAttributes(sfdSave.FileName) And IO.FileAttributes.ReadOnly) <> 0) Then
+						If MessageBox.Show(My.Resources.ExportFiltersReadOnlyErrorText, _
+						  My.Resources.ExportFiltersReadOnlyErrorCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.Yes Then
+							c.SaveFileToDisk(sfdSave.FileName, False, False, False, False, True, True)
 
-                        End If
-                    Else
-                        c.SaveFileToDisk(sfdSave.FileName, False, False, False, False, True, mnuFilterReadOnly.Checked)
-                    End If
-                Else
-                    c.SaveFileToDisk(sfdSave.FileName, False, False, False, False, True, mnuFilterReadOnly.Checked)
-                End If
+						End If
+					Else
+						c.SaveFileToDisk(sfdSave.FileName, False, False, False, False, True, mnuFilterReadOnly.Checked)
+					End If
+				Else
+					c.SaveFileToDisk(sfdSave.FileName, False, False, False, False, True, mnuFilterReadOnly.Checked)
+				End If
 
-                If IO.Directory.Exists(IO.Path.GetDirectoryName(sfdSave.FileName)) Then
-                    Settings.ImportDialogDir = IO.Path.GetDirectoryName(sfdSave.FileName)
+				If IO.Directory.Exists(IO.Path.GetDirectoryName(sfdSave.FileName)) Then
+					Settings.ImportDialogDir = IO.Path.GetDirectoryName(sfdSave.FileName)
 
-                End If
+				End If
 
-            End If
+			End If
 
-        Catch ax As ArgumentException
-            Log.HandleError("An invalid path was entered. Please try again with a valid filename.", ax, sfdSave.FileName, MessageBoxButtons.OK)
-        Catch ex As Exception
-            Log.HandleError("There was an error saving the file. File may be corrupted or unavailable.", ex, sfdSave.FileName, MessageBoxButtons.OK)
+		Catch ax As ArgumentException
+			Log.HandleError(My.Resources.InvalidPath, ax, sfdSave.FileName, MessageBoxButtons.OK)
+		Catch ex As Exception
+			Log.HandleError(My.Resources.ErrorOpeningFile, ex, sfdSave.FileName, MessageBoxButtons.OK)
 
-        Finally
-            Log.LogMinorInfo("-Operation Completed")
-        End Try
+		Finally
+			Log.LogMinorInfo("-Operation Completed")
+		End Try
 
 
 	End Sub
@@ -2918,7 +2874,6 @@ Public Class ToolbarForm
 #End Region
 
 #End Region
-
 #Region "Keyword Menu Handlers"
 
 #Region "Edit Keywords Menu"
@@ -2979,7 +2934,6 @@ Public Class ToolbarForm
 #End Region
 
 #End Region
-
 #Region "View Menu Handlers"
 
 #Region "View Font Name Menu Handler"
@@ -3071,7 +3025,6 @@ Public Class ToolbarForm
 #End Region
 
 #End Region
-
 #Region "Tools Menu Handlers"
 
 
@@ -3082,21 +3035,21 @@ Public Class ToolbarForm
 		Dim frmUnicode As New Form
 		frmUnicode.Name = "frmUnicode"
 		frmUnicode.TopMost = True
-        frmUnicode.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
+		frmUnicode.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
 		'frmUnicode.Icon = ProgramIcon
 		frmUnicode.MaximizeBox = False
 		frmUnicode.MinimizeBox = False
-		frmUnicode.Text = "Get Character from Unicode Value"
+		frmUnicode.Text = My.Resources.AddUnicodeChar
 		frmUnicode.StartPosition = FormStartPosition.CenterScreen
 		frmUnicode.TabStop = False
 
 		Dim optDec As New RadioButton
-		optDec.name = "optDec"
-		optDec.Text = "Decimal Value"
+		optDec.Name = "optDec"
+		optDec.Text = My.Resources.DecimalMode
 		optDec.FlatStyle = FlatStyle.System
 		Dim optHex As New RadioButton
 		optHex.Name = "optHex"
-		optHex.Text = "Hexadecimal Value"
+		optHex.Text = My.Resources.HexadecimalMode
 		optHex.FlatStyle = FlatStyle.System
 
 		frmUnicode.Controls.Add(optDec)
@@ -3128,7 +3081,7 @@ Public Class ToolbarForm
 		Dim btnAdd As New Button
 		btnAdd.Name = "btnAdd"
 		btnAdd.FlatStyle = FlatStyle.System
-		btnAdd.Text = "&Add"
+		btnAdd.Text = My.Resources.AddButton
 		btnAdd.Top = frmUnicode.ClientSize.Height - 32
 		btnAdd.Height = 24
 		btnAdd.Width = 75
@@ -3140,7 +3093,7 @@ Public Class ToolbarForm
 		Dim btnCancel As New Button
 		btnCancel.Name = "btnCancel"
 		btnCancel.FlatStyle = FlatStyle.System
-		btnCancel.Text = "&Cancel"
+		btnCancel.Text = My.Resources.CancelButton
 		btnCancel.Top = frmUnicode.ClientSize.Height - 32
 		btnCancel.Height = 24
 		btnCancel.Width = 75
@@ -3152,7 +3105,7 @@ Public Class ToolbarForm
 		Dim lblUnicodeCategory As New Label
 		lblUnicodeCategory.Name = "lblUnicodeCategory"
 		lblUnicodeCategory.AutoSize = True
-		lblUnicodeCategory.Text = "Unicode Category: "
+		lblUnicodeCategory.Text = My.Resources.UnicodeCategoryPrefix
 		frmUnicode.Controls.Add(lblUnicodeCategory)
 		lblUnicodeCategory.Left = 8
 		lblUnicodeCategory.Top = btnAdd.Top - (lblUnicodeCategory.Height + 8)
@@ -3161,7 +3114,7 @@ Public Class ToolbarForm
 		Dim lblUnicodeValue As New Label
 		lblUnicodeValue.Name = "lblUnicodeValue"
 		lblUnicodeValue.AutoSize = True
-		lblUnicodeValue.Text = "Unicode Value: "
+		lblUnicodeValue.Text = My.Resources.UnicodeValuePrefix
 		frmUnicode.Controls.Add(lblUnicodeValue)
 		lblUnicodeValue.Left = 8
 		lblUnicodeValue.Top = lblUnicodeCategory.Top - (lblUnicodeValue.Height + 8)
@@ -3170,7 +3123,7 @@ Public Class ToolbarForm
 		Dim lblAnsii As New Label
 		lblAnsii.Name = "lblAnsii"
 		lblAnsii.AutoSize = True
-		lblAnsii.Text = "Ansii Value: "
+		lblAnsii.Text = My.Resources.AnsiiValuePrefix
 
 		frmUnicode.Controls.Add(lblAnsii)
 		lblAnsii.Left = 8
@@ -3202,8 +3155,8 @@ Public Class ToolbarForm
 		lblUnicodeValue.Text = ""
 		lblChar.Text = ""
 		lblUnicodeCategory.Text = ""
-		lblAnsii.Text = "No Character Entered"
-		txtValue.Focus()
+		lblAnsii.Text = My.Resources.NoCharacterEntered
+		txtValue.Select()
 		frmUnicode.ShowDialog()
 	End Sub
 
@@ -3277,7 +3230,7 @@ Public Class ToolbarForm
 
 			If Not txtValue Is Nothing Then
 				If Not txtValue.ContainsFocus Then
-					txtValue.Focus()
+					txtValue.Select()
 				End If
 				If txtValue.Text.Length > 0 Then
 					If optDec.Checked Then
@@ -3292,7 +3245,7 @@ Public Class ToolbarForm
 								btnAdd.Enabled = False
 								Exit Sub
 							End Try
-							lblAnsii.Text = "Ansii Value: " & Asc(ChrW(CInt(txtValue.Text))).ToString
+							lblAnsii.Text = "Ansii Value: " & AscW(ChrW(CInt(txtValue.Text))).ToString
 							lblUnicodeValue.Text = "Unicode Value: " & "U+" & Hex(CInt(txtValue.Text)) & " (" & CInt(txtValue.Text).ToString & ")"
 
 							If Array.IndexOf(UnicodeFilters.FilterTitles, System.Char.GetUnicodeCategory(ChrW(CInt(txtValue.Text))).ToString) > -1 Then
@@ -3323,7 +3276,7 @@ Public Class ToolbarForm
 								btnAdd.Enabled = False
 								Exit Sub
 							End Try
-							lblAnsii.Text = "Ansii Value: " & Asc(ChrW(CInt("&H" & txtValue.Text))).ToString
+							lblAnsii.Text = "Ansii Value: " & AscW(ChrW(CInt("&H" & txtValue.Text))).ToString
 							lblUnicodeValue.Text = "Unicode Value: " & "U+" & Hex(CInt("&H" & txtValue.Text)) & " (" & CInt("&H" & txtValue.Text).ToString & ")"
 
 							If Array.IndexOf(UnicodeFilters.FilterTitles, System.Char.GetUnicodeCategory(ChrW(CInt("&H" & txtValue.Text))).ToString) > -1 Then
@@ -3386,7 +3339,7 @@ Public Class ToolbarForm
 							Try
 								Settings.Charset.Characters &= ChrW(CInt(txtValue.Text))
 							Catch ex As Exception
-								Log.HandleError("Could Not Add Character!", ex, , MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+								Log.HandleError(My.Resources.CouldNotAddCharacter, ex, , MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 							Finally
 								frmUnicode.Close()
 							End Try
@@ -3396,7 +3349,7 @@ Public Class ToolbarForm
 							Try
 								Settings.Charset.Characters &= ChrW(CInt("&H" & txtValue.Text))
 							Catch ex As Exception
-								Log.HandleError("Could Not Add Character!", ex, , MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+								Log.HandleError(My.Resources.CouldNotAddCharacter, ex, , MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 							Finally
 								frmUnicode.Close()
 							End Try
@@ -3409,6 +3362,168 @@ Public Class ToolbarForm
 			End If
 		Catch ex As Exception
 			Log.LogError("Error During Unicode Add Clicked Event", ex)
+		End Try
+	End Sub
+
+#End Region
+
+#End Region
+
+#Region "Get Unicode Chars"
+
+	Private Sub mnuToolsGetUnicodeChars_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuToolsGetUnicodeChars.Click
+
+		Dim frmUnicode As New Form
+		frmUnicode.Name = "frmUnicode"
+		frmUnicode.TopMost = True
+		frmUnicode.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
+		'frmUnicode.Icon = ProgramIcon
+		frmUnicode.MaximizeBox = False
+		frmUnicode.MinimizeBox = False
+		frmUnicode.Text = My.Resources.AddCharacterRange
+		frmUnicode.StartPosition = FormStartPosition.CenterScreen
+		frmUnicode.TabStop = False
+
+		Dim optDec As New RadioButton
+		optDec.Name = "optDec"
+		optDec.Text = My.Resources.DecimalMode
+		optDec.FlatStyle = FlatStyle.System
+		Dim optHex As New RadioButton
+		optHex.Name = "optHex"
+		optHex.Text = My.Resources.HexadecimalMode
+		optHex.FlatStyle = FlatStyle.System
+
+		frmUnicode.Controls.Add(optDec)
+		frmUnicode.Controls.Add(optHex)
+		optDec.Checked = True
+		optDec.Top = 8
+		optDec.Left = 8
+		optDec.Height = 16
+		optDec.Width = CInt(frmUnicode.ClientSize.Width / 2 - 16)
+		optDec.Anchor = AnchorStyles.Left Or AnchorStyles.Top
+		optDec.TabStop = False
+		optHex.Left = CInt(frmUnicode.ClientSize.Width / 2 + 8)
+		optHex.Height = 16
+		optHex.Top = 8
+		optHex.Width = CInt(frmUnicode.ClientSize.Width / 2 + 16)
+		optHex.Anchor = AnchorStyles.Right Or AnchorStyles.Top
+		optHex.TabStop = False
+		Dim nud1 As New NumericUpDown()
+		Dim nud2 As New NumericUpDown()
+		nud1.Top = 32
+		nud1.Left = 8
+		nud1.Width = CInt((frmUnicode.ClientSize.Width / 2) - 24)
+		nud2.Width = CInt((frmUnicode.ClientSize.Width / 2) - 24)
+		nud2.Left = nud1.Right + 8
+		nud2.Top = 32
+		nud1.Anchor = AnchorStyles.Left Or AnchorStyles.Top
+		nud2.Anchor = AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
+		nud1.Minimum = 1
+		nud2.Minimum = 1
+		nud1.Maximum = AscW(System.Char.MaxValue)
+		nud2.Maximum = AscW(System.Char.MaxValue)
+		nud1.TabIndex = 0
+		nud2.TabIndex = 1
+		frmUnicode.Controls.Add(nud1)
+		frmUnicode.Controls.Add(nud2)
+		Dim btnAdd As New Button
+		btnAdd.Name = "btnAdd"
+		btnAdd.FlatStyle = FlatStyle.System
+		btnAdd.Text = My.Resources.AddButton
+		btnAdd.Top = frmUnicode.ClientSize.Height - 32
+		btnAdd.Height = 24
+		btnAdd.Width = 75
+		btnAdd.Left = frmUnicode.ClientSize.Width - (btnAdd.Width + 8)
+		btnAdd.Anchor = AnchorStyles.Right Or AnchorStyles.Bottom
+		frmUnicode.Controls.Add(btnAdd)
+		frmUnicode.AcceptButton = btnAdd
+		btnAdd.TabIndex = 2
+		Dim btnCancel As New Button
+		btnCancel.Name = "btnCancel"
+		btnCancel.FlatStyle = FlatStyle.System
+		btnCancel.Text = My.Resources.CancelButton
+		btnCancel.Top = frmUnicode.ClientSize.Height - 32
+		btnCancel.Height = 24
+		btnCancel.Width = 75
+		btnCancel.Left = btnAdd.Left - (btnAdd.Width + 8)
+		btnCancel.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+		frmUnicode.Controls.Add(btnCancel)
+		frmUnicode.CancelButton = btnCancel
+		btnCancel.TabIndex = 3
+
+		frmUnicode.ClientSize = New Size(frmUnicode.ClientSize.Width, nud1.Bottom + btnCancel.Height + 16)
+
+		AddHandler btnAdd.Click, AddressOf UnicodesAddClick
+		AddHandler btnCancel.Click, AddressOf UnicodesCancelClick
+		AddHandler optDec.CheckedChanged, AddressOf UnicodesDecimalChanged
+		frmUnicode.ShowDialog()
+	End Sub
+
+#Region "Unicode Char Form Handling"
+
+	Friend Sub UnicodesDecimalChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+		Try
+			Dim optClick As RadioButton = CType(sender, RadioButton)
+			Dim frmUnicode As Form = CType(optClick.Parent, Form)
+			Dim optDec As RadioButton = CType(frmUnicode.Controls(0), RadioButton)
+			Dim nud1 As NumericUpDown = CType(frmUnicode.Controls(2), NumericUpDown)
+			Dim nud2 As NumericUpDown = CType(frmUnicode.Controls(3), NumericUpDown)
+			If Not optDec Is Nothing And Not nud1 Is Nothing And Not nud2 Is Nothing Then
+				nud1.Hexadecimal = Not optDec.Checked
+				nud2.Hexadecimal = Not optDec.Checked
+			End If
+		Catch ex As Exception
+			Log.LogError("Error During Unicodes Char Decimal System Changed Event", ex)
+		End Try
+	End Sub
+
+
+
+	Friend Sub UnicodesCancelClick(ByVal sender As Object, ByVal e As EventArgs)
+		Try
+			Dim btnCancel As Button = CType(sender, Button)
+			Dim frmUnicode As Form = CType(btnCancel.Parent, Form)
+			frmUnicode.Close()
+		Catch ex As Exception
+			Log.LogError("Error During Unicodes Cancel Clicked Event", ex)
+		End Try
+	End Sub
+
+	Friend Sub UnicodesAddClick(ByVal sender As Object, ByVal e As EventArgs)
+		Try
+			Dim Click As Button = CType(sender, Button)
+			Dim frmUnicode As Form = CType(Click.Parent, Form)
+			Dim optDec As RadioButton = CType(frmUnicode.Controls(0), RadioButton)
+			Dim nud1 As NumericUpDown = CType(frmUnicode.Controls(2), NumericUpDown)
+			Dim nud2 As NumericUpDown = CType(frmUnicode.Controls(3), NumericUpDown)
+			If Not nud1 Is Nothing And Not nud2 Is Nothing Then
+				Dim first As Integer = CInt(nud1.Value)
+				Dim last As Integer = CInt(nud2.Value)
+				If (last >= first) Then
+					Dim goahead As Boolean = True
+					If (last - first > 200) Then
+						If (MessageBox.Show(frmUnicode, My.Resources.CharacterRangeConfirmation1 & " " & CStr(last - first) & " " & My.Resources.CharacterRangeConfirmation2, My.Resources.CharacterRangeConfirmationTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes) Then
+							goahead = True
+						Else
+							goahead = False
+						End If
+					End If
+					If goahead Then
+						Dim sb As System.Text.StringBuilder = New System.Text.StringBuilder(last - first)
+						Dim i As Integer
+						For i = first To last
+							sb.Append(ChrW(i))
+						Next
+						Settings.Charset.Characters += sb.ToString()
+						frmUnicode.Close()
+					End If
+				End If
+
+
+			End If
+
+		Catch ex As Exception
+			Log.LogError("Error During Unicodes Add Clicked Event", ex)
 		End Try
 	End Sub
 
@@ -3475,10 +3590,10 @@ Public Class ToolbarForm
 	Private Sub mnuToolsEditText_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuToolsEditText.Click
 
 		If frmEditText Is Nothing Then
-			frmEditText = New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), Constants.DialogStrings.EditCharsAsTextDialogCaption, Settings.Charset.Characters)
+			frmEditText = New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), My.Resources.EditCharsAsTextDialogCaption, Settings.Charset.Characters)
 		Else
 			frmEditText.Font = New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle)
-			frmEditText.Text = Constants.DialogStrings.EditCharsAsTextDialogCaption
+			frmEditText.Text = My.Resources.EditCharsAsTextDialogCaption
 			frmEditText.CharacterList = Settings.Charset.Characters
 		End If
 
@@ -3492,9 +3607,9 @@ Public Class ToolbarForm
 
 		'Dim frmEditText As New EditDialog(New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle), "Edit Character List as Text", Settings.Charset.Characters, False, True, True)
 		Select Case frmEditText.ShowDialog(frmQuickKey)
-            Case Windows.Forms.DialogResult.OK
-                Settings.Charset.Characters = frmEditText.CharacterList
-        End Select
+			Case Windows.Forms.DialogResult.OK
+				Settings.Charset.Characters = frmEditText.CharacterList
+		End Select
 
 	End Sub
 
@@ -3512,15 +3627,39 @@ Public Class ToolbarForm
 #End Region
 
 #End Region
-
 #Region "Help Menu Handlers"
+
+#Region "Tips Menu"
+
+	Private Sub mnuHelpTips_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuHelpTips.Popup
+		mnuHelpTipsHide.Checked = Not Settings.ShowTips
+	End Sub
+
+#End Region
+
+
+#Region "Help tips hide Menu"
+
+	Private Sub mnuHelpTipsHide_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuHelpTipsHide.Click
+		Settings.ShowTips = Not Settings.ShowTips
+	End Sub
+
+#End Region
+
+
+#Region "reset tips Menu"
+
+	Private Sub mnuHelpTipsReset_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuHelpTipsReset.Click
+		Settings.Tips = Nothing
+	End Sub
+
+#End Region
+
 
 #Region "Help Topics Menu"
 
 	Private Sub mnuHelpHelpTopics_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuHelpHelpTopics.Click
-		System.Windows.Forms.Help.ShowHelp(frmQuickKey, _
-		  IO.Path.GetDirectoryName(Application.ExecutablePath) & _
-		  IO.Path.DirectorySeparatorChar & Constants.Resources.HelpFileName)
+		Main.ShowHelpFile()
 	End Sub
 
 #End Region
@@ -3539,11 +3678,8 @@ Public Class ToolbarForm
 #End Region
 
 #End Region
-
 #End Region
-
 #Region "File Handling Procedures"
-
 #Region "Open File Procedure"
 
 	Public Sub OpenFile()
@@ -3561,32 +3697,31 @@ Public Class ToolbarForm
 			ofdOpen.ValidateNames = True
 			ofdOpen.ShowHelp = True
 			ofdOpen.Multiselect = False
-			ofdOpen.Filter = Constants.DialogStrings.OpenCharsetDialogFilter
+			ofdOpen.Filter = My.Resources.OpenCharsetDialogFilter
 			ofdOpen.ShowReadOnly = False
-			ofdOpen.Title = Constants.DialogStrings.OpenCharsetDialogCaption
+			ofdOpen.Title = My.Resources.OpenCharsetDialogCaption
 			ofdOpen.DereferenceLinks = True
 
 			If Settings.FileName.Length > 0 Then
 				ofdOpen.FileName = Settings.FileName
 			End If
-            If ofdOpen.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+			If ofdOpen.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
 
-                Settings.LoadCharset(ofdOpen.FileName)
-                If IO.Directory.Exists(IO.Path.GetDirectoryName(ofdOpen.FileName)) Then
-                    Settings.FileDialogDir = IO.Path.GetDirectoryName(ofdOpen.FileName)
-                End If
-            End If
+				Settings.LoadCharset(ofdOpen.FileName)
+				If IO.Directory.Exists(IO.Path.GetDirectoryName(ofdOpen.FileName)) Then
+					Settings.FileDialogDir = IO.Path.GetDirectoryName(ofdOpen.FileName)
+				End If
+			End If
 
 		Catch ax As ArgumentException
-			Log.HandleError("An invalid path was entered. Please try again with a valid filename.", ax, ofdOpen.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.InvalidPath, ax, ofdOpen.FileName, MessageBoxButtons.OK)
 		Catch ex As Exception
-			Log.HandleError("There was an error opening the file. File may be corrupted or unavailable.", ex, ofdOpen.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.ErrorOpeningFile, ex, ofdOpen.FileName, MessageBoxButtons.OK)
 
 		End Try
 	End Sub
 
 #End Region
-
 #Region "Save File Subroutine"
 
 	Public Sub SaveFile()
@@ -3595,28 +3730,26 @@ Public Class ToolbarForm
 				SaveAsFile()
 			Else
 				If ((IO.File.GetAttributes(Settings.FileName) And IO.FileAttributes.ReadOnly) <> 0) And Not Settings.FileReadOnly Then
-                    If MessageBox.Show(Constants.DialogStrings.SaveCharsetReadOnlyErrorText, _
-                       Constants.DialogStrings.SaveCharsetErrorCaption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.OK Then
+					If MessageBox.Show(My.Resources.SaveCharsetReadOnlyErrorText, _
+					   My.Resources.SaveCharsetErrorCaption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.OK Then
 
-                        SaveAsFile()
-                    End If
+						SaveAsFile()
+					End If
 				Else
 
 					Settings.SaveCharsetToDisk(Settings.FileName)
 				End If
 			End If
 		Catch ax As ArgumentException
-			Log.HandleError("An invalid path was entered. Please try again with a valid filename.", ax, Settings.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.InvalidPath, ax, Settings.FileName, MessageBoxButtons.OK)
 		Catch ex As Exception
-			Log.HandleError("There was an error saving the file. File may be corrupted or unavailable.", ex, Settings.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.ErrorOpeningFile, ex, Settings.FileName, MessageBoxButtons.OK)
 
 		End Try
 	End Sub
 
 #End Region
-
 #Region "Save As FileSubroutine"
-
 	Public Sub SaveAsFile()
 		Try
 			sfdSave.AddExtension = True
@@ -3626,8 +3759,8 @@ Public Class ToolbarForm
 			sfdSave.InitialDirectory = Settings.FileDialogDir
 			sfdSave.ValidateNames = True
 			sfdSave.ShowHelp = True
-			sfdSave.Filter = Constants.DialogStrings.SaveCharsetDialogFilter
-			sfdSave.Title = Constants.DialogStrings.SaveCharsetDialogTitle
+			sfdSave.Filter = My.Resources.SaveCharsetDialogFilter
+			sfdSave.Title = My.Resources.SaveCharsetDialogTitle
 			sfdSave.DereferenceLinks = True
 			sfdSave.OverwritePrompt = True
 			If Settings.FileName.Length > 0 Then
@@ -3635,107 +3768,65 @@ Public Class ToolbarForm
 			Else
 				sfdSave.FileName = Constants.Xml.Charset.CharsetDefaultFileName & "." & Constants.Xml.Charset.CharsetExtension
 			End If
-            If sfdSave.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-                If IO.File.Exists(sfdSave.FileName) Then
-                    If ((IO.File.GetAttributes(sfdSave.FileName) And IO.FileAttributes.ReadOnly) <> 0) And Not Settings.FileReadOnly Then
-                        If MessageBox.Show(Constants.DialogStrings.SaveCharsetReadOnlyErrorText, _
-                          Constants.DialogStrings.SaveCharsetErrorCaption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.OK Then
+			If sfdSave.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+				If IO.File.Exists(sfdSave.FileName) Then
+					If ((IO.File.GetAttributes(sfdSave.FileName) And IO.FileAttributes.ReadOnly) <> 0) And Not Settings.FileReadOnly Then
+						If MessageBox.Show(My.Resources.SaveCharsetReadOnlyErrorText, _
+						  My.Resources.SaveCharsetErrorCaption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.OK Then
 
-                            SaveAsFile()
-                        End If
-                    Else
-                        Settings.SaveCharsetToDisk(sfdSave.FileName)
-                    End If
-                Else
-                    Settings.SaveCharsetToDisk(sfdSave.FileName)
-                End If
-                If IO.Directory.Exists(IO.Path.GetDirectoryName(sfdSave.FileName)) Then
-                    Settings.FileDialogDir = IO.Path.GetDirectoryName(sfdSave.FileName)
-                End If
-            End If
+							SaveAsFile()
+						End If
+					Else
+						Settings.SaveCharsetToDisk(sfdSave.FileName)
+					End If
+				Else
+					Settings.SaveCharsetToDisk(sfdSave.FileName)
+				End If
+				If IO.Directory.Exists(IO.Path.GetDirectoryName(sfdSave.FileName)) Then
+					Settings.FileDialogDir = IO.Path.GetDirectoryName(sfdSave.FileName)
+				End If
+			End If
 
 		Catch ax As ArgumentException
-			Log.HandleError("An invalid path was entered. Please try again with a valid filename.", ax, sfdSave.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.InvalidPath, ax, sfdSave.FileName, MessageBoxButtons.OK)
 		Catch ex As Exception
-			Log.HandleError("There was an error saving the file. File may be corrupted or unavailable.", ex, sfdSave.FileName, MessageBoxButtons.OK)
+			Log.HandleError(My.Resources.ErrorOpeningFile, ex, sfdSave.FileName, MessageBoxButtons.OK)
 
 		End Try
 	End Sub
 
 #End Region
-
 #Region "Query Save Changes Function"
-
 	Public Function CheckSaveFalseOnCancel() As Boolean
 		If Settings.FileChanged Then
+			Select Case MessageBox.Show(My.Resources.CharsetChangedQuerySave, _
+			 Application.ProductName & " - " & My.Resources.CharsetChangedSuffix, MessageBoxButtons.YesNoCancel, _
+			MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
 
-			Select Case MessageBox.Show(Constants.DialogStrings.SaveFileQueryText, _
-				Constants.DialogStrings.SaveFileQueryCaption, MessageBoxButtons.YesNoCancel, _
-				  MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
-
-                Case Windows.Forms.DialogResult.Cancel
-                    Return False
-                Case Windows.Forms.DialogResult.Yes
-                    SaveFile()
-            End Select
-
+				Case Windows.Forms.DialogResult.Cancel
+					Return False
+				Case Windows.Forms.DialogResult.Yes
+					SaveFile()
+			End Select
 		End If
-
 		Return True
 	End Function
-
 #End Region
-
 #End Region
-
-#Region "Private Scaling variable holds relative widths of font combos for resizing"
-
+#Region "Font Combos Splitter Moved Event - Saves Relative Positions"
+	'Private Scaling variable holds relative widths of font combos for resizing
 	Private m_dblFontSplitterRelative As Double = (1 / 4)
 
-#End Region
-
-#Region "Font Combos Splitter Moved Event - Saves Relative Positions"
-
 	Private Sub splFont_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs) Handles splFont.SplitterMoved
-		m_dblFontSplitterRelative = splFont.SplitPosition / (pnlFontName.Width + pnlFontSize.Width)
-	End Sub
-
-#End Region
-
-#Region "Form Location Changed Event Hadler Saves Size and Location Settings "
-
-	Private Sub ToolbarForm_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.LocationChanged
-		If Settings.Locked Then
-			Me.Bounds = Settings.ToolbarBounds
-		End If
-		If blnInitialized Then
-			Settings.m_bToolbar = Me.Bounds
+		If pnlFontName.Width + pnlFontSize.Width > 70 Then
+			m_dblFontSplitterRelative = splFont.SplitPosition / (pnlFontName.Width + pnlFontSize.Width)
 		End If
 	End Sub
-
 #End Region
-
-#Region "frmQuickKey TitleBar Refresh"
-
-	Private Sub ToolbarForm_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Enter
-		frmQuickKey.RefreshTitlebar()
-		Me.TopMost = True
-	End Sub
-
-	Private Sub ToolbarForm_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Activated
-		frmQuickKey.RefreshTitlebar()
-		frmToolbar_Resize(Me, Nothing)
-		Me.TopMost = True
-	End Sub
-
-#End Region
-
 #Region "Keyword Combo Box Event Handlers"
-
 	Private Sub cmbKeywords_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbKeywords.TextChanged
 		Settings.Keyword = cmbKeywords.Text
 	End Sub
-
 #End Region
 
 #Region "Public Show Edit Text Chars calls menu item"
@@ -3745,7 +3836,6 @@ Public Class ToolbarForm
 	End Sub
 
 #End Region
-
 #Region "Public Show Get Unicode Char  calls Menu item"
 
 	Public Sub ShowGetUnicodeChar()
@@ -3754,8 +3844,9 @@ Public Class ToolbarForm
 
 #End Region
 
-
-
+	Private Sub ToolbarForm_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+		ToolbarForm_ResizeEnd(Me, Nothing)
+	End Sub
 
 
 End Class
@@ -3765,20 +3856,20 @@ End Class
 #Region "Docking Icon"
 
 Public Class DockIconForm
-	Inherits System.Windows.Forms.Form
+	Inherits SmallWindow
 
 #Region "Public ReadonlyMouseOver Property"
 	Public ReadOnly Property MouseOver() As Boolean
 		Get
 
-            If Control.MousePosition.X < Me.Left Or Control.MousePosition.Y < Me.Top Or _
+			If Control.MousePosition.X < Me.Left Or Control.MousePosition.Y < Me.Top Or _
    Control.MousePosition.X > Me.Width + Me.Left Or Control.MousePosition.Y > Me.Height + Me.Top Then
 
-                Return False
-            Else
+				Return False
+			Else
 
-                Return True
-            End If
+				Return True
+			End If
 		End Get
 	End Property
 
@@ -3787,18 +3878,41 @@ Public Class DockIconForm
 
 #Region "Recieving Events"
 
-	Public Sub DockIconBoundsChanged()
-		Me.Bounds = Settings.DockIconBounds
+	Public Sub DockIconBoundsChanged(ByVal sender As Object, ByVal e As EventArgs)
+		'Set the text properly
+		Dim newwidth As Integer = Settings.DockIconBounds.Width
+		Dim newheight As Integer = Settings.DockIconBounds.Height
+		If Not lblMove Is Nothing Then
+			If newwidth < 50 Then
+
+				If lblMove.Text <> My.Resources.QK Then
+					lblMove.Text = My.Resources.QK
+				End If
+			ElseIf newwidth < 90 And newheight < 64 Or newwidth < 64 And newheight < 90 Then
+				If lblMove.Text <> My.Resources.QuickKey Then
+					lblMove.Text = My.Resources.QuickKey
+				End If
+			Else
+				If lblMove.Text <> My.Resources.QuickKey Then
+					lblMove.Text = My.Resources.QuickKey
+				End If
+			End If
+		End If
+		'We can't set the size now, as it won't take.
+		'Until the form is display there is a 123x25 minimum size limit
 	End Sub
 
-
-	Friend Sub QuickKeyChanged()
+	Friend Sub QuickKeyChanged(ByVal sender As Object, ByVal e As EventArgs)
 		If Settings.QuickKey Then
 			If Settings.Docked Then
 				Me.Visible = True
 				If MouseOver Then
 					tmrMouseOver.Enabled = True
 				End If
+				If (frmQuickKey.Visible) Then
+					frmQuickKey.Activate()
+				End If
+
 			End If
 		Else
 			Me.Visible = False
@@ -3807,41 +3921,24 @@ Public Class DockIconForm
 	End Sub
 
 
-	Friend Sub DockedChanged()
+	Friend Sub DockedChanged(ByVal sender As Object, ByVal e As EventArgs)
 		If Settings.Docked Then
 			If Settings.QuickKey Then
 				Me.Visible = True
 				If MouseOver Then
 					tmrMouseOver.Enabled = True
 				End If
-				frmQuickKey.Show()
-				If Settings.Toolbar And Not frmToolbar Is Nothing Then
-					frmToolbar.Show()
-				End If
+				ShowQuickKey()
 			End If
 		Else
 			Me.Visible = False
 			tmrMouseOver.Enabled = False
-			If Settings.QuickKey Then
-				frmQuickKey.Show()
-				If Settings.Toolbar And Not frmToolbar Is Nothing Then
-					frmToolbar.Show()
-				End If
-			End If
-
+			ShowQuickKey()
 		End If
 	End Sub
 
 	Friend Sub LockedChanged()
-		If Settings.Locked Then
-
-			Me.MinimumSize = Me.Size
-			Me.MaximumSize = Me.Size
-		Else
-			Me.MaximumSize = New Size(0, 0)
-			Me.MinimumSize = New Size(16, 16)
-
-		End If
+		Me.AllowResize = Not Settings.Locked
 	End Sub
 
 
@@ -3855,48 +3952,38 @@ Public Class DockIconForm
 
 #End Region
 
-#Region "Instantationations Subroutine and Component Initializer"
+#Region "Creation Subroutine and Component Initializer"
 
 	Public Sub New()
-		Me.Name = "frmDockIcon"
-        Me.FormBorderStyle = Windows.Forms.FormBorderStyle.Sizable
-		Me.Text = ""
-		Me.ControlBox = False
-		Me.TopMost = True
-		Me.MinimumSize = New Size(16, 16)
-		Me.ShowInTaskbar = False
-		Me.Opacity = 1
-		Me.StartPosition = FormStartPosition.Manual
-		Me.Visible = False
-		Me.Width = 90
-		Me.Height = 24
 
+		Me.Name = "frmDockIcon"
+
+		Me.Text = ""
 
 		lblMove = New Label
 		lblMove.Name = "lblMove"
 		lblMove.Visible = True
 		Me.Controls.Add(lblMove)
 		lblMove.Dock = DockStyle.Fill
-		lblMove.Text = "Auto Hide Window"
+		lblMove.Text = ""
 		lblMove.Font = New Font(FontFamily.GenericSansSerif, 8, FontStyle.Bold)
 
 		lblMove.TextAlign = ContentAlignment.MiddleCenter
-		lblMove.BackColor = SystemColors.ActiveCaption
-		lblMove.ForeColor = SystemColors.ActiveCaptionText
+		lblMove.BackColor = SystemColors.Window
+		lblMove.ForeColor = SystemColors.WindowText
 
 		tmrMouseOver = New Timer
-		tmrMouseOver.Interval = 300
+		tmrMouseOver.Interval = 160
 		tmrMouseOver.Enabled = False
-		lblMove.ForeColor = SystemColors.InactiveCaptionText
 		lblMove.Font = New Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular)
 
 		cmPopup = New ContextMenu
-		Dim mnuDisable As New MenuItem("Disable AutoHide", AddressOf P_Disable)
+		Dim mnuDisable As New MenuItem(My.Resources.DisableAutoHide, AddressOf P_Disable)
 		Dim mnuSide As New MenuItem("Screen Edge")
-		Dim mnuSideTop As New MenuItem("Top", AddressOf P_Side)
-		Dim mnuSideRight As New MenuItem("Right", AddressOf P_Side)
-		Dim mnuSideLeft As New MenuItem("Left", AddressOf P_Side)
-		Dim mnuSideBottom As New MenuItem("Bottom", AddressOf P_Side)
+		Dim mnuSideTop As New MenuItem("Top edge", AddressOf P_Side)
+		Dim mnuSideRight As New MenuItem("Right edge", AddressOf P_Side)
+		Dim mnuSideLeft As New MenuItem("Left edge", AddressOf P_Side)
+		Dim mnuSideBottom As New MenuItem("Bottom edge", AddressOf P_Side)
 		cmPopup.MenuItems.Add(mnuDisable)
 		'cmPopup.MenuItems.Add("-")
 		'cmPopup.MenuItems.Add(mnuSideTop)
@@ -3910,35 +3997,25 @@ Public Class DockIconForm
 #Region "Popup Menu Handlers"
 
 	Private Sub P_Disable(ByVal sender As Object, ByVal e As System.EventArgs)
-		If Not frmQuickKey Is Nothing Then
-			frmQuickKey.Visible = True
-			If Settings.Toolbar And Not frmToolbar Is Nothing Then
-				frmToolbar.Show()
-			End If
-			Settings.Docked = False
-
-            'ShowTip("You have disabled the Auto-Hide Window. The Character Grid and the Toolbar will stay visible even when not in use.", _
-            '"Auto-hide Tip", , AppWinStyle.NormalNoFocus, "Tips\Nohide.jpg", DockStyle.Top)
-
-		End If
+		StopAutohide()
 	End Sub
 
 	Private Sub P_Side(ByVal sender As Object, ByVal e As System.EventArgs)
 		If Not sender Is Nothing Then
 
 			Select Case CType(sender, MenuItem).Text
-				Case "Top"
+				Case "Top edge"
 
 					Me.Location = New Point(Screen.GetWorkingArea(Me).Location.X - CInt((Me.Width - Me.ClientSize.Width) / 2), _
-						Screen.GetWorkingArea(Me).Location.Y - CInt((Me.Height - Me.ClientSize.Height) / 2))
+					 Screen.GetWorkingArea(Me).Location.Y - CInt((Me.Height - Me.ClientSize.Height) / 2))
 					Me.MinimumSize = New Size(2, 2)
 					Me.ClientSize = New Size(Screen.GetWorkingArea(Me).Width, 9)
 					Me.Height = 2 + (Me.Height - Me.ClientSize.Height)
-				Case "Right"
+				Case "Right edge"
 
-				Case "Left"
+				Case "Left edge"
 
-				Case "Bottom"
+				Case "Bottom edge"
 
 			End Select
 
@@ -3957,31 +4034,22 @@ Public Class DockIconForm
 
 	Private Sub lblMove_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblMove.MouseMove
 		'If Left then start move
-		Dim lngReturnValue As Integer
-        If e.Button = Windows.Forms.MouseButtons.Left And Not Settings.Locked Then
-            lblMove.Capture = False
-            'Dim m As Message = Message.Create(Me.Handle, &HA1S, cintptr())
-            'lngReturnValue = me.DefWndProc(new Message(.ToInt32,, 2, 0)
-            lngReturnValue = QuickKey.APIS.SendMessage(Me.Handle.ToInt32, &HA1S, 2, 0)
-        End If
+		If e.Button = Windows.Forms.MouseButtons.Left And Not Settings.Locked Then
+			'Releases the mouse capture. There will be no subseqent mousemove events
+			lblMove.Capture = False
+			Me.StartMoving()
+		End If
 	End Sub
 
 #End Region
 
-#Region "tmrTick Event Handler Shows QuickKey when mouse rests on form"
+#Region "tmrMouseOver Event Handler Shows QuickKey when mouse rests on form"
 
 	Private Sub tmrMouseOver_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles tmrMouseOver.Tick
-		If Not frmQuickKey Is Nothing Then
-
-			frmQuickKey.Visible = True
-
-
-			If Settings.Toolbar Then
-				If Not frmToolbar.Visible Then
-					frmToolbar.Show()
-				End If
-			End If
+		If Not frmQuickKey.Visible Then
+			ShowQuickKey()
 		End If
+
 	End Sub
 
 #End Region
@@ -3991,35 +4059,34 @@ Public Class DockIconForm
 	Private Sub lblMove_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblMove.MouseEnter
 		tmrMouseOver.Start()
 		lblMove.BackColor = SystemColors.Highlight
-		lblMove.BorderStyle = BorderStyle.Fixed3D
+		lblMove.BorderStyle = BorderStyle.FixedSingle
 		lblMove.ForeColor = SystemColors.HighlightText
 		lblMove.Font = New Font(FontFamily.GenericSansSerif, 10, FontStyle.Underline)
 		'Me.Opacity = 1
 	End Sub
 
 	Private Sub lblMove_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblMove.MouseLeave
-		tmrMouseOver.Stop()
-		lblMove.BackColor = SystemColors.ActiveCaption
-		lblMove.BorderStyle = BorderStyle.None
-		lblMove.ForeColor = SystemColors.ActiveCaptionText
-		lblMove.Font = New Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular)
-		'Me.Opacity = 0.8
+		If (tmrMouseOver.Enabled) Then
+			tmrMouseOver.Stop()
+			lblMove.BackColor = SystemColors.Window
+			lblMove.BorderStyle = BorderStyle.None
+			lblMove.ForeColor = SystemColors.WindowText
+			lblMove.Font = New Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular)
+
+		End If
+
 	End Sub
 
 #End Region
 
 #Region "Click Event Handler Shows Quick Key"
 	Private Sub lblMove_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblMove.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Left Then
-            If Not frmQuickKey Is Nothing Then
-                frmQuickKey.Visible = True
-                If Settings.Toolbar Then
-                    frmToolbar.Show()
-                End If
-            End If
-        ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
-            cmPopup.Show(lblMove, New Point(e.X, e.Y))
-        End If
+		If e.Button = Windows.Forms.MouseButtons.Left Then
+			ShowQuickKey()
+		ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
+			tmrMouseOver.Enabled = False
+			cmPopup.Show(lblMove, New Point(e.X, e.Y))
+		End If
 
 	End Sub
 
@@ -4028,50 +4095,40 @@ Public Class DockIconForm
 #Region "Double Click Event Handler Disables Docking"
 
 	Private Sub lblMove_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblMove.DoubleClick
-		If Not frmQuickKey Is Nothing Then
-			frmQuickKey.Visible = True
-			If Settings.Toolbar And Not frmToolbar Is Nothing Then
-				frmToolbar.Show()
-			End If
-			Settings.Docked = False
-
-            'ShowTip("You have disabled the Auto-Hide Window. The Character Grid and the Toolbar will stay visible even when not in use.", _
-            '"Auto-hide Tip", , AppWinStyle.NormalNoFocus, "Tips\Nohide.jpg", DockStyle.Top)
-
-		End If
+		StopAutohide()
 	End Sub
 
 #End Region
 
 #Region "Resize and Location Event Handlers Save Bounds Settings"
 
-	Private Sub DockIconForm_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
-		Settings.m_bDockIcon = Me.Bounds
+	Private Sub DockIconForm_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged
+		If Me.Size = Settings.DockIconBounds.Size And Not Me.Location = Settings.DockIconBounds.Location Then
+			Settings.m_bDockIcon.Location = Me.Location
+		End If
+	End Sub
+
+
+	Private Sub DockIconForm_ResizeEnd(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ResizeEnd
 		Try
 			If Not Me Is Nothing Then
 				If Not lblMove Is Nothing Then
 					If Me.Width < 50 Then
 
-						If lblMove.Text <> "Qk" Then
-							lblMove.Text = "Qk"
+						If lblMove.Text <> My.Resources.QK Then
+							lblMove.Text = My.Resources.QK
 						End If
 					ElseIf Me.Width < 90 And Me.Height < 64 Or Me.Width < 64 And Me.Height < 90 Then
-						If lblMove.Text <> "Quick Key" Then
-							lblMove.Text = "Quick Key"
+						If lblMove.Text <> My.Resources.QuickKey Then
+							lblMove.Text = My.Resources.QuickKey
 						End If
 					Else
-						If lblMove.Text <> "Quick Key Auto-Hide" Then
-							lblMove.Text = "Quick Key Auto-Hide"
+						If lblMove.Text <> My.Resources.QuickKey Then
+							lblMove.Text = My.Resources.QuickKey
 						End If
 					End If
 				End If
-				'If Me.Width < 32 And Me.Height < 32 Then
-				'    Me.Width = 32
-				'    Me.Height = 32
-				'    Me.MinimumSize = New Size(32, 32)
-				'Else
-				'    Me.MinimumSize = New Size(8, 8)
-				'End If
+
 				Dim intHBorder As Integer = CInt((Me.Width - Me.ClientSize.Width) / 2)
 				Dim intVBorder As Integer = CInt((Me.Height - Me.ClientSize.Height) / 2)
 				If Me.Left < Screen.GetWorkingArea(Me).Left - intHBorder Then
@@ -4089,35 +4146,16 @@ Public Class DockIconForm
 			End If
 		Catch
 		End Try
-	End Sub
-
-	Private Sub DockIconForm_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.LocationChanged
-		Dim intHBorder As Integer = CInt((Me.Width - Me.ClientSize.Width) / 2)
-		Dim intVBorder As Integer = CInt((Me.Height - Me.ClientSize.Height) / 2)
-		If Me.Left < Screen.GetWorkingArea(Me).Left - intHBorder Then
-			Me.Left = Screen.GetWorkingArea(Me).Left - intHBorder
-		End If
-		If Me.Top < Screen.GetWorkingArea(Me).Top - intVBorder Then
-			Me.Top = Screen.GetWorkingArea(Me).Top - intVBorder
-		End If
-		If Me.Left + Me.Width > Screen.GetWorkingArea(Me).Right + intHBorder Then
-			Me.Left = Screen.GetWorkingArea(Me).Right + intHBorder - Me.Width
-		End If
-		If Me.Top + Me.Height > Screen.GetWorkingArea(Me).Bottom + intVBorder Then
-			Me.Top = Screen.GetWorkingArea(Me).Bottom + intVBorder - Me.Height
-		End If
-
-
 		Settings.m_bDockIcon = Me.Bounds
 	End Sub
 
 #End Region
 
 #Region "Closing Event"
+	Private Sub DockIconForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+		If (e.CloseReason = CloseReason.UserClosing) Then
+			e.Cancel = True
 
-	Private Sub DockIconForm_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
-		e.Cancel = Not ShuttingDown
-		If Not ShuttingDown Then
 			If Settings.QuickKey Then
 				If Not frmQuickKey.Visible Then
 					frmQuickKey.Visible = True
@@ -4126,27 +4164,37 @@ Public Class DockIconForm
 		End If
 	End Sub
 
+
 #End Region
 
-#Region "ShutDown Code"
-	Public Const WM_QUERYENDSESSION As Integer = &H11
-	Public Const WM_ENDSESSION As Integer = &H16
-	Public ShuttingDown As Boolean = False
-	<System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.Demand, Name:="FullTrust")> _
-	   Protected Overrides Sub WndProc(ByRef m As Message)
-		' Listen for operating system messages
-		Select Case (m.Msg)
-			Case WM_QUERYENDSESSION
-				ShuttingDown = True
-                'FinishProgram()
-                'blnClose = True
-		End Select
-		MyBase.WndProc(m)
+
+
+	Private Sub ShowQuickKey()
+		If Settings.QuickKey Then
+			If Not frmQuickKey Is Nothing Then
+				If (Not frmQuickKey.Visible) Then
+					frmQuickKey.Visible = True
+
+
+					If Settings.Toolbar Then
+						If Not frmToolbar.Visible Then
+							frmToolbar.Show()
+						End If
+					End If
+					frmQuickKey.Activate()
+				End If
+
+			End If
+		End If
+
 	End Sub
-#End Region
 
-	Private Sub DockIconForm_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Enter
-		Me.TopMost = True
+	Private Sub StopAutohide()
+		Settings.Docked = False
+	End Sub
+
+	Private Sub DockIconForm_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+		Me.Bounds = Settings.DockIconBounds
 	End Sub
 
 End Class
@@ -4156,11 +4204,8 @@ End Class
 #Region "Quick Key Form"
 
 Public Class QuickKeyForm
-
-	Inherits System.Windows.Forms.Form
-
+	Inherits SmallWindow
 #Region "Form Code"
-
 #Region "Form New Event"
 
 	Friend Sub New()
@@ -4169,13 +4214,8 @@ Public Class QuickKeyForm
 		Try
 			Log.LogMajorInfo("+QuickKeyForm Class New Subroutine Starting...")
 
-			Me.Visible = False
 			'Initialize All Form Components
 			InitializeComponents()
-
-			'Resize Title Bar to update form title bar button positons and settings
-			ResizeTitleBar()
-
 		Catch ex As Exception
 			Log.HandleError("Error in QuickKeyFormClass New Subroutine", ex, , MessageBoxButtons.OK)
 		Finally
@@ -4186,7 +4226,6 @@ Public Class QuickKeyForm
 	End Sub
 
 #End Region
-
 #Region "Control Declarations"
 
 #Region "TitleBar Declatations"
@@ -4213,9 +4252,15 @@ Public Class QuickKeyForm
 
 #Region "Menu Declarations"
 
-#Region "Main Menu Declaration"
+#Region "Title Menu Declaration"
 
 	Friend WithEvents cmTitleMenu As System.Windows.Forms.ContextMenu
+
+#End Region
+
+#Region "Char Menu Declaration"
+
+	Friend WithEvents cmCharMenu As System.Windows.Forms.ContextMenu
 
 #End Region
 
@@ -4276,171 +4321,60 @@ Public Class QuickKeyForm
 
 #End Region
 
-#Region "Disabled Advanced Menus"
-
-	'#Region "Edit Menu Declaration"
-
-	'#Region "Edit Menu Dec"
-
-	'    Friend WithEvents mnuEdit As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Cut Menu"
-
-	'    Friend WithEvents mnuEditCut As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Copy Menu"
-
-	'    Friend WithEvents mnuEditCopy As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Paste Menu"
-
-	'    Friend WithEvents mnuEditPaste As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Delete Menu"
-
-	'    Friend WithEvents mnuEditDelete As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Send Menu"
-
-	'    Friend WithEvents mnuEditSend As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Copy All Chars Menu"
-
-	'    Friend WithEvents mnuEditCopyAllChars As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#End Region
-
-	'#Region "Filters Menu Declaration"
-
-	'#Region "Filter Menu"
-
-	'    Friend WithEvents mnuFilter As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Defaults Menu"
-
-	'    Friend WithEvents mnuFilterDefaults As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "SelAll Menu"
-
-	'    Friend WithEvents mnuFilterSelAll As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "DeSelAll Menu"
-
-	'    Friend WithEvents mnuFilterDeSelAll As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#End Region
-
-	'#Region "Keywords Menu Declaration"
-
-	'#Region "Keywords Menu"
-
-	'    Friend WithEvents mnuKeywords As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Edit Menu"
-
-	'    Friend WithEvents mnuKeywordsEdit As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "AddTop Menu"
-
-	'    Friend WithEvents mnuKeywordsAddTop As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "DelTop Menu"
-
-	'    Friend WithEvents mnuKeywordsDelTop As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "AddBottom Menu"
-
-	'    Friend WithEvents mnuKeywordsAddBottom As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "DelBottom Menu"
-
-	'    Friend WithEvents mnuKeywordsDelBottom As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#End Region
-
-	'#Region "Tools Menu Declaration"
-
-	'#Region "Tools Menu"
-
-	'    Friend WithEvents mnuTools As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Edit as Text Menu"
-
-	'    Friend WithEvents mnuToolsEditText As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Options Menu"
-
-	'    Friend WithEvents mnuToolsOptions As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#End Region
-
-	'#Region "Help Menu Declaration"
-
-	'#Region "Help Menu"
-
-	'    Friend WithEvents mnuHelp As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "About Menu"
-
-	'    Friend WithEvents mnuHelpAbout As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#Region "Help Topics Menu"
-
-	'    Friend WithEvents mnuHelpHelpTopics As System.Windows.Forms.MenuItem
-
-	'#End Region
-
-	'#End Region
-
-#End Region
 
 #Region "Appearance Item"
 
 	Friend WithEvents mnuAppearance As MenuItem
+
+#End Region
+
+
+#Region "Cut Item"
+
+	Friend WithEvents mnuCut As MenuItem
+
+#End Region
+#Region "Copy Item"
+
+	Friend WithEvents mnuCopy As MenuItem
+
+#End Region
+#Region "Paste Item"
+
+	Friend WithEvents mnuPaste As MenuItem
+
+#End Region
+#Region "Delete Item"
+
+	Friend WithEvents mnuDelete As MenuItem
+
+#End Region
+#Region "CopyHTML Item"
+
+	Friend WithEvents mnuCopyHTML As MenuItem
+
+#End Region
+#Region "Send Item"
+
+	Friend WithEvents mnuSend As MenuItem
+
+#End Region
+
+#Region "Properties Item"
+
+	Friend WithEvents mnuProperties As MenuItem
+
+#End Region
+
+#Region "Mouse Settings Item"
+
+	Friend WithEvents mnuMouseSettings As MenuItem
+
+#End Region
+
+#Region "Send Settings Item"
+
+	Friend WithEvents mnuSendSettings As MenuItem
 
 #End Region
 
@@ -4459,232 +4393,109 @@ Public Class QuickKeyForm
 
 #End Region
 
+
 #End Region
-
 #Region "Component and Control Initialization Procedures"
-
 #Region "Menu Inintialization Procedures"
-
 #Region "Menu Initialization Procedure"
 
 	Private Sub InitializeMenus()
 
 		cmTitleMenu = New ContextMenu
 
-		mnuHideMe = New MenuItem("&Hide All")
-		mnuLocked = New MenuItem("Locked")
-		mnuCharsLocked = New MenuItem("Chars Locked")
-		mnuDocked = New MenuItem("Auto-hide")
-		mnuToolbar = New MenuItem("Toolbar")
-		mnuOrientation = New MenuItem("Titlebar Position")
-		mnuOriTop = New MenuItem("Top")
-		mnuOriRight = New MenuItem("Right")
-		mnuOriBottom = New MenuItem("Bottom")
-		mnuOriLeft = New MenuItem("Left")
+		mnuHideMe = New MenuItem(My.Resources.HideMe)
+		mnuLocked = New MenuItem(My.Resources.Locked1)
+
+		mnuDocked = New MenuItem(My.Resources.Docked1)
+		mnuToolbar = New MenuItem(My.Resources.MenuToolbar)
+
+		mnuOrientation = New MenuItem(My.Resources.Orientation)
+		mnuOriTop = New MenuItem(My.Resources.OriTop)
+		mnuOriRight = New MenuItem(My.Resources.OriRight)
+		mnuOriBottom = New MenuItem(My.Resources.OriBottom)
+		mnuOriLeft = New MenuItem(My.Resources.OriLeft)
 		mnuOrientation.MenuItems.Add(mnuOriTop)
 		mnuOrientation.MenuItems.Add(mnuOriRight)
 		mnuOrientation.MenuItems.Add(mnuOriBottom)
 		mnuOrientation.MenuItems.Add(mnuOriLeft)
-		mnuCOrientation = New MenuItem("Character Sorting Orientation")
-        mnuCOriTop = New MenuItem("Left-to-right (Rows going rightward)")
-        mnuCOriRight = New MenuItem("Bottom-to-top (Rows going upward)")
-        mnuCOriBottom = New MenuItem("Right-to-left (Rows going leftward)")
-        mnuCOriLeft = New MenuItem("Top-to-bottom (Rows going downward)")
 
 
-		mnuCOrientation.MenuItems.Add(mnuCOriTop)
-		mnuCOrientation.MenuItems.Add(mnuCOriRight)
-		mnuCOrientation.MenuItems.Add(mnuCOriBottom)
-		mnuCOrientation.MenuItems.Add(mnuCOriLeft)
 
 
 		cmTitleMenu.MenuItems.Add(mnuHideMe)
 		cmTitleMenu.MenuItems.Add("-")
 		cmTitleMenu.MenuItems.Add(mnuToolbar)
-		cmTitleMenu.MenuItems.Add("-")
 		cmTitleMenu.MenuItems.Add(mnuLocked)
-		cmTitleMenu.MenuItems.Add(mnuCharsLocked)
-		cmTitleMenu.MenuItems.Add("-")
 		cmTitleMenu.MenuItems.Add(mnuDocked)
 		cmTitleMenu.MenuItems.Add("-")
 		cmTitleMenu.MenuItems.Add(mnuOrientation)
-		cmTitleMenu.MenuItems.Add(mnuCOrientation)
+
+		pnlMove.ContextMenu = cmTitleMenu
 
 
+		mnuCharsLocked = New MenuItem(My.Resources.CharsLocked)
+		mnuCOrientation = New MenuItem(My.Resources.COrientation)
+		mnuCOriTop = New MenuItem(My.Resources.COriTop)
+		mnuCOriRight = New MenuItem(My.Resources.COriRight)
+		mnuCOriBottom = New MenuItem(My.Resources.COriBottom)
+		mnuCOriLeft = New MenuItem(My.Resources.COriLeft)
+		mnuCOrientation.MenuItems.Add(mnuCOriTop)
+		mnuCOrientation.MenuItems.Add(mnuCOriRight)
+		mnuCOrientation.MenuItems.Add(mnuCOriBottom)
+		mnuCOrientation.MenuItems.Add(mnuCOriLeft)
 
-		mnuRecent = New MenuItem("&Recent")
+		mnuRecent = New MenuItem(My.Resources.RecentCharsets)
 		mnuRecentSep = New MenuItem("-")
 
 		'mnuRecent.Enabled = False
 
 
-		cmTitleMenu.MenuItems.Add(mnuRecentSep)
-		cmTitleMenu.MenuItems.Add(mnuRecent)
 
-		mnuAppearance = New MenuItem("Change appearance...")
-		cmTitleMenu.MenuItems.Add("-")
-		cmTitleMenu.MenuItems.Add(mnuAppearance)
 
-		'InitEditMenu()
+		mnuAppearance = New MenuItem(My.Resources.ChangeAppearance)
 
-		'InitFilterMenu()
 
-		'InitKeywordsMenu()
 
-		'InitToolsMenu()
 
-		'InitHelpMenu()
 
-		pnlMove.ContextMenu = cmTitleMenu
+
+		cmCharMenu = New ContextMenu()
+		mnuSend = New MenuItem(My.Resources.Send)
+		mnuCut = New MenuItem(My.Resources.Cut1)
+		mnuCopy = New MenuItem(My.Resources.Copy1)
+		mnuCopyHTML = New MenuItem(My.Resources.CopyHTML)
+		mnuPaste = New MenuItem(My.Resources.Paste1)
+		mnuDelete = New MenuItem(My.Resources.Delete1)
+		mnuProperties = New MenuItem(My.Resources.Properties)
+		mnuMouseSettings = New MenuItem(My.Resources.MouseSettings)
+		mnuSendSettings = New MenuItem(My.Resources.SendSettings)
+		mnuCut.Shortcut = Shortcut.CtrlX
+		mnuCopy.Shortcut = Shortcut.CtrlC
+		mnuPaste.Shortcut = Shortcut.CtrlV
+		mnuDelete.Shortcut = Shortcut.Del
+
+		cmCharMenu.MenuItems.Add(mnuSend)
+		cmCharMenu.MenuItems.Add("-")
+		cmCharMenu.MenuItems.Add(mnuCut)
+		cmCharMenu.MenuItems.Add(mnuCopy)
+		cmCharMenu.MenuItems.Add(mnuCopyHTML)
+		cmCharMenu.MenuItems.Add(mnuPaste)
+		cmCharMenu.MenuItems.Add(mnuDelete)
+		cmCharMenu.MenuItems.Add("-")
+		cmCharMenu.MenuItems.Add(mnuProperties)
+		cmCharMenu.MenuItems.Add("-")
+		cmCharMenu.MenuItems.Add(mnuRecent)
+		cmCharMenu.MenuItems.Add(mnuRecentSep)
+		cmCharMenu.MenuItems.Add(mnuCharsLocked)
+		cmCharMenu.MenuItems.Add(mnuCOrientation)
+		cmCharMenu.MenuItems.Add(mnuAppearance)
+		cmCharMenu.MenuItems.Add(mnuMouseSettings)
+		cmCharMenu.MenuItems.Add(mnuSendSettings)
+
 	End Sub
 
 #End Region
-
-#Region "Disbled Advance Menu Initialization"
-
-	'#Region "Edit Menu Initialization Procedure"
-
-	'    Private Sub InitEditMenu()
-	'        mnuEdit = New MenuItem()
-	'        mnuEdit.Text = "&Edit"
-
-
-	'        mnuEditCut = New MenuItem("Cu&t Character")
-	'        mnuEditCopy = New MenuItem("&Copy Character")
-	'        mnuEditPaste = New MenuItem("&Paste Character(s)")
-	'        mnuEditDelete = New MenuItem("&Delete Character")
-	'        mnuEditSend = New MenuItem("Send Character")
-	'        mnuEditCopyAllChars = New MenuItem("Copy All Characters")
-
-	'        mnuEdit.MenuItems.Add(mnuEditCut)
-	'        mnuEdit.MenuItems.Add(mnuEditCopy)
-	'        mnuEdit.MenuItems.Add(mnuEditPaste)
-	'        mnuEdit.MenuItems.Add(mnuEditDelete)
-	'        mnuEdit.MenuItems.Add("-")
-	'        mnuEdit.MenuItems.Add(mnuEditSend)
-	'        mnuEdit.MenuItems.Add("-")
-	'        mnuEdit.MenuItems.Add(mnuEditCopyAllChars)
-
-	'        cmTitleMenu.MenuItems.Add(mnuEdit)
-	'    End Sub
-
-	'#End Region
-
-	'#Region "Filter Menu Initialization Procedure"
-
-	'    Private Sub InitFilterMenu()
-	'        mnuFilter = New MenuItem()
-	'        mnuFilter.Text = "F&ilter"
-
-
-	'        mnuFilterDefaults = New MenuItem("Defaults")
-	'        mnuFilterSelAll = New MenuItem("Select All")
-	'        mnuFilterDeSelAll = New MenuItem("Deselect All")
-
-
-	'        mnuFilter.MenuItems.Add(mnuFilterDefaults)
-	'        mnuFilter.MenuItems.Add("-")
-	'        mnuFilter.MenuItems.Add(mnuFilterSelAll)
-	'        mnuFilter.MenuItems.Add(mnuFilterDeSelAll)
-	'        mnuFilter.MenuItems.Add("-")
-
-	'        Dim intFilterLoop As Integer
-	'        For intFilterLoop = 0 To UnicodeFilters.FilterTitles.GetUpperBound(0)
-	'            mnuFilter.MenuItems.Add(UnicodeFilters.FilterTitles(intFilterLoop), AddressOf FilterItem_Click)
-	'        Next
-
-
-
-	'        cmTitleMenu.MenuItems.Add(mnuFilter)
-	'    End Sub
-
-	'#End Region
-
-	'#Region "Keywords Initialization Procedure"
-
-	'    Private Sub InitKeywordsMenu()
-	'        mnuKeywords = New MenuItem("&Keywords")
-
-	'        mnuKeywordsEdit = New MenuItem("&Edit Keyword")
-
-	'        mnuKeywordsAddTop = New MenuItem("Add Item to Top")
-	'        mnuKeywordsAddBottom = New MenuItem("Add Item to Bottom")
-	'        mnuKeywordsDelTop = New MenuItem("Delete Top Item")
-	'        mnuKeywordsDelBottom = New MenuItem("DeleteBottomItem")
-
-	'        mnuKeywords.MenuItems.Add(mnuKeywordsEdit)
-	'        mnuKeywords.MenuItems.Add("-")
-	'        mnuKeywords.MenuItems.Add(mnuKeywordsAddTop)
-	'        mnuKeywords.MenuItems.Add(mnuKeywordsAddBottom)
-	'        mnuKeywords.MenuItems.Add(mnuKeywordsDelTop)
-	'        mnuKeywords.MenuItems.Add(mnuKeywordsDelBottom)
-	'        mnuKeywords.MenuItems.Add("-")
-
-
-
-
-	'        cmTitleMenu.MenuItems.Add(mnuKeywords)
-	'    End Sub
-
-	'#End Region
-
-	'#Region "Private Menu Updating Procedure for the keywords"
-
-	'    Private Sub DoKeywordsMenu()
-	'        Dim intMenuItemLoop As Integer
-	'        For intMenuItemLoop = 7 To mnuKeywords.MenuItems.Count - 1
-	'            mnuKeywords.MenuItems.RemoveAt(7)
-	'        Next
-
-	'        mnuKeywords.MenuItems.Add(Settings.Keyword)
-	'        mnuKeywords.MenuItems.Add("-")
-
-	'        For intMenuItemLoop = 0 To Settings.Keywords.GetUpperBound(0)
-	'            mnuKeywords.MenuItems.Add(Settings.Keywords(intMenuItemLoop))
-	'        Next
-	'    End Sub
-
-	'#End Region
-
-	'#Region "Tools Menu Initialization Procedure"
-
-	'    Private Sub InitToolsMenu()
-	'        mnuTools = New MenuItem()
-	'        mnuTools.Text = "&Tools"
-
-	'        mnuToolsEditText = New MenuItem("&Edit Characters as Text")
-	'        mnuToolsOptions = New MenuItem("&Options")
-
-	'        mnuTools.MenuItems.Add(mnuToolsEditText)
-	'        mnuTools.MenuItems.Add("-")
-	'        mnuTools.MenuItems.Add(mnuToolsOptions)
-
-	'        cmTitleMenu.MenuItems.Add(mnuTools)
-	'    End Sub
-
-	'#End Region
-
-	'#Region "Help Menu Initialization procedure"
-
-	'    Private Sub InitHelpMenu()
-	'        mnuHelp = New MenuItem("&Help")
-
-
-	'        mnuHelpAbout = New MenuItem("&About")
-	'        mnuHelpHelpTopics = New MenuItem("&Help Topics")
-
-	'        mnuHelp.MenuItems.Add(mnuHelpAbout)
-	'        mnuHelp.MenuItems.Add("-")
-	'        mnuHelp.MenuItems.Add(mnuHelpHelpTopics)
-	'        cmTitleMenu.MenuItems.Add(mnuHelp)
-	'    End Sub
-
-	'#End Region
-
 #End Region
-
-#End Region
-
 #Region "Component Initialization Procedure(s)"
 
 	Public Sub InitializeComponents()
@@ -4696,24 +4507,13 @@ Public Class QuickKeyForm
 			Log.LogMajorInfo("+Initialize Components Subroutine Starting...")
 
 RESTART:
-
 			Me.SuspendLayout()
-			Dim cTitleBarColor As Color = Drawing.SystemColors.ActiveCaption
-			Dim cOtherBarColor As Color = Drawing.SystemColors.Control
-			Me.Name = "frmQuickKey"
-			Me.AllowTransparency = False
 			Me.Text = ""
-			Me.WindowState = FormWindowState.Normal
-            Me.FormBorderStyle = Windows.Forms.FormBorderStyle.Sizable
-			Me.ControlBox = False
-			Me.MinimumSize = New Size(32, 32)
-			Me.TopMost = True
-			Me.ShowInTaskbar = False
-			Me.StartPosition = FormStartPosition.Manual
+			Me.Name = "frmQuickKey"
 			Me.Icon = ProgramIcon
-			Me.Visible = False
 			Me.KeyPreview = True
-			'Me.Opacity = 0.95
+
+			Dim cTitleBarColor As Color = Drawing.SystemColors.ActiveCaption
 
 			tmrMouseOff = New Timer
 			tmrMouseOff.Enabled = False
@@ -4724,109 +4524,68 @@ RESTART:
 			tmrMouseCheck.Enabled = False
 			tmrMouseCheck.Interval = 200
 
-			ttTips = New ToolTip
+			ttTips = New ToolTip()
+			ttTips.UseFading = False
+			ttTips.UseAnimation = False
+			ttTips.ToolTipIcon = ToolTipIcon.Info
+			ttTips.ReshowDelay = 1000
+			ttTips.IsBalloon = True
+			ttTips.InitialDelay = 1000
+			ttTips.AutoPopDelay = 5000
 			ttTips.ShowAlways = True
 
-			'Load Picture Storage Variables
-
-
-			Try
-
-
-                m_picLocked = My.Resources.Locked.ToBitmap
-                m_picUnLocked = My.Resources.Unlocked.ToBitmap
-                m_picDocked = My.Resources.Docked.ToBitmap
-                m_picUnDocked = My.Resources.Undocked.ToBitmap
-                m_picClose = My.Resources.CloseIcon.ToBitmap
-                m_picWaste = My.Resources.Waste.ToBitmap
-
-
-
-			Catch ex As Exception
-				Select Case Log.HandleError("An error occured while loading the Character Grid's titlebar icons. They may not display correctly.", _
-				ex)
-                    Case Windows.Forms.DialogResult.Ignore
-                    Case Windows.Forms.DialogResult.Retry
-                    Case Windows.Forms.DialogResult.Abort
-
-                End Select
-			End Try
+	
 
 			pnlTitleBar = New Panel
-			pnlTitleBar.Visible = True
 			pnlTitleBar.BackColor = cTitleBarColor
 			pnlTitleBar.Name = "pnlTitleBar"
-			pnlTitleBar.Tag = "NOSTYLE"
+
 			Me.Controls.Add(pnlTitleBar)
 
 			pnlMoveDock = New Panel
-			pnlMoveDock.Visible = True
-			pnlMoveDock.BackColor = cTitleBarColor
 			pnlMoveDock.Name = "pnlMoveDock"
 			pnlTitleBar.Controls.Add(pnlMoveDock)
 
 			pnlMove = New Panel
-			pnlMove.Visible = True
-			pnlMove.BackColor = cTitleBarColor
-			'pnlMove.Cursor = Cursors.SizeAll
 			pnlMove.Name = "pnlMove"
 			pnlMoveDock.Controls.Add(pnlMove)
 
 
 			pnlDock = New Panel
-			pnlDock.Visible = True
-			pnlDock.BackColor = cOtherBarColor
 			pnlDock.Name = "pnlDock"
 			pnlMoveDock.Controls.Add(pnlDock)
 
 			pnlLockX = New Panel
-			pnlLockX.Visible = True
-			pnlLockX.BackColor = cTitleBarColor
-
-			pnlLockX.Name = "pnlLockX"
+            pnlLockX.Name = "pnlLockX"
 			pnlTitleBar.Controls.Add(pnlLockX)
 
 			pnlLock = New Panel
-			pnlLock.Visible = True
-			pnlLock.BackColor = cOtherBarColor
 			pnlLock.Name = "pnlLock"
 			pnlLockX.Controls.Add(pnlLock)
 
 
 			pnlX = New Panel
-			pnlX.Visible = True
-			pnlX.BackColor = cOtherBarColor
 			pnlX.Name = "pnlX"
 			pnlLockX.Controls.Add(pnlX)
 
-
-
-
 			hvLock = New HoverButton
-			hvLock.Visible = True
-			hvLock.Picture = m_picUnLocked
 			hvLock.Name = "hvLock"
-            hvLock.PressMouseButtons = Windows.Forms.MouseButtons.Left
-
+			hvLock.PressMouseButtons = Windows.Forms.MouseButtons.Left
 			pnlLock.Controls.Add(hvLock)
-			ttTips.SetToolTip(hvLock, "Click to lock the size and location of this window, the Toolbar, and the Docking Window")
+
 			hvDock = New HoverButton
-			hvLock.Visible = True
-			hvDock.Picture = m_picUnDocked
 			hvDock.Name = "hvDock"
-            hvDock.PressMouseButtons = Windows.Forms.MouseButtons.Left
+			hvDock.PressMouseButtons = Windows.Forms.MouseButtons.Left
 			pnlDock.Controls.Add(hvDock)
-			ttTips.SetToolTip(hvDock, "Click to enable the auto-hide feature. This window and the Toolbar will disapear when the mouse cursor is not over them. They will reappear when the auto-hide window is clicked or the mouse is moved over it.")
 
 			hvClose = New HoverButton
-			hvClose.Picture = m_picClose
 			hvClose.Name = "hvClose"
-            hvClose.PressMouseButtons = Windows.Forms.MouseButtons.Left
+			hvClose.PressMouseButtons = Windows.Forms.MouseButtons.Left
 			pnlX.Controls.Add(hvClose)
-			ttTips.SetToolTip(hvClose, "Click to hide the Character Grid and its accessory windows.")
+
+            SetTitlebarIcons()
 
 			InitializeMenus()
-
 
 			pnlMove.ContextMenu = cmTitleMenu
 			pnlLockX.ContextMenu = cmTitleMenu
@@ -4836,71 +4595,49 @@ RESTART:
 
 
 			cdCharacters = New CharacterDisplay
-			cdCharacters.Dock = DockStyle.Fill
-			cdCharacters.Visible = True
 			cdCharacters.Editable = True
-			cdCharacters.ViewOnly = False
-			'cdCharacters.Autosize = True
+			cdCharacters.Dock = DockStyle.Fill
+
 			Me.Controls.Add(cdCharacters)
+
 			cdCharacters.BringToFront()
 
-			'hvLock.TabStop = False
-			'hvDock.TabStop = False
-			'hvClose.TabStop = False
-
-
-			Me.ResumeLayout()
 			cdCharacters.TabIndex = 0
-			cdCharacters.Focus()
+			cdCharacters.Select()
+			Me.ResumeLayout()
 
 		Catch ex As Exception
-			Select Case Log.HandleError("An error occured while initializing the Character Grid. Retry initialization?", ex, , MessageBoxButtons.YesNo)
-                Case Windows.Forms.DialogResult.No
-                    Try
-                        Me.ResumeLayout()
-                    Catch
-                    End Try
-                Case Windows.Forms.DialogResult.Yes
-                    GoTo RESTART
+			Select Case Log.HandleError(My.Resources.QuickKeyFormNewError, ex, , MessageBoxButtons.YesNo)
+				Case Windows.Forms.DialogResult.No
+					Try
+						Me.ResumeLayout()
+					Catch
+					End Try
+				Case Windows.Forms.DialogResult.Yes
+					GoTo RESTART
 
-            End Select
+			End Select
 		Finally
 			'Insert Log Item
 			Log.LogMajorInfo("-Initialize Components Subroutine Completed")
 
 		End Try
-
-
 	End Sub
 
 #End Region
-
 #End Region
 
 #Region "Form Close Event Handler"
 
-	Private Sub AttemptingClose(ByVal eventSender As System.Object, ByVal eventArgs As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
-		eventArgs.Cancel = Not ShuttingDown
-		If Not ShuttingDown Then Settings.QuickKey = False
+	Private Sub QuickKeyForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+		If e.CloseReason = CloseReason.UserClosing Then
+			e.Cancel = True
+			Settings.QuickKey = False
+		Else
+			Main.FinishProgram()
+		End If
 	End Sub
 
-#End Region
-
-#Region "ShutDown Code"
-	Public Const WM_QUERYENDSESSION As Integer = &H11
-	Public Const WM_ENDSESSION As Integer = &H16
-	Public ShuttingDown As Boolean = False
-	<System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.Demand, Name:="FullTrust")> _
-	   Protected Overrides Sub WndProc(ByRef m As Message)
-		' Listen for operating system messages
-		Select Case (m.Msg)
-			Case WM_QUERYENDSESSION
-				ShuttingDown = True
-                'FinishProgram()
-                'blnClose = True
-		End Select
-		MyBase.WndProc(m)
-	End Sub
 #End Region
 
 #Region "Dispose Override"
@@ -4925,14 +4662,6 @@ RESTART:
 
 #End Region
 
-#Region "Quick Key Location Changed Event Handler Saves bounds Settings"
-
-	Private Sub QuickKeyForm_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.LocationChanged
-		Settings.m_rQuickKey = Me.Bounds
-	End Sub
-
-#End Region
-
 #Region "Private Border Property"
 
 	Private ReadOnly Property Border() As Size
@@ -4950,41 +4679,32 @@ RESTART:
 	Private Sub tmrMouseOff_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles tmrMouseOff.Tick
 		If ActiveForm Is Nothing Then
 			Me.Visible = False
-            If Not frmToolbar Is Nothing Then frmToolbar.Visible = False
-            If Not frmDockIcon Is Nothing Then
-                frmDockIcon.Visible = True
-                frmDockIcon.tmrMouseOver.Stop()
-            End If
-
-            'Else
-            '    'If ActiveForm.Name <> "frmQuickKey" And ActiveForm.Name <> "frmToolbar" Then
-            '    Me.Visible = False
-            '    frmToolbar.Visible = False
-            '    frmDockIcon.Visible = True
-            'End 'If
-        End If
+			If Not frmToolbar Is Nothing Then frmToolbar.Visible = False
+			If Not frmDockIcon Is Nothing Then
+				frmDockIcon.Visible = True
+				frmDockIcon.tmrMouseOver.Stop()
+			End If
+		End If
 
 	End Sub
 
 #End Region
-
 #Region "Public ReadonlyMouseOver Property"
 	Public ReadOnly Property MouseOver() As Boolean
 		Get
 
-            If Control.MousePosition.X < Me.Left Or Control.MousePosition.Y < Me.Top Or _
-   Control.MousePosition.X > Me.Width + Me.Left Or Control.MousePosition.Y > Me.Height + Me.Top Then
+			If Control.MousePosition.X < Me.Left Or Control.MousePosition.Y < Me.Top Or _
+			Control.MousePosition.X > Me.Width + Me.Left Or Control.MousePosition.Y > Me.Height + Me.Top Then
 
-                Return False
-            Else
+				Return False
+			Else
 
-                Return True
-            End If
+				Return True
+			End If
 		End Get
 	End Property
 
 #End Region
-
 #Region "Mouse Over Check Tick"
 
 	Private Sub tmrMouseCheck_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles tmrMouseCheck.Tick
@@ -4999,24 +4719,11 @@ RESTART:
 	End Sub
 
 #End Region
-
-#Region "Mouse Wheel Event Handler"
-
-	Protected Overrides Sub OnMouseWheel(ByVal e As System.Windows.Forms.MouseEventArgs)
-		If Not cdCharacters.ContainsFocus Then
-			Dim sngCurrentSize As Single = cdCharacters.Font.Size
-			sngCurrentSize += ((e.Delta * CSng(SystemInformation.MouseWheelScrollLines)) / 360) * cdCharacters.SizeWheelIncrement
-			If sngCurrentSize > 0 Then
-				cdCharacters.Font = New Font(cdCharacters.Font.FontFamily, sngCurrentSize, cdCharacters.Font.Style, cdCharacters.Font.Unit, cdCharacters.Font.GdiCharSet, cdCharacters.Font.GdiVerticalFont)
-			End If
-		End If
-	End Sub
-
-#End Region
-
 #Region "Key Down Event Handler"
 
+
 	Private Sub QuickKeyForm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+		e.Handled = True
 		If e.Control And e.Shift And e.KeyCode = Keys.E Then
 			frmToolbar.ShowEditTextChars()
 		ElseIf e.Control And e.Shift And e.KeyCode = Keys.U Then
@@ -5040,64 +4747,31 @@ RESTART:
 			Settings.Charset.FontUnderline = Not Settings.Charset.FontUnderline
 		ElseIf e.Control And e.KeyCode = Keys.T Then
 			cdCharacters.SendFocused()
-			'ElseIf e.KeyCode = Keys.Down Or e.KeyCode = Keys.Up Or e.KeyCode = Keys.Right Or e.KeyCode = Keys.Left Then
-			'    Dim intKey As Integer
-			'    Select Case e.KeyData
-			'        Case Keys.Up
-			'            intKey = 0
-			'        Case Keys.Right
-			'            intKey = 1
-			'        Case Keys.Down
-			'            intKey = 2
-			'        Case Keys.Left
-			'            intKey = 3
-			'    End Select
+		Else
+			e.Handled = False
 
-			'    Select Case intKey
-			'        Case 0
-			'            If pnlBack.Controls.IndexOf(m_cbLastFocused) >= m_intCharCols Then
-			'                pnlBack.Controls(pnlBack.Controls.IndexOf(m_cbLastFocused) - m_intCharCols).Focus()
-			'            End If
-			'        Case 1
-			'            If pnlBack.Controls.IndexOf(m_cbLastFocused) < pnlBack.Controls.Count - 1 Then
-			'                pnlBack.Controls(pnlBack.Controls.IndexOf(m_cbLastFocused) + 1).Focus()
-			'            End If
-			'        Case 2
-			'            If pnlBack.Controls.Count > pnlBack.Controls.IndexOf(m_cbLastFocused) + m_intCharCols Then
-			'                pnlBack.Controls(pnlBack.Controls.IndexOf(m_cbLastFocused) + m_intCharCols).Focus()
-			'            End If
-			'        Case 3
-			'            If pnlBack.Controls.IndexOf(m_cbLastFocused) > 0 Then
-			'                pnlBack.Controls(pnlBack.Controls.IndexOf(m_cbLastFocused) - 1).Focus()
-			'            End If
-			'End Select
-			' e.Handled = True
-			' ElseIf (e.KeyCode = Keys.Enter) Or e.KeyCode = Keys.Space Then
-			'Me.Send()
 		End If
-
 
 	End Sub
 
 #End Region
-
 #End Region
-
 #Region "Title Bar Code"
-
 #Region "Picture Storage Variables"
-
-	Private m_picLocked As System.Drawing.Image
-	Private m_picUnLocked As System.Drawing.Image
-	Private m_picDocked As System.Drawing.Image
-	Private m_picUnDocked As System.Drawing.Image
-	Private m_picClose As System.Drawing.Image
-	Private m_picWaste As System.Drawing.Image
-
+    Private m_picLocked As System.Drawing.Bitmap
+    Private m_picUnLocked As System.Drawing.Bitmap
+    Private m_picDocked As System.Drawing.Bitmap
+    Private m_picUnDocked As System.Drawing.Bitmap
+    Private m_picClose As System.Drawing.Bitmap
+    Private m_picWaste As System.Drawing.Bitmap
+    Private m_picLocked2 As System.Drawing.Bitmap
+    Private m_picUnLocked2 As System.Drawing.Bitmap
+    Private m_picDocked2 As System.Drawing.Bitmap
+    Private m_picUnDocked2 As System.Drawing.Bitmap
+    Private m_picClose2 As System.Drawing.Bitmap
+    Private m_picWaste2 As System.Drawing.Bitmap
 #End Region
-
 #Region "TitleBar Size Constants"
-
 	Private Const cm_intMoveBarHeight As Integer = 16
 	Private Const cm_intMoveBarWidth As Integer = 16
 	Private Const cm_intLockBarHeight As Integer = 18
@@ -5106,12 +4780,9 @@ RESTART:
 	Private Const cm_intDockBarWidth As Integer = 18
 	Private Const cm_intXBarHeight As Integer = 18
 	Private Const cm_intXBarWidth As Integer = 18
-
 #End Region
-
-#Region "TitleBar Resizing Procedure"
-
-	Public Sub ResizeTitleBar()
+#Region "QuickKeyForm_Layout"
+	Private Sub QuickKeyForm_Layout(ByVal sender As Object, ByVal e As System.Windows.Forms.LayoutEventArgs) Handles Me.Layout
 		'All Widths of Titlebar Objects Added
 		Dim intMinWidth As Integer = (cm_intMoveBarWidth + cm_intLockBarWidth + cm_intXBarWidth + cm_intDockBarWidth)
 
@@ -5120,6 +4791,8 @@ RESTART:
 		If intMinWidth2 < cm_intMoveBarWidth + cm_intDockBarWidth Then
 			intMinWidth2 = cm_intMoveBarWidth + cm_intDockBarWidth
 		End If
+
+		Dim intPadding As Integer = Me.Padding.All
 
 		'Width of Titlebar when Titlebar is tiny
 		Dim intMinWidth4 As Integer = cm_intMoveBarWidth
@@ -5169,33 +4842,33 @@ RESTART:
 		Dim blnSmallWidth As Boolean
 		Dim blnTinyWidth As Boolean
 
-        Dim blnHorizontal As Boolean = (Settings.Orientation = SettingsClass.OrientationDirection.Top Or Settings.Orientation = SettingsClass.OrientationDirection.Bottom)
+		Dim blnHorizontal As Boolean = (Settings.Orientation = SettingsClass.OrientationDirection.Top Or Settings.Orientation = SettingsClass.OrientationDirection.Bottom)
 		'Dim blnVertical As Boolean = (settings.Orientation = settings.Orientationdirection.Left Or settings.Orientation = settings.Orientationdirection.Right)
 
 		'Create Dockstyle variable to use to find dockstyle eqivalent of orientationdirection
 		Dim dsOrientation As DockStyle
 		Select Case Settings.Orientation
-            Case SettingsClass.OrientationDirection.Top
-                dsOrientation = DockStyle.Top
-            Case SettingsClass.OrientationDirection.Right
-                dsOrientation = DockStyle.Right
-            Case SettingsClass.OrientationDirection.Left
-                dsOrientation = DockStyle.Left
-            Case SettingsClass.OrientationDirection.Bottom
-                dsOrientation = DockStyle.Bottom
-        End Select
+			Case SettingsClass.OrientationDirection.Top
+				dsOrientation = DockStyle.Top
+			Case SettingsClass.OrientationDirection.Right
+				dsOrientation = DockStyle.Right
+			Case SettingsClass.OrientationDirection.Left
+				dsOrientation = DockStyle.Left
+			Case SettingsClass.OrientationDirection.Bottom
+				dsOrientation = DockStyle.Bottom
+		End Select
 		'Create Dockstyle variable to use to find dockstyle 90* to the right of orientationdirection
 		Dim ds90Orientation As DockStyle
 		Select Case Settings.Orientation
-            Case SettingsClass.OrientationDirection.Top
-                ds90Orientation = DockStyle.Right
-            Case SettingsClass.OrientationDirection.Right
-                ds90Orientation = DockStyle.Bottom
-            Case SettingsClass.OrientationDirection.Bottom
-                ds90Orientation = DockStyle.Left
-            Case SettingsClass.OrientationDirection.Left
-                ds90Orientation = DockStyle.Top
-        End Select
+			Case SettingsClass.OrientationDirection.Top
+				ds90Orientation = DockStyle.Right
+			Case SettingsClass.OrientationDirection.Right
+				ds90Orientation = DockStyle.Bottom
+			Case SettingsClass.OrientationDirection.Bottom
+				ds90Orientation = DockStyle.Left
+			Case SettingsClass.OrientationDirection.Left
+				ds90Orientation = DockStyle.Top
+		End Select
 
 		'if the main parent titlebar panel has a different dock orientation, change to to match the coorect settings
 		If pnlTitleBar.Dock <> dsOrientation Then
@@ -5238,12 +4911,12 @@ RESTART:
 		If blnNormalWidth Then
 
 			If blnHorizontal Then
-				If pnlTitleBar.Height <> intTitleBarThickness1 Then
-					pnlTitleBar.Height = intTitleBarThickness1
+				If pnlTitleBar.Height <> intTitleBarThickness1 + intPadding Then
+					pnlTitleBar.Height = intTitleBarThickness1 + intPadding
 				End If
 			Else
-				If pnlTitleBar.Width <> intTitleBarThickness1 Then
-					pnlTitleBar.Width = intTitleBarThickness1
+				If pnlTitleBar.Width <> intTitleBarThickness1 + intPadding Then
+					pnlTitleBar.Width = intTitleBarThickness1 + intPadding
 				End If
 			End If
 
@@ -5270,80 +4943,77 @@ RESTART:
 				pnlX.Height = cm_intXBarWidth
 			End If
 
-			pnlDock.SendToBack()
-			pnlLockX.SendToBack()
-
-			pnlLock.Dock = DockStyle.Fill
-
-			pnlX.SendToBack()
-
 		ElseIf blnSmallWidth Then
 			If blnHorizontal Then
-				pnlTitleBar.Height = intTitleBarThickness2
+				If pnlTitleBar.Height <> intTitleBarThickness2 + intPadding Then
+					pnlTitleBar.Height = intTitleBarThickness2 + intPadding
+				End If
 			Else
-				pnlTitleBar.Width = intTitleBarThickness2
-			End If
+				If pnlTitleBar.Width <> intTitleBarThickness2 + intPadding Then
+					pnlTitleBar.Width = intTitleBarThickness2 + intPadding
+				End If
+		End If
 
-			Select Case Settings.Orientation
-                Case SettingsClass.OrientationDirection.Top
-                    pnlDock.Dock = DockStyle.Right
-                    pnlLockX.Dock = DockStyle.Bottom
-                    pnlX.Dock = DockStyle.Right
-                Case SettingsClass.OrientationDirection.Right
-                    pnlDock.Dock = DockStyle.Bottom
-                    pnlLockX.Dock = DockStyle.Left
-                    pnlX.Dock = DockStyle.Bottom
-                Case SettingsClass.OrientationDirection.Bottom
-                    pnlDock.Dock = DockStyle.Left
-                    pnlLockX.Dock = DockStyle.Top
-                    pnlX.Dock = DockStyle.Left
-                Case SettingsClass.OrientationDirection.Left
-                    pnlDock.Dock = DockStyle.Top
-                    pnlLockX.Dock = DockStyle.Right
-                    pnlX.Dock = DockStyle.Top
-            End Select
+		Select Case Settings.Orientation
+			Case SettingsClass.OrientationDirection.Top
+				pnlDock.Dock = DockStyle.Right
+				pnlLockX.Dock = DockStyle.Bottom
+				pnlX.Dock = DockStyle.Right
+			Case SettingsClass.OrientationDirection.Right
+				pnlDock.Dock = DockStyle.Bottom
+				pnlLockX.Dock = DockStyle.Left
+				pnlX.Dock = DockStyle.Bottom
+			Case SettingsClass.OrientationDirection.Bottom
+				pnlDock.Dock = DockStyle.Left
+				pnlLockX.Dock = DockStyle.Top
+				pnlX.Dock = DockStyle.Left
+			Case SettingsClass.OrientationDirection.Left
+				pnlDock.Dock = DockStyle.Top
+				pnlLockX.Dock = DockStyle.Right
+				pnlX.Dock = DockStyle.Top
+		End Select
 
-			If blnHorizontal Then
-				pnlDock.Width = cm_intDockBarWidth
-				pnlLockX.Height = intMinHeight
-				pnlX.Width = cm_intXBarWidth
-			Else
-				pnlDock.Height = cm_intDockBarWidth
-				pnlLockX.Width = intMinHeight
-				pnlX.Height = cm_intXBarWidth
-			End If
+		If blnHorizontal Then
+			pnlDock.Width = cm_intDockBarWidth
+			pnlLockX.Height = intMinHeight
+			pnlX.Width = cm_intXBarWidth
+		Else
+			pnlDock.Height = cm_intDockBarWidth
+			pnlLockX.Width = intMinHeight
+			pnlX.Height = cm_intXBarWidth
+		End If
 
-			pnlDock.SendToBack()
-			pnlLockX.SendToBack()
 
-			pnlLock.Dock = DockStyle.Fill
-
-			pnlX.SendToBack()
 		ElseIf blnTinyWidth Then
+
 			If blnHorizontal Then
-				pnlTitleBar.Height = intTitleBarThickness3
+				If pnlTitleBar.Height <> intTitleBarThickness3 + intPadding Then
+					pnlTitleBar.Height = intTitleBarThickness3 + intPadding
+				End If
 			Else
-				pnlTitleBar.Width = intTitleBarThickness3
+				If pnlTitleBar.Width <> intTitleBarThickness3 + intPadding Then
+					pnlTitleBar.Width = intTitleBarThickness3 + intPadding
+				End If
 			End If
 
 			Select Case Settings.Orientation
-                Case SettingsClass.OrientationDirection.Top
-                    pnlDock.Dock = DockStyle.Bottom
-                    pnlLockX.Dock = DockStyle.Bottom
-                    pnlX.Dock = DockStyle.Bottom
-                Case SettingsClass.OrientationDirection.Right
-                    pnlDock.Dock = DockStyle.Left
-                    pnlLockX.Dock = DockStyle.Left
-                    pnlX.Dock = DockStyle.Left
-                Case SettingsClass.OrientationDirection.Bottom
-                    pnlDock.Dock = DockStyle.Top
-                    pnlLockX.Dock = DockStyle.Top
-                    pnlX.Dock = DockStyle.Top
-                Case SettingsClass.OrientationDirection.Left
-                    pnlDock.Dock = DockStyle.Right
-                    pnlLockX.Dock = DockStyle.Right
-                    pnlX.Dock = DockStyle.Right
-            End Select
+				Case SettingsClass.OrientationDirection.Top
+					pnlDock.Dock = DockStyle.Bottom
+					pnlLockX.Dock = DockStyle.Bottom
+					pnlX.Dock = DockStyle.Bottom
+				Case SettingsClass.OrientationDirection.Right
+					pnlDock.Dock = DockStyle.Left
+					pnlLockX.Dock = DockStyle.Left
+					pnlX.Dock = DockStyle.Left
+				Case SettingsClass.OrientationDirection.Bottom
+					pnlDock.Dock = DockStyle.Top
+					pnlLockX.Dock = DockStyle.Top
+					pnlX.Dock = DockStyle.Top
+				Case SettingsClass.OrientationDirection.Left
+					pnlDock.Dock = DockStyle.Right
+					pnlLockX.Dock = DockStyle.Right
+					pnlX.Dock = DockStyle.Right
+			End Select
 
 			If blnHorizontal Then
 				pnlDock.Height = cm_intDockBarHeight
@@ -5355,14 +5025,26 @@ RESTART:
 				pnlX.Width = cm_intXBarHeight
 			End If
 
-			pnlDock.SendToBack()
-			pnlLockX.SendToBack()
 
-			pnlLock.Dock = DockStyle.Fill
-
-			pnlX.SendToBack()
 		End If
+		Select Case Settings.Orientation
+			Case SettingsClass.OrientationDirection.Left
+				pnlTitleBar.Padding = New Padding(0, 0, intPadding, 0)
+			Case SettingsClass.OrientationDirection.Top
+				pnlTitleBar.Padding = New Padding(0, 0, 0, intPadding)
+			Case SettingsClass.OrientationDirection.Right
+				pnlTitleBar.Padding = New Padding(intPadding, 0, 0, 0)
+			Case SettingsClass.OrientationDirection.Bottom
 
+				pnlTitleBar.Padding = New Padding(0, intPadding, 0, 0)
+		End Select
+
+		'pnlDock.SendToBack()
+		'pnlLockX.SendToBack()
+
+		pnlLock.Dock = DockStyle.Fill
+
+		'pnlX.SendToBack()
 
 		'Set Objects Size and Docking
 		hvClose.Dock = ds90Orientation
@@ -5384,68 +5066,68 @@ RESTART:
 		'Compute Minimum Size
 		If blnHorizontal Then
 			If blnNormalWidth Then
-				If Me.ClientSize.Height < intTitleBarThickness1 And Me.Height <> Border.Height + intTitleBarThickness1 Then
-					Me.Height = Border.Height + intTitleBarThickness1
+				If Me.ClientSize.Height < intTitleBarThickness1 + intPadding And Me.Height <> Border.Height + intTitleBarThickness1 + intPadding Then
+					Me.Height = Border.Height + intTitleBarThickness1 + intPadding
 				End If
 				If Me.ClientSize.Width < intMinWidth4 And Me.Width <> Border.Width + intMinWidth4 Then
 					Me.Width = Border.Width + intMinWidth4
 				End If
 				If Not Settings.Locked And _
-				   Not Me.MinimumSize.Equals(New Size(intMinWidth4 + Border.Width, Border.Height + intTitleBarThickness1)) Then
-					Me.MinimumSize = New Size(intMinWidth4 + Border.Width, Border.Height + intTitleBarThickness1)
+				 Not Me.MinimumSize.Equals(New Size(intMinWidth4 + Border.Width, Border.Height + intTitleBarThickness1 + intPadding)) Then
+					Me.MinimumSize = New Size(intMinWidth4 + Border.Width, Border.Height + intTitleBarThickness1 + intPadding)
 				End If
 			ElseIf blnSmallWidth Then
-				If Me.ClientSize.Height < intTitleBarThickness2 Then
-					Me.Height = Border.Height + intTitleBarThickness2
+				If Me.ClientSize.Height < intTitleBarThickness2 + intPadding Then
+					Me.Height = Border.Height + intTitleBarThickness2 + intPadding
 				End If
 				If Me.ClientSize.Width < intMinWidth4 Then
 					Me.Width = Border.Width + intMinWidth4
 				End If
 				If Not Settings.Locked Then
-					Me.MinimumSize = New Size(intMinWidth4 + Border.Width, Border.Height + intTitleBarThickness2)
+					Me.MinimumSize = New Size(intMinWidth4 + Border.Width, Border.Height + intTitleBarThickness2 + intPadding)
 				End If
 			ElseIf blnTinyWidth Then
-				If Me.ClientSize.Height < intTitleBarThickness3 Then
-					Me.Height = Border.Height + intTitleBarThickness3
+				If Me.ClientSize.Height < intTitleBarThickness3 + intPadding Then
+					Me.Height = Border.Height + intTitleBarThickness3 + intPadding
 				End If
 				If Me.ClientSize.Width < intMinWidth4 Then
 					Me.Width = Border.Width + intMinWidth4
 					blnTinyWidth = True
 				End If
 				If Not Settings.Locked Then
-					Me.MinimumSize = New Size(intMinWidth4 + Border.Width, Border.Height + intTitleBarThickness3)
+					Me.MinimumSize = New Size(intMinWidth4 + Border.Width, Border.Height + intTitleBarThickness3 + intPadding)
 				End If
 			End If
 		Else
 			If blnNormalWidth Then
-				If Me.ClientSize.Width < intTitleBarThickness1 Then
-					Me.Width = Border.Width + intTitleBarThickness1
+				If Me.ClientSize.Width < intTitleBarThickness1 + intPadding Then
+					Me.Width = Border.Width + intTitleBarThickness1 + intPadding
 				End If
 				If Me.ClientSize.Height < intMinWidth4 Then
 					Me.Height = Border.Height + intMinWidth4
 				End If
 				If Not Settings.Locked Then
-					Me.MinimumSize = New Size(Border.Width + intTitleBarThickness1, intMinWidth4 + Border.Height)
+					Me.MinimumSize = New Size(Border.Width + intTitleBarThickness1 + intPadding, intMinWidth4 + Border.Height)
 				End If
 			ElseIf blnSmallWidth Then
-				If Me.ClientSize.Width < intTitleBarThickness2 Then
-					Me.Width = Border.Width + intTitleBarThickness2
+				If Me.ClientSize.Width < intTitleBarThickness2 + intPadding Then
+					Me.Width = Border.Width + intTitleBarThickness2 + intPadding
 				End If
 				If Me.ClientSize.Height < intMinWidth4 Then
 					Me.Height = Border.Height + intMinWidth4
 				End If
 				If Not Settings.Locked Then
-					Me.MinimumSize = New Size(Border.Width + intTitleBarThickness2, intMinWidth4 + Border.Height)
+					Me.MinimumSize = New Size(Border.Width + intTitleBarThickness2 + intPadding, intMinWidth4 + Border.Height)
 				End If
 			ElseIf blnTinyWidth Then
-				If Me.ClientSize.Width < intTitleBarThickness3 Then
-					Me.Width = Border.Width + intTitleBarThickness3
+				If Me.ClientSize.Width < intTitleBarThickness3 + intPadding Then
+					Me.Width = Border.Width + intTitleBarThickness3 + intPadding
 				End If
 				If Me.ClientSize.Height < intMinWidth4 Then
 					Me.Height = Border.Height + intMinWidth4
 				End If
 				If Not Settings.Locked Then
-					Me.MinimumSize = New Size(Border.Width + intTitleBarThickness3, intMinWidth4 + Border.Height)
+					Me.MinimumSize = New Size(Border.Width + intTitleBarThickness3 + intPadding, intMinWidth4 + Border.Height)
 				End If
 			End If
 		End If
@@ -5453,67 +5135,179 @@ RESTART:
 	End Sub
 
 #End Region
-
 #Region "TitleBar Effect"
 
 	Private Sub pnlMove_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlMove.MouseMove
 		'If Left then start move
-		Dim lngReturnValue As Integer
-        If e.Button = Windows.Forms.MouseButtons.Left And Not Settings.Locked Then
-            pnlMove.Capture = False
-
-            lngReturnValue = QuickKey.APIS.SendMessage(Me.Handle.ToInt32, &HA1S, 2, 0)
-        End If
+		If e.Button = Windows.Forms.MouseButtons.Left Then
+			pnlMove.Capture = False
+			Me.StartMoving()
+		End If
 	End Sub
 
 #End Region
 
 #Region "Resize Event calls Title Bar Resize"
 
-	Private Sub frmQuickKey_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
-		ResizeTitleBar()
+	Private Sub QuickKeyForm_ResizeEnd(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ResizeEnd
 		Settings.m_rQuickKey = Me.Bounds
+		'cdCharacters.ResumeLayout(False)
 	End Sub
+#End Region
+#Region "Modify Titlbar Images"
+    Private LastActiveCaptionText As Integer = Color.Bisque.ToArgb()
+    Private LastInactiveCaptionText As Integer = Color.Bisque.ToArgb()
+    Private Sub SetTitlebarIcons()
+        If Not LastActiveCaptionText = SystemColors.ActiveCaptionText.ToArgb() Or _
+                m_picClose Is Nothing Or _
+                Not LastInactiveCaptionText = SystemColors.InactiveCaptionText.ToArgb() Then
+            m_picLocked = My.Resources.Locked.ToBitmap
+            m_picUnLocked = My.Resources.Unlocked.ToBitmap
+            m_picDocked = My.Resources.Docked.ToBitmap
+            m_picUnDocked = My.Resources.Undocked.ToBitmap
+            m_picClose = My.Resources.CloseIcon.ToBitmap
+            m_picLocked2 = My.Resources.Locked.ToBitmap
+            m_picUnLocked2 = My.Resources.Unlocked.ToBitmap
+            m_picDocked2 = My.Resources.Docked.ToBitmap
+            m_picUnDocked2 = My.Resources.Undocked.ToBitmap
+            m_picClose2 = My.Resources.CloseIcon.ToBitmap
+            Dim findcolor As Integer = Color.Black.ToArgb
+            ReplaceColor(findcolor, SystemColors.ActiveCaptionText, m_picUnLocked)
+            ReplaceColor(findcolor, SystemColors.ActiveCaptionText, m_picUnDocked)
+            ReplaceColor(findcolor, SystemColors.ActiveCaptionText, m_picDocked)
+            ReplaceColor(findcolor, SystemColors.ActiveCaptionText, m_picClose)
+            ReplaceColor(findcolor, SystemColors.InactiveCaptionText, m_picUnLocked2)
+            ReplaceColor(findcolor, SystemColors.InactiveCaptionText, m_picUnDocked2)
+            ReplaceColor(findcolor, SystemColors.InactiveCaptionText, m_picDocked2)
+            ReplaceColor(findcolor, SystemColors.InactiveCaptionText, m_picClose2)
+            LastActiveCaptionText = SystemColors.ActiveCaptionText.ToArgb()
+            LastInactiveCaptionText = SystemColors.InactiveCaptionText.ToArgb()
+        End If
+        Dim formactive As Boolean = False
+        If Not Form.ActiveForm Is Nothing Then
+            If Form.ActiveForm.Name = Me.Name Then
+                formactive = True
+            End If
 
+        End If
+        If (Settings.Locked And Settings.CharsLocked) Then
+            If formactive Then
+                hvLock.Picture = m_picLocked
+            Else
+                hvLock.Picture = m_picLocked2
+            End If
+
+        Else
+            If formactive Then
+                hvLock.Picture = m_picUnLocked
+            Else
+                hvLock.Picture = m_picUnLocked2
+            End If
+        End If
+        If (Settings.Docked) Then
+            If formactive Then
+                hvDock.Picture = m_picDocked
+            Else
+                hvDock.Picture = m_picDocked2
+            End If
+
+        Else
+            If formactive Then
+                hvDock.Picture = m_picUnDocked
+            Else
+                hvDock.Picture = m_picUnDocked2
+            End If
+        End If
+        If formactive Then
+            hvClose.Picture = m_picClose
+        Else
+            hvClose.Picture = m_picClose2
+        End If
+
+    End Sub
+    Private Sub ReplaceColor(ByVal color1argb As Integer, ByVal color2 As Color, ByRef img As Bitmap)
+        Dim i As Integer
+        Dim j As Integer
+        For i = 0 To img.Size.Width - 1
+            For j = 0 To img.Size.Height - 1
+                If img.GetPixel(i, j).ToArgb() = color1argb Then
+                    img.SetPixel(i, j, color2)
+                End If
+            Next
+        Next
+    End Sub
 #End Region
 
+
+    Private Sub QuickKeyForm_SystemColorsChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SystemColorsChanged
+        SetTitlebarIcons()
+    End Sub
 #Region "Title bar Button Event Handlers"
 
 #Region "Close Click"
 
-	Private Sub hvClose_Click(ByVal sender As Object, ByVal e As ClickButtonPressEventArgs) Handles hvClose.Pressed
-		Settings.QuickKey = False
-	End Sub
+    Private Sub hvClose_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles hvClose.MouseEnter
+        ttTips.ToolTipTitle = My.Resources.CloseButton
+
+        ttTips.SetToolTip(hvClose, My.Resources.CloseButtonTooltip)
+    End Sub
+
+    Private Sub hvClose_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles hvClose.MouseLeave
+        ttTips.RemoveAll()
+    End Sub
+
+    Private Sub hvClose_Click(ByVal sender As Object, ByVal e As ClickButtonPressEventArgs) Handles hvClose.Pressed
+        Settings.QuickKey = False
+        ShowTip(My.Resources.HideQuickKey)
+    End Sub
 
 #End Region
 
 #Region "Lock Toggle"
 
-	Private Sub hvLock_Click(ByVal sender As Object, ByVal e As ClickButtonPressEventArgs) Handles hvLock.Pressed
-		Settings.Locked = Not Settings.Locked
-		If Settings.Locked Then
-			ShowTip("You have locked the Character Grid, the Toolbar, and the Auto-Hide Window. You will not be able to resize or move these windows until you unlock Quick Key.", _
-			  , AppWinStyle.NormalFocus, "Tips\Locked.jpg", DockStyle.Left)
-		Else
-            'ShowTip("You have unlocked Quick Key. You may now move and resize the Character Grid, the Toolbar, and the Auto-Hide Window.", _
-            ', AppWinStyle.NormalFocus, "Tips\Unlocked.jpg", DockStyle.Left)
-		End If
-	End Sub
+    Private Sub hvLock_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles hvLock.MouseEnter
+        ttTips.ToolTipTitle = My.Resources.BothLocked
+        ttTips.SetToolTip(hvLock, My.Resources.BothLockedTooltip)
+
+    End Sub
+
+    Private Sub hvLock_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles hvLock.MouseLeave
+        ttTips.RemoveAll()
+    End Sub
+
+    Private Sub hvLock_Click(ByVal sender As Object, ByVal e As ClickButtonPressEventArgs) Handles hvLock.Pressed
+        Dim newsetting As Boolean = Not (Settings.Locked And Settings.CharsLocked)
+        Settings.Locked = newsetting
+        Settings.CharsLocked = newsetting
+
+        If Settings.Locked And Settings.CharsLocked Then
+            ShowTip(My.Resources.BothLockedText, My.Resources.BothLockedTitle, , AppWinStyle.NormalFocus, My.Resources.Locked2, DockStyle.Left)
+        End If
+
+    End Sub
 
 #End Region
 
 #Region "Dock Toggle"
 
-	Private Sub hvDock_Click(ByVal sender As Object, ByVal e As ClickButtonPressEventArgs) Handles hvDock.Pressed
-		Settings.Docked = Not Settings.Docked
-		If Settings.Docked Then
-			ShowTip("You have enabled the Auto-Hide Feature. When you are not using the Toolbar or Character Grid, they will disappear; however, the Auto-Hide Window will remain. If you move the mouse over the Auto-Hide Window, the Character Grid and the Toolbar will reappear.", _
-			"Auto-hide Tip", , AppWinStyle.NormalNoFocus, "Tips\Autohide.jpg", DockStyle.Top)
-		Else
-            'ShowTip("You have disabled the Auto-Hide Window. The Character Grid and the Toolbar will stay visible even when not in use.", _
-            '"Auto-hide Tip", , AppWinStyle.NormalNoFocus, "Tips\Nohide.jpg", DockStyle.Top)
-		End If
-	End Sub
+    Private Sub hvDock_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles hvDock.MouseEnter
+        ttTips.ToolTipTitle = My.Resources.AutoHideButton
+        ttTips.SetToolTip(hvDock, My.Resources.AutoHideButtonTooltip)
+    End Sub
+
+    Private Sub hvDock_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles hvDock.MouseLeave
+        ttTips.RemoveAll()
+    End Sub
+
+
+    Private Sub hvDock_Click(ByVal sender As Object, ByVal e As ClickButtonPressEventArgs) Handles hvDock.Pressed
+        Settings.Docked = Not Settings.Docked
+        If Settings.Docked Then
+            ShowTip(My.Resources.DockedText, My.Resources.DockedTitle, , AppWinStyle.NormalNoFocus, My.Resources.Autohide, DockStyle.Top)
+        Else
+
+        End If
+    End Sub
 
 #End Region
 
@@ -5521,142 +5315,139 @@ RESTART:
 
 #Region "Titlebar Graphical Effects"
 
-	Private Sub pnlMove_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlMove.Paint
+    Private Sub pnlMove_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlMove.Paint
         Dim gBrush As Drawing2D.LinearGradientBrush = Nothing
-		Dim cTitle As Color
-		Dim cTitle2 As Color = SystemColors.Control
-
-		''TODO: Fix Color of Form Focus Title Bar
-		'If Not Me.ActiveForm Is Nothing Then
-		'    If Me.ActiveForm.Name = Me.Name Then
-		cTitle = m_cTitle
-		'    Else
-		'cTitle = SystemColors.InactiveCaption
-		'    End If
-		'Else
-		'    cTitle = SystemColors.InactiveCaption
-		'End If
-		Static cLastColor As Color
-		Try
+        Dim cTitle As Color
+        Dim cTitle2 As Color
 
 
-			Select Case Settings.Orientation
-                Case SettingsClass.OrientationDirection.Top
+        cTitle2 = SystemColors.InactiveCaption
+        cTitle = SystemColors.GradientInactiveCaption
+        'TODO: Fix Color of Form Focus Title Bar
+        If Not Form.ActiveForm Is Nothing Then
+            If Form.ActiveForm.Name = Me.Name Then
+                cTitle2 = SystemColors.ActiveCaption
+                cTitle = SystemColors.GradientActiveCaption
+            End If
+        End If
+
+        If Not pnlTitleBar.BackColor = cTitle2 Or Not hvClose.BackColor = cTitle2 Then
+            pnlTitleBar.BackColor = cTitle2
+            SetTitlebarIcons()
+            Me.pnlDock.BackColor = cTitle2
+            Me.pnlLock.BackColor = cTitle2
+            Me.pnlLockX.BackColor = cTitle2
+            Me.pnlMove.BackColor = cTitle2
+            Me.pnlMoveDock.BackColor = cTitle2
+            Me.pnlX.BackColor = cTitle2
+            Me.hvClose.BackColor = cTitle2
+            Me.hvDock.BackColor = cTitle2
+            Me.hvLock.BackColor = cTitle2
+        End If
+        'hvLock.BackColor = cTitle2
+        'hvDock.BackColor = cTitle2
+        'hvClose.BackColor = cTitle2
+        'Me.pnlX.BackColor = cTitle2
+        'Me.pnlLock.BackColor = cTitle2
+        'Me.pnlLockX.BackColor = cTitle2
+        'Me.pnlDock.BackColor = cTitle2
+        'Static cLastColor As Color
+        Try
+
+
+            Select Case Settings.Orientation
+                Case SettingsClass.OrientationDirection.Left
                     gBrush = New Drawing2D.LinearGradientBrush(New Point(0, 0), New Point(pnlMove.Width, 0), cTitle, cTitle2)
                     gBrush.WrapMode = Drawing.Drawing2D.WrapMode.TileFlipX
-                Case SettingsClass.OrientationDirection.Right
+                Case SettingsClass.OrientationDirection.Top
                     gBrush = New Drawing2D.LinearGradientBrush(New Point(0, 0), New Point(0, pnlMove.Height), cTitle, cTitle2)
                     gBrush.WrapMode = Drawing.Drawing2D.WrapMode.TileFlipY
-                Case SettingsClass.OrientationDirection.Bottom
-                    gBrush = New Drawing2D.LinearGradientBrush(New Point(pnlMove.Width, 0), New Point(0, 0), cTitle, cTitle2)
+                Case SettingsClass.OrientationDirection.Right
+                    gBrush = New Drawing2D.LinearGradientBrush(New Point(0, 0), New Point(pnlMove.Width, 0), cTitle, cTitle2)
                     gBrush.WrapMode = Drawing.Drawing2D.WrapMode.TileFlipX
-                Case SettingsClass.OrientationDirection.Left
-                    gBrush = New Drawing2D.LinearGradientBrush(New Point(0, pnlMove.Height), New Point(0, -1), cTitle, cTitle2)
+                Case SettingsClass.OrientationDirection.Bottom
+                    gBrush = New Drawing2D.LinearGradientBrush(New Point(0, 0), New Point(0, pnlMove.Height), cTitle, cTitle2)
                     gBrush.WrapMode = Drawing.Drawing2D.WrapMode.TileFlipY
             End Select
-			e.Graphics.SmoothingMode = Drawing.Drawing2D.SmoothingMode.None
-			If Not cLastColor.Equals(cTitle) Then
-				e.Graphics.FillRectangle(gBrush, New Rectangle(0, 0, pnlMove.Width, pnlMove.Height))
-				'e.Graphics.DrawString("Character Grid", New Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold), SystemBrushes.ActiveCaptionText, 2, 2)
+            e.Graphics.SmoothingMode = Drawing.Drawing2D.SmoothingMode.None
+            'If Not cLastColor.Equals(cTitle) Then
+            e.Graphics.FillRectangle(gBrush, New Rectangle(0, 0, pnlMove.Width, pnlMove.Height))
+            'e.Graphics.DrawString("Character Grid", New Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold), SystemBrushes.ActiveCaptionText, 2, 2)
+            gBrush.Dispose()
 
 
-			Else
-				e.Graphics.FillRectangle(gBrush, New Rectangle(0, 0, pnlMove.Width, pnlMove.Height))
-			End If
+            'Else
+            'e.Graphics.FillRectangle(gBrush, New Rectangle(0, 0, pnlMove.Width, pnlMove.Height))
+            'End If
 
-			'Dim f As New Font(FontFamily.GenericSansSerif, 8, FontStyle.Bold)
-			'Dim sText As SizeF = e.Graphics.MeasureString("Character Grid", f)
-			'Select Case Settings.Orientation
-			'    Case SettingsClass.OrientationDirection.Top
+            'Dim f As New Font(FontFamily.GenericSansSerif, 8, FontStyle.Bold)
+            'Dim sText As SizeF = e.Graphics.MeasureString("Character Grid", f)
+            'Select Case Settings.Orientation
+            '    Case SettingsClass.OrientationDirection.Top
 
-			'        Debug.WriteLine(sText.Width & ", " & sText.Height)
+            '        Debug.WriteLine(sText.Width & ", " & sText.Height)
 
-			'        If sText.Width < pnlMove.Width - 28 And sText.Height < pnlMove.Height - 4 Then
-			'            e.Graphics.DrawString("Character Grid", f, SystemBrushes.ActiveCaptionText, 24, 2)
-			'            e.Graphics.DrawIcon(ProgramIcon, New Rectangle(4, 2, 16, 14))
-			'        End If
-			'    Case SettingsClass.OrientationDirection.Right
+            '        If sText.Width < pnlMove.Width - 28 And sText.Height < pnlMove.Height - 4 Then
+            '            e.Graphics.DrawString("Character Grid", f, SystemBrushes.ActiveCaptionText, 24, 2)
+            '            e.Graphics.DrawIcon(ProgramIcon, New Rectangle(4, 2, 16, 14))
+            '        End If
+            '    Case SettingsClass.OrientationDirection.Right
 
-			'        If sText.Width < pnlMove.Height - 28 And sText.Height < pnlMove.Width - 4 Then
-			'            e.Graphics.SmoothingMode = Drawing.Drawing2D.SmoothingMode.HighQuality
-			'            e.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
-			'            e.Graphics.RotateTransform(90, Drawing.Drawing2D.MatrixOrder.Append)
-			'            e.Graphics.DrawString("Character Grid", f, SystemBrushes.ActiveCaptionText, 2, 24)
-			'            e.Graphics.DrawIcon(ProgramIcon, 2, 4)
-			'        End If
-			'End Select
-		Catch
-			Debug.WriteLine("error")
-		End Try
-		cLastColor = cTitle
+            '        If sText.Width < pnlMove.Height - 28 And sText.Height < pnlMove.Width - 4 Then
+            '            e.Graphics.SmoothingMode = Drawing.Drawing2D.SmoothingMode.HighQuality
+            '            e.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
+            '            e.Graphics.RotateTransform(90, Drawing.Drawing2D.MatrixOrder.Append)
+            '            e.Graphics.DrawString("Character Grid", f, SystemBrushes.ActiveCaptionText, 2, 24)
+            '            e.Graphics.DrawIcon(ProgramIcon, 2, 4)
+            '        End If
+            'End Select
+        Catch
+            Debug.WriteLine("error")
+        End Try
+        'cLastColor = cTitle
 
-	End Sub
-
-#End Region
-
-#Region "Titlebar Resize calls Refresh"
-
-	Private Sub pnlMove_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMove.Resize
-		pnlMove.Refresh()
-	End Sub
+    End Sub
 
 #End Region
 
 #Region "Title Bar Refresh Caller Sub"
 
-	Public Sub RefreshTitlebar()
-		pnlTitleBar.Refresh()
-	End Sub
+    Public Sub RefreshTitlebar()
+        pnlMove.Invalidate()
+    End Sub
 
 #End Region
 
 #Region "Title Bar Refresh Catchers"
 
-	Private Sub frmQuickKey_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Activated
-		pnlMove.Refresh()
-		Me.TopMost = True
-		cdCharacters.Select()
+    Private Sub frmQuickKey_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Activated
+        pnlMove.Invalidate()
+        'Me.TopMost = True
+        If Not cdCharacters.ContainsFocus Then
+            cdCharacters.Select()
+        End If
+    End Sub
 
-	End Sub
 
-	'Private Sub frmQuickKey_Leave(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Leave
-	'    pnlMove.Refresh()
-	'End Sub
-
-	Private Sub frmQuickKey_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Enter
-		pnlMove.Refresh()
-		Me.TopMost = True
-		cdCharacters.Select()
-	End Sub
-
-	'Private Sub frmQuickKey_ChangeUICues(ByVal sender As Object, ByVal e As System.Windows.Forms.UICuesEventArgs) Handles MyBase.ChangeUICues
-	'    pnlMove.Refresh()
-	'End Sub
-
-	'Protected Overrides Sub OnLostFocus(ByVal e As System.EventArgs)
-	'    MyBase.OnLostFocus(e)
-	'    pnlMove.Refresh()
-	'End Sub
-
-	'Private Sub hvLock_Leave(ByVal sender As Object, ByVal e As System.EventArgs) Handles hvLock.Leave
-	'    pnlMove.Refresh()
-	'End Sub
+    Private Sub QuickKeyForm_Deactivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Deactivate
+        pnlMove.Invalidate()
+    End Sub
 
 #End Region
 
 #Region "Title Color Property as color"
 
-	Private m_cTitle As Color = SystemColors.ActiveCaption
-	Public Property TitleColor() As Color
-		Get
-			Return m_cTitle
+    Private m_cTitle As Color = SystemColors.ActiveCaption
+    Public Property TitleColor() As Color
+        Get
+            Return m_cTitle
 
-		End Get
-		Set(ByVal Value As Color)
-			m_cTitle = Value
-			Me.Refresh()
-		End Set
-	End Property
+        End Get
+        Set(ByVal Value As Color)
+            m_cTitle = Value
+            pnlMove.Invalidate()
+        End Set
+    End Property
 #End Region
 
 #End Region
@@ -5664,15 +5455,7 @@ RESTART:
 #Region "Recieving Events"
 	Friend Sub TitleColorChanged()
 		Me.TitleColor = Settings.TitleColor
-		pnlMove.BackColor = Settings.TitleColor
 	End Sub
-	Friend Sub FileSaveCharactersChanged()
-
-	End Sub
-	Friend Sub FileReadOnlyChanged()
-	End Sub
-
-	Private blnFirstResize As Boolean = True
 
 	Friend Sub QuickKeyChanged()
 		If Settings.QuickKey Then
@@ -5681,115 +5464,45 @@ RESTART:
 			If Settings.Docked Then
 				tmrMouseCheck.Enabled = True
 			End If
-			If blnFirstResize Then
-				frmQuickKey.cdCharacters.ResizeCharactersNow()
-				blnFirstResize = False
-			End If
 		Else
 			Me.Visible = False
 			tmrMouseCheck.Enabled = False
-
 		End If
 		Me.tmrMouseOff.Enabled = False
-	End Sub
-	Public Sub OpenFileDialogDirChanged()
-
 	End Sub
 
 	Public Sub QuickKeyBoundsChanged()
 		Me.Bounds = Settings.QuickKeyBounds
 	End Sub
 
-	Public Sub SaveFileDialogDirChanged()
-
-	End Sub
-
 	Public Sub FocusedColorChanged()
 		cdCharacters.FocusedColor = Settings.FocusedColor
 	End Sub
-
 	Public Sub CharGridBackColorChanged()
 		cdCharacters.BackColor = Settings.BackColor
 	End Sub
-
-
 	Public Sub NormaloutlineColorChanged()
 		cdCharacters.NormalOutlineColor = Settings.NormalOutlineColor
 	End Sub
-
 	Public Sub TextColorChanged()
 		cdCharacters.ForeColor = Settings.TextColor
 	End Sub
-
 	Public Sub ButtonColorChanged()
 		cdCharacters.ButtonColor = Settings.ButtonColor
 	End Sub
-
 	Public Sub LightEdgeColorChanged()
 		cdCharacters.LightEdgeColor = Settings.LightEdgeColor
 	End Sub
-
 	Public Sub DarkEdgeColorCHanged()
 		cdCharacters.DarkEdgeColor = Settings.DarkEdgeColor
 	End Sub
-	Public Sub ImportDialogDirChanged()
-
-	End Sub
-
-	Public Sub SaveReportDialogDirChanged()
-
-	End Sub
-
-	Public Sub ToolbarSettingsChanged()
-
-	End Sub
-
-
-
-	Public Sub CharsForeColorChanged()
-
-	End Sub
-
-	Public Sub CharsBackColorChanged()
-
-	End Sub
-	Friend Sub FileNameChanged()
-
-	End Sub
-
-	Friend Sub FileChangedChanged()
-
-	End Sub
-
-	Friend Sub FileSavePropertiesChanged()
-
-	End Sub
-
 	Friend Sub MouseSettingsChanged()
 		cdCharacters.MouseSettings = Settings.MouseSettings
 	End Sub
-
-
 	Friend Sub CharactersChanged()
-
-
 		cdCharacters.CharacterList = Settings.Charset.FilteredCharacters
-		If Settings.Charset.FilteredCharacters = "" Then hvClose.Focus()
-
+		If Settings.Charset.FilteredCharacters = "" Then hvClose.Select()
 	End Sub
-
-	Friend Sub FilterSettingsChanged()
-
-		'Dim intFilterLoop As Integer
-		'For intFilterLoop = 0 To Settings.Charset.Filters.Filters.GetUpperBound(0)
-		'    If intFilterLoop + 5 <= mnuFilter.MenuItems.Count - 1 Then
-		'        mnuFilter.MenuItems(intFilterLoop + 5).Checked = Settings.Charset.Filters.Filters(intFilterLoop)
-		'    End If
-		'Next
-
-	End Sub
-
-
 	Friend Sub RecentFilesChanged()
 
 		If Not mnuRecent Is Nothing Then
@@ -5809,7 +5522,7 @@ RESTART:
 								 Settings.RecentFiles(intFileLoop).Substring(Settings.RecentFiles(intFileLoop).Length - 40, 40)
 							Else
 								mnuRecentFile.Text = "&" & CStr(intFileLoop + 1) & " " & _
-								   Settings.RecentFiles(intFileLoop)
+									Settings.RecentFiles(intFileLoop)
 							End If
 
 							AddHandler mnuRecentFile.Click, AddressOf RecentCharset_Click
@@ -5829,17 +5542,6 @@ RESTART:
 	End Sub
 	Friend Sub FontPropertiesChanged()
 		cdCharacters.Font = New Font(Settings.Charset.FontName, Settings.Charset.FontSize, Settings.Charset.FontStyle)
-
-	End Sub
-
-
-
-	Friend Sub KeywordChanged()
-		'DoKeywordsMenu()
-	End Sub
-
-	Friend Sub KeywordsChanged()
-		'DoKeywordsMenu()
 	End Sub
 
 	Friend Sub DockedChanged()
@@ -5848,7 +5550,7 @@ RESTART:
 			If Settings.QuickKey Then
 				tmrMouseCheck.Enabled = True
 			End If
-			hvDock.Picture = m_picDocked
+
 		Else
 			If Settings.QuickKey Then
 				Me.Visible = True
@@ -5856,27 +5558,27 @@ RESTART:
 			End If
 			tmrMouseCheck.Enabled = False
 			tmrMouseOff.Enabled = False
-			hvDock.Picture = m_picUnDocked
-		End If
+
+        End If
+        SetTitlebarIcons()
 		mnuDocked.Checked = Settings.Docked
 	End Sub
 
 	Friend Sub LockedChanged()
-		If Settings.Locked Then
-			hvLock.Picture = m_picLocked
-			Me.MinimumSize = Me.Size
-			Me.MaximumSize = Me.Size
-		Else
-			hvLock.Picture = m_picUnLocked
-			Me.MaximumSize = New Size(0, 0)
-			ResizeTitleBar()
-		End If
+		Me.AllowResize = Not Settings.Locked
+
+		Application.DoEvents()
 		mnuLocked.Checked = Settings.Locked
+
+        SetTitlebarIcons()
+
 	End Sub
 
 	Friend Sub CharsLockedChanged()
 		cdCharacters.Editable = Not Settings.CharsLocked
 		mnuCharsLocked.Checked = Settings.CharsLocked
+        SetTitlebarIcons()
+
 	End Sub
 
 	Friend Sub ToolbarChanged()
@@ -5891,65 +5593,65 @@ RESTART:
 		End If
 		mnuToolbar.Checked = Settings.Toolbar
 	End Sub
-
+#Region "Title bar or characters orientation changed"
 	Friend Sub OrientationChanged()
-		ResizeTitleBar()
+		cdCharacters.ResizeCharacters()
 		Select Case Settings.Orientation
-            Case SettingsClass.OrientationDirection.Left
-                mnuOriLeft.Checked = True
-                mnuOriTop.Checked = False
-                mnuOriBottom.Checked = False
-                mnuOriRight.Checked = False
-            Case SettingsClass.OrientationDirection.Top
-                mnuOriLeft.Checked = False
-                mnuOriTop.Checked = True
-                mnuOriBottom.Checked = False
-                mnuOriRight.Checked = False
-            Case SettingsClass.OrientationDirection.Right
-                mnuOriLeft.Checked = False
-                mnuOriTop.Checked = False
-                mnuOriBottom.Checked = False
-                mnuOriRight.Checked = True
-            Case SettingsClass.OrientationDirection.Bottom
-                mnuOriLeft.Checked = False
-                mnuOriTop.Checked = False
-                mnuOriBottom.Checked = True
-                mnuOriRight.Checked = False
-        End Select
+			Case SettingsClass.OrientationDirection.Left
+				mnuOriLeft.Checked = True
+				mnuOriTop.Checked = False
+				mnuOriBottom.Checked = False
+				mnuOriRight.Checked = False
+			Case SettingsClass.OrientationDirection.Top
+				mnuOriLeft.Checked = False
+				mnuOriTop.Checked = True
+				mnuOriBottom.Checked = False
+				mnuOriRight.Checked = False
+			Case SettingsClass.OrientationDirection.Right
+				mnuOriLeft.Checked = False
+				mnuOriTop.Checked = False
+				mnuOriBottom.Checked = False
+				mnuOriRight.Checked = True
+			Case SettingsClass.OrientationDirection.Bottom
+				mnuOriLeft.Checked = False
+				mnuOriTop.Checked = False
+				mnuOriBottom.Checked = True
+				mnuOriRight.Checked = False
+		End Select
+		Me.PerformLayout()
 	End Sub
 
 	Friend Sub CharsOrientationChanged()
 		Select Case Settings.CharsOrientation
-            Case SettingsClass.CharsOrientationDirection.Left
-                cdCharacters.Orientation = CharacterDisplay.OrientationDirection.Left
-                mnuCOriLeft.Checked = True
-                mnuCOriTop.Checked = False
-                mnuCOriBottom.Checked = False
-                mnuCOriRight.Checked = False
+			Case SettingsClass.CharsOrientationDirection.Left
+				cdCharacters.Orientation = CharacterDisplay.OrientationDirection.Left
+				mnuCOriLeft.Checked = True
+				mnuCOriTop.Checked = False
+				mnuCOriBottom.Checked = False
+				mnuCOriRight.Checked = False
 
-            Case SettingsClass.CharsOrientationDirection.Top
-                cdCharacters.Orientation = CharacterDisplay.OrientationDirection.Top
-                mnuCOriLeft.Checked = False
-                mnuCOriTop.Checked = True
-                mnuCOriBottom.Checked = False
-                mnuCOriRight.Checked = False
+			Case SettingsClass.CharsOrientationDirection.Top
+				cdCharacters.Orientation = CharacterDisplay.OrientationDirection.Top
+				mnuCOriLeft.Checked = False
+				mnuCOriTop.Checked = True
+				mnuCOriBottom.Checked = False
+				mnuCOriRight.Checked = False
 
-            Case SettingsClass.CharsOrientationDirection.Right
-                cdCharacters.Orientation = CharacterDisplay.OrientationDirection.Right
-                mnuCOriLeft.Checked = False
-                mnuCOriTop.Checked = False
-                mnuCOriBottom.Checked = False
-                mnuCOriRight.Checked = True
-            Case SettingsClass.CharsOrientationDirection.Bottom
-                cdCharacters.Orientation = CharacterDisplay.OrientationDirection.Bottom
-                mnuCOriLeft.Checked = False
-                mnuCOriTop.Checked = False
-                mnuCOriBottom.Checked = True
-                mnuCOriRight.Checked = False
-        End Select
-
+			Case SettingsClass.CharsOrientationDirection.Right
+				cdCharacters.Orientation = CharacterDisplay.OrientationDirection.Right
+				mnuCOriLeft.Checked = False
+				mnuCOriTop.Checked = False
+				mnuCOriBottom.Checked = False
+				mnuCOriRight.Checked = True
+			Case SettingsClass.CharsOrientationDirection.Bottom
+				cdCharacters.Orientation = CharacterDisplay.OrientationDirection.Bottom
+				mnuCOriLeft.Checked = False
+				mnuCOriTop.Checked = False
+				mnuCOriBottom.Checked = True
+				mnuCOriRight.Checked = False
+		End Select
 	End Sub
-
+#End Region
 #End Region
 
 #Region "Popup Menu Handling"
@@ -5959,11 +5661,8 @@ RESTART:
 	Private Sub mnuToolbar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuToolbar.Click
 		Settings.Toolbar = Not Settings.Toolbar
 		If Settings.Toolbar Then
-			ShowTip("You have chosen to display the Toolbar. From here you can change font settings, manipulate Character Grid characters, and perform file operations.", _
-			 "Toolbar Tip", frmToolbar.Location, frmToolbar.Size, , AppWinStyle.NormalNoFocus, "Tips\Toolbar.jpg", DockStyle.Top)
 		Else
-            'ShowTip("You have chosen to hide the toolbar. It may be redisplayed from the System Tray Icon Menu or from Character Grid's ritlebar popup menu.", _
-            ' "Toolbar Tip", , AppWinStyle.NormalNoFocus)
+
 		End If
 	End Sub
 
@@ -5972,19 +5671,19 @@ RESTART:
 #Region "Orientation Menu Items"
 
 	Private Sub mnuOriTop_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuOriTop.Click
-        Settings.Orientation = SettingsClass.OrientationDirection.Top
+		Settings.Orientation = SettingsClass.OrientationDirection.Top
 	End Sub
 
 	Private Sub mnuOriRight_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuOriRight.Click
-        Settings.Orientation = SettingsClass.OrientationDirection.Right
+		Settings.Orientation = SettingsClass.OrientationDirection.Right
 	End Sub
 
 	Private Sub mnuOriBottom_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuOriBottom.Click
-        Settings.Orientation = SettingsClass.OrientationDirection.Bottom
+		Settings.Orientation = SettingsClass.OrientationDirection.Bottom
 	End Sub
 
 	Private Sub mnuOriLeft_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuOriLeft.Click
-        Settings.Orientation = SettingsClass.OrientationDirection.Left
+		Settings.Orientation = SettingsClass.OrientationDirection.Left
 	End Sub
 
 #End Region
@@ -6022,11 +5721,8 @@ RESTART:
 	Private Sub mnuDocked_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuDocked.Click
 		Settings.Docked = Not Settings.Docked
 		If Settings.Docked Then
-			ShowTip("You have enabled the Auto-Hide Feature. When you are not using the Toolbar or Character Grid, they will disappear; however, the Auto-Hide Window will remain. If you move the mouse over the Auto-Hide Window, the Character Grid and the Toolbar will reappear.", _
-			"Auto-hide Tip", , AppWinStyle.NormalNoFocus, "Tips\Autohide.jpg", DockStyle.Top)
+			ShowTip(My.Resources.DockedText, My.Resources.DockedTitle, , AppWinStyle.NormalNoFocus, My.Resources.Autohide, DockStyle.Top)
 		Else
-            'ShowTip("You have disabled the Auto-Hide Window. The Character Grid and the Toolbar will stay visible even when not in use.", _
-            '"Auto-hide Tip", , AppWinStyle.NormalNoFocus, "Tips\Nohide.jpg", DockStyle.Top)
 		End If
 	End Sub
 
@@ -6037,11 +5733,9 @@ RESTART:
 	Private Sub mnuLocked_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuLocked.Click
 		Settings.Locked = Not Settings.Locked
 		If Settings.Locked Then
-			ShowTip("You have locked the Character Grid, the Toolbar, and the Auto-Hide Window. You will not be able to resize or move these windows until you unlock Quick Key.", _
-			  , AppWinStyle.NormalFocus, "Tips\Locked.jpg", DockStyle.Left)
+			ShowTip(My.Resources.LockedText, My.Resources.LockedTitle, , AppWinStyle.NormalFocus, My.Resources.Locked2, DockStyle.Left)
 		Else
-            'ShowTip("You have unlocked Quick Key. You may now move and resize the Character Grid, the Toolbar, and the Auto-Hide Window.", _
-            ', AppWinStyle.NormalFocus, "Tips\Unlocked.jpg", DockStyle.Left)
+
 		End If
 	End Sub
 
@@ -6052,11 +5746,9 @@ RESTART:
 	Private Sub mnuCharsLocked_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuCharsLocked.Click
 		Settings.CharsLocked = Not Settings.CharsLocked
 		If Settings.CharsLocked Then
-			ShowTip("You have locked the characters in the character grid. You will not be able to move or change the characters until you unlock them.", _
-			  , AppWinStyle.NormalFocus, "Tips\Locked.jpg", DockStyle.Left)
+			ShowTip(My.Resources.CharsLockedText, My.Resources.CharsLockedTitle, , AppWinStyle.NormalFocus, My.Resources.Locked2, DockStyle.Left)
 		Else
-            'ShowTip("You have unlocked the characters in the Charcter Grid. You may now move and edit them.", _
-            ', AppWinStyle.NormalFocus, "Tips\Unlocked.jpg", DockStyle.Left)
+
 		End If
 	End Sub
 
@@ -6084,15 +5776,15 @@ RESTART:
 
 
 			Catch ax As ArgumentException
-				MessageBox.Show("Sorry, this character set cannot be found. The file may have be moved or deleted.", "Could not load Charset", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-				Log.LogError("Sorry, this character set cannot be found. The file may have been moved or deleted", ax, strRecentFile)
+				MessageBox.Show(My.Resources.CharsetNotFoundMessageText, My.Resources.CharsetNotFoundMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+				Log.LogError(My.Resources.CharsetNotFoundMessageText, ax, strRecentFile)
 			Catch ex As Exception
-				Log.HandleError("There was an error opening the file. File may be corrupted or unavailable.", ex, strRecentFile, MessageBoxButtons.OK)
+				Log.HandleError(My.Resources.ErrorOpeningFile, ex, strRecentFile, MessageBoxButtons.OK)
 
 			End Try
 		Else
-			MessageBox.Show("Sorry, this character set cannot be found. The file may have be moved or deleted.", "Could not load Charset", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-			Log.LogError("Sorry, this character set cannot be found. The file may have been moved or deleted", strRecentFile)
+			MessageBox.Show(My.Resources.CharsetNotFoundMessageText, My.Resources.CharsetNotFoundMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+			Log.LogError(My.Resources.CharsetNotFoundMessageText, strRecentFile)
 
 		End If
 		Log.LogMinorInfo("-Operation Completed")
@@ -6109,16 +5801,61 @@ RESTART:
 
 #End Region
 
+
+#Region "Right-click Items"
+
+	Private Sub mnuSend_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuSend.Click
+		Me.cdCharacters.SendClicked()
+	End Sub
+
+	Private Sub mnuCopy_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuCopy.Click
+		cdCharacters.CopyClicked()
+	End Sub
+
+	Private Sub mnuCopyHTML_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuCopyHTML.Click
+		cdCharacters.CopyHTMLClicked()
+	End Sub
+
+	Private Sub mnuCut_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuCut.Click
+		cdCharacters.CutClicked()
+	End Sub
+
+	Private Sub mnuDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuDelete.Click
+		cdCharacters.DeleteClicked()
+	End Sub
+
+	Private Sub mnuPaste_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuPaste.Click
+		cdCharacters.PasteClicked()
+	End Sub
+
+
+
+	Private Sub mnuSendSettings_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuSendSettings.Click
+		If Not frmSettings Is Nothing Then
+			frmSettings.Show()
+			frmSettings.tbMain.SelectedTab = frmSettings.tbMain.TabPages(2)
+		End If
+	End Sub
+
+	Private Sub mnuMouseSettings_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuMouseSettings.Click
+		If Not frmSettings Is Nothing Then
+			frmSettings.Show()
+			frmSettings.tbMain.SelectedTab = frmSettings.tbMain.TabPages(1)
+		End If
+	End Sub
+
+#End Region
+
 #End Region
 
 #Region "Character Grid Event Handlers"
 
-	Private Sub cdCharacters_CharDeleted(ByVal sender As CharacterDisplay, ByVal intChar As Integer) Handles cdCharacters.CharDeleted
-		Settings.Charset.FilteredCharactersDeleteChar(intChar)
+	Private Sub cdCharacters_CharDeleted(ByVal sender As CharacterDisplay, ByVal e As CharEventArgs) Handles cdCharacters.CharDeleted
+		Settings.Charset.FilteredCharactersDeleteChar(e.Index)
 	End Sub
 
-	Private Sub cdCharacters_CharsInserted(ByVal sender As CharacterDisplay, ByVal intChar As Integer, ByVal c As String) Handles cdCharacters.CharsInserted
-		Settings.Charset.FilteredCharactersInsertChars(intChar, c)
+	Private Sub cdCharacters_CharsInserted(ByVal sender As CharacterDisplay, ByVal e As CharEventArgs) Handles cdCharacters.CharsInserted
+		Settings.Charset.FilteredCharactersInsertChars(e.Index, e.Character)
 	End Sub
 
 	Private Sub cdCharacters_FontChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cdCharacters.FontChanged
@@ -6127,121 +5864,164 @@ RESTART:
 		Settings.Charset.FontStyle = cdCharacters.Font.Style
 	End Sub
 
-	Private Sub cdCharacters_OnCharacter(ByVal sender As CharacterDisplay, ByVal c As Char, ByVal AnsiiCode As String, ByVal UnicodeCode As String, ByVal UnicodeCategory As String, ByVal UnicodeDefinition As String) Handles cdCharacters.OnCharacter
+	Private Sub cdCharacters_OnCharacter(ByVal sender As CharacterDisplay, ByVal e As CharEventArgs) Handles cdCharacters.OnCharacter
+		Dim info As CharacterInformation = UnicodeDatabase.GetInformation(e.Character)
+		Dim title As String = ""
+		Dim tiptext As String = ""
+
+
+		title = info.CodePoint & "  " & info.DecimalHTMLCode & "  " & info.AltCode
+		tiptext = info.ToolTipCategoryDescription
+
+		ttTips.ToolTipTitle = title
+
+		ttTips.SetToolTip(e.Button, tiptext)
+
+
 		If Settings.Toolbar Then
-			Dim strCatName As String = UnicodeCategory
-			Dim strFriendly As String = ""
-
-			Dim intLoop As Integer
-			For intLoop = 0 To strCatName.Length - 1
-				If Char.IsUpper(strCatName, intLoop) And intLoop > 0 Then
-					strFriendly &= " "
-				End If
-				strFriendly &= strCatName.Chars(intLoop)
-			Next
-
-			frmToolbar.StatusBarCharacterOn(c, AnsiiCode, UnicodeCode, strFriendly, UnicodeDefinition)
+			frmToolbar.StatusBarCharacterOn(info.Character, info.Numeric.ToString(), info.CodePoint, info.FriendlyCategoryName, "")
 		End If
 	End Sub
 
 	Private Sub cdCharacters_OffCharacter(ByVal sender As CharacterDisplay) Handles cdCharacters.OffCharacter
+		ttTips.RemoveAll()
 		If Settings.Toolbar Then
 			If Not sender.MouseOver Then
-                frmToolbar.StatusBarOff()
+				frmToolbar.StatusBarOff()
 			End If
 		End If
 	End Sub
 
-	Private Sub cdCharacters_SendCharacter(ByVal sender As CharacterDisplay, ByVal intChar As Integer, ByVal c As Char) Handles cdCharacters.SendCharacter
-        'Dim blnShow As Boolean = True
-        'Select Case c
-        '	Case CChar("{")
-        '	Case CChar("}")
-        '	Case CChar("(")
-        '	Case CChar(")")
-        '	Case CChar("+")
-        '	Case CChar("^")
-        '	Case CChar("%")
-        '	Case CChar("~")
-        '	Case Else
-        '		blnShow = False
-        'End Select
-        'If blnShow Then
-        '	ShowTip("You have chosen to send one of the following reserved characters: (){}+^%~  . If you need to use one of these characters in a document, drag and drop or copy it instead.")
+	Private Sub cdCharacters_SendCharacter(ByVal sender As CharacterDisplay, ByVal e As CharEventArgs) Handles cdCharacters.SendCharacter
+		If Not e.Button Is Nothing Then
+			e.Button.PressedDown = False
+		End If
 
-        'End If
-        If Settings.Keyword.Length > 0 Then
-            Try
-                Dim intTimes As Integer
+		If Settings.Keyword.Length <= 0 Then Exit Sub
+		Try
+			Dim FocusSucceeded As Boolean = False
+			'''''''''''''''''''''''''''''''''''''
+			'   Apply focus to the correct window
+			'''''''''''''''''''''''''''''''''''''
+			If (Not Settings.Keyword = My.Resources.LastWindow) Then
+				Dim intTimes As Integer
+				Do
+					If APIS.GetForegroundWindow = Utils.SetClassFocus(Settings.Keyword) Then
+						Threading.Thread.Sleep(0)
+						SendKeys.Flush()
+						FocusSucceeded = True
+						Exit Do
+					Else
+						Utils.SetClassFocus(Settings.Keyword)
+						Threading.Thread.Sleep(0)
+						SendKeys.Flush()
+						Threading.Thread.Sleep(25)
+						intTimes += 1
+					End If
+				Loop Until intTimes = 10
+			End If
 
-                Do
-                    If APIS.GetForegroundWindow = Utils.SetClassFocus(Settings.Keyword) Then
-                        Threading.Thread.Sleep(0)
-                        Threading.Thread.Sleep(50)
-                        Utils.APIS.SendChar(c)
-                        'SendKeys.SendWait(c)
-                        Exit Sub
-                    Else
-                        Utils.SetClassFocus(Settings.Keyword)
-                        Threading.Thread.Sleep(0)
-                        Threading.Thread.Sleep(25)
-                        intTimes += 1
-                    End If
-                Loop Until intTimes = 10
-                Log.LogWarning("Character send failed")
-                Beep()
-            Catch wndnf As Utils.WindowNotFoundException
-                Log.LogWarning("Character send failed", wndnf)
-                Beep()
-            Catch nke As Utils.NullKeywordException
-                Log.LogWarning("Character send failed", nke)
-                Beep()
-            Catch fthe As Utils.FocusToHandleException
-                Log.LogWarning("Character send failed", fthe)
-                Beep()
-            Catch ex As Exception
-                Log.LogWarning("Character send failed", ex)
-                Beep()
-            End Try
-        End If
+			'Store Original setting
+			Dim blnQuickKey As Boolean = Settings.QuickKey
+			If (Settings.Keyword = My.Resources.LastWindow) Then
+
+				Settings.QuickKey = False
+				FocusSucceeded = True
+			End If
+			If FocusSucceeded Then
+				Select Case Settings.SendMethod
+					Case SettingsClass.SendMethods.SendInputAPI
+						Threading.Thread.Sleep(Settings.SendDelay)
+						Utils.APIS.SendChar(CChar((e.Character)))
+						SendKeys.Flush()
+					Case SettingsClass.SendMethods.ClipboardAndSendKeys
+						Clipboard.SetDataObject(Utils.Convert.GetDataFromString(e.Character))
+						Threading.Thread.Sleep(Settings.SendDelay)
+						SendKeys.Flush()
+						SendKeys.SendWait("^v")
+						SendKeys.Flush()
+					Case SettingsClass.SendMethods.SendKeysAPI
+						Dim blnShow As Boolean = True
+						Select Case e.Character
+							Case "{"
+							Case "}"
+							Case "("
+							Case ")"
+							Case "+"
+							Case "^"
+							Case "%"
+							Case "~"
+							Case Else
+								blnShow = False
+						End Select
+						If blnShow Then
+							ShowTip(My.Resources.SendBadCharacter)
+						Else
+							Threading.Thread.Sleep(Settings.SendDelay)
+							SendKeys.SendWait(e.Character)
+							SendKeys.Flush()
+						End If
+
+				End Select
+				If (Settings.Keyword = My.Resources.LastWindow) Then
+					Threading.Thread.Sleep(Settings.SendDelay)
+					Settings.QuickKey = blnQuickKey
+				End If
+			Else
+				Log.LogWarning("Character send failed")
+				Beep()
+			End If
+		Catch wndnf As Utils.WindowNotFoundException
+			Log.LogWarning("Character send failed", wndnf)
+			Beep()
+		Catch nke As Utils.NullKeywordException
+			Log.LogWarning("Character send failed", nke)
+			Beep()
+		Catch fthe As Utils.FocusToHandleException
+			Log.LogWarning("Character send failed", fthe)
+			Beep()
+		Catch ex As Exception
+			Log.LogWarning("Character send failed", ex)
+			Beep()
+		End Try
+
 	End Sub
 
 	Private Sub cdCharacters_EditableChanged(ByVal sender As CharacterDisplay, ByVal e As System.EventArgs) Handles cdCharacters.EditableChanged
 		If Settings.CharsLocked = cdCharacters.Editable Then
 			Settings.CharsLocked = Not cdCharacters.Editable
 		End If
+
 	End Sub
 
-	Private Sub cdCharacters_MouseSettingsClicked(ByVal sender As CharacterDisplay, ByVal e As System.EventArgs) Handles cdCharacters.MouseSettingsClicked
-		If Not frmSettings Is Nothing Then
-			frmSettings.Show()
-			frmSettings.tbMain.SelectedTab = frmSettings.tbMain.TabPages(1)
-		End If
-	End Sub
+
+
+
 
 
 #Region "Character Properties"
 	Dim p_intPropertiesChar As Integer
-	Private Sub cdCharacters_CharacterProperties(ByVal sender As CharacterDisplay, ByVal intChar As Integer, ByVal c As Char) Handles cdCharacters.CharacterProperties
-		p_intPropertiesChar = intChar
+	Private Sub cdCharacters_CharacterProperties(ByVal sender As Object, ByVal e As EventArgs) Handles mnuProperties.Click
+
+		p_intPropertiesChar = cdCharacters.LastClickedCharIndex
 		Dim frmUnicode As New Form
 		frmUnicode.Name = "frmUnicode"
 		frmUnicode.TopMost = True
-        frmUnicode.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
+		frmUnicode.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
 		'frmUnicode.Icon = ProgramIcon
 		frmUnicode.MaximizeBox = False
 		frmUnicode.MinimizeBox = False
-		frmUnicode.Text = "Character Properties"
+		frmUnicode.Text = My.Resources.CharacterProperties
 		frmUnicode.StartPosition = FormStartPosition.CenterScreen
 		frmUnicode.TabStop = False
 
 		Dim optDec As New RadioButton
 		optDec.Name = "optDec"
-		optDec.Text = "Decimal Value"
+		optDec.Text = My.Resources.DecimalMode
 		optDec.FlatStyle = FlatStyle.System
 		Dim optHex As New RadioButton
 		optHex.Name = "optHex"
-		optHex.Text = "Hexadecimal Value"
+		optHex.Text = My.Resources.HexadecimalMode
 		optHex.FlatStyle = FlatStyle.System
 
 		frmUnicode.Controls.Add(optDec)
@@ -6272,7 +6052,7 @@ RESTART:
 		Dim btnAdd As New Button
 		btnAdd.Name = "btnAdd"
 		btnAdd.FlatStyle = FlatStyle.System
-		btnAdd.Text = "&OK"
+		btnAdd.Text = My.Resources.OKButton
 		btnAdd.Top = frmUnicode.ClientSize.Height - 32
 		btnAdd.Height = 24
 		btnAdd.Width = 75
@@ -6284,7 +6064,7 @@ RESTART:
 		Dim btnCancel As New Button
 		btnCancel.Name = "btnCancel"
 		btnCancel.FlatStyle = FlatStyle.System
-		btnCancel.Text = "&Cancel"
+		btnCancel.Text = My.Resources.CancelButton
 		btnCancel.Top = frmUnicode.ClientSize.Height - 32
 		btnCancel.Height = 24
 		btnCancel.Width = 75
@@ -6296,7 +6076,7 @@ RESTART:
 		Dim lblUnicodeCategory As New Label
 		lblUnicodeCategory.Name = "lblUnicodeCategory"
 		lblUnicodeCategory.AutoSize = True
-		lblUnicodeCategory.Text = "Unicode Category: "
+		lblUnicodeCategory.Text = My.Resources.UnicodeCategoryPrefix
 		frmUnicode.Controls.Add(lblUnicodeCategory)
 		lblUnicodeCategory.Left = 8
 		lblUnicodeCategory.Top = btnAdd.Top - (lblUnicodeCategory.Height + 8)
@@ -6305,7 +6085,7 @@ RESTART:
 		Dim lblUnicodeValue As New Label
 		lblUnicodeValue.Name = "lblUnicodeValue"
 		lblUnicodeValue.AutoSize = True
-		lblUnicodeValue.Text = "Unicode Value: "
+		lblUnicodeValue.Text = My.Resources.UnicodeValuePrefix
 		frmUnicode.Controls.Add(lblUnicodeValue)
 		lblUnicodeValue.Left = 8
 		lblUnicodeValue.Top = lblUnicodeCategory.Top - (lblUnicodeValue.Height + 8)
@@ -6314,7 +6094,7 @@ RESTART:
 		Dim lblAnsii As New Label
 		lblAnsii.Name = "lblAnsii"
 		lblAnsii.AutoSize = True
-		lblAnsii.Text = "Ansii Value: "
+		lblAnsii.Text = My.Resources.AnsiiValuePrefix
 
 		frmUnicode.Controls.Add(lblAnsii)
 		lblAnsii.Left = 8
@@ -6346,10 +6126,10 @@ RESTART:
 		lblUnicodeValue.Text = ""
 		lblChar.Text = ""
 		lblUnicodeCategory.Text = ""
-		lblAnsii.Text = "No Character Entered"
-		txtValue.Text = AscW(c).ToString
+		lblAnsii.Text = My.Resources.NoCharacterEntered
+		txtValue.Text = AscW(cdCharacters.LastClickedChar.Text).ToString
 
-		txtValue.Focus()
+		txtValue.Select()
 		frmUnicode.ShowDialog()
 	End Sub
 
@@ -6421,7 +6201,7 @@ RESTART:
 
 			If Not txtValue Is Nothing Then
 				If Not txtValue.ContainsFocus Then
-					txtValue.Focus()
+					txtValue.Select()
 				End If
 				If txtValue.Text.Length > 0 Then
 					If optDec.Checked Then
@@ -6432,15 +6212,15 @@ RESTART:
 								lblUnicodeValue.Text = ""
 								lblChar.Text = ""
 								lblUnicodeCat.Text = ""
-								lblAnsii.Text = "Character Does Not Exist!"
+								lblAnsii.Text = My.Resources.CharacterDoesNotExist
 								btnAdd.Enabled = False
 								Exit Sub
 							End Try
-							lblAnsii.Text = "Ansii Value: " & Asc(ChrW(CInt(txtValue.Text))).ToString
-							lblUnicodeValue.Text = "Unicode Value: " & "U+" & Hex(CInt(txtValue.Text)) & " (" & CInt(txtValue.Text).ToString & ")"
+							lblAnsii.Text = My.Resources.AnsiiValuePrefix & AscW(ChrW(CInt(txtValue.Text))).ToString
+							lblUnicodeValue.Text = My.Resources.UnicodeValuePrefix & "U+" & Hex(CInt(txtValue.Text)) & " (" & CInt(txtValue.Text).ToString & ")"
 
 							If Array.IndexOf(UnicodeFilters.FilterTitles, System.Char.GetUnicodeCategory(ChrW(CInt(txtValue.Text))).ToString) > -1 Then
-								lblUnicodeCat.Text = "Unicode Category: " & System.Char.GetUnicodeCategory(ChrW(CInt(txtValue.Text))).ToString()
+								lblUnicodeCat.Text = My.Resources.UnicodeCategoryPrefix & System.Char.GetUnicodeCategory(ChrW(CInt(txtValue.Text))).ToString()
 
 								ttTips.SetToolTip(lblUnicodeCat, UnicodeFilters.FilterDefinitions(Array.IndexOf(UnicodeFilters.FilterTitles, System.Char.GetUnicodeCategory(ChrW(CInt(txtValue.Text))).ToString)))
 							Else
@@ -6452,7 +6232,7 @@ RESTART:
 							lblUnicodeValue.Text = ""
 							lblChar.Text = ""
 							lblUnicodeCat.Text = ""
-							lblAnsii.Text = "No Valid Character Entered"
+							lblAnsii.Text = My.Resources.NoCharacterEntered
 						End If
 					Else
 						If CInt("&H" & txtValue.Text) > 0 Then
@@ -6463,15 +6243,15 @@ RESTART:
 								lblUnicodeValue.Text = ""
 								lblChar.Text = ""
 								lblUnicodeCat.Text = ""
-								lblAnsii.Text = "Character Does Not Exist!"
+								lblAnsii.Text = My.Resources.CharacterDoesNotExist
 								btnAdd.Enabled = False
 								Exit Sub
 							End Try
-							lblAnsii.Text = "Ansii Value: " & Asc(ChrW(CInt("&H" & txtValue.Text))).ToString
-							lblUnicodeValue.Text = "Unicode Value: " & "U+" & Hex(CInt("&H" & txtValue.Text)) & " (" & CInt("&H" & txtValue.Text).ToString & ")"
+							lblAnsii.Text = My.Resources.AnsiiValuePrefix & AscW(ChrW(CInt("&H" & txtValue.Text))).ToString
+							lblUnicodeValue.Text = My.Resources.UnicodeValuePrefix & "U+" & Hex(CInt("&H" & txtValue.Text)) & " (" & CInt("&H" & txtValue.Text).ToString & ")"
 
 							If Array.IndexOf(UnicodeFilters.FilterTitles, System.Char.GetUnicodeCategory(ChrW(CInt("&H" & txtValue.Text))).ToString) > -1 Then
-								lblUnicodeCat.Text = "Unicode Category: " & System.Char.GetUnicodeCategory(ChrW(CInt("&H" & txtValue.Text))).ToString()
+								lblUnicodeCat.Text = My.Resources.UnicodeCategoryPrefix & System.Char.GetUnicodeCategory(ChrW(CInt("&H" & txtValue.Text))).ToString()
 
 								ttTips.SetToolTip(lblUnicodeCat, UnicodeFilters.FilterDefinitions(Array.IndexOf(UnicodeFilters.FilterTitles, System.Char.GetUnicodeCategory(ChrW(CInt("&H" & txtValue.Text))).ToString)))
 							Else
@@ -6483,7 +6263,7 @@ RESTART:
 							lblUnicodeValue.Text = ""
 							lblChar.Text = ""
 							lblUnicodeCat.Text = ""
-							lblAnsii.Text = "No Valid Character Entered"
+							lblAnsii.Text = My.Resources.NoCharacterEntered
 							btnAdd.Enabled = False
 						End If
 					End If
@@ -6491,14 +6271,14 @@ RESTART:
 					lblUnicodeValue.Text = ""
 					lblChar.Text = ""
 					lblUnicodeCat.Text = ""
-					lblAnsii.Text = "No Character Entered"
+					lblAnsii.Text = My.Resources.NoCharacterEntered
 					btnAdd.Enabled = False
 				End If
 			Else
 				lblUnicodeValue.Text = ""
 				lblChar.Text = ""
 				lblUnicodeCat.Text = ""
-				lblAnsii.Text = "No Character Entered"
+				lblAnsii.Text = My.Resources.NoCharacterEntered
 				btnAdd.Enabled = False
 			End If
 		Catch ex As Exception
@@ -6532,7 +6312,7 @@ RESTART:
 								Settings.Charset.FilteredCharactersInsertChars(p_intPropertiesChar, ChrW(CInt(txtValue.Text)))
 
 							Catch ex As Exception
-								Log.HandleError("Could Not Modify Character!", ex, , MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+								Log.HandleError(My.Resources.CouldNotModifyCharacter, ex, , MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 							Finally
 								frmUnicode.Close()
 							End Try
@@ -6544,7 +6324,7 @@ RESTART:
 								Settings.Charset.FilteredCharactersInsertChars(p_intPropertiesChar, ChrW(CInt("&H" & txtValue.Text)))
 
 							Catch ex As Exception
-								Log.HandleError("Could Not Modify Character!", ex, , MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+								Log.HandleError(My.Resources.CouldNotModifyCharacter, ex, , MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 							Finally
 								frmUnicode.Close()
 							End Try
@@ -6567,39 +6347,51 @@ RESTART:
 
 #End Region
 
-#Region "Focus Events"
 
-	'Private Sub hvLock_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles hvLock.Enter
-	'    cdCharacters.Focus()
-	'End Sub
+	Private Sub cdCharacters_ShowCharMenu(ByVal sender As UIElements.CharacterDisplay, ByVal e As UIElements.CharEventArgs) Handles cdCharacters.ShowCharMenu
+		cmCharMenu.Show(e.Button, e.Button.PointToClient(Control.MousePosition))
+	End Sub
 
-	'Private Sub hvDock_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles hvDock.Enter
-	'    cdCharacters.Focus()
-	'End Sub
+	Private Sub cmCharMenu_Popup(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmCharMenu.Popup
+		mnuCut.Enabled = cdCharacters.Editable
+		mnuPaste.Enabled = cdCharacters.Editable
+		mnuProperties.Enabled = cdCharacters.Editable
+		mnuDelete.Enabled = cdCharacters.Editable
+		mnuSend.Enabled = Not cdCharacters.ViewOnly
+		mnuCopy.Enabled = Not cdCharacters.ViewOnly
+		mnuCopyHTML.Enabled = Not cdCharacters.ViewOnly
 
-	'Private Sub hvClose_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles hvClose.Enter
-	'    cdCharacters.Focus()
-	'End Sub
+		If mnuPaste.Enabled Then
+			mnuPaste.Enabled = (Utils.GetStringFromData(Clipboard.GetDataObject).Length > 0)
 
-#End Region
+		End If
 
-	Private Sub cdCharacters_BeforeCharacterSend(ByVal sender As UIElements.CharacterDisplay, ByVal Buttons As System.Windows.Forms.MouseButtons, ByVal ModifierKeys As System.Windows.Forms.Keys, ByVal CharacterNumber As Integer, ByVal Character As Char) Handles cdCharacters.BeforeCharacterSend
-		Dim blnShow As Boolean = True
-		Select Case Character
-			Case CChar("{")
-			Case CChar("}")
-			Case CChar("(")
-			Case CChar(")")
-			Case CChar("+")
-			Case CChar("^")
-			Case CChar("%")
-			Case CChar("~")
-			Case Else
-				blnShow = False
-		End Select
-		If blnShow Then
-			ShowTip("You have chosen to send one of the following reserved characters: (){}+^%~  . If you need to use one of these characters in a document, drag and drop or copy it instead.")
+		If (cdCharacters.LastClickedChar Is Nothing) Then
+			mnuSend.Enabled = False
+			mnuCut.Enabled = False
+			mnuCopy.Enabled = False
+			mnuPaste.Enabled = False
+			mnuCopyHTML.Enabled = False
+			mnuDelete.Enabled = False
+			mnuProperties.Enabled = False
+		End If
+	End Sub
 
+	Private Sub cdCharacters_ShowNoCharsMenu(ByVal sender As UIElements.CharacterDisplay) Handles cdCharacters.ShowNoCharsMenu
+		cmCharMenu.Show(sender, sender.PointToClient(Control.MousePosition))
+	End Sub
+
+	Private Sub QuickKeyForm_ResizeBegin(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ResizeBegin
+		'cdCharacters.SuspendLayout()
+	End Sub
+
+	Private Sub QuickKeyForm_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+		Me.Bounds = Settings.QuickKeyBounds
+	End Sub
+
+	Private Sub QuickKeyForm_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged
+		If Me.Size = Settings.QuickKeyBounds.Size And Not Me.Location = Settings.QuickKeyBounds.Location Then
+			Settings.m_rQuickKey.Location = Me.Location
 		End If
 	End Sub
 
@@ -6645,7 +6437,7 @@ Public Class QuickKeyStyleForm
 		End If
 
 
-		Me.Text = "Character Grid Appearance"
+        Me.Text = My.Resources.CharacterGridAppearance
 		' Me.FormBorderStyle = FormBorderStyle.FixedDialog
 		Me.StartPosition = FormStartPosition.CenterScreen
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
@@ -6654,7 +6446,9 @@ Public Class QuickKeyStyleForm
 		Me.MaximizeBox = False
 		Me.ShowInTaskbar = False
 		Me.MinimizeBox = False
-		Dim strColors() As String = {"Focused Outline", "Light Edge", "Dark Edge", "Normal Outline", "Back Color", "Text Color", "Button Color", "Title Bar"}
+		Dim strColors() As String = {My.Resources.FocusedOutline, _
+		My.Resources.LightEdge, My.Resources.DarkEdge, My.Resources.NormalOutline, _
+	  My.Resources.OutsideRimColor, My.Resources.TextColor, My.Resources.ButtonColor, My.Resources.TitleBar}
 		Dim intColors As Integer
 		For intColors = 0 To strColors.GetUpperBound(0)
 			Dim lblCaption As New Label
@@ -6669,7 +6463,7 @@ Public Class QuickKeyStyleForm
 			btnReset.Name = "btnReset" & intColors.ToString
 			btnReset.Tag = intColors
 
-			btnReset.Text = "Reset"
+            btnReset.Text = My.Resources.ResetButton
 			btnChange.Text = "..."
 			lblCaption.Text = strColors(intColors)
 			lblColor.BorderStyle = BorderStyle.Fixed3D
@@ -6731,27 +6525,27 @@ Public Class QuickKeyStyleForm
 		cbChar.Left = 8
 		cbChar.Width = Me.ClientSize.Width - 16
 		cbChar.Height = Me.ClientSize.Height - cbChar.Top - 48
-		cbChar.Text = "Character Button"
+        cbChar.Text = My.Resources.CharacterButton
 
 		cbChar.FocusedColor = Settings.FocusedColor
 		cbChar.NormalOutlineColor = Settings.NormalOutlineColor
 		cbChar.LightEdgeColor = Settings.LightEdgeColor
 		cbChar.DarkEdgeColor = Settings.DarkEdgeColor
-		cbChar.BackColor = Settings.BackColor
+        cbChar.RimColor = Settings.BackColor
 		cbChar.ForeColor = Settings.TextColor
-		cbChar.ButtonColor = Settings.ButtonColor
+        cbChar.BackColor = Settings.ButtonColor
 
 		lblInstructions = New Label
 		lblInstructions.Top = 8
 		lblInstructions.AutoSize = True
-		lblInstructions.Text = "Change the Character Grid appearance"
+        lblInstructions.Text = My.Resources.ChangeAppearance
 		lblInstructions.Left = 8
 		Me.Controls.Add(lblInstructions)
 		Me.Controls.Add(cbChar)
 		cbChar.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Bottom
 		cbChar.Autosize = False
-		cbChar.Font = New Font(FontFamily.GenericSansSerif, 20, FontStyle.Regular)
-		m_Colors(0) = Settings.FocusedColor
+        cbChar.Font = New Font(FontFamily.GenericSansSerif, 20, FontStyle.Regular)
+        m_Colors(0) = Settings.FocusedColor
 		m_Colors(1) = Settings.LightEdgeColor
 		m_Colors(2) = Settings.DarkEdgeColor
 		m_Colors(3) = Settings.NormalOutlineColor
@@ -6773,19 +6567,20 @@ Public Class QuickKeyStyleForm
 		btnResetAll = New Button
 		btnResetAll.Top = 8 * (24 + 8) + 32
 		btnResetAll.Width = 100
-		btnResetAll.Text = "Reset ALL"
-		btnResetAll.Left = Me.ClientSize.Width - 8 - btnResetAll.Width
-		btnResetAll.Height = 24
-		btnApply.Height = 24
-		btnApply.Width = 50
-		btnApply.Top = Me.ClientSize.Height - 8 - btnApply.Height
-		btnApply.Left = Me.ClientSize.Width - btnApply.Width - 8
-		btnApply.Text = "Apply"
-		btnApply.Name = "btnApply"
+        btnResetAll.Text = My.Resources.ResetAllButton
+        btnResetAll.Left = Me.ClientSize.Width - 8 - btnResetAll.Width
+        btnResetAll.Height = 24
+        btnApply.Height = 24
+        btnApply.Width = 50
+        btnApply.Top = Me.ClientSize.Height - 8 - btnApply.Height
+        btnApply.Left = Me.ClientSize.Width - btnApply.Width - 8
+        btnApply.Text = My.Resources.ApplyButton
+        btnApply.Name = "btnApply"
+        btnApply.Enabled = False
 		Me.Controls.Add(btnApply)
 		Me.Controls.Add(btnResetAll)
 		btnOK.Name = "btnOK"
-		btnOK.Text = "OK"
+        btnOK.Text = My.Resources.OKButton
 		btnOK.Height = 24
 		btnOK.Width = 50
 		btnOK.Top = btnApply.Top
@@ -6794,7 +6589,7 @@ Public Class QuickKeyStyleForm
 		btnCancel.Top = Me.ClientSize.Height - btnCancel.Height - 8
 		btnCancel.Left = btnApply.Left - btnCancel.Width - 8
 		btnCancel.Name = "btnCancel"
-		btnCancel.Text = "Cancel"
+        btnCancel.Text = My.Resources.CancelButton
 		btnOK.Left = btnCancel.Left - btnOK.Width - 8
 		Me.Controls.Add(btnCancel)
 		Me.Controls.Add(btnOK)
@@ -6808,20 +6603,19 @@ Public Class QuickKeyStyleForm
 
 	Private m_Colors(7) As Color
 
-	Public Sub ChangeButtonClicked(ByVal sender As Object, ByVal e As System.EventArgs)
-		Try
-			cdlColor.Color = m_Colors(CInt(CType(sender, Button).Tag))
-			Select Case cdlColor.ShowDialog(Me)
+    Public Sub ChangeButtonClicked(ByVal sender As Object, ByVal e As System.EventArgs)
+        btnApply.Enabled = True
+        Try
+            cdlColor.Color = m_Colors(CInt(CType(sender, Button).Tag))
+            Select Case cdlColor.ShowDialog(Me)
                 Case Windows.Forms.DialogResult.OK
                     m_Colors(CInt(CType(sender, Button).Tag)) = cdlColor.Color
                     Dim ctrl As New Control
                     For Each ctrl In Me.Controls
                         If Not ctrl Is Nothing Then
-                            If Not ctrl.Tag Is Nothing And ctrl.Text = "" Then
+                            If Not ctrl.Tag Is Nothing And ctrl.Text.Length = 0 Then
                                 If ctrl.Tag.Equals(CType(sender, Button).Tag) Then
                                     ctrl.BackColor = cdlColor.Color
-                                    Debug.WriteLine(ctrl.BackColor.ToArgb.ToString)
-                                    Debug.WriteLine(ctrl.BackColor.ToKnownColor.ToString)
                                 End If
                             End If
                         End If
@@ -6829,62 +6623,65 @@ Public Class QuickKeyStyleForm
                     UpdateChar()
 
             End Select
-		Catch
-		End Try
-	End Sub
+        Catch
+        End Try
+    End Sub
 
-	Public Sub ResetButtonClicked(ByVal sender As Object, ByVal e As System.EventArgs)
-		Try
-			Dim intColor As Integer = CInt(CType(sender, Button).Tag)
+    Public Sub ResetButtonClicked(ByVal sender As Object, ByVal e As System.EventArgs)
+        btnApply.Enabled = True
+        Try
+            Dim intColor As Integer = CInt(CType(sender, Button).Tag)
 
-			Dim ctrl As New Control
-			For Each ctrl In Me.Controls
-				If Not ctrl Is Nothing Then
-					If Not ctrl.Tag Is Nothing And ctrl.Text = "" Then
-						If ctrl.Tag.Equals(CType(sender, Button).Tag) Then
-							Select Case intColor
-								Case 0
-									ctrl.BackColor = SystemColors.ControlLightLight
+            Dim ctrl As New Control
+            For Each ctrl In Me.Controls
+                If Not ctrl Is Nothing Then
+                    If Not ctrl.Tag Is Nothing And ctrl.Text.Length = 0 Then
+                        If ctrl.Tag.Equals(CType(sender, Button).Tag) Then
+                            Dim defset As New SettingsClass
+                            Select Case intColor
+                                Case 0
+                                    ctrl.BackColor = defset.FocusedColor
 
-								Case 1
-									ctrl.BackColor = SystemColors.ControlLightLight
-								Case 2
-									ctrl.BackColor = SystemColors.ControlDarkDark
-								Case 3
-									ctrl.BackColor = SystemColors.ControlDark
-								Case 4
-									ctrl.BackColor = SystemColors.Control
-								Case 5
-									ctrl.BackColor = SystemColors.ControlText
-								Case 6
-									ctrl.BackColor = SystemColors.Control
-								Case 7
-									ctrl.BackColor = SystemColors.ActiveCaption
-							End Select
-							m_Colors(intColor) = ctrl.BackColor
-							'Debug.WriteLine(ctrl.BackColor.ToArgb.ToString)
-							'Debug.WriteLine(ctrl.BackColor.ToKnownColor.ToString)
-							'Dim c As New Color()
+                                Case 1
+                                    ctrl.BackColor = defset.LightEdgeColor
+                                Case 2
+                                    ctrl.BackColor = defset.DarkEdgeColor
+                                Case 3
+                                    ctrl.BackColor = defset.NormalOutlineColor
+                                Case 4
+                                    ctrl.BackColor = defset.BackColor
+                                Case 5
+                                    ctrl.BackColor = defset.TextColor
+                                Case 6
+                                    ctrl.BackColor = defset.ButtonColor
+                                Case 7
+                                    ctrl.BackColor = defset.TitleColor
+                            End Select
+                            m_Colors(intColor) = ctrl.BackColor
+                            'Debug.WriteLine(ctrl.BackColor.ToArgb.ToString)
+                            'Debug.WriteLine(ctrl.BackColor.ToKnownColor.ToString)
+                            'Dim c As New Color()
 
-						End If
-					End If
-				End If
-			Next
-			UpdateChar()
-		Catch
-		End Try
-	End Sub
+                        End If
+                    End If
+                End If
+            Next
+            UpdateChar()
+        Catch
+        End Try
+    End Sub
 
-	Public Sub UpdateChar()
-		cbChar.FocusedColor = m_Colors(0)
-		cbChar.LightEdgeColor = m_Colors(1)
-		cbChar.DarkEdgeColor = m_Colors(2)
-		cbChar.NormalOutlineColor = m_Colors(3)
-		cbChar.BackColor = m_Colors(4)
-		cbChar.ForeColor = m_Colors(5)
-		cbChar.ButtonColor = m_Colors(6)
+    Public Sub UpdateChar()
 
-	End Sub
+        cbChar.FocusedColor = m_Colors(0)
+        cbChar.LightEdgeColor = m_Colors(1)
+        cbChar.DarkEdgeColor = m_Colors(2)
+        cbChar.NormalOutlineColor = m_Colors(3)
+        cbChar.RimColor = m_Colors(4)
+        cbChar.ForeColor = m_Colors(5)
+        cbChar.BackColor = m_Colors(6)
+
+    End Sub
 
 	Private Sub QuickKeyStyleForm_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
 		Dim intColor As Integer
@@ -6902,15 +6699,21 @@ Public Class QuickKeyStyleForm
 		For intColor = 0 To cdlColor.CustomColors.GetUpperBound(0)
 			ReDim Preserve intColors(intColor)
 			intColors(intColor) = Color.FromArgb(cdlColor.CustomColors(intColor))
-		Next
-		Settings.FocusedColor = m_Colors(0)
-		Settings.LightEdgeColor = m_Colors(1)
-		Settings.DarkEdgeColor = m_Colors(2)
-		Settings.NormalOutlineColor = m_Colors(3)
-		Settings.BackColor = m_Colors(4)
-		Settings.TextColor = m_Colors(5)
-		Settings.ButtonColor = m_Colors(6)
-		Settings.TitleColor = m_Colors(7)
+        Next
+        If btnApply.Enabled = True Then
+            frmQuickKey.cdCharacters.SuspendCharRedraw = True
+            Settings.FocusedColor = m_Colors(0)
+            Settings.LightEdgeColor = m_Colors(1)
+            Settings.DarkEdgeColor = m_Colors(2)
+            Settings.NormalOutlineColor = m_Colors(3)
+            Settings.BackColor = m_Colors(4)
+            Settings.TextColor = m_Colors(5)
+            Settings.ButtonColor = m_Colors(6)
+            Settings.TitleColor = m_Colors(7)
+            frmQuickKey.cdCharacters.SuspendCharRedraw = False
+			frmQuickKey.cdCharacters.Invalidate(True)
+        End If
+
 		Me.Close()
 	End Sub
 
@@ -6924,28 +6727,280 @@ Public Class QuickKeyStyleForm
 		Me.Close()
 	End Sub
 
-	Private Sub btnApply_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnApply.Click
-		Settings.FocusedColor = m_Colors(0)
-		Settings.LightEdgeColor = m_Colors(1)
-		Settings.DarkEdgeColor = m_Colors(2)
-		Settings.NormalOutlineColor = m_Colors(3)
-		Settings.BackColor = m_Colors(4)
-		Settings.TextColor = m_Colors(5)
-		Settings.ButtonColor = m_Colors(6)
-		Settings.TitleColor = m_Colors(7)
-	End Sub
+    Private Sub btnApply_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnApply.Click
+        frmQuickKey.cdCharacters.SuspendCharRedraw = True
+        Settings.FocusedColor = m_Colors(0)
+        Settings.LightEdgeColor = m_Colors(1)
+        Settings.DarkEdgeColor = m_Colors(2)
+        Settings.NormalOutlineColor = m_Colors(3)
+        Settings.BackColor = m_Colors(4)
+        Settings.TextColor = m_Colors(5)
+        Settings.ButtonColor = m_Colors(6)
+        Settings.TitleColor = m_Colors(7)
+        frmQuickKey.cdCharacters.SuspendCharRedraw = False
+		frmQuickKey.cdCharacters.Invalidate(True)
+        btnApply.Enabled = False
+    End Sub
 
-	Private Sub btnResetAll_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnResetAll.Click
-		Dim intColorLoop As Integer
-		For intColorLoop = 0 To m_Colors.GetUpperBound(0)
-			Dim b As New Button
-			b.Tag = intColorLoop
-			ResetButtonClicked(b, Nothing)
-		Next
+    Private Sub btnResetAll_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnResetAll.Click
+        btnApply.Enabled = True
+        Dim intColorLoop As Integer
+        For intColorLoop = 0 To m_Colors.GetUpperBound(0)
+            Dim b As New Button
+            b.Tag = intColorLoop
+            ResetButtonClicked(b, Nothing)
+        Next
 
-	End Sub
+    End Sub
+
+
 End Class
 
 
 
+#End Region
+
+#Region "Custom window class"
+
+''' <summary>
+''' Defines a small, topmost, resizable window that doesn't have the limitations
+''' associated with the normal FormBorderStyle Sizable (123x25 minimum size)
+''' </summary>
+''' <remarks></remarks>
+Public Class SmallWindow
+	Inherits Form
+	Public Sub New()
+		Dim border As Integer = 3
+		Me.Padding = New Padding(border)
+		Me.TopMost = True
+		Me.MinimumSize = New Size(border * 2, border * 2)
+		Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+		Me.ShowInTaskbar = False
+		Me.ControlBox = False
+		Me.StartPosition = FormStartPosition.Manual
+		Me.Visible = False
+		Me.BackColor = SystemColors.InactiveCaption
+	End Sub
+
+
+	Public Shadows Event ResizeBegin(ByVal sender As Object, ByVal e As EventArgs)
+	Public Shadows Event Resize(ByVal sender As Object, ByVal e As EventArgs)
+	Public Shadows Event ResizeEnd(ByVal sender As Object, ByVal e As EventArgs)
+
+	Protected _allowResize As Boolean
+	Public Property AllowResize() As Boolean
+		Get
+			Return _allowResize
+		End Get
+		Set(ByVal value As Boolean)
+			_allowResize = value
+			If (value = False) Then
+				SmallWindow_MouseCaptureChanged(Me, Nothing)
+			End If
+		End Set
+	End Property
+
+	Enum EdgePart
+		None
+		N
+		NE
+		E
+		SE
+		S
+		SW
+		W
+		NW
+	End Enum
+	Protected Function GetSizeCursor(ByVal edge As EdgePart) As Cursor
+		Select Case edge
+			Case EdgePart.W
+				Return Cursors.SizeWE
+			Case EdgePart.E
+				Return Cursors.SizeWE
+			Case EdgePart.N
+				Return Cursors.SizeNS
+			Case EdgePart.S
+				Return Cursors.SizeNS
+
+			Case EdgePart.NE
+				Return Cursors.SizeNESW
+			Case EdgePart.SW
+				Return Cursors.SizeNESW
+
+			Case EdgePart.NW
+				Return Cursors.SizeNWSE
+			Case EdgePart.SE
+				Return Cursors.SizeNWSE
+			Case EdgePart.None
+				Return Cursors.Arrow
+		End Select
+		Return Cursors.Arrow
+	End Function
+	Protected ReadOnly Property CornerSize() As Integer
+		Get
+			Dim smallestside As Integer
+			smallestside = Me.Width
+			If Me.Height < smallestside Then
+				smallestside = Me.Height
+			End If
+
+			If smallestside < 100 Then
+				Return smallestside \ 3
+			Else
+				Return smallestside \ 10
+			End If
+		End Get
+	End Property
+	Protected Function GetEdgePart(ByVal pt As Point) As EdgePart
+		Dim cs As Integer = CornerSize
+		Dim epx As EdgePart = EdgePart.None
+		Dim epy As EdgePart = EdgePart.None
+		If pt.X <= cs Then
+			epx = EdgePart.W
+		End If
+		If pt.Y <= cs Then
+			epy = EdgePart.N
+		End If
+		If Me.Width - pt.X <= cs Then
+			epx = EdgePart.E
+		End If
+		If Me.Height - pt.Y <= cs Then
+			epy = EdgePart.S
+		End If
+		If epx = EdgePart.E Then
+			If epy = EdgePart.S Then
+				Return EdgePart.SE
+			End If
+			If epy = EdgePart.N Then
+				Return EdgePart.NE
+			End If
+			Return EdgePart.E
+		End If
+		If epx = EdgePart.W Then
+			If epy = EdgePart.S Then
+				Return EdgePart.SW
+			End If
+			If epy = EdgePart.N Then
+				Return EdgePart.NW
+			End If
+			Return EdgePart.W
+		End If
+		If epy = EdgePart.S Then
+			Return EdgePart.S
+		End If
+		If epy = EdgePart.N Then
+			Return EdgePart.N
+		End If
+		Return EdgePart.None
+	End Function
+	Protected Function GetDistanceToEdge() As Integer
+
+	End Function
+
+	Protected CurrentSizingPart As EdgePart = EdgePart.None
+
+	Private Sub SmallWindow_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+		Me.BackColor = SystemColors.ActiveCaption
+	End Sub
+
+	Private Sub SmallWindow_Deactivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Deactivate
+		Me.BackColor = SystemColors.InactiveCaption
+	End Sub
+
+	Private Sub SmallWindow_MouseCaptureChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseCaptureChanged
+		If Not CurrentSizingPart = EdgePart.None Then
+			RaiseEvent ResizeEnd(Me, Nothing)
+			'Debug.WriteLine("stop " + CurrentSizingPart.ToString())
+			Me.Cursor = Cursors.Arrow
+			CurrentSizingPart = EdgePart.None
+		End If
+	End Sub
+
+	Protected mouseOffset As Point
+	Protected formBounds As Rectangle
+	Private Sub SmallWindow_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseDown
+		If CurrentSizingPart = EdgePart.None And allowResize And e.Button = Windows.Forms.MouseButtons.Left Then
+			CurrentSizingPart = GetEdgePart(New Point(e.X, e.Y))
+			mouseOffset = New Point(e.X + Me.Left, e.Y + Me.Top)
+			formBounds = Me.Bounds
+
+			RaiseEvent ResizeBegin(Me, Nothing)
+			'Debug.WriteLine("start " + CurrentSizingPart.ToString())
+		End If
+
+	End Sub
+	''' <summary>
+	''' When the mouse cursor leaves the form, or moves onto a child control, this code returns the cursor to normal
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
+	''' <remarks></remarks>
+	Private Sub SmallWindow_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseLeave
+		Me.Cursor = Cursors.Arrow
+	End Sub
+	''' <summary>
+	''' Displays the correct mouse cursor based upon positioning
+	''' Resizes the window based on CurrentSizingPart value
+	''' Uses mouseOffset (the location in screen coordinates that the mouse was clicked)
+	''' And formBounds, the original form dimensions
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
+	''' <remarks></remarks>
+	Private Sub SmallWindow_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
+		If e.Button = Windows.Forms.MouseButtons.None Then
+			If AllowResize Then
+				Me.Cursor = GetSizeCursor(GetEdgePart(New Point(e.X, e.Y)))
+			End If
+		ElseIf Not CurrentSizingPart = EdgePart.None Then
+			Dim mousePos As Point = Control.MousePosition
+			mousePos.Offset(-mouseOffset.X, -mouseOffset.Y)
+			Dim newBounds As Rectangle = formBounds
+			Select Case CurrentSizingPart
+				Case EdgePart.N, EdgePart.NE, EdgePart.NW
+					If (newBounds.Height - mousePos.Y) > MinimumSize.Height Then
+						newBounds.Offset(0, mousePos.Y)
+					Else
+						newBounds.Offset(0, newBounds.Height - MinimumSize.Height)
+					End If
+
+					newBounds.Height -= mousePos.Y
+				Case EdgePart.S, EdgePart.SE, EdgePart.SW
+					newBounds.Height += mousePos.Y
+			End Select
+			Select Case CurrentSizingPart
+				Case EdgePart.E, EdgePart.NE, EdgePart.SE
+					newBounds.Width += mousePos.X
+				Case EdgePart.W, EdgePart.NW, EdgePart.SW
+					If (newBounds.Width - mousePos.X) > MinimumSize.Width Then
+						newBounds.Offset(mousePos.X, 0)
+					Else
+						newBounds.Offset(newBounds.Width - MinimumSize.Width, 0)
+					End If
+
+					newBounds.Width -= mousePos.X
+			End Select
+			Me.Bounds = newBounds
+			If (Not Rectangle.Equals(Me.Bounds, newBounds)) Then
+				RaiseEvent Resize(Me, Nothing)
+			End If
+
+		End If
+
+	End Sub
+
+	''' <summary>
+	''' Call this when the user left-clicks an area designated as the titlebar.
+	''' Tells Windows that the user has started a move window action.
+	''' The form will now follow the mouse cursor until the mouse button is
+	''' released or the action interrupted.
+	''' AllowResize must be enabled
+	''' </summary>
+	''' <remarks></remarks>
+	Protected Sub StartMoving()
+		If AllowResize Then
+			QuickKey.APIS.SendMessage(Me.Handle.ToInt32, &HA1S, 2, 0)
+		End If
+	End Sub
+End Class
 #End Region

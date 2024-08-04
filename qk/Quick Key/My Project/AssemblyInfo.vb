@@ -22,6 +22,8 @@
 'Please report bugs to nathanaeljones@users.sourceforge.net
 
 
+Imports System.Resources
+
 Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
@@ -32,11 +34,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Quick Key 5.1")> 
-<Assembly: AssemblyDescription("Advanced character keyboard")> 
-<Assembly: AssemblyCompany("Jones Software")> 
+<Assembly: AssemblyTitle("Quick Key")> 
+<Assembly: AssemblyDescription("Foreign character keyboard")> 
+<Assembly: AssemblyCompany("Nathanael Jones")> 
 <Assembly: AssemblyProduct("Quick Key")> 
-<Assembly: AssemblyCopyright("Copyright (c) 2005 Nathanael Jones")> 
+<Assembly: AssemblyCopyright("Copyright (c) 2002 - 2005 Nathanael Jones")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)> 
@@ -54,5 +56,8 @@ Imports System.Runtime.InteropServices
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("5.1.*")> 
-<Assembly: AssemblyFileVersion("5.1")> 
+<Assembly: AssemblyVersion("5.2.*")> 
+'<Assembly: AssemblyFileVersion("5.2.")> 
+'<Assembly: AssemblyInformationalVersion("5.2.2.0")> 
+
+<Assembly: NeutralResourcesLanguageAttribute("en")> 

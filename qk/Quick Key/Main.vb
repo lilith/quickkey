@@ -41,80 +41,58 @@ Imports XMLPath = QuickKey.Constants.Xml.PathSeparators
 
 Imports System.Windows.Forms
 
-#End Region
-
-#Region "Assembly Information"
-
+Imports System.Collections.Generic
+Imports System.Collections.ObjectModel
 Imports System.Reflection
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
 Imports System.Security.Permissions
 #End Region
 
+
+
+
+
 #End Region
 
 #Region "Windows API'S"
-
 Namespace APIS
+	Friend Module Declarations
+		Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hwnd As Integer, ByVal wMsg As Integer, ByVal wParam As Integer, ByRef lParam As Integer) As Integer
+		Declare Function DefWindowProc Lib "user32" Alias "DefWindowProcA" (ByVal hwnd As Integer, ByVal wMsg As Integer, ByVal wParam As Integer, ByRef lParam As Integer) As Integer
 
-    Friend Module Declarations
+		Declare Function GetForegroundWindow Lib "user32" Alias "GetForegroundWindow" () As Integer
+		Public Const WM_SYSCOMMAND As Integer = &H112
+		Public Const SC_SIZE As Integer = &HF000
+		Public Const SC_MOVE As Integer = &HF010
 
-        'Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Integer
 
-        'Declare Function SetFocusAPI Lib "user32" Alias "SetForegroundWindow" (ByVal hwnd As Integer) As Integer
-
-        'Declare Function GetClassName Lib "user32" Alias "GetClassNameA" (ByVal hwnd As Integer, ByVal lpClassName As String, ByVal nMaxCount As Integer) As Integer
-
-        Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hwnd As Integer, ByVal wMsg As Integer, ByVal wParam As Integer, ByRef lParam As Integer) As Integer
-
-        Declare Function GetForegroundWindow Lib "user32" Alias "GetForegroundWindow" () As Integer
-
-#Region "Old APIS"
-
-        'Declare Sub Sleep Lib "kernel32" Alias "Sleep" (ByVal dwMilliseconds As Long)
-
-        'Declare Function SleepEx Lib "kernel32" Alias "SleepEx" (ByVal dwMilliseconds As Long, ByVal bAlertable As Long) As Long
-
-        'Declare Function IsWindow Lib "user32" (ByVal hwnd As Integer) As Integer
-
-        'Declare Function PlaySound Lib "winmm.dll" Alias "PlaySoundA" (ByVal lpszName As String, ByVal hModule As Integer, ByVal dwFlags As Integer) As Integer
-
-        'Declare Function GetDesktopWindow Lib "user32" () As Integer
-
-        'Declare Sub ReleaseCapture Lib "user32" ()
-
-#End Region
-
-    End Module
-
+	End Module
 End Namespace
-
 #End Region
 
 #Region "Program Main Subroutine and Program Icon Property"
-
 Public Module Main
-
 #Region "Close Program Boolean"
 
-    'This Boolean, when set to true terminates the Program
-    Private m_blnClose As Boolean = False
+	'This Boolean, when set to true terminates the Program
+	Private m_blnClose As Boolean = False
 
-    Property blnClose() As Boolean
-        Get
-            Return m_blnClose
-        End Get
-        Set(ByVal Value As Boolean)
-            If m_blnClose = False Then
-                m_blnClose = Value
-                If Value And Not m_blnClosed Then
-                    FinishProgram()
-                    Application.Exit()
-                End If
-            End If
+	Property blnClose() As Boolean
+		Get
+			Return m_blnClose
+		End Get
+		Set(ByVal Value As Boolean)
+			If m_blnClose = False Then
+				m_blnClose = Value
+				If Value And Not m_blnClosed Then
+					FinishProgram()
+					Application.Exit()
+				End If
+			End If
 
-        End Set
-    End Property
+		End Set
+	End Property
 
 	'This Boolean, when set to true terminates the Program
 	Private m_blnClosed As Boolean = False
@@ -127,23 +105,22 @@ Public Module Main
 
 
 #End Region
-
 #Region "Program Icon Property"
 
-    Private m_icoProgramIcon As Icon
+	Private m_icoProgramIcon As Icon
 
-    Public ReadOnly Property ProgramIcon() As System.Drawing.Icon
-        Get
-            If m_icoProgramIcon Is Nothing Then
-                If Not My.Resources.Quick_Key Is Nothing Then
-                    m_icoProgramIcon = My.Resources.Quick_Key
-                Else
-                    If Not blnClose Then
-                        Log.HandleError("The Quick Key Icon is missing. As the absence of this resource may cause additional errors, the program will now shut down. Please reistall the application.", , MessageBoxButtons.OK)
-                        blnClose = True
-                    End If
+	Public ReadOnly Property ProgramIcon() As System.Drawing.Icon
+		Get
+			If m_icoProgramIcon Is Nothing Then
+				If Not My.Resources.QuickKeyIcon Is Nothing Then
+					m_icoProgramIcon = My.Resources.QuickKeyIcon
+				Else
+					If Not blnClose Then
+						Log.HandleError("The Quick Key Icon is missing. As the absence of this resource may cause additional errors, the program will now shut down. Please reistall the application.", , MessageBoxButtons.OK)
+						blnClose = True
+					End If
 
-                End If
+				End If
 
 			End If
 			Return m_icoProgramIcon
@@ -151,7 +128,6 @@ Public Module Main
 	End Property
 
 #End Region
-
 #Region "Base Path Property"
 
 	Public ReadOnly Property BasePath() As String
@@ -161,25 +137,21 @@ Public Module Main
 	End Property
 
 #End Region
-
 #Region "Initialized Boolean"
 
 	Public blnInitialized As Boolean = False
 
 #End Region
-
 #Region "Settings Object Declaration"
 
 	Public WithEvents Settings As SettingsClass
 
 #End Region
-
 #Region "Logging Object Declaration"
 
 	Public Log As Logging.Logger
 
 #End Region
-
 #Region "Forms Object Declarations"
 
 #Region "QuickKey Form Declaration"
@@ -213,53 +185,76 @@ Public Module Main
 #End Region
 
 #End Region
-
+#Region "Unicode Provider Declaration"
+	Public UnicodeDatabase As UIElements.UnicodeProvider
+#End Region
 	Dim blnAllowQuickKeyChange As Boolean = False
-
-
 #Region "Program Sub Main"
 
-    Dim nfyIcon As NotifyIcon
+	Dim nfyIcon As NotifyIcon
 	<STAThread()> Friend Sub Main(ByVal strCmdArgs() As String)
 
+		'Parse /Debug command-line argument
+		If strCmdArgs.GetUpperBound(0) >= 0 Then
+			Dim intArg As Integer
+			For intArg = 0 To strCmdArgs.GetUpperBound(0)
+				If strCmdArgs(intArg).ToUpper.StartsWith("/LANGUAGE:") Then
+					If strCmdArgs(intArg).Length > 10 Then
+						Dim lng As String = strCmdArgs(intArg).Substring(10, strCmdArgs(intArg).Length - 10)
+						'On Error GoTo SkipCulture
+						Dim ci As New System.Globalization.CultureInfo(lng)
+						System.Threading.Thread.CurrentThread.CurrentUICulture = ci
+					End If
+				End If
+			Next
+		End If
+SkipCulture:
 		'Start Error Handling
-        On Error GoTo Main_Err
-
-        Application.EnableVisualStyles()
-        Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
+		On Error GoTo Main_Err
+		Application.EnableVisualStyles()
+		Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
 
 		'Use this variable to comute total time to load program
 		Dim t As Date = Now
 
 		Const blnLoadingForm As Boolean = False
 
-        Log = New Logging.Logger
-        Log.FileLogDirectory = Application.UserAppDataPath
+		Log = New Logging.Logger
+		Log.FileLogDirectory = Application.LocalUserAppDataPath
+		Log.FileLogFileName = "QuickKey.LOG"
 		Log.ApplicationEXE = RAssembly.GetExecutingAssembly.Location
 		Log.ApplicationName = Application.ProductName
 		Log.ApplicationVer = Application.ProductVersion
 		Log.EventLogSource = Application.ProductName
 		Log.LogToFile = True
 		Log.LogToEventLog = False
-
+		Log.LogMajorInfos = False
+		Log.LogErrors = True
+		Log.LogWarnings = True
+		Log.LogLifetime = False
+		Log.LogMinorInfos = False
 
 		'Add default application thread exception handler
-        AddHandler Application.ThreadException, AddressOf AppException
+		AddHandler Application.ThreadException, AddressOf AppException
 
 		'Default debug boolean to false
-		Dim blnDebug As Boolean = True
+		Dim blnDebug As Boolean = False
+
+#If DEBUG Then
+		blnDebug = True
+#End If
 
 		'Parse /Debug command-line argument
 		If strCmdArgs.GetUpperBound(0) >= 0 Then
 			Dim intArg As Integer
 			For intArg = 0 To strCmdArgs.GetUpperBound(0)
 				If strCmdArgs(intArg).ToUpper = "/DEBUG" Then
+					blnDebug = True
 					Log.LogMinorInfos = True
 					Log.LogMajorInfos = True
 					Log.LogErrors = True
 					Log.LogWarnings = True
 					Log.LogLifetime = True
-					blnDebug = True
 				End If
 			Next
 		End If
@@ -271,7 +266,7 @@ Public Module Main
 		Log.LogMajorInfo("+Loading Program...")
 
 		'Add system shutdown handler
-        'AddHandler Microsoft.Win32.SystemEvents.SessionEnding, AddressOf SystemShuttingDown
+		'AddHandler Microsoft.Win32.SystemEvents.SessionEnding, AddressOf SystemShuttingDown
 
 		'Use this variable to compute time taken for each loading section.
 		Dim dtComp As Date = Now
@@ -281,283 +276,333 @@ Public Module Main
 		' Load Taskbar Menu
 		'''''''''''''''''''''''''''''''''
 		'Create Taskbar Icon Object
-        Dim nfyTaskbarIcon As New NotifyIcon
+		Dim nfyTaskbarIcon As New NotifyIcon
 
-		nfyTaskbarIcon.Text = "Quick Key is loading..."
+		nfyTaskbarIcon.Text = My.Resources.AppLoadingTooltip
 
 		'Set its visible property to false until we're done settings it up
 		nfyTaskbarIcon.Visible = False
 
 		'Set the Taskbar Icon Image to the programs Global ProgramIcon Property
 
-        nfyTaskbarIcon.Icon = My.Resources.Quick_Key_Disabled
+		nfyTaskbarIcon.Icon = My.Resources.QuickKeyDisabled
 
-        'Create Context Menu For the Icon (When You Right- CLick)
-        Dim ctmIcon As New ContextMenu
+		AddHandler nfyTaskbarIcon.MouseClick, AddressOf IconClick
 
-        'Create the Menu Items and Add them To the context Menu
-        ctmIcon.MenuItems.Add("Auto-hide", AddressOf DockedSelect)
-        ctmIcon.MenuItems.Add("Toolbar", AddressOf ToolbarSelect)
-        ctmIcon.MenuItems.Add("Character Grid", AddressOf QuickKeySelect)
-        ctmIcon.MenuItems.Add("-")
-        ctmIcon.MenuItems.Add("Options", AddressOf OptionsSelect)
-        ctmIcon.MenuItems.Add("-")
-        ctmIcon.MenuItems.Add("Event Log", AddressOf EventLogSelect)
-        ctmIcon.MenuItems.Add("-")
-        'If not debug version, don't show the Event Log item
-        If Not blnDebug Then
-            ctmIcon.MenuItems.Item(6).Visible = False
-            ctmIcon.MenuItems.Item(7).Visible = False
-        End If
-        Dim mnuHelp As New MenuItem("Help")
-        mnuHelp.MenuItems.Add("Help Topics", AddressOf HelpSelect)
-        mnuHelp.MenuItems.Add("-")
-        mnuHelp.MenuItems.Add("Show Tips", AddressOf ShowTipsSelect)
-        mnuHelp.MenuItems.Add("Reset Tips", AddressOf ResetTipsSelect)
-        ctmIcon.MenuItems.Add(mnuHelp)
-        ctmIcon.MenuItems.Add("-")
-        ctmIcon.MenuItems.Add("About", AddressOf AboutSelect)
-        ctmIcon.MenuItems.Add("-")
-        ctmIcon.MenuItems.Add("E&xit", AddressOf ExitSelect)
+		'Create Context Menu For the Icon (When You Right- CLick)
+		Dim ctmIcon As New ContextMenu
 
-        'Add a handler for the event of pulling up the menu
-        AddHandler ctmIcon.Popup, AddressOf PopupSelect
+		'Create the Menu Items and Add them To the context Menu
+		ctmIcon.MenuItems.Add(My.Resources.MenuAutohide, AddressOf DockedSelect)
+		ctmIcon.MenuItems.Add(My.Resources.MenuToolbar, AddressOf ToolbarSelect)
+		ctmIcon.MenuItems.Add(My.Resources.MenuCharacterGrid, AddressOf QuickKeySelect)
+		ctmIcon.MenuItems.Add("-")
+		ctmIcon.MenuItems.Add(My.Resources.MenuOptions, AddressOf OptionsSelect)
+		ctmIcon.MenuItems.Add("-")
+		ctmIcon.MenuItems.Add(My.Resources.MenuEventLog, AddressOf EventLogSelect)
+		ctmIcon.MenuItems.Add("-")
+		'If not debug version, don't show the Event Log item
+		'If Not blnDebug Then
+		'	ctmIcon.MenuItems.Item(6).Visible = False
+		'	ctmIcon.MenuItems.Item(7).Visible = False
+		'End If
+		Dim mnuHelp As New MenuItem(My.Resources.MenuHelp)
+		mnuHelp.MenuItems.Add(My.Resources.MenuHelpTopics, AddressOf HelpSelect)
+		mnuHelp.MenuItems.Add("-")
+		mnuHelp.MenuItems.Add(My.Resources.MenuHideTips, AddressOf ShowTipsSelect)
+		mnuHelp.MenuItems.Add(My.Resources.MenuResetTips, AddressOf ResetTipsSelect)
+		ctmIcon.MenuItems.Add(mnuHelp)
+		ctmIcon.MenuItems.Add("-")
+		ctmIcon.MenuItems.Add(My.Resources.MenuAbout, AddressOf AboutSelect)
+		ctmIcon.MenuItems.Add("-")
+		ctmIcon.MenuItems.Add(My.Resources.MenuExit, AddressOf ExitSelect)
 
-        Log.LogMinorInfo("-Completed Creating Icon.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
-        dtComp = Now
-        Log.LogMinorInfo("+Displaying Taskbar Icon....")
-        'Finally, Show the Icon
-        nfyTaskbarIcon.Visible = True
-        Log.LogMinorInfo("-Completed showing taksbar icon.")
-
-        Dim frmLoaded As Form = Nothing
-        Dim lblAnnounce As Label = Nothing
-        If blnLoadingForm Then
-            Log.LogMinorInfo("+Creating Loading Form ...")
-            frmLoaded = New Form
-            frmLoaded.Name = "frmLoaded"
-            frmLoaded.FormBorderStyle = FormBorderStyle.None
-            frmLoaded.Text = ""
-            frmLoaded.BackColor = SystemColors.Control
-            frmLoaded.TopMost = True
-            frmLoaded.ShowInTaskbar = False
-            '  AddHandler frmLoaded.Closing, AddressOf SystemShutdown2
-            lblAnnounce = New Label
-            lblAnnounce.Text = "Quick Key 5.1 is Loading..."
-            lblAnnounce.Dock = DockStyle.Fill
-            lblAnnounce.Name = "lblAnnounce"
-            lblAnnounce.BorderStyle = BorderStyle.Fixed3D
-            lblAnnounce.Font = New Font(FontFamily.GenericMonospace, 14, FontStyle.Bold)
-            frmLoaded.Controls.Add(lblAnnounce)
-            lblAnnounce.ForeColor = SystemColors.ControlText
-            lblAnnounce.BackColor = SystemColors.Control
-
-            frmLoaded.Top = Screen.PrimaryScreen.WorkingArea.Bottom - 64
-            frmLoaded.Height = 64
-            frmLoaded.Width = 256
-            frmLoaded.Left = Screen.PrimaryScreen.WorkingArea.Right - 256
-            frmLoaded.Show()
-            frmLoaded.Top = Screen.PrimaryScreen.WorkingArea.Bottom - 64
-            frmLoaded.Height = 64
-            frmLoaded.Width = 256
-            frmLoaded.Left = Screen.PrimaryScreen.WorkingArea.Right - 256
-            frmLoaded.Refresh()
-            Log.LogMinorInfo("-Completed displaying form")
-        End If
-
-        'Update time variable to compute next code section efficiency
-        dtComp = Now
-        Log.LogMajorInfo("+Initializing Settings Class...")
-        Settings = New SettingsClass
-        Log.LogMajorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+		'Add a handler for the event of pulling up the menu
+		AddHandler ctmIcon.Popup, AddressOf PopupSelect
 
 
+		Log.LogMinorInfo("-Completed Creating Icon.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+		dtComp = Now
+		Log.LogMinorInfo("+Displaying Taskbar Icon....")
+		'Finally, Show the Icon
+		nfyTaskbarIcon.Visible = True
+		Log.LogMinorInfo("-Completed showing taksbar icon.")
 
-        'Update time variable to compute next code section efficiency
-        dtComp = Now
-        Log.LogMajorInfo("+Initializing SettingsDialog Class...")
-        frmSettings = New OptionsDialog
-        Log.LogMajorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+		Dim frmLoaded As Form = Nothing
+		Dim lblAnnounce As Label = Nothing
+		If blnLoadingForm Then
+			Log.LogMinorInfo("+Creating Loading Form ...")
+			frmLoaded = New Form
+			frmLoaded.Name = "frmLoaded"
+			frmLoaded.FormBorderStyle = FormBorderStyle.None
+			frmLoaded.Text = ""
+			frmLoaded.BackColor = SystemColors.Control
+			frmLoaded.TopMost = True
+			frmLoaded.ShowInTaskbar = False
+			'  AddHandler frmLoaded.Closing, AddressOf SystemShutdown2
+			lblAnnounce = New Label
+			lblAnnounce.Text = My.Resources.AppLoadingTooltip
+			lblAnnounce.Dock = DockStyle.Fill
+			lblAnnounce.Name = "lblAnnounce"
+			lblAnnounce.BorderStyle = BorderStyle.Fixed3D
+			lblAnnounce.Font = New Font(FontFamily.GenericMonospace, 14, FontStyle.Bold)
+			frmLoaded.Controls.Add(lblAnnounce)
+			lblAnnounce.ForeColor = SystemColors.ControlText
+			lblAnnounce.BackColor = SystemColors.Control
 
+			frmLoaded.Top = Screen.PrimaryScreen.WorkingArea.Bottom - 64
+			frmLoaded.Height = 64
+			frmLoaded.Width = 256
+			frmLoaded.Left = Screen.PrimaryScreen.WorkingArea.Right - 256
+			frmLoaded.Show()
+			frmLoaded.Top = Screen.PrimaryScreen.WorkingArea.Bottom - 64
+			frmLoaded.Height = 64
+			frmLoaded.Width = 256
+			frmLoaded.Left = Screen.PrimaryScreen.WorkingArea.Right - 256
+			frmLoaded.Refresh()
+			Log.LogMinorInfo("-Completed displaying form")
+		End If
 
-        'Update time variable to compute next code section efficiency
-        dtComp = Now
-        Log.LogMajorInfo("+Initializing DockIconForm Class...")
-        frmDockIcon = New DockIconForm
-        Log.LogMajorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+		'Update time variable to compute next code section efficiency
+		dtComp = Now
+		Log.LogMajorInfo("+Initializing Settings Class...")
+		Settings = New SettingsClass
+		Log.LogMajorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
 
 
 
-        'Update time variable to compute next code section efficiency
-        dtComp = Now
-        Log.LogMajorInfo("+Initializing QuickKeyForm Class...")
-        frmQuickKey = New QuickKeyForm
-        Log.LogMajorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+		'Update time variable to compute next code section efficiency
+		dtComp = Now
+		Log.LogMajorInfo("+Initializing SettingsDialog Class...")
+		frmSettings = New OptionsDialog
+		Log.LogMajorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+
+
+		'Update time variable to compute next code section efficiency
+		dtComp = Now
+		Log.LogMajorInfo("+Initializing DockIconForm Class...")
+		frmDockIcon = New DockIconForm
+		Log.LogMajorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
 
 
 
-        'Update time variable to compute next code section efficiency
-        dtComp = Now
-        Log.LogMajorInfo("+Initializing ToolbarForm Class...")
-        frmToolbar = New ToolbarForm
-        Log.LogMajorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
-
-
-        'Update time variable to compute next code section efficiency
-        dtComp = Now
-        Log.LogMinorInfo("+Initializing AboutDialog Class...")
-        frmAbout = New AboutDialog
-        Log.LogMinorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+		'Update time variable to compute next code section efficiency
+		dtComp = Now
+		Log.LogMajorInfo("+Initializing QuickKeyForm Class...")
+		frmQuickKey = New QuickKeyForm
+		Log.LogMajorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
 
 
 
-        'We have everything instantaniated, so enable initialization boolean
-        blnInitialized = True
-
-        'Update time variable to compute next code section efficiency
-        dtComp = Now
-        Log.LogMajorInfo("+Loading Settings XML File into settings class variable through serialization...")
-        'Update all Settings
-        Settings = SettingsClass.LoadSettings(Constants.Xml.SettingsFileName.SettingsFileName)
-        Log.LogMajorInfo("-Completed Loading Settings File.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+		'Update time variable to compute next code section efficiency
+		dtComp = Now
+		Log.LogMajorInfo("+Initializing ToolbarForm Class...")
+		frmToolbar = New ToolbarForm
+		Log.LogMajorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
 
 
-        Settings.QuickKey = False
-        'Create Variable to hold whether file ewas actally changed last time so that the perform settigns changes will not corrupt the real value
-        Dim blnFileChanged As Boolean = Settings.FileChanged
+		'Update time variable to compute next code section efficiency
+		dtComp = Now
+		Log.LogMinorInfo("+Initializing AboutDialog Class...")
+		frmAbout = New AboutDialog
+		Log.LogMinorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
 
-        'Update time variable to compute next code section efficiency
-        dtComp = Now
-        Log.LogMajorInfo("+Performing settings changes and sending all events...")
-        Settings.PerformSettingsChanges()
-        Log.LogMajorInfo("-Completed Performing setting changes.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+		'Update time variable to compute next code section efficiency
+		dtComp = Now
+		Log.LogMinorInfo("+Initializing UnicodeDatabase Class...")
+		UnicodeDatabase = New UnicodeProvider()
+		Log.LogMinorInfo("-Completed initializing class.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
 
 
 
-        If blnLoadingForm Then
-            lblAnnounce.Text = "Quick Key 5.1 is Now Loaded"
-            lblAnnounce.Refresh()
-        End If
+		'We have everything instantaniated, so enable initialization boolean
+		blnInitialized = True
 
-        'Restor original FileChanged Value
-        Settings.FileChanged = blnFileChanged
+		'Update time variable to compute next code section efficiency
+		dtComp = Now
+		Log.LogMajorInfo("+Loading Settings XML File into settings class variable through serialization...")
+		Dim filename As String = Application.UserAppDataPath & _
+		IO.Path.DirectorySeparatorChar & Constants.Xml.SettingsFileName.SettingsFileName
 
-        'Update time variable to compute next code section efficiency
-        dtComp = Now
-        Log.LogMinorInfo("+Displaying loaded program icon in taskbar...")
+		If (Not IO.File.Exists(filename)) Then
+			Dim di As IO.DirectoryInfo = IO.Directory.GetParent(filename).Parent
+			'Search all sibling directories and the parent diretory for files
+			'named settings.xml (Constants.Xml.SettingsFileName.SettingsFileName)
+			'and choose the most recently edited one
+			Dim files() As IO.FileInfo
+			files = di.GetFiles(Constants.Xml.SettingsFileName.SettingsFileName, IO.SearchOption.AllDirectories)
+			If Not files Is Nothing Then
+				Dim thisfile As IO.FileInfo = Nothing
+				Dim NewestFile As IO.FileInfo = Nothing
+				For Each thisfile In files
+					If (NewestFile Is Nothing) Then
+						NewestFile = thisfile
+					Else
+						If thisfile.LastWriteTimeUtc > NewestFile.LastWriteTimeUtc Then
+							NewestFile = thisfile
+						End If
+					End If
+				Next
+				If (Not NewestFile Is Nothing) Then
+					'Save the filename of the most recent settings file
+					filename = NewestFile.FullName
+				End If
+			End If
+		End If
 
-        'Set the Taskbar Icon Image to the programs Global ProgramIcon Property
+		'at this point, filename may still specify an undefined name.
+		'in this situation, the LoadSettings method will load a default configuration
 
-        nfyTaskbarIcon.Icon = New Icon(ProgramIcon, New Size(16, 16))
-
-        nfyTaskbarIcon.Text = "Quick Key Character Keyboard 5.1"
-        'Tell the Taskbar Icon That its menu is the Context menu We just Made
-        nfyTaskbarIcon.ContextMenu = ctmIcon
-        Log.LogMinorInfo("-Completed Displaying Icon.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
-
-        '''''''''''''''''''''''''''''''''''''''''
-        'Tell Debugger Settings is loaded A-OK and record Load Time
-        Log.LogMajorInfo("-Program is now fully loaded!", "Loading Time: """ & Date.op_Subtraction(Now, t).ToString & """")
+		'Update all Settings
+		Settings = SettingsClass.LoadSettings(filename)
+		Log.LogMajorInfo("-Completed Loading Settings File.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
 
 
-        blnAllowQuickKeyChange = True
+		Settings.QuickKey = False
+		'Create Variable to hold whether file ewas actally changed last time so that the perform settigns changes will not corrupt the real value
+		Dim blnFileChanged As Boolean = Settings.FileChanged
+
+		'Update time variable to compute next code section efficiency
+		dtComp = Now
+		Log.LogMajorInfo("+Performing settings changes and sending all events...")
+		Settings.PerformSettingsChanges()
+		Log.LogMajorInfo("-Completed Performing setting changes.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+
+
+
+		If blnLoadingForm Then
+			lblAnnounce.Text = My.Resources.AppLoadedTooltip
+			lblAnnounce.Refresh()
+		End If
+
+		'Restor original FileChanged Value
+		Settings.FileChanged = blnFileChanged
+
+		'Update time variable to compute next code section efficiency
+		dtComp = Now
+		Log.LogMinorInfo("+Displaying loaded program icon in taskbar...")
+
+		'Set the Taskbar Icon Image to the programs Global ProgramIcon Property
+
+		nfyTaskbarIcon.Icon = New Icon(ProgramIcon, New Size(16, 16))
+
+		nfyTaskbarIcon.Text = My.Resources.AppRunningTooltip
+		'Tell the Taskbar Icon That its menu is the Context menu We just Made
+		nfyTaskbarIcon.ContextMenu = ctmIcon
+		Log.LogMinorInfo("-Completed Displaying Icon.", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+
+		'''''''''''''''''''''''''''''''''''''''''
+		'Tell Debugger Settings is loaded A-OK and record Load Time
+		Log.LogMajorInfo("-Program is now fully loaded!", "Loading Time: """ & Date.op_Subtraction(Now, t).ToString & """")
+
+
+		blnAllowQuickKeyChange = True
 
 #If Debug = True Then
-        'Write the load time to the Debug Window
-        Debug.WriteLine("Program has now fully finished loading. Total Time: """ & Date.op_Subtraction(Now, t).ToString & """")
+		'Write the load time to the Debug Window
+		Debug.WriteLine("Program has now fully finished loading. Total Time: """ & Date.op_Subtraction(Now, t).ToString & """")
 #End If
 
-        'ShowTip("   Quick Key is a utility designed to allow non-standard chartacters to" & _
-        ' " be quickly inserted into a document without the use of special codes." & ControlChars.NewLine & _
-        ' "   Quick Key is currently running in an icon in the system tray " & _
-        ' "(Normally located at the bottom-right hand corner of the screen)." & ControlChars.NewLine & _
-        ' "   The icon (Qk) may be right-clicked to show a pop-up menu from " & _
-        ' "which you may display the Charcter Grid, change options, or close the program. " & ControlChars.NewLine & _
-        '  ControlChars.NewLine & _
-        ' "   Tips such as this one may be ignored; you may continue with whatever you are doing, " & _
-        ' "and they will remain to offer advice on your last action. You may disable these tips by deselecting the ""Help"" > ""Show Tips"" item on the Icon Pop-up menu.", , AppWinStyle.NormalFocus, BasePath & "Tips\Loading.jpg", DockStyle.Bottom)
-        ShowTip("", , , BasePath & "Tips\StartupTip.png", DockStyle.Fill)
+		ShowTip(My.Resources.StartupTipText, My.Resources.StartupTipTitle, , , My.Resources.StartupTip, DockStyle.Fill)
+
+		Dim ageresult As Integer = _
+		System.IO.File.GetLastWriteTime(RAssembly.GetExecutingAssembly.Location).AddDays(90).CompareTo(DateTime.Now)
+
+		If ageresult < 0 Then
+			ShowTip(My.Resources.UpgradeTipText, My.Resources.UpgradeTipTitle, , , My.Resources.Upgrade, DockStyle.Fill)
+		End If
 
 
-        'Load command-line argument charset
-        If strCmdArgs.GetUpperBound(0) >= 0 Then
-            Log.LogMajorInfo("+Loading command-line argument charset file...")
-            Dim intArg As Integer
-            For intArg = 0 To strCmdArgs.GetUpperBound(0)
-                If IO.File.Exists(strCmdArgs(intArg)) Then
-                    If frmToolbar.CheckSaveFalseOnCancel Then
-                        Settings.LoadCharset(strCmdArgs(intArg))
-                        Settings.QuickKey = True
-                    End If
-                    Exit For
-                End If
-            Next
-            If intArg < 0 Then intArg = 0
-            If intArg > strCmdArgs.GetUpperBound(0) Then intArg = strCmdArgs.GetUpperBound(0)
-            Log.LogMajorInfo("-Completed loading charset file.", "Filename: " & strCmdArgs(intArg))
-        End If
 
-        If blnLoadingForm Then
-            frmLoaded.Controls.Remove(lblAnnounce)
-            frmLoaded.Width = 1
-            frmLoaded.Height = 1
-            frmLoaded.TopMost = False
-            frmLoaded.FormBorderStyle = FormBorderStyle.SizableToolWindow
-
-            frmLoaded.Left = Screen.PrimaryScreen.Bounds.Width
-            frmLoaded.Top = Screen.PrimaryScreen.Bounds.Height
-        End If
-
-        'For outside access
-        nfyIcon = nfyTaskbarIcon
-
-        Log.LogMajorInfo("+Running Application's Main Thread...")
+		'Load command-line argument charset
+		If strCmdArgs.GetUpperBound(0) >= 0 Then
+			Log.LogMajorInfo("+Loading command-line argument charset file...")
+			Dim intArg As Integer
+			For intArg = 0 To strCmdArgs.GetUpperBound(0)
 
 
-        'Start the windows messaging loop cycle- wait for events
-        On Error GoTo 0
-        If blnLoadingForm Then
-            Application.Run(frmLoaded)
-        Else
-            Application.Run()
-        End If
+				If IO.File.Exists(strCmdArgs(intArg)) Then
+					If frmToolbar.CheckSaveFalseOnCancel Then
+						Settings.LoadCharset(strCmdArgs(intArg))
+						Settings.QuickKey = True
+					End If
+					Exit For
+				ElseIf strCmdArgs(intArg).ToUpper = "/SHOW" Then
+					Settings.QuickKey = True
 
-        If blnClosed Then Exit Sub
+				End If
+			Next
+			If intArg < 0 Then intArg = 0
+			If intArg > strCmdArgs.GetUpperBound(0) Then intArg = strCmdArgs.GetUpperBound(0)
+			Log.LogMajorInfo("-Completed loading charset file.", "Filename: " & strCmdArgs(intArg))
+		End If
 
-        'MessageBox.Show("closing...")
-        On Error GoTo Main_Err
+		If blnLoadingForm Then
+			frmLoaded.Controls.Remove(lblAnnounce)
+			frmLoaded.Width = 1
+			frmLoaded.Height = 1
+			frmLoaded.TopMost = False
+			frmLoaded.FormBorderStyle = FormBorderStyle.SizableToolWindow
 
-        nfyTaskbarIcon.Visible = False
-        FinishProgram()
+			frmLoaded.Left = Screen.PrimaryScreen.Bounds.Width
+			frmLoaded.Top = Screen.PrimaryScreen.Bounds.Height
+		End If
+
+		'For outside access
+		nfyIcon = nfyTaskbarIcon
+
+		Log.LogMajorInfo("+Running Application's Main Thread...")
 
 
-        Exit Sub
+		'Start the windows messaging loop cycle- wait for events
+		On Error GoTo 0
+		If blnLoadingForm Then
+			Application.Run(frmLoaded)
+		Else
+			Application.Run()
+		End If
+
+		If blnClosed Then Exit Sub
+
+
+		On Error GoTo Main_Err
+
+		nfyTaskbarIcon.Visible = False
+		FinishProgram()
+
+
+		Exit Sub
 
 Main_Err:
-        If Not Log Is Nothing Then
-            Select Case Log.HandleError("Error in main subroutine of program." & ControlChars.NewLine & "Abort closes program, Retry attempts failed operation again, and Ignore allows program to continue unhindered (recommended).", Err, , MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error, MessageBoxDefaultButton.Button3)
-                Case DialogResult.Abort
-                    Exit Sub
-                Case DialogResult.Retry
-                    Resume
-                Case DialogResult.Ignore
-                    Resume Next
-            End Select
-        End If
-    End Sub
+		If Not Log Is Nothing Then
+			Select Case Log.HandleError("Error in main subroutine of program." & ControlChars.NewLine & "Abort closes program, Retry attempts failed operation again, and Ignore allows program to continue unhindered (recommended).", Err, , MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error, MessageBoxDefaultButton.Button3)
+				Case DialogResult.Abort
+					Exit Sub
+				Case DialogResult.Retry
+					Resume
+				Case DialogResult.Ignore
+					Resume Next
+			End Select
+		End If
+	End Sub
 
+	Dim blnInFinishSection As Boolean = False
 	Public Sub FinishProgram()
-        If blnClosed Then Exit Sub
-        If (Not nfyIcon Is Nothing) Then
-            nfyIcon.Visible = False
-        End If
+		If blnClosed Or blnInFinishSection Then Exit Sub
+		blnInFinishSection = True
+
+		If (Not nfyIcon Is Nothing) Then
+			nfyIcon.Visible = False
+		End If
 
 		'When the program gets to here, we have terminated the application cycle
-        Log.LogMajorInfo("-Application's main thread has now terminated")
+		Log.LogMajorInfo("-Application's main thread has now terminated")
 
 		Log.LogMajorInfo("+Saving Program Settings...")
 		'called when the user selects the 'Exit' context menu
-        Settings.Save(Constants.Xml.SettingsFileName.SettingsFileName)
+		Settings.Save(Application.UserAppDataPath & _
+		 IO.Path.DirectorySeparatorChar & _
+		 Constants.Xml.SettingsFileName.SettingsFileName)
 		Log.LogMajorInfo("-Completed Saving Settings Changes.")
 
 		'Log Settings Ending
@@ -571,17 +616,16 @@ Main_Err:
 	End Sub
 
 #End Region
-
 #Region "Default App Error Handler"
 
 	Friend Sub AppException(ByVal sender As Object, ByVal e As System.Threading.ThreadExceptionEventArgs)
 		If Not e Is Nothing Then
 
-            Dim strData As String = ""
+			Dim strData As String = ""
 
 			If Not sender Is Nothing Then
-                Dim ctrlSender As Control = Nothing
-                Dim frmSender As Form = Nothing
+				Dim ctrlSender As Control = Nothing
+				Dim frmSender As Form = Nothing
 
 				Try
 					ctrlSender = CType(sender, Control)
@@ -591,41 +635,30 @@ Main_Err:
 					frmSender = CType(sender, Form)
 				Catch
 				End Try
-                If Not frmSender Is Nothing Then
-                    strData = "Error generated by " & sender.ToString & ". Form Name = """ & frmSender.Name & """ form.visible = " & frmSender.Visible.ToString
+				If Not frmSender Is Nothing Then
+					strData = "Error generated by " & sender.ToString & ". Form Name = """ & frmSender.Name & """ form.visible = " & frmSender.Visible.ToString
 
-                ElseIf Not ctrlSender Is Nothing Then
-                    strData = "Error generated by " & sender.ToString & ". Control Name = """ & ctrlSender.Name & """"
-                Else
-                    If Not sender Is Nothing Then
-                        strData = "Unknown Object: " & sender.ToString
-                    Else
-                        strData = "Sender is Nothing"
-                    End If
-                End If
+				ElseIf Not ctrlSender Is Nothing Then
+					strData = "Error generated by " & sender.ToString & ". Control Name = """ & ctrlSender.Name & """"
+				Else
+					If Not sender Is Nothing Then
+						strData = "Unknown Object: " & sender.ToString
+					Else
+						strData = "Sender is Nothing"
+					End If
+				End If
 			End If
-            Select Case Log.HandleError("I messed up! Congratulations, you just found a bug." & ControlChars.NewLine & _
-"Whatever just happened was unexpected and caused an error in Quick Key." & ControlChars.NewLine & _
-"Please open up your email editor and send a message to me at" & ControlChars.NewLine & _
-"nathanaeljones@users.sourceforge.net" & ControlChars.NewLine & _
-"Just tell me what you clicked on when this happened, and paste in the error message displayed below." & ControlChars.NewLine & _
-"(This error will be displayed in Quick Key’s error log window)" & ControlChars.NewLine & _
-"It is very important that you report this bug, because otherwise it may never be fixed." & ControlChars.NewLine & _
-"It is recommended that you save your work and restart Quick Key as soon as possible." & ControlChars.NewLine & _
-"If you do not open the Error Log window until you restart, you will need to click 'Last Two Instances' to display the error information." & ControlChars.NewLine & _
-"Thank you for your support." & ControlChars.NewLine & ControlChars.NewLine & _
-"Please click Yes to continue using Quick Key, or No if these messages keep appearing." _
-             , e.Exception, strData, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+			Select Case Log.HandleError(My.Resources.GenericErrorMessage _
+			 , e.Exception, strData, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 
-                Case DialogResult.Yes
-                Case DialogResult.No
-                    Application.Exit()
-            End Select
-        End If
+				Case DialogResult.Yes
+				Case DialogResult.No
+					Application.Exit()
+			End Select
+		End If
 	End Sub
 
 #End Region
-
 #Region "Popup Menu Handlers"
 
 	Private Sub PopupSelect(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -637,41 +670,17 @@ Main_Err:
 			CType(sender, ContextMenu).MenuItems.Item(2).Checked = Settings.QuickKey
 			CType(sender, ContextMenu).MenuItems.Item(0).Enabled = CType(sender, ContextMenu).MenuItems.Item(2).Checked
 			CType(sender, ContextMenu).MenuItems.Item(1).Enabled = CType(sender, ContextMenu).MenuItems.Item(2).Checked
-			CType(sender, ContextMenu).MenuItems.Item(8).MenuItems.Item(2).Checked = Settings.ShowTips
+			CType(sender, ContextMenu).MenuItems.Item(8).MenuItems.Item(2).Checked = Not Settings.ShowTips
 
 
 		Catch ex As Exception
 			Log.HandleError("An error occured while displaying the pop-up menu. Try restarting the appplication and try again.", ex)
 		End Try
 
-
-        ShowTip(">  Auto-hide makes the character grid go away when it is not in use." & _
-   ControlChars.NewLine & _
-   ControlChars.NewLine & ">  From the toolbar you can change the font, save your character set, and everything else." & _
-   ControlChars.NewLine & _
-   ControlChars.NewLine & ">  The character grid allows you to transfer characters to other applications." & _
-   ControlChars.NewLine & _
-   ControlChars.NewLine & ">  You can change mouse button confinguration and character sending options using Options." & _
-   ControlChars.NewLine & _
-   ControlChars.NewLine & ">  To make these annoying tips go AWAY, deselect Help > Show Tips" & _
-   ControlChars.NewLine & ">  Use the Help > Reset Tips item to make all of the tips you have dissmissed come back." & _
-   ControlChars.NewLine & ">  Exit is the only way to unload Quick Key from memory.", "Icon Pop-up Menu Tip.", _
-   , _
-   AppWinStyle.NormalNoFocus, "Tips\Iconmenu.jpg", DockStyle.Right)
-
-
 	End Sub
 
 	Private Sub ToolbarSelect(ByVal sender As Object, ByVal e As System.EventArgs)
 		Settings.Toolbar = Not Settings.Toolbar
-
-		If Settings.Toolbar Then
-            'ShowTip("   You have chosen to display the Toolbar. From here you can change font settings, manipulate Character Grid characters, and perform file operations. You can load hundreds of character sets by clicking File>Open. As each font supports only certain characters, you can find special charsets for many fonts in the Fonts directory.", _
-            ' "Toolbar Tip", frmToolbar.Location, frmToolbar.Size, , AppWinStyle.NormalNoFocus, "Tips\Toolbar.jpg", DockStyle.Top)
-		Else
-            'ShowTip("   You have chosen to hide the toolbar. It may be redisplayed from the System Tray Icon Menu or from Character Grid's ritlebar popup menu.", _
-            '"Toolbar Tip", , AppWinStyle.NormalNoFocus)
-		End If
 	End Sub
 
 	Private Sub EventLogSelect(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -683,29 +692,26 @@ Main_Err:
 	Private Sub DockedSelect(ByVal sender As Object, ByVal e As System.EventArgs)
 		Settings.Docked = Not Settings.Docked
 		If Settings.Docked Then
-            ShowTip("You just turned on Auto-hide." & ControlChars.NewLine & _
-            "The character grid will go away when it is not in use." & ControlChars.NewLine & _
-            "Just move your mouse over the square box that will replace it to get them back." & ControlChars.NewLine & _
-            "Double-click it to go back to normal mode.", _
-   "Auto-hide Tip", , AppWinStyle.NormalNoFocus, "Tips\Autohide.jpg", DockStyle.Top)
+			ShowTip(My.Resources.DockedText, My.Resources.DockedTitle, , AppWinStyle.NormalNoFocus, My.Resources.Autohide, DockStyle.Top)
+
 		Else
-            'ShowTip("   You have disabled the Auto-Hide Window. The Character Grid and the Toolbar will stay visible even when not in use.", _
-            '"Auto-hide Tip", , AppWinStyle.NormalNoFocus, "Tips\Nohide.jpg", DockStyle.Top)
+
+		End If
+	End Sub
+	Private Sub IconClick(ByVal sender As Object, ByVal e As MouseEventArgs)
+		If (e.Button = MouseButtons.Left) Then
+			If (Not Settings.QuickKey) Then
+				Settings.QuickKey = True
+			End If
+
 		End If
 	End Sub
 
 	Private Sub QuickKeySelect(ByVal sender As Object, ByVal e As System.EventArgs)
 		Settings.QuickKey = Not Settings.QuickKey
-		'frmQuickKey.Bounds = Settings.QuickKeyBounds
-		'frmToolbar.Bounds = Settings.ToolbarBounds
-		'frmDockIcon.Bounds = Settings.DockIconBounds
+
 		If Settings.QuickKey Then
-            ShowTip("   You chose to display the Character Grid. From here you may:" & ControlChars.NewLine & ControlChars.NewLine & _
-              "1)     Drag characters from here to other applications. (Click and hold the drag-and-drop mouse button over a character, then move the mouse over to the application you want to transfer the character to, and release the button. (Note: The drag-and-drop mouse button is normally your left mouse button, but you may change it in the settings dialog box." & ControlChars.NewLine & _
-              "2)     Rearrange characters by dragging them around inside the Character grid." & ControlChars.NewLine & _
-              "3)     Send characters to the selected application by clicking them with the send mouse button. Note: The send mouse button is normally the middle mouse button. You can change the selected application from ""OpusApp"" (Microsoft Word) to another program using the Toolbar." & ControlChars.NewLine & _
-              "4)     Copy characters to the clipbard so that they may be used in any compatible application. (To access this and other common commands, right click the character to display the pop-up menu. From here you may choose what action to perform on the character." & ControlChars.NewLine & _
-              "5)     Use the right-click menus on the grid and the title bar for quick command access.", "Character Keyboard Tip", frmQuickKey.Location, frmQuickKey.Size, , AppWinStyle.NormalNoFocus)
+			ShowTip(My.Resources.QuickKeyText, My.Resources.QuickKeyTitle, , , , )
 
 		End If
 	End Sub
@@ -714,20 +720,15 @@ Main_Err:
 		If Not frmSettings Is Nothing Then
 
 			frmSettings.Show()
-			ShowTip("This is the Options Dialog Box.  From here you can:" & ControlChars.NewLine & _
-			  "1)  Add, remove, and organize program keywords (Internal nicknames). These are used for sending characters." & ControlChars.NewLine & _
-			  "2)  Change mouse button settings. On this tab you can select what actions you want performed for each mouse button.", _
-			  "Options Dialog Box Tip", frmSettings.Location, frmSettings.Size, , AppWinStyle.NormalNoFocus _
-			  , "Tips\Options.jpg", DockStyle.Top)
+			ShowTip(My.Resources.OptionsDialog, My.Resources.OptionsDialogTitle, , , , DockStyle.Top)
 
 		End If
 
 	End Sub
 
-	Private Sub HelpSelect(ByVal sender As Object, ByVal e As System.EventArgs)
 
-		System.Windows.Forms.Help.ShowHelp(frmQuickKey, _
-		  BasePath & Constants.Resources.HelpFileName)
+	Private Sub HelpSelect(ByVal sender As Object, ByVal e As System.EventArgs)
+		ShowHelpFile()
 	End Sub
 
 	Private Sub ShowTipsSelect(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -755,36 +756,24 @@ Main_Err:
 	End Sub
 
 	Private Sub ExitSelect(ByVal sender As Object, ByVal e As System.EventArgs)
-        'ShowTip("You have chosen to close Quick Key. After you dismiss this message, the Quick Key icon will disappear along with the Character Grid and the other windows.")
 		blnClose = True
 	End Sub
 
 #End Region
+#Region "Help"
+	Public Sub ShowHelpFile()
 
-#Region "System Event Handlers"
-
-	Public Sub SystemShutdown(ByVal sender As Object, ByVal e As Win32.SessionEndedEventArgs)
-		'MessageBox.Show(e.Reason.ToString, "System Shutdown", MessageBoxButtons.OK)
+		'Shell("http://quickkeydotnet.sourceforge.net", AppWinStyle.NormalFocus)
+		System.Windows.Forms.Help.ShowHelp(frmQuickKey, _
+		 BasePath & Constants.Resources.HelpFileName)
 	End Sub
-    Public Sub SystemShuttingDown(ByVal sender As Object, ByVal e As Win32.SessionEndingEventArgs)
-        'e.Cancel = False
-        ''MessageBox.Show("System Shutting Down")
-        'blnClose = True
-        'Do Until blnClosed
-        '    Application.DoEvents()
-        'Loop
-    End Sub
-
-
 #End Region
-
 #Region "Settings Subroutine Time Variable"
 
 	'Use this variable to compute time taken for each loading section.
 	Public dtCompSettings As Date = Now
 
 #End Region
-
 #Region "Settings Event Handlers"
 
 	Public Sub Settings_CharsetChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.CharsetChanged
@@ -795,13 +784,12 @@ Main_Err:
 		'Call the methods on each form that corresponds the this event handler
 		frmQuickKey.CharactersChanged()
 		frmQuickKey.FontPropertiesChanged()
-		frmQuickKey.FilterSettingsChanged()
-		frmToolbar.CharactersChanged()
+
+
 		frmToolbar.FontPropertiesChanged()
 		frmToolbar.FilterSettingsChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_CharsetCharactersChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.CharsetCharactersChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -809,21 +797,18 @@ Main_Err:
 		Log.LogMinorInfo("+Settings.Charset.Characters Changed Subroutine Starting...")
 		'Call the methods on each form that corresponds the this event handler
 		frmQuickKey.CharactersChanged()
-		frmToolbar.CharactersChanged()
+
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_CharsetFiltersChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.CharsetFiltersChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.Charset.Filters Changed Subroutine Starting...")
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.FilterSettingsChanged()
 		frmToolbar.FilterSettingsChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_CharsetFontChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.CharsetFontChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -834,7 +819,6 @@ Main_Err:
 		frmToolbar.FontPropertiesChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_CharsLockedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.CharsLockedChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -845,8 +829,6 @@ Main_Err:
 		frmToolbar.CharsLockedChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
-
 	Public Sub Settings_CharsOrientationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.CharsOrientationChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -854,10 +836,9 @@ Main_Err:
 		Log.LogMinorInfo("+Settings.CharsOrientation Changed Subroutine Starting...", Settings.CharsOrientation.ToString)
 		'Call the methods on each form that corresponds the this event handler
 		frmQuickKey.CharsOrientationChanged()
-		frmToolbar.CharsOrientationChanged()
+
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_DockedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.DockedChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -866,54 +847,49 @@ Main_Err:
 		'Call the methods on each form that corresponds the this event handler
 		frmQuickKey.DockedChanged()
 		frmToolbar.DockedChanged()
-		frmDockIcon.DockedChanged()
+		frmDockIcon.DockedChanged(sender, e)
 
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_DockIconBoundsChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.DockIconBoundsChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.DockIconBounds Changed Subroutine Starting...")
 		'Call the methods on each form that corresponds the this event handler
-		frmDockIcon.DockIconBoundsChanged()
+		frmDockIcon.DockIconBoundsChanged(sender, e)
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_FileChangedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.FileChangedChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.FileChanged Changed Subroutine Starting...", Settings.FileChanged.ToString)
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.FileChangedChanged()
+
 		frmToolbar.FileChangedChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_FileNameChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.FileNameChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.FileName Changed Subroutine Starting...", Settings.FileName)
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.FileNameChanged()
+
 		frmToolbar.FileNameChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_FileReadOnlyChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.FileReadOnlyChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.FileReadOnly Changed Subroutine Starting...", Settings.FileReadOnly.ToString)
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.FileReadOnlyChanged()
+
 		frmToolbar.FileReadOnlyChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_FileSavePropertiesChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.FileSavePropertiesChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -925,44 +901,39 @@ Main_Err:
 		  "Save FontSize = " & Settings.SaveFontSize.ToString & _
 		  "Save FontAttrs = " & Settings.SaveFontAttrs.ToString)
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.FileSavePropertiesChanged()
+
 		frmToolbar.FileSavePropertiesChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_ImportFileDialogDirChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.ImportFileDialogDirChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.ImportFileDialogDir Changed Subroutine Starting...", Settings.ImportDialogDir)
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.ImportDialogDirChanged()
-		frmToolbar.ImportDialogDirChanged()
+
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_KeywordChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.KeywordChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.Keyword Changed Subroutine Starting...", Settings.Keyword)
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.KeywordChanged()
+
 		frmToolbar.KeywordChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_KeywordsChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.KeywordsChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.Keywords Changed Subroutine Starting...", Settings.Keywords.ToString)
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.KeywordsChanged()
+
 		frmToolbar.KeywordsChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_LockedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.LockedChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -974,7 +945,6 @@ Main_Err:
 		frmDockIcon.LockedChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_MouseSettingsChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.MouseSettingsChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -987,21 +957,18 @@ Main_Err:
 		  "XButton2 = " & Settings.MouseSettings.XButton2.ToString)
 		'Call the methods on each form that corresponds the this event handler
 		frmQuickKey.MouseSettingsChanged()
-		frmToolbar.MouseSettingsChanged()
+
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_FileDialogDirChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.FileDialogDirChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.OpenFileDialogDir Changed Subroutine Starting...", Settings.FileDialogDir)
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.OpenFileDialogDirChanged()
-		frmToolbar.OpenFileDialogDirChanged()
+
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_OrientationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.OrientationChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1009,10 +976,9 @@ Main_Err:
 		Log.LogMinorInfo("+Settings.Orientation Changed Subroutine Starting...", Settings.Orientation.ToString)
 		'Call the methods on each form that corresponds the this event handler
 		frmQuickKey.OrientationChanged()
-		frmToolbar.OrientationChanged()
+
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_QuickKeyBoundsChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.QuickKeyBoundsChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1022,7 +988,6 @@ Main_Err:
 		frmQuickKey.QuickKeyBoundsChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_QuickKeyChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.QuickKeyChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Or Not blnAllowQuickKeyChange Then Exit Sub
@@ -1031,14 +996,10 @@ Main_Err:
 		'Call the methods on each form that corresponds the this event handler
 		frmQuickKey.QuickKeyChanged()
 		frmToolbar.QuickKeyChanged()
-		frmDockIcon.QuickKeyChanged()
-		If Not Settings.QuickKey Then
-            'ShowTip("You have chosen to hide the Character Grid. It may be redisplayed from the system tray icon menu.")
+		frmDockIcon.QuickKeyChanged(sender, e)
 
-		End If
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_RecentFilesChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.RecentFilesChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1049,18 +1010,6 @@ Main_Err:
 		frmToolbar.RecentFilesChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
-	'Public Sub Settings_SaveFileDialogDirChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.FileDialogDirChanged
-	'    'If forms are not initialized, then we can't call forms methods
-	'    If Not blnInitialized Then Exit Sub
-	'    dtCompSettings = Now
-	'    Log.LogMinorInfo("+Settings.SaveFileDialogDir Changed Subroutine Starting...", Settings.FileDialogDir)
-	'    'Call the methods on each form that corresponds the this event handler
-	'    frmQuickKey.SaveFileDialogDirChanged()
-	'    frmToolbar.SaveFileDialogDirChanged()
-	'    Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
-	'End Sub
-
 	Public Sub Settings_FocusedColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.FocusedColorChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1071,7 +1020,6 @@ Main_Err:
 		'frmToolbar.FocusedColorChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_ButtonColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.ButtonColorChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1082,7 +1030,6 @@ Main_Err:
 		'frmToolbar.ButtonColorChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_TextColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.TextColorChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1093,7 +1040,6 @@ Main_Err:
 		'frmToolbar.TextColorChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_BackColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.BackColorChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1114,7 +1060,6 @@ Main_Err:
 		'frmToolbar.LightEdgeColorChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_DarkEdgeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.DarkEdgeColorChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1125,7 +1070,6 @@ Main_Err:
 		'frmToolbar.DarkEdgeColorChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_NormalOutlineColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.NormalOutlineColorChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1136,7 +1080,6 @@ Main_Err:
 		'frmToolbar.NormalOutlineColorChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_TitleColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.TitleColorChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1147,19 +1090,15 @@ Main_Err:
 		'frmToolbar.TitleColorChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
-
 	Public Sub Settings_SaveReportFileDialogDirChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.SaveReportFileDialogDirChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.SaveReportDialogDir Changed Subroutine Starting...", Settings.SaveReportDialogDir)
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.SaveReportDialogDirChanged()
-		frmToolbar.SaveReportDialogDirChanged()
+
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_ToolbarBoundsChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.ToolbarBoundsChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1169,7 +1108,6 @@ Main_Err:
 		frmToolbar.ToolbarBoundsChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_ToolbarChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.ToolbarChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1178,13 +1116,9 @@ Main_Err:
 		'Call the methods on each form that corresponds the this event handler
 		frmToolbar.ToolbarChanged()
 		frmQuickKey.ToolbarChanged()
-		'If Not Settings.Toolbar Then
-		'    ShowTip("You have chosen to hide the Toolbar. It may be redisplayed from the system tray icon menu or from the Character Grid's title bar menu.")
 
-		'End If
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_ToolbarSettingsChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.ToolbarSettingsChanged
 		'If forms are not initialized, then we can't call forms methods
 		If Not blnInitialized Then Exit Sub
@@ -1197,17 +1131,15 @@ Main_Err:
 		  "FontAttrs Bar = " & Settings.ViewFontAttrsBar.ToString & _
 		  "Status Bar = " & Settings.ViewStatusBar.ToString)
 		'Call the methods on each form that corresponds the this event handler
-		frmQuickKey.ToolbarSettingsChanged()
+
 		frmToolbar.ToolbarSettingsChanged()
 		Log.LogMinorInfo("-Sub Finished", "Time: (" & Date.op_Subtraction(Now, dtCompSettings).ToString & ")")
 	End Sub
-
 	Public Sub Settings_ShowTipsChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Settings.ShowTipsChanged
 		If Not blnInitialized Then Exit Sub
 		dtCompSettings = Now
 		Log.LogMinorInfo("+Settings.ShowTips Changed Subroutine Starting...", Settings.ShowTips.ToString)
 		'Call the methods on each form that corresponds the this event handler
-
 		If Settings.ShowTips = False Then
 			HideTip()
 		End If
@@ -1216,218 +1148,50 @@ Main_Err:
 	End Sub
 
 #End Region
-
 End Module
-
 #End Region
 
 #Region "Program Constants"
-
 Namespace Constants
-
-#Region "Dialog Strings Namespace"
-
-	Namespace DialogStrings
-
-		Friend Module SaveFileQuery
-
-			Friend Const SaveFileQueryText As String = "The charset has been modified." & _
-								ControlChars.NewLine & "Do you want to save the changes?"
-
-			Friend ReadOnly SaveFileQueryCaption As String = Application.ProductName & " - Charset Changed"
-
-			Friend Const ImportFileDialogFilter As String = "All Files (*.*)|*.*|Text Files (*.txt;*.doc;*.rtf;*.htm)|*.txt;*.doc;*.rtf;*.htm)"
-
-			Friend Const ImportFileDialogCaption As String = "Import from file"
-
-			Friend Const ImportCharsetDialogFilter As String = "Charset Files (*.charset)|*.charset"
-
-			Friend Const ImportCharsetDialogCaption As String = "Import from charset"
-
-			Friend Const EditCharsAsTextDialogCaption As String = "Edit Characters As Text"
-
-			Friend Const ImportClipboardDialogCaption As String = "Import from clipboard"
-
-			Friend Const ImportCharsetAttrsDialogFilter As String = "Charset Files (*.charset)|*.charset"
-
-			Friend Const ImportCharsetAttrsDialogCaption As String = "Import Attributes from charset"
-
-			Friend Const ExportFiltersDialogFilter As String = "Charset Files (*.charset)|*.charset"
-
-			Friend Const ExportFiltersDialogCaption As String = "Export Charset Filters"
-
-
-			Friend Const ImportFiltersDialogFilter As String = "Charset Files (*.charset)|*.charset"
-
-			Friend Const ImportFiltersDialogCaption As String = "Import Filters from charset"
-
-			Friend Const OpenCharsetDialogFilter As String = "Charset Files (*.charset)|*.charset"
-
-			Friend Const OpenCharsetDialogCaption As String = "Open Charset"
-
-			Friend Const OpenCharsetFileDoesNotExist As String = "File Does Not Exist!"
-
-			Friend Const OpenCharsetFileCorrupt As String = "File is corrupt!"
-
-			Friend Const OpenCharsetFileEmpty As String = "File is empty!"
-
-			Friend Const OpenCharsetErrorCaption As String = "Error Loading File"
-
-			Friend Const SaveCharsetDialogFilter As String = "Charset Files (*.charset)|*.charset"
-
-			Friend Const SaveCharsetDialogTitle As String = "Save Charset As"
-
-			Friend Const SaveCharsetOverwriteText As String = "A file already exists by this name." & ControlChars.NewLine & "Are you sure that you wish to overwrite this file?"
-			Friend Const SaveCharsetOverwriteCaption As String = "Overwrite File?"
-
-			Friend Const SaveCharsetReadOnlyErrorText As String = "The file you have chose to overwrite is read-only!" & ControlChars.NewLine & _
-																"You must choose either a different file name, or select ""Save As Readonly"" before attempting to overwrite a read-only file."
-
-			Friend Const SaveCharsetErrorCaption As String = "Error Saving File"
-
-			Friend Const ExportFiltersReadOnlyErrorText As String = "The filters charset that you have chosen to overwrite is readonly." & ControlChars.NewLine & _
-																	"Are you positve that you wish to change this file?"
-
-			Friend Const ExportFiltersReadOnlyErrorCaption As String = "Overwrite read-only file?"
-
-		End Module
-
-	End Namespace
-
-#End Region
-
-#Region "Rescources Namespace"
-
+#Region "Resources Namespace"
 	Namespace Resources
-
 #Region "Charset Constants"
-
-
 		Module Charset
-
-			Public Const CharsetDir As String = "Charsets"
-
+			Friend ReadOnly CharsetDir As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments _
+			   + IO.Path.DirectorySeparatorChar + "Charsets"
 		End Module
-
 #End Region
-
-#Region "Icon Rescources"
-
-		Friend Module IconResourceNames
-
-			Friend ReadOnly FiltersDir As String = "Filters"
-			'The directory inside the program exe directiory that holds these icons
-			Friend ReadOnly IconsDir As String = "Icons"
-            Friend ReadOnly QuickKeyDisabledIconFileName As String = "Quick Key Disabled.ico"
-
-            Friend ReadOnly QuickKeyMovieFileName As String = "Quick Key Movie.gif"
-
-            Friend ReadOnly QuickKeyIconFileName As String = "Quick Key.ico"
-
-            Friend ReadOnly CloseIconFileName As String = "CloseIcon.ico"
-
-            Friend ReadOnly LockedIconFileName As String = "Locked.ico"
-
-            Friend ReadOnly UnlockedIconFileName As String = "Unlocked.ico"
-
-            Friend ReadOnly DockedIconFileName As String = "Undocked.ico"
-
-            Friend ReadOnly UndockedIconFileName As String = "Docked.ico"
-
-            Friend ReadOnly WasteIconFileName As String = "Waste.ico"
-
-            Friend ReadOnly BoldIconFileName As String = "Bold.ico"
-
-            Friend ReadOnly ItalicIconFileName As String = "Italic.ico"
-
-            Friend ReadOnly UnderlineIconFileName As String = "Underline.ico"
-
-            Friend ReadOnly StrikeoutIconFileName As String = "Strikeout.ico"
-
-            Friend ReadOnly NewIconFileName As String = "New.ico"
-
-            Friend ReadOnly OpenIconFileName As String = "Open.ico"
-
-            Friend ReadOnly SaveIconFileName As String = "Save.ico"
-
-            Friend ReadOnly CutIconFileName As String = "Cut.ico"
-
-            Friend ReadOnly CopyIconFileName As String = "Copy.ico"
-
-            Friend ReadOnly PasteIconFileName As String = "Paste.ico"
-
-            Friend ReadOnly DeleteIconFileName As String = "Delete.ico"
-
-            Friend ReadOnly FindIconFileName As String = "Find.ico"
-
-            Friend ReadOnly HelpIconFileName As String = "Help.ico"
-
-		End Module
-
-#End Region
-
 #Region "Help File Resources"
-
 		Friend Module HelpFileResources
-
 			Friend Const HelpFileName As String = "QuickKeyHelp.chm"
-
 		End Module
-
 #End Region
-
 	End Namespace
-
 #End Region
-
 #Region "XML COnstants"
-
 	Namespace Xml
-
 #Region "Settings File Name constant"
-
 		Friend Module SettingsFileName
-
-            Friend ReadOnly SettingsFileName As String = Application.UserAppDataPath _
-                                    + IO.Path.DirectorySeparatorChar + "settings.xml"
-
+			Friend ReadOnly SettingsFileName As String = "settings.xml"
 		End Module
-
 #End Region
-
-
 #Region "XML Path Constants"
-
 		Namespace PathSeparators
-
 			Friend Module PathSeparators
-
 				Friend Const NodeSeparator As String = "\"
 				Friend Const AttributePrefix As String = "@"
 				Friend Const GetAllNodesPrefix As String = "*"
-
 			End Module
-
 		End Namespace
-
 #End Region
-
-
 #Region "Charset Constants"
-
 		Namespace Charset
-
 			Friend Module CharsetStrings
-
-
 				Friend Const CharsetDefaultFileName As String = "UntitledCharset"
 				Friend Const CharsetExtension As String = "charset"
-
-
 			End Module
 
 			Friend Module CharacterNodeNames
-
 				Friend Const DocumentElementNodeName As String = "Charset"
 				Friend Const CharactersAttribute As String = "Characters"
 				Friend Const FiltersNode As String = "Filters"
@@ -1441,32 +1205,19 @@ Namespace Constants
 				Friend Const FontItalicString As String = "Italic"
 				Friend Const FontUnderlineString As String = "Underline"
 				Friend Const FontStrikeoutString As String = "Strikeout"
-
 			End Module
-
-
 		End Namespace
-
 #End Region
-
 	End Namespace
-
 #End Region
-
 #Region "Font Sizes Settings"
-
 	Friend Module FontConstants
-
 		Friend Const sngFontSizeMin As Long = 6
 		Friend Const sngFontSizeMax As Long = 72
 		Friend Const sngFontSizeStep As Long = 1
-
 	End Module
-
 #End Region
-
 End Namespace
-
 #End Region
 
 #Region "About Dialog and System Information Code"
@@ -1535,7 +1286,7 @@ Public Class AboutDialog
 		Me.Name = "frmAbout"
 		Me.ShowInTaskbar = False
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-		Me.Text = "About " & Application.ProductName
+        Me.Text = My.Resources.AboutPrefix & " " & Application.ProductName
 		Me.TopMost = True
 
 
@@ -1548,8 +1299,8 @@ Public Class AboutDialog
 		Me.cmdOK.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
 
 		Me.cmdOK.TabIndex = 0
-		Me.cmdOK.Text = "OK"
-		Me.ttTips.SetToolTip(Me.cmdOK, "Closes the About Dialog Box")
+        Me.cmdOK.Text = My.Resources.OKButton
+        'Me.ttTips.SetToolTip(Me.cmdOK, "Closes the dialog")
 
 
 
@@ -1560,8 +1311,8 @@ Public Class AboutDialog
 		Me.cmdSysInfo.Name = "cmdSysInfo"
 		Me.cmdSysInfo.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
 		Me.cmdSysInfo.TabIndex = 1
-		Me.cmdSysInfo.Text = "&System Info..."
-		Me.ttTips.SetToolTip(Me.cmdSysInfo, "Displays the System Information Dialog Box")
+        Me.cmdSysInfo.Text = My.Resources.SystemInfo
+        'Me.ttTips.SetToolTip(Me.cmdSysInfo, "Displays the System Information Dialog Box")
 
 		Me.picIcon.BackColor = System.Drawing.Color.Transparent
 		Me.picIcon.Location = New System.Drawing.Point(8, 8)
@@ -1573,7 +1324,7 @@ Public Class AboutDialog
         Me.picIcon.Image = My.Resources.Quick_Key_Movie
 		Me.picIcon.TabIndex = 11
 		Me.picIcon.TabStop = False
-		Me.ttTips.SetToolTip(Me.picIcon, "The Quick Key Icon")
+
 
 
 		lstInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -1586,18 +1337,24 @@ Public Class AboutDialog
 		lstInfo.TabIndex = 2
 		lstInfo.HorizontalScrollbar = True
 
+		Dim versionstring As String = ""
+		versionstring += Ver.GetVersionInfo(RAssembly.GetExecutingAssembly.Location).FileMajorPart.ToString() & "."
+		versionstring += Ver.GetVersionInfo(RAssembly.GetExecutingAssembly.Location).FileMinorPart.ToString() & "."
+		versionstring += Ver.GetVersionInfo(RAssembly.GetExecutingAssembly.Location).FileBuildPart.ToString() & "."
+		versionstring += Ver.GetVersionInfo(RAssembly.GetExecutingAssembly.Location).FilePrivatePart.ToString()
+
 
 		lstInfo.Items.Add(Application.ProductName & _
-		"  Version " & Application.ProductVersion)
+		" " & My.Resources.Version & " " & versionstring)
 
-		lstInfo.Items.Add(Ver.GetVersionInfo(RAssembly.GetExecutingAssembly.Location).LegalCopyright)
-
-		lstInfo.Items.Add(Application.CompanyName)
-        lstInfo.Items.Add("Created by Nathanael Jones")
-        lstInfo.Items.Add("Application licensed under the General Public License.")
-        lstInfo.Items.Add("JCL libraries licensed under the Lesser General Public License.")
-        lstInfo.Items.Add("Web Address: http://quickkeydotnet.sourceforge.net")
-        lstInfo.Items.Add("Email: nathanaeljones@users.sourceforge.net")
+        lstInfo.Items.Add(Ver.GetVersionInfo(RAssembly.GetExecutingAssembly.Location).LegalCopyright)
+        lstInfo.Items.Add("")
+		lstInfo.Items.Add(My.Resources.AboutLine1)
+        lstInfo.Items.Add(My.Resources.AboutLine2)
+        lstInfo.Items.Add("")
+        lstInfo.Items.Add(My.Resources.AboutLine3)
+        lstInfo.Items.Add(My.Resources.AboutLine4)
+        lstInfo.Items.Add(My.Resources.AboutLine5)
 
 
 
@@ -1640,32 +1397,13 @@ INIT_ERR:
 #End Region
 
 
-	Private Sub AboutDialog_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
-		e.Cancel = Not ShuttingDown
-        If Not ShuttingDown Then Me.Visible = False
+	Private Sub AboutDialog_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+		If e.CloseReason = CloseReason.UserClosing Then
+			e.Cancel = True
+			Me.Hide()
+		End If
 	End Sub
 
-
-#Region "ShutDown Code"
-	Public Const WM_QUERYENDSESSION As Integer = &H11
-	Public Const WM_ENDSESSION As Integer = &H16
-	Public ShuttingDown As Boolean = False
-	<System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.Demand, Name:="FullTrust")> _
-	   Protected Overrides Sub WndProc(ByRef m As Message)
-		' Listen for operating system messages
-		Select Case (m.Msg)
-			Case WM_QUERYENDSESSION
-				ShuttingDown = True
-                'blnClose = True
-                'Do Until blnClosed
-                '	Application.DoEvents()
-                'Loop
-
-		End Select
-		MyBase.WndProc(m)
-	End Sub
-
-#End Region
 
 End Class
 
@@ -1949,107 +1687,18 @@ Public Class EditDialog
 
 #Region "Menu Inintialization Procedures"
 
-	'#Region "Menu Initialization Procedure"
-
-	'    Private Sub InitializeMenus()
-
-	'        mnuMain = New MainMenu()
-
-	'        InitEditMenu()
-
-	'        InitViewMenu()
-
-	'        InitHelpMenu()
-
-	'        Me.Menu = mnuMain
-	'    End Sub
-
-	'#End Region
-
-
-	'#Region "Edit Menu Initialization Procedure"
-
-	'    Private Sub InitEditMenu()
-	'        mnuEdit = New MenuItem()
-	'        mnuEdit.Text = "&Edit"
-
-
-	'        mnuEditCut = New MenuItem("Cu&t Character")
-	'        mnuEditCopy = New MenuItem("&Copy Character")
-	'        mnuEditPaste = New MenuItem("&Paste Character(s)")
-	'        mnuEditDelete = New MenuItem("&Delete Character")
-
-	'        mnuEditCopyAllChars = New MenuItem("Copy All Characters")
-
-	'        mnuEdit.MenuItems.Add(mnuEditCut)
-	'        mnuEdit.MenuItems.Add(mnuEditCopy)
-	'        mnuEdit.MenuItems.Add(mnuEditPaste)
-	'        mnuEdit.MenuItems.Add(mnuEditDelete)
-	'        mnuEdit.MenuItems.Add("-")
-	'        mnuEdit.MenuItems.Add(mnuEditCopyAllChars)
-
-	'        mnuMain.MenuItems.Add(mnuEdit)
-	'    End Sub
-
-	'#End Region
-
-	'#Region "Intitialize View Menu Proc"
-
-	'    Private Sub InitViewMenu()
-	'        mnuView = New MenuItem()
-	'        mnuView.Text = "&View"
-
-
-	'        mnuViewOrientation = New MenuItem("&Orientation")
-
-
-	'        mnuViewOrientationLeft = New MenuItem("&Left")
-	'        mnuViewOrientationTop = New MenuItem("&Top")
-	'        mnuViewOrientationRight = New MenuItem("&Right")
-	'        mnuViewOrientationBottom = New MenuItem("&Bottom")
-
-	'        mnuViewOrientation.MenuItems.Add(mnuViewOrientationTop)
-	'        mnuViewOrientation.MenuItems.Add(mnuViewOrientationLeft)
-	'        mnuViewOrientation.MenuItems.Add(mnuViewOrientationRight)
-	'        mnuViewOrientation.MenuItems.Add(mnuViewOrientationBottom)
-
-
-	'        mnuView.MenuItems.Add(mnuViewOrientation)
-
-
-	'        mnuMain.MenuItems.Add(mnuView)
-	'    End Sub
-
-	'#End Region
-
-	'#Region "Help Menu Initialization procedure"
-
-	'    Private Sub InitHelpMenu()
-	'        mnuHelp = New MenuItem("&Help")
-
-
-	'        mnuHelpAbout = New MenuItem("&About")
-	'        mnuHelpHelpTopics = New MenuItem("&Help Topics")
-
-	'        mnuHelp.MenuItems.Add(mnuHelpAbout)
-	'        mnuHelp.MenuItems.Add("-")
-	'        mnuHelp.MenuItems.Add(mnuHelpHelpTopics)
-	'        mnuMain.MenuItems.Add(mnuHelp)
-	'    End Sub
-
-	'#End Region
-
 #End Region
 
 #Region "Component Initialization Procedure(s)"
 
 	Private Sub InitializeComponents()
-
-		Me.ClientSize = New System.Drawing.Size(300, 200)
+		Me.SuspendLayout()
+        Me.ClientSize = New System.Drawing.Size(520, 400)
 		Me.Name = "frmEdit"
 		Me.Text = ""
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.Sizable
 		Me.ShowInTaskbar = False
+		Me.Owner = frmQuickKey
 		Me.TopMost = True
 		Me.Icon = QuickKey.ProgramIcon
 		Me.ControlBox = False
@@ -2066,8 +1715,8 @@ Public Class EditDialog
 
 		tbEdit = New TabControl
 		tbEdit.Font = New Font(FontFamily.GenericSansSerif, 8)
-		tpText = New TabPage("Text")
-		tpChars = New TabPage("Characters")
+        tpText = New TabPage(My.Resources.TextTab)
+		tpChars = New TabPage(My.Resources.TabCharacters)
 		tbEdit.Name = "tbEdit"
 		tpText.Name = "tpText"
 		tpChars.Name = "tpChars"
@@ -2095,14 +1744,14 @@ Public Class EditDialog
 
 
 		cdCharacters.Dock = DockStyle.Fill
-		cdCharacters.ResizeCharactersNow()
+        'cdCharacters.ResizeCharactersNow()
 		tpChars.Controls.Add(cdCharacters)
 
 		btnDone = New Button
 		btnCancel = New Button
 
-		btnDone.Text = "&OK"
-		btnCancel.Text = "&Cancel"
+        btnDone.Text = My.Resources.OKButton
+        btnCancel.Text = My.Resources.CancelButton
 		btnDone.Name = "btnDone"
 		btnCancel.Name = "btnCancel"
 		btnDone.FlatStyle = FlatStyle.System
@@ -2110,9 +1759,9 @@ Public Class EditDialog
 		btnCancel.Font = New Font(FontFamily.GenericSansSerif, 8)
 		btnDone.Font = New Font(FontFamily.GenericSansSerif, 8)
 
-		Me.Controls.Add(btnDone)
-		Me.Controls.Add(btnCancel)
-		Me.Controls.Add(tbEdit)
+        Me.Controls.Add(tbEdit)
+        Me.Controls.Add(btnDone)
+        Me.Controls.Add(btnCancel)
 
 		btnDone.Height = c_intButtonHeight
 		btnCancel.Height = c_intButtonHeight
@@ -2128,7 +1777,7 @@ Public Class EditDialog
 
 
 
-
+		Me.ResumeLayout()
 
 	End Sub
 
@@ -2271,9 +1920,9 @@ Public Class EditDialog
 		Set(ByVal Value As Boolean)
 			m_blnOKButton = Value
 			If Value Then
-				btnDone.Text = "OK"
+                btnDone.Text = My.Resources.OKButton
 			Else
-				btnDone.Text = "Done"
+                btnDone.Text = My.Resources.DoneButton
 			End If
 		End Set
 	End Property
@@ -2312,7 +1961,7 @@ Public Class EditDialog
 
 	Private Sub tbEdit_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tbEdit.SelectedIndexChanged
 		If tbEdit.SelectedTab.Name = "tpChars" Then
-			cdCharacters.ResizeCharactersNow()
+			cdCharacters.PerformLayout()
 		End If
 	End Sub
 
@@ -2320,39 +1969,49 @@ Public Class EditDialog
 
 #Region "Form Events"
 
-	Private Sub EditDialog_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
+	Private Sub EditDialog_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 		If Not m_blnCloseSourceButton Then
-			e.Cancel = Not ShuttingDown
-            If Not ShuttingDown Then
-                Me.Hide()
-                Debug.WriteLine("Close Button Clicked")
-            End If
-        End If
+			If (e.CloseReason = CloseReason.UserClosing) Then
+				e.Cancel = True
+				Me.Hide()
+
+			End If
+		End If
 	End Sub
+
+	'	Private Sub EditDialog_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
+	'		If Not m_blnCloseSourceButton Then
+	'			e.Cancel = Not ShuttingDown
+	'            If Not ShuttingDown Then
+	'                Me.Hide()
+	'                Debug.WriteLine("Close Button Clicked")
+	'            End If
+	'        End If
+	'	End Sub
 
 
 #End Region
 
-#Region "ShutDown Code"
-	Public Const WM_QUERYENDSESSION As Integer = &H11
-	Public Const WM_ENDSESSION As Integer = &H16
-	Public ShuttingDown As Boolean = False
-	<System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.Demand, Name:="FullTrust")> _
-	   Protected Overrides Sub WndProc(ByRef m As Message)
-		' Listen for operating system messages
-		Select Case (m.Msg)
-			Case WM_QUERYENDSESSION
-				ShuttingDown = True
-                'blnClose = True
-                'Do Until blnClosed
-                '	Application.DoEvents()
-                'Loop
+	'#Region "ShutDown Code"
+	'	Public Const WM_QUERYENDSESSION As Integer = &H11
+	'	Public Const WM_ENDSESSION As Integer = &H16
+	'	Public ShuttingDown As Boolean = False
+	'	<System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.Demand, Name:="FullTrust")> _
+	'	   Protected Overrides Sub WndProc(ByRef m As Message)
+	'		' Listen for operating system messages
+	'		Select Case (m.Msg)
+	'			Case WM_QUERYENDSESSION
+	'				ShuttingDown = True
+	'                'blnClose = True
+	'                'Do Until blnClosed
+	'                '	Application.DoEvents()
+	'                'Loop
 
-		End Select
-		MyBase.WndProc(m)
-	End Sub
+	'		End Select
+	'		MyBase.WndProc(m)
+	'	End Sub
 
-#End Region
+	'#End Region
 
 End Class
 
@@ -2366,146 +2025,145 @@ Public Module TipShow
 
 	End Sub
 
-	Public Sub ShowTip(ByVal Message As String, Optional ByVal MessageFont As Font = Nothing, _
-	 Optional ByVal DisplayMode As AppWinStyle = AppWinStyle.NormalFocus, _
-	 Optional ByVal ImageFile As String = "", Optional ByVal ImagePosition As DockStyle = DockStyle.None)
-		p_ShowTip(Message, "", Nothing, Nothing, DisplayMode, MessageFont, ImageFile, ImagePosition)
+    Public Sub ShowTip(ByVal Message As String, Optional ByVal MessageFont As Font = Nothing, _
+     Optional ByVal DisplayMode As AppWinStyle = AppWinStyle.NormalFocus, _
+     Optional ByRef ImageBitmap As Bitmap = Nothing, Optional ByVal ImagePosition As DockStyle = DockStyle.None)
+        p_ShowTip(Message, "", Nothing, Nothing, DisplayMode, MessageFont, ImageBitmap, ImagePosition)
 
-	End Sub
-	Public Sub ShowTip(ByVal Message As String, ByVal Caption As String, _
-	 Optional ByVal MessageFont As Font = Nothing, _
-	 Optional ByVal DisplayMode As AppWinStyle = AppWinStyle.NormalFocus, _
-	 Optional ByVal ImageFile As String = "", Optional ByVal ImagePosition As DockStyle = DockStyle.None)
-		p_ShowTip(Message, Caption, Nothing, Nothing, DisplayMode, MessageFont, ImageFile, ImagePosition)
-	End Sub
-	Public Sub ShowTip(ByVal Message As String, ByVal Caption As String, ByVal TargetLocation As Point, _
-	 ByVal TargetSize As Size, Optional ByVal MessageFont As Font = Nothing, _
-	 Optional ByVal DisplayMode As AppWinStyle = AppWinStyle.NormalFocus, _
-	 Optional ByVal ImageFile As String = "", Optional ByVal ImagePosition As DockStyle = DockStyle.None)
-		p_ShowTip(Message, Caption, TargetLocation, TargetSize, DisplayMode, MessageFont, ImageFile, ImagePosition)
-	End Sub
-	Private Sub p_ShowTip(ByVal Message As String, ByVal Caption As String, _
-	  ByVal TargetLocation As Point, ByVal TargetSize As Size, _
-	  Optional ByVal DisplayMode As AppWinStyle = AppWinStyle.NormalFocus, _
-	  Optional ByVal MessageFont As Font = Nothing, _
-	 Optional ByVal ImageFile As String = "", Optional ByVal ImagePosition As DockStyle = DockStyle.None, Optional ByVal DefaultRemoveMessage As Boolean = True)
-
-
-		Dim intSearch As Integer
-		If Not Settings Is Nothing Then
-			If Settings.ShowTips = False Then
-				Exit Sub
-			End If
-			If Not Settings.Tips Is Nothing Then
-				'Debug.WriteLine(Message)
-				For intSearch = 0 To Settings.Tips.GetUpperBound(0)
-
-					'Debug.WriteLine(Settings.Tips(intSearch))
-					If Message.ToLower.Trim.Replace(ControlChars.NewLine, String.Empty).Replace(ControlChars.Cr, String.Empty).Replace(ControlChars.Lf, String.Empty) = _
-					 Settings.Tips(intSearch).ToLower.Trim.Replace(ControlChars.NewLine, String.Empty).Replace(ControlChars.Cr, String.Empty).Replace(ControlChars.Lf, String.Empty) Then
-						Exit Sub
-					End If
-				Next
-			End If
-		End If
-
-		Dim frmHelp As New HelpDialog
-		If Not MessageFont Is Nothing Then
-			frmHelp.txtMessage.Font = MessageFont
-		End If
-		If Caption.Length = 0 Then
-			frmHelp.Text = "Quick Key Tutorial Tip"
-		Else
-			frmHelp.Text = Caption
-		End If
-		frmHelp.DefaultDelete = DefaultRemoveMessage
-		frmHelp.Message = Message
-		If ImageFile.Length > 0 Then
-			Try
-				If IO.File.Exists(ImageFile) Then
-					Dim img As New Bitmap(ImageFile)
-					frmHelp.Image = img
-					frmHelp.ImagePos = ImagePosition
-
-					If ImagePosition = DockStyle.Fill Then
-						frmHelp.ClientSize = New Size( _
-						  img.Width + frmHelp.pnlMessage.DockPadding.Left + frmHelp.pnlMessage.DockPadding.Right + frmHelp.ClientSize.Width - frmHelp.pnlMessage.Width, _
-						  img.Height + frmHelp.pnlMessage.DockPadding.Top + frmHelp.pnlMessage.DockPadding.Bottom + (frmHelp.ClientSize.Height - frmHelp.pnlMessage.Height))
-
-					End If
-				End If
-			Catch
-			End Try
-		End If
-		frmHelp.Location = New Point(CInt((Screen.PrimaryScreen.WorkingArea.Width - frmHelp.Width) / 2 + Screen.PrimaryScreen.WorkingArea.Left), _
-		 CInt((Screen.PrimaryScreen.WorkingArea.Height - frmHelp.Height) / 2 + Screen.PrimaryScreen.WorkingArea.Height))
-		Dim g As Graphics = frmHelp.CreateGraphics
-		Dim sText As SizeF = g.MeasureString(Message, frmHelp.txtMessage.Font, New SizeF(frmHelp.txtMessage.Width, frmHelp.txtMessage.Height))
-		If sText.Height + 48 < frmHelp.txtMessage.Height And ImagePosition <> DockStyle.Fill Then
-			frmHelp.Height = CInt(frmHelp.Height - (frmHelp.txtMessage.Height - sText.Height - 36))
-			frmHelp.txtMessage.ScrollBars = ScrollBars.None
-		Else
-			frmHelp.txtMessage.ScrollBars = ScrollBars.Vertical
-		End If
+    End Sub
+    Public Sub ShowTip(ByVal Message As String, ByVal Caption As String, _
+     Optional ByVal MessageFont As Font = Nothing, _
+     Optional ByVal DisplayMode As AppWinStyle = AppWinStyle.NormalFocus, _
+     Optional ByRef ImageBitmap As Bitmap = Nothing, Optional ByVal ImagePosition As DockStyle = DockStyle.None)
+        p_ShowTip(Message, Caption, Nothing, Nothing, DisplayMode, MessageFont, ImageBitmap, ImagePosition)
+    End Sub
+    Public Sub ShowTip(ByVal Message As String, ByVal Caption As String, ByVal TargetLocation As Point, _
+     ByVal TargetSize As Size, Optional ByVal MessageFont As Font = Nothing, _
+     Optional ByVal DisplayMode As AppWinStyle = AppWinStyle.NormalFocus, _
+     Optional ByRef ImageBitmap As Bitmap = Nothing, Optional ByVal ImagePosition As DockStyle = DockStyle.None)
+        p_ShowTip(Message, Caption, TargetLocation, TargetSize, DisplayMode, MessageFont, ImageBitmap, ImagePosition)
+    End Sub
+    Private Sub p_ShowTip(ByVal Message As String, ByVal Caption As String, _
+      ByVal TargetLocation As Point, ByVal TargetSize As Size, _
+      Optional ByVal DisplayMode As AppWinStyle = AppWinStyle.NormalFocus, _
+      Optional ByVal MessageFont As Font = Nothing, _
+     Optional ByRef ImageBitmap As Bitmap = Nothing, Optional ByVal ImagePosition As DockStyle = DockStyle.None, Optional ByVal DefaultRemoveMessage As Boolean = True)
 
 
+        Dim intSearch As Integer
+        If Not Settings Is Nothing Then
+            If Settings.ShowTips = False Then
+                Exit Sub
+            End If
+            If Not Settings.Tips Is Nothing Then
+                'Debug.WriteLine(Message)
+                For intSearch = 0 To Settings.Tips.GetUpperBound(0)
 
-		Dim Cpoint As New Point(CInt(TargetLocation.X + (TargetSize.Width / 2)), CInt(TargetLocation.Y + (TargetSize.Height / 2)))
-		Dim HelpCPoint As New Point(CInt(frmHelp.Left + (frmHelp.Width / 2)), CInt(frmHelp.Top + (frmHelp.Height + (frmHelp.Height / 2))))
-		Dim Diff As New Point(Cpoint.X - HelpCPoint.X, Cpoint.Y - HelpCPoint.Y)
-		Dim bounds As New Rectangle(TargetLocation, TargetSize)
-		If bounds.Right > frmHelp.Left And bounds.Left < frmHelp.Right And bounds.Bottom > frmHelp.Top And bounds.Top < frmHelp.Bottom Then
-			If Diff.X <= 0 And TargetLocation.X > frmHelp.Width Then
-				frmHelp.Left = bounds.Left - frmHelp.Width
-			ElseIf Screen.PrimaryScreen.WorkingArea.Width - bounds.Right > frmHelp.Width Then
-				frmHelp.Left = bounds.Right
-			ElseIf Diff.X <= 0 Then
-				frmHelp.Left = Screen.PrimaryScreen.WorkingArea.Left
-			Else
-				frmHelp.Left = Screen.PrimaryScreen.WorkingArea.Width - frmHelp.Width + Screen.PrimaryScreen.WorkingArea.Left
-			End If
+                    'Debug.WriteLine(Settings.Tips(intSearch))
+                    If Message.ToLower.Trim.Replace(ControlChars.NewLine, String.Empty).Replace(ControlChars.Cr, String.Empty).Replace(ControlChars.Lf, String.Empty) = _
+                     Settings.Tips(intSearch).ToLower.Trim.Replace(ControlChars.NewLine, String.Empty).Replace(ControlChars.Cr, String.Empty).Replace(ControlChars.Lf, String.Empty) Then
+                        Exit Sub
+                    End If
+                Next
+            End If
+        End If
 
-			If Diff.Y <= 0 And TargetLocation.Y > frmHelp.Height Then
-				frmHelp.Top = bounds.Top - frmHelp.Top
-			ElseIf Screen.PrimaryScreen.WorkingArea.Height - bounds.Bottom > frmHelp.Height Then
-				frmHelp.Top = bounds.Bottom
-			ElseIf Diff.X <= 0 Then
-				frmHelp.Left = Screen.PrimaryScreen.WorkingArea.Top
-			Else
-				frmHelp.Left = Screen.PrimaryScreen.WorkingArea.Height - frmHelp.Height + Screen.PrimaryScreen.WorkingArea.Top
-			End If
-		End If
-		If Not frmH Is Nothing Then
-			frmH.Hide()
-			frmH.Close()
-		End If
-		frmH = frmHelp
-		AddHandler frmHelp.DeleteMessage, AddressOf RemoveTip
-		'AddHandler frmHelp.DeleteMessage, AddressOf MessageHid
-		'AddHandler frmHelp.HideMessage, AddressOf MessageHid
-		'AddHandler frmHelp.Closing, AddressOf MessageClosing
+        Dim frmHelp As New HelpDialog
+        If Not MessageFont Is Nothing Then
+            frmHelp.txtMessage.Font = MessageFont
+        End If
+        If Caption.Length = 0 Then
+            frmHelp.Text = My.Resources.DefaultTipTitle
+        Else
+            frmHelp.Text = Caption
+        End If
+        frmHelp.DefaultDelete = DefaultRemoveMessage
+        frmHelp.Message = Message
+        If Not ImageBitmap Is Nothing Then
+            Try
+
+                frmHelp.Image = ImageBitmap
+                frmHelp.ImagePos = ImagePosition
+
+                If ImagePosition = DockStyle.Fill Then
+                    frmHelp.ClientSize = New Size( _
+                      ImageBitmap.Width + frmHelp.pnlMessage.DockPadding.Left + frmHelp.pnlMessage.DockPadding.Right + frmHelp.ClientSize.Width - frmHelp.pnlMessage.Width, _
+                      ImageBitmap.Height + frmHelp.pnlMessage.DockPadding.Top + frmHelp.pnlMessage.DockPadding.Bottom + (frmHelp.ClientSize.Height - frmHelp.pnlMessage.Height))
+
+                End If
+
+            Catch
+            End Try
+        End If
+        frmHelp.Location = New Point(CInt((Screen.PrimaryScreen.WorkingArea.Width - frmHelp.Width) / 2 + Screen.PrimaryScreen.WorkingArea.Left), _
+         CInt((Screen.PrimaryScreen.WorkingArea.Height - frmHelp.Height) / 2 + Screen.PrimaryScreen.WorkingArea.Height))
+        Dim g As Graphics = frmHelp.CreateGraphics
+        Dim sText As SizeF = g.MeasureString(Message, frmHelp.txtMessage.Font, New SizeF(frmHelp.txtMessage.Width, frmHelp.txtMessage.Height))
+        If sText.Height + 48 < frmHelp.txtMessage.Height And ImagePosition <> DockStyle.Fill Then
+            frmHelp.Height = CInt(frmHelp.Height - (frmHelp.txtMessage.Height - sText.Height - 36))
+            frmHelp.txtMessage.ScrollBars = ScrollBars.None
+        Else
+            frmHelp.txtMessage.ScrollBars = ScrollBars.Vertical
+        End If
 
 
 
+        Dim Cpoint As New Point(CInt(TargetLocation.X + (TargetSize.Width / 2)), CInt(TargetLocation.Y + (TargetSize.Height / 2)))
+        Dim HelpCPoint As New Point(CInt(frmHelp.Left + (frmHelp.Width / 2)), CInt(frmHelp.Top + (frmHelp.Height + (frmHelp.Height / 2))))
+        Dim Diff As New Point(Cpoint.X - HelpCPoint.X, Cpoint.Y - HelpCPoint.Y)
+        Dim bounds As New Rectangle(TargetLocation, TargetSize)
+        If bounds.Right > frmHelp.Left And bounds.Left < frmHelp.Right And bounds.Bottom > frmHelp.Top And bounds.Top < frmHelp.Bottom Then
+            If Diff.X <= 0 And TargetLocation.X > frmHelp.Width Then
+                frmHelp.Left = bounds.Left - frmHelp.Width
+            ElseIf Screen.PrimaryScreen.WorkingArea.Width - bounds.Right > frmHelp.Width Then
+                frmHelp.Left = bounds.Right
+            ElseIf Diff.X <= 0 Then
+                frmHelp.Left = Screen.PrimaryScreen.WorkingArea.Left
+            Else
+                frmHelp.Left = Screen.PrimaryScreen.WorkingArea.Width - frmHelp.Width + Screen.PrimaryScreen.WorkingArea.Left
+            End If
 
-		If DisplayMode = AppWinStyle.NormalNoFocus Then
-			' If m_strMessage <> Message Then
-			' m_strMessage = Message
+            If Diff.Y <= 0 And TargetLocation.Y > frmHelp.Height Then
+                frmHelp.Top = bounds.Top - frmHelp.Top
+            ElseIf Screen.PrimaryScreen.WorkingArea.Height - bounds.Bottom > frmHelp.Height Then
+                frmHelp.Top = bounds.Bottom
+            ElseIf Diff.X <= 0 Then
+                frmHelp.Left = Screen.PrimaryScreen.WorkingArea.Top
+            Else
+                frmHelp.Left = Screen.PrimaryScreen.WorkingArea.Height - frmHelp.Height + Screen.PrimaryScreen.WorkingArea.Top
+            End If
+        End If
+        If Not frmH Is Nothing Then
+            frmH.Hide()
+            frmH.Close()
+        End If
+        frmH = frmHelp
+        AddHandler frmHelp.DeleteMessage, AddressOf RemoveTip
+        'AddHandler frmHelp.DeleteMessage, AddressOf MessageHid
+        'AddHandler frmHelp.HideMessage, AddressOf MessageHid
+        'AddHandler frmHelp.Closing, AddressOf MessageClosing
 
-			frmHelp.Show()
-			'  End If
 
 
-		Else
-			'm_strMessage = Message
-			If frmHelp.ShowDialog = DialogResult.Abort Then
-				RemoveTip()
 
-			End If
-		End If
+        If DisplayMode = AppWinStyle.NormalNoFocus Then
+            ' If m_strMessage <> Message Then
+            ' m_strMessage = Message
+
+            frmHelp.Show()
+            '  End If
 
 
-	End Sub
+        Else
+            'm_strMessage = Message
+            If frmHelp.ShowDialog = DialogResult.Abort Then
+                RemoveTip()
+
+            End If
+        End If
+
+
+    End Sub
 	Dim frmH As HelpDialog
 	'Private m_strMessage As String = ""
 	'Public Sub MessageClosing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs)
@@ -2656,8 +2314,8 @@ Public Class HelpDialog
 		MyBase.New()
 		Me.Name = "HelpDialog"
 		Me.TopMost = True
-        Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
-		Me.Text = "Quick Key Tutorial Tip"
+		Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
+		Me.Text = My.Resources.DefaultTipTitle
 		Me.ClientSize = New Size(600, 400)
 		Me.MinimizeBox = False
 		Me.MaximizeBox = False
@@ -2697,8 +2355,6 @@ Public Class HelpDialog
 		txtMessage.Text = ""
 		txtMessage.Dock = DockStyle.Fill
 		txtMessage.BringToFront()
-		'txtMessage.Font = New Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular)
-
 		pnlMessage.Controls.Add(txtMessage)
 		Me.Controls.Add(pnlMessage)
 
@@ -2716,9 +2372,8 @@ Public Class HelpDialog
 
 		chkRemove = New CheckBox
 		chkRemove.Name = "chkRemove"
-		chkRemove.Text = "Do not show this tip again"
-		chkRemove.Height = 24
-		chkRemove.Width = 175
+		chkRemove.Text = My.Resources.DontShowTip
+        chkRemove.AutoSize = True
 		chkRemove.Top = btnOK.Top
 		chkRemove.Left = btnOK.Left - chkRemove.Width - 8
 		chkRemove.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
@@ -2739,10 +2394,10 @@ Public Class HelpDialog
 	Private Sub btnOK_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnOK.Click
 		If chkRemove.Checked = False Then
 			RaiseEvent HideMessage()
-            Me.DialogResult = Windows.Forms.DialogResult.OK
+			Me.DialogResult = Windows.Forms.DialogResult.OK
 		Else
 			RaiseEvent DeleteMessage()
-            Me.DialogResult = Windows.Forms.DialogResult.Abort
+			Me.DialogResult = Windows.Forms.DialogResult.Abort
 		End If
 		Me.Close()
 	End Sub
@@ -2751,36 +2406,3 @@ Public Class HelpDialog
 End Class
 #End Region
 
-#Region "Bitmap Loading Function"
-
-Public Class BitmapLoader
-
-	Public Shared Function LoadBitmap(ByVal FileName As String) As Bitmap
-		Try
-			If IO.File.Exists(FileName) Then
-				Dim b As New Bitmap(FileName)
-				If b Is Nothing Then Return New Bitmap(16, 16)
-				Return b
-			Else
-				Log.HandleWarning("The following Icon has been moved or deleted. This should not affect the stability of the program. If you cannot recover the icon, please reinstall the program.", _
-				 FileName, MessageBoxButtons.OK)
-				Return New Bitmap(16, 16)
-			End If
-		Catch ex As Exception
-			Select Case Log.HandleWarning("Quick Key encountered an unkown error while loading the following icon.", ex, FileName, MessageBoxButtons.AbortRetryIgnore)
-				Case DialogResult.Abort
-                    Application.Exit()
-                    Return New Bitmap(16, 16)
-				Case DialogResult.Ignore
-					Return New Bitmap(16, 16)
-				Case DialogResult.Retry
-                    Return LoadBitmap(FileName)
-                Case Else
-                    Return New Bitmap(16, 16)
-            End Select
-		End Try
-	End Function
-
-End Class
-
-#End Region

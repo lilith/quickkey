@@ -1,0 +1,37 @@
+generate font-specific character set
+Auto-resize font (1/2) 
+MouseOverButtonColor
+SelectedButtonColor
+Single-line text box support for sending (sendkeys[end])- preferably a right-click menu option
+
+Better handling of explorer associations
+charactergrid resizecharacters should detect when the size is too small, and display a scroll bar by placing controls over the edge
+auto-hide should have a close item
+
+
+Change default error handler to OK & Cancel instead of Yes & No
+
+
+Add print Character Set feature
+Add Copy as RTF/ copy as WMF/ copy as bmp / copy as jpg...
+
+
+Check the upgrade code is intact
+{917AC10B-38EE-4EF7-AD32-E8C9C3F95848}
+
+The Autosize Settings should not affect the current font size (and it should not be named autosize)
+If the current font size is using less than half the space, double the font size in OnPaint
+
+There should be an Autosize setting that actually resizes the CharacterGrid to fit its contents. 
+A decision must be made on whether to expand horizontally or vertically. (put it into another property).
+
+The Dock icon should really follow the character grid around.
+
+The Dock Icon mouse-over delay should be changeable
+
+consider Snap-to-window code
+
+Evaluate NGEN impact
+
+
+Consider removing the tray icon altogether

@@ -165,6 +165,90 @@
         oADgAwAA4AcAAPAHAADwDwAA+A8AAPh/AAD//wAA
 </value>
   </data>
+  <data name="AboutLine1" xml:space="preserve">
+    <value>Application licensed under the General Public License. resources</value>
+  </data>
+  <data name="AboutLine2" xml:space="preserve">
+    <value>JCL libraries licensed under the Lesser General Public License.</value>
+  </data>
+  <data name="AboutLine3" xml:space="preserve">
+    <value>Web Address: http://quickkeydotnet.sourceforge.net</value>
+  </data>
+  <data name="AboutLine4" xml:space="preserve">
+    <value>Email: nathanaeljones@users.sourceforge.net</value>
+  </data>
+  <data name="AboutLine5" xml:space="preserve">
+    <value>Special thanks to Christoph for his German translation of Quick Key!</value>
+  </data>
+  <data name="AboutPrefix" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="ActionCopy" xml:space="preserve">
+    <value>Copy to clipboard</value>
+  </data>
+  <data name="ActionDrag" xml:space="preserve">
+    <value>Drag and drop</value>
+  </data>
+  <data name="ActionFocus" xml:space="preserve">
+    <value>Select character</value>
+  </data>
+  <data name="ActionMenu" xml:space="preserve">
+    <value>Display pop-up menu</value>
+  </data>
+  <data name="ActionSend" xml:space="preserve">
+    <value>Send as keystroke</value>
+  </data>
+  <data name="ActionTooltipPart1" xml:space="preserve">
+    <value>Select actions to take when the </value>
+  </data>
+  <data name="ActionTooltipPart2" xml:space="preserve">
+    <value>mouse button is clicked</value>
+  </data>
+  <data name="AddButton" xml:space="preserve">
+    <value>&amp;Add</value>
+  </data>
+  <data name="AddCharacterRange" xml:space="preserve">
+    <value>Add Character Range</value>
+  </data>
+  <data name="AddKeywordInstructions" xml:space="preserve">
+    <value>Please enter the program keyword</value>
+  </data>
+  <data name="AddUnicodeChar" xml:space="preserve">
+    <value>Get Character from Unicode Value</value>
+  </data>
+  <data name="AllCulturesLastWindow" xml:space="preserve">
+    <value>Letztes Fenster Last Window</value>
+  </data>
+  <data name="AnsiiValuePrefix" xml:space="preserve">
+    <value>Ansii value: </value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Change appearance...</value>
+  </data>
+  <data name="AppLoadedTooltip" xml:space="preserve">
+    <value>Quick Key is Now Loaded</value>
+  </data>
+  <data name="AppLoadingTooltip" xml:space="preserve">
+    <value>Quick Key is loading...</value>
+  </data>
+  <data name="ApplyButton" xml:space="preserve">
+    <value>&amp;Apply</value>
+  </data>
+  <data name="AppRunningTooltip" xml:space="preserve">
+    <value>Quick Key Character Keyboard</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Autohide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Autohide.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AutoHideButton" xml:space="preserve">
+    <value>Auto-hide</value>
+  </data>
+  <data name="AutoHideButtonTooltip" xml:space="preserve">
+    <value>Enables/disables Auto-Hide. This window and the Toolbar will dissapear
+when the mouse pointer is not over them. They will reappear when the
+auto-hide window is clicked or the mouse is moved over it.</value>
+  </data>
   <data name="Bold" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAMAEBAAAAAAAABoBQAANgAAABAQEAAAAAAAKAEAAJ4FAAAQEAIAAAAAALAAAADGBgAAKAAAABAA
@@ -201,41 +285,81 @@
         AADgHwAA8Y8AAPGPAADxjwAA8B8AAPGPAADxjwAA8Y8AAOAfAAD//wAA//8AAP//AAA=
 </value>
   </data>
-  <data name="CloseIcon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAMAEBAQAAAAAAAoAQAANgAAABAQAAAAAAAAaAUAAF4BAAAQEAIAAAAAALAAAADGBgAAKAAAABAA
-        AAAgAAAAAQAEAAAAAACAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAIAAAIAAAACAgACAAAAAgACAAICA
-        AADAwMAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD3/wAA9/8AAPPn
-        AAD7xwAA+58AAPk/AAD8fwAA+H8AAPE/AADjPwAA558AAP/PAAD/zwAA//8AAP//AAAoAAAAEAAAACAA
-        AAABAAgAAAAAAAABAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDA
-        wADA3MAA8MqmAAQEBAAICAgADAwMABEREQAWFhYAHBwcACIiIgApKSkAVVVVAE1NTQBCQkIAOTk5AIB8
-        /wBQUP8AkwDWAP/szADG1u8A1ufnAJCprQAAADMAAABmAAAAmQAAAMwAADMAAAAzMwAAM2YAADOZAAAz
-        zAAAM/8AAGYAAABmMwAAZmYAAGaZAABmzAAAZv8AAJkAAACZMwAAmWYAAJmZAACZzAAAmf8AAMwAAADM
-        MwAAzGYAAMyZAADMzAAAzP8AAP9mAAD/mQAA/8wAMwAAADMAMwAzAGYAMwCZADMAzAAzAP8AMzMAADMz
-        MwAzM2YAMzOZADMzzAAzM/8AM2YAADNmMwAzZmYAM2aZADNmzAAzZv8AM5kAADOZMwAzmWYAM5mZADOZ
-        zAAzmf8AM8wAADPMMwAzzGYAM8yZADPMzAAzzP8AM/8zADP/ZgAz/5kAM//MADP//wBmAAAAZgAzAGYA
-        ZgBmAJkAZgDMAGYA/wBmMwAAZjMzAGYzZgBmM5kAZjPMAGYz/wBmZgAAZmYzAGZmZgBmZpkAZmbMAGaZ
-        AABmmTMAZplmAGaZmQBmmcwAZpn/AGbMAABmzDMAZsyZAGbMzABmzP8AZv8AAGb/MwBm/5kAZv/MAMwA
-        /wD/AMwAmZkAAJkzmQCZAJkAmQDMAJkAAACZMzMAmQBmAJkzzACZAP8AmWYAAJlmMwCZM2YAmWaZAJlm
-        zACZM/8AmZkzAJmZZgCZmZkAmZnMAJmZ/wCZzAAAmcwzAGbMZgCZzJkAmczMAJnM/wCZ/wAAmf8zAJnM
-        ZgCZ/5kAmf/MAJn//wDMAAAAmQAzAMwAZgDMAJkAzADMAJkzAADMMzMAzDNmAMwzmQDMM8wAzDP/AMxm
-        AADMZjMAmWZmAMxmmQDMZswAmWb/AMyZAADMmTMAzJlmAMyZmQDMmcwAzJn/AMzMAADMzDMAzMxmAMzM
-        mQDMzMwAzMz/AMz/AADM/zMAmf9mAMz/mQDM/8wAzP//AMwAMwD/AGYA/wCZAMwzAAD/MzMA/zNmAP8z
-        mQD/M8wA/zP/AP9mAAD/ZjMAzGZmAP9mmQD/ZswAzGb/AP+ZAAD/mTMA/5lmAP+ZmQD/mcwA/5n/AP/M
-        AAD/zDMA/8xmAP/MmQD/zMwA/8z/AP//MwDM/2YA//+ZAP//zABmZv8AZv9mAGb//wD/ZmYA/2b/AP//
-        ZgAhAKUAX19fAHd3dwCGhoYAlpaWAMvLywCysrIA19fXAN3d3QDj4+MA6urqAPHx8QD4+PgA8Pv/AKSg
-        oACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA9/8AAPf/
-        AADz5wAA+8cAAPufAAD5PwAA/H8AAPh/AADxPwAA4z8AAOefAAD/zwAA/88AAP//AAD//wAAKAAAABAA
-        AAAgAAAAAQABAAAAAABAAAAAAAAAAAAAAAACAAAAAgAAAAAAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD3/wAA9/8AAPPn
-        AAD7xwAA+58AAPk/AAD8fwAA+H8AAPE/AADjPwAA558AAP/PAAD/zwAA//8AAP//AAA=
-</value>
+  <data name="BothLocked" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="BothLockedText" xml:space="preserve">
+    <value>You have just locked the position of the Character Grid and the Toolbar so that they cannot be accidentally moved. This also disables editing the character set directly. Please not that you can still edit it using the Edit as Text feature.</value>
+  </data>
+  <data name="BothLockedTitle" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="BothLockedTooltip" xml:space="preserve">
+    <value>Disables editing the character set or moving the widows.</value>
+  </data>
+  <data name="ButtonColor" xml:space="preserve">
+    <value>Button Color</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>&amp;Cancel</value>
+  </data>
+  <data name="ChangeAppearance" xml:space="preserve">
+    <value>Change the Character Grid appearance</value>
+  </data>
+  <data name="CharacterButton" xml:space="preserve">
+    <value>Character Button</value>
+  </data>
+  <data name="CharacterDoesNotExist" xml:space="preserve">
+    <value>Character does not exist!</value>
+  </data>
+  <data name="CharacterGridAppearance" xml:space="preserve">
+    <value>Character Grid Appearance</value>
+  </data>
+  <data name="CharacterProperties" xml:space="preserve">
+    <value>Character Properties</value>
+  </data>
+  <data name="CharacterRangeConfirmation1" xml:space="preserve">
+    <value>If you click Yes,</value>
+  </data>
+  <data name="CharacterRangeConfirmation2" xml:space="preserve">
+    <value>characters will be added. This will significantly hamper operation of Quick Key. Please click No and choose a smaller range of characters</value>
+  </data>
+  <data name="CharacterRangeConfirmationTitle" xml:space="preserve">
+    <value>Too many characters!</value>
+  </data>
+  <data name="CharsetChangedQuerySave" xml:space="preserve">
+    <value>The charset has been modified.
+Do you want to save the changes?</value>
+  </data>
+  <data name="CharsetChangedSuffix" xml:space="preserve">
+    <value>Charset Changed</value>
+  </data>
+  <data name="CharsetNotFoundMessageText" xml:space="preserve">
+    <value>Sorry, this character set cannot be found. The file may have be moved or deleted.</value>
+  </data>
+  <data name="CharsetNotFoundMessageTitle" xml:space="preserve">
+    <value>Could not load Charset</value>
+  </data>
+  <data name="CharsLocked" xml:space="preserve">
+    <value>Lock Charset</value>
+  </data>
+  <data name="CharsLockedText" xml:space="preserve">
+    <value>You have locked the characters in the character grid. You will not be able to move or change the characters until you unlock them.</value>
+  </data>
+  <data name="CharsLockedTitle" xml:space="preserve">
+    <value>Entering read-only mode</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CloseButtonTooltip" xml:space="preserve">
+    <value>Hides the Character Grid and its accessory windows.</value>
+  </data>
+  <data name="CloseIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CloseIcon.ICO;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CommandsToolbarTooltip" xml:space="preserve">
+    <value>These buttons control character set file operations and clipboard actions</value>
   </data>
   <data name="Copy" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -284,6 +408,33 @@
         AHjAAQCA4AMAeeADAIDwBwB5/g8AgP//AHn//wCA
 </value>
   </data>
+  <data name="Copy1" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="CopyHTML" xml:space="preserve">
+    <value>Copy HTML code</value>
+  </data>
+  <data name="COriBottom" xml:space="preserve">
+    <value>Leftward rows</value>
+  </data>
+  <data name="COrientation" xml:space="preserve">
+    <value>Sort Order</value>
+  </data>
+  <data name="COriLeft" xml:space="preserve">
+    <value>Downward rows</value>
+  </data>
+  <data name="COriRight" xml:space="preserve">
+    <value>Upward rows</value>
+  </data>
+  <data name="COriTop" xml:space="preserve">
+    <value>Rightward rows</value>
+  </data>
+  <data name="CouldNotAddCharacter" xml:space="preserve">
+    <value>Could Not Add Character!</value>
+  </data>
+  <data name="CouldNotModifyCharacter" xml:space="preserve">
+    <value>Could Not Modify Character!</value>
+  </data>
   <data name="cut" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAEBAAAAEACABoBQAAJgAAABAQAAABACAAaAQAAI4FAAAoAAAAEAAAACAAAAABAAgAAAAAAAAA
@@ -330,6 +481,18 @@
         ABEAAAAEAAAAAQAAAAEAAAACAAAAAgAAAAH//4YA/+8AAP+DAADzAwAAwAMAAMADAADAAwAAwAcAAMAH
         SADgAwAA/gEAAP4BAAD+MQAA/nkAAP5/AAD//wAA
 </value>
+  </data>
+  <data name="Cut1" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="DarkEdge" xml:space="preserve">
+    <value>Dark Edge</value>
+  </data>
+  <data name="DecimalMode" xml:space="preserve">
+    <value>Decimal Value</value>
+  </data>
+  <data name="DefaultTipTitle" xml:space="preserve">
+    <value>Tip</value>
   </data>
   <data name="Delete" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -378,33 +541,192 @@
         AACAAQAAgAEAAIABAADAAwAAwAMAAPAPAAD8PwAA
 </value>
   </data>
-  <data name="Docked" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAB
-        AAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAMDcwADwyqYABAQEAAgICAAMDAwAERERABYW
-        FgAcHBwAIiIiACkpKQBVVVUATU1NAEJCQgA5OTkAgHz/AFBQ/wCTANYA/+zMAMbW7wDW5+cAkKmtAAAA
-        MwAAAGYAAACZAAAAzAAAMwAAADMzAAAzZgAAM5kAADPMAAAz/wAAZgAAAGYzAABmZgAAZpkAAGbMAABm
-        /wAAmQAAAJkzAACZZgAAmZkAAJnMAACZ/wAAzAAAAMwzAADMZgAAzJkAAMzMAADM/wAA/2YAAP+ZAAD/
-        zAAzAAAAMwAzADMAZgAzAJkAMwDMADMA/wAzMwAAMzMzADMzZgAzM5kAMzPMADMz/wAzZgAAM2YzADNm
-        ZgAzZpkAM2bMADNm/wAzmQAAM5kzADOZZgAzmZkAM5nMADOZ/wAzzAAAM8wzADPMZgAzzJkAM8zMADPM
-        /wAz/zMAM/9mADP/mQAz/8wAM///AGYAAABmADMAZgBmAGYAmQBmAMwAZgD/AGYzAABmMzMAZjNmAGYz
-        mQBmM8wAZjP/AGZmAABmZjMAZmZmAGZmmQBmZswAZpkAAGaZMwBmmWYAZpmZAGaZzABmmf8AZswAAGbM
-        MwBmzJkAZszMAGbM/wBm/wAAZv8zAGb/mQBm/8wAzAD/AP8AzACZmQAAmTOZAJkAmQCZAMwAmQAAAJkz
-        MwCZAGYAmTPMAJkA/wCZZgAAmWYzAJkzZgCZZpkAmWbMAJkz/wCZmTMAmZlmAJmZmQCZmcwAmZn/AJnM
-        AACZzDMAZsxmAJnMmQCZzMwAmcz/AJn/AACZ/zMAmcxmAJn/mQCZ/8wAmf//AMwAAACZADMAzABmAMwA
-        mQDMAMwAmTMAAMwzMwDMM2YAzDOZAMwzzADMM/8AzGYAAMxmMwCZZmYAzGaZAMxmzACZZv8AzJkAAMyZ
-        MwDMmWYAzJmZAMyZzADMmf8AzMwAAMzMMwDMzGYAzMyZAMzMzADMzP8AzP8AAMz/MwCZ/2YAzP+ZAMz/
-        zADM//8AzAAzAP8AZgD/AJkAzDMAAP8zMwD/M2YA/zOZAP8zzAD/M/8A/2YAAP9mMwDMZmYA/2aZAP9m
-        zADMZv8A/5kAAP+ZMwD/mWYA/5mZAP+ZzAD/mf8A/8wAAP/MMwD/zGYA/8yZAP/MzAD/zP8A//8zAMz/
-        ZgD//5kA///MAGZm/wBm/2YAZv//AP9mZgD/Zv8A//9mACEApQBfX18Ad3d3AIaGhgCWlpYAy8vLALKy
-        sgDX19cA3d3dAOPj4wDq6uoA8fHxAPj4+ADw+/8ApKCgAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//
-        AAD///8ACgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoAAAoKCgoKCgoKCgoKCgoKAAAKCgoKCgoKCgoKCgoK
-        CgAACgoKCgoKCgoKCgoKCgoAAAoKCgoKCgoKCgoKCgoKAAAKCgoKCgoKCgoKAAAAAAAAAAAAAAoKCgoK
-        CgoKAAoKCh0ACgoKCgoKCgoKCgAKCgodAAoKCgoKCgoKCgoACgoKHQAKCgoKCgoKCgoKAAoKCh0ACgoK
-        CgoKCgoKCgAKCgodAAoKCgoKCgoKCgoACgoKHQAKCgoKCgoKCgoKAAoKCgoACgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCv//AAD+/wAA/v8AAP7/AAD+/wAA/v8AAOAHAAD7nwAA+58AAPuf
-        AAD7nwAA+58AAPufAAD4HwAA//8AAP//AAA=
-</value>
+  <data name="Delete1" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DisableAutoHide" xml:space="preserve">
+    <value>Disable AutoHide</value>
+  </data>
+  <data name="Docked" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Docked.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Docked1" xml:space="preserve">
+    <value>Enable Auto-hide</value>
+  </data>
+  <data name="DockedText" xml:space="preserve">
+    <value>You have enabled the Auto-Hide Feature. When you are not using the Toolbar or Character Grid, they will disappear; however, the Auto-Hide Window will remain. If you move the mouse over the Auto-Hide Window, the Character Grid and the Toolbar will reappear.</value>
+  </data>
+  <data name="DockedTitle" xml:space="preserve">
+    <value>Auto-hide saves screen space</value>
+  </data>
+  <data name="DoneButton" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="DontShowTip" xml:space="preserve">
+    <value>Do not show this tip again</value>
+  </data>
+  <data name="EditCharsAsTextDialogCaption" xml:space="preserve">
+    <value>Edit Characters As Text</value>
+  </data>
+  <data name="EditCopy" xml:space="preserve">
+    <value>Copy Character</value>
+  </data>
+  <data name="EditCopyAllChars" xml:space="preserve">
+    <value>Copy All Characters</value>
+  </data>
+  <data name="EditCopyHTML" xml:space="preserve">
+    <value>Copy HTML Code</value>
+  </data>
+  <data name="EditCopyVisibleChars" xml:space="preserve">
+    <value>Copy Visible Chars</value>
+  </data>
+  <data name="EditCut" xml:space="preserve">
+    <value>Cut Character</value>
+  </data>
+  <data name="EditDelete" xml:space="preserve">
+    <value>Delete Character</value>
+  </data>
+  <data name="EditMenu" xml:space="preserve">
+    <value>&amp;Edit</value>
+  </data>
+  <data name="EditPaste" xml:space="preserve">
+    <value>Paste Character(s)</value>
+  </data>
+  <data name="EditSend" xml:space="preserve">
+    <value>Send Character</value>
+  </data>
+  <data name="ErrorLoadingCharacterSet" xml:space="preserve">
+    <value>Error Loading Character Set!</value>
+  </data>
+  <data name="ErrorOpeningFile" xml:space="preserve">
+    <value>There was an error opening the file. The file may be corrupted or unavailable.</value>
+  </data>
+  <data name="ExportFiltersDialogCaption" xml:space="preserve">
+    <value>Export Charset Filters</value>
+  </data>
+  <data name="ExportFiltersDialogFilter" xml:space="preserve">
+    <value>Charset Files (*.charset)|*.charset</value>
+  </data>
+  <data name="ExportFiltersReadOnlyErrorCaption" xml:space="preserve">
+    <value>Overwrite read-only file?</value>
+  </data>
+  <data name="ExportFiltersReadOnlyErrorText" xml:space="preserve">
+    <value>The filters charset that you have chosen to overwrite is readonly. 
+Are you positve that you wish to change this file?</value>
+  </data>
+  <data name="FileCharsLocked" xml:space="preserve">
+    <value>&amp;Chars Locked</value>
+  </data>
+  <data name="FileDocked" xml:space="preserve">
+    <value>&amp;Auto-hide</value>
+  </data>
+  <data name="FileExit" xml:space="preserve">
+    <value>E&amp;xit</value>
+  </data>
+  <data name="FileExport" xml:space="preserve">
+    <value>&amp;Export to Report...</value>
+  </data>
+  <data name="FileHide" xml:space="preserve">
+    <value>Close Toolbar</value>
+  </data>
+  <data name="FileHideQuickKey" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="FileImport" xml:space="preserve">
+    <value>&amp;Import</value>
+  </data>
+  <data name="FileImportCharset" xml:space="preserve">
+    <value>From C&amp;harset...</value>
+  </data>
+  <data name="FileImportCharsetAttrs" xml:space="preserve">
+    <value>All &amp;Attributes from Charset</value>
+  </data>
+  <data name="FileImportClipboard" xml:space="preserve">
+    <value>From &amp;Clipboard...</value>
+  </data>
+  <data name="FileImportFile" xml:space="preserve">
+    <value>From &amp;File...</value>
+  </data>
+  <data name="FileLocked" xml:space="preserve">
+    <value>&amp;Locked</value>
+  </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="FilenamePrefix" xml:space="preserve">
+    <value>Filename: </value>
+  </data>
+  <data name="FileNew" xml:space="preserve">
+    <value>&amp;New</value>
+  </data>
+  <data name="FileNewBlank" xml:space="preserve">
+    <value>&amp;Blank Charset</value>
+  </data>
+  <data name="FileNewCopy" xml:space="preserve">
+    <value>&amp;Copy of this Charset</value>
+  </data>
+  <data name="FileNewCopyAttrs" xml:space="preserve">
+    <value>Copy of these &amp;Attributes</value>
+  </data>
+  <data name="FileOpen" xml:space="preserve">
+    <value>&amp;Open</value>
+  </data>
+  <data name="FileReadOnly" xml:space="preserve">
+    <value>Save Read-Only</value>
+  </data>
+  <data name="FileRecent" xml:space="preserve">
+    <value>&amp;Recent</value>
+  </data>
+  <data name="FileSave" xml:space="preserve">
+    <value>&amp;Save</value>
+  </data>
+  <data name="FileSaveAllInfo" xml:space="preserve">
+    <value>Save All Information</value>
+  </data>
+  <data name="FileSaveAs" xml:space="preserve">
+    <value>Save &amp;As...</value>
+  </data>
+  <data name="FileSaveCharacters" xml:space="preserve">
+    <value>Save Characters</value>
+  </data>
+  <data name="FileSaveFilters" xml:space="preserve">
+    <value>Save Filters</value>
+  </data>
+  <data name="FileSaveFont" xml:space="preserve">
+    <value>Save Font</value>
+  </data>
+  <data name="FileSaveFontAttrs" xml:space="preserve">
+    <value>Save Font Attributes</value>
+  </data>
+  <data name="FileSaveOnlyCharacters" xml:space="preserve">
+    <value>Save Characters Only</value>
+  </data>
+  <data name="FileSaveSize" xml:space="preserve">
+    <value>Save Font Size</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>F&amp;ilter</value>
+  </data>
+  <data name="FilterDefaults" xml:space="preserve">
+    <value>Select Default Filters</value>
+  </data>
+  <data name="FilterDeSelAll" xml:space="preserve">
+    <value>Deselect All Filters</value>
+  </data>
+  <data name="FilterExport" xml:space="preserve">
+    <value>Export Filters...</value>
+  </data>
+  <data name="FilterImport" xml:space="preserve">
+    <value>Import Filters...</value>
+  </data>
+  <data name="FilterMenu" xml:space="preserve">
+    <value>F&amp;ilter</value>
+  </data>
+  <data name="FilterReadOnly" xml:space="preserve">
+    <value>Export (Read-Only) Filters...</value>
+  </data>
+  <data name="FilterSelAll" xml:space="preserve">
+    <value>Select All Filters</value>
   </data>
   <data name="Find" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -442,6 +764,58 @@
         AAAHwQAAAQEAAAABAAAAAQAAAAEAAIADAADBBwAAwQcAAOOPAADjjwAA448AAP//AAA=
 </value>
   </data>
+  <data name="FindButton" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="FocusedOutline" xml:space="preserve">
+    <value>Focused Outline</value>
+  </data>
+  <data name="FontBold" xml:space="preserve">
+    <value>&amp;Bold</value>
+  </data>
+  <data name="FontBoxTooltip" xml:space="preserve">
+    <value>This changes the font</value>
+  </data>
+  <data name="FontItalic" xml:space="preserve">
+    <value>&amp;Italic</value>
+  </data>
+  <data name="FontMenu" xml:space="preserve">
+    <value>F&amp;ont</value>
+  </data>
+  <data name="FontName" xml:space="preserve">
+    <value>Font: </value>
+  </data>
+  <data name="FontPrefix" xml:space="preserve">
+    <value>Font: </value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>Size: </value>
+  </data>
+  <data name="FontSizeTooltip" xml:space="preserve">
+    <value>This changes the font size</value>
+  </data>
+  <data name="FontStrikeout" xml:space="preserve">
+    <value>&amp;Strikeout</value>
+  </data>
+  <data name="FontStyleTooltip" xml:space="preserve">
+    <value>This toolbar controls the graphical attributes of the font</value>
+  </data>
+  <data name="FontUnderline" xml:space="preserve">
+    <value>&amp;Underline</value>
+  </data>
+  <data name="GenericErrorMessage" xml:space="preserve">
+    <value>I messed up! Congratulations, you just found a bug.
+Whatever just happened was very unexpected.
+Please open up your email editor and send a message to me at
+nathanaeljones@users.sourceforge.net
+Just tell me what you clicked on when this happened, and include the error information.
+The easiest way to get the error information is to right-click on the icon and choose 'Error Log'.
+It is very important that you report this bug, because otherwise it may never be fixed.
+It is recommended that you save your work and restart Quick Key as soon as possible.
+Thank you for your support.
+
+Please click Yes to continue using Quick Key, or No if these messages keep appearing.</value>
+  </data>
   <data name="Help" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAMAEBAAAAAAAABoBQAANgAAABAQEAAAAAAAKAEAAJ4FAAAQEAIAAAAAALAAAADGBgAAKAAAABAA
@@ -477,6 +851,66 @@
         AAABAAAAAQAAAAEAAAABgAAAAMAAAAhgAAAIIAAADGAAAAfAAAAAAAAAAAAAAP//AAD+fwAA/D8AAPw/
         AAD+fwAA/D8AAPw/AAD8PwAA/B8AAPIPAADhBwAA4YcAAOAHAADwDwAA+B8AAP//AAA=
 </value>
+  </data>
+  <data name="HelpAbout" xml:space="preserve">
+    <value>&amp;About</value>
+  </data>
+  <data name="HelpHelpTopics" xml:space="preserve">
+    <value>&amp;Help Topics</value>
+  </data>
+  <data name="HelpMenu" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="HelpTips" xml:space="preserve">
+    <value>Tips</value>
+  </data>
+  <data name="HelpTipsHide" xml:space="preserve">
+    <value>Hide Tips</value>
+  </data>
+  <data name="HelpTipsReset" xml:space="preserve">
+    <value>Reset Tips</value>
+  </data>
+  <data name="HexadecimalMode" xml:space="preserve">
+    <value>Hexadecimal Value</value>
+  </data>
+  <data name="HideMe" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="HideQuickKey" xml:space="preserve">
+    <value>Please note that you have only minimized Quick Key to the icon in the notification area. To completely close Quick Key, please click 'Exit'.</value>
+  </data>
+  <data name="IconLoadingError" xml:space="preserve">
+    <value>An error occured while loading the Character Grid's titlebar icons. They may not display correctly.</value>
+  </data>
+  <data name="ImportCharsetAttrsDialogCaption" xml:space="preserve">
+    <value>Import Attributes from charset"</value>
+  </data>
+  <data name="ImportCharsetAttrsDialogFilter" xml:space="preserve">
+    <value>Charset Files (*.charset)|*.charset</value>
+  </data>
+  <data name="ImportCharsetDialogCaption" xml:space="preserve">
+    <value>Import from charset</value>
+  </data>
+  <data name="ImportCharsetDialogFilter" xml:space="preserve">
+    <value>Charset Files (*.charset)|*.charset</value>
+  </data>
+  <data name="ImportClipboardDialogCaption" xml:space="preserve">
+    <value>Import from clipboard</value>
+  </data>
+  <data name="ImportFileDialogCaption" xml:space="preserve">
+    <value>Import from file</value>
+  </data>
+  <data name="ImportFileDialogFilter" xml:space="preserve">
+    <value>All Files (*.*)|*.*|Text Files (*.txt;*.doc;*.rtf;*.htm)|*.txt;*.doc;*.rtf;*.htm)</value>
+  </data>
+  <data name="ImportFiltersDialogCaption" xml:space="preserve">
+    <value>Import Filters from charset</value>
+  </data>
+  <data name="ImportFiltersDialogFilter" xml:space="preserve">
+    <value>Charset Files (*.charset)|*.charset</value>
+  </data>
+  <data name="InvalidPath" xml:space="preserve">
+    <value>An invalid path was entered. Please try again with a valid filename.</value>
   </data>
   <data name="Italic" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -514,15 +948,127 @@
         AADgfwAA+f8AAPz/AAD8/wAA/n8AAP5/AAD/PwAA/z8AAP4PAAD//wAA//8AAP//AAA=
 </value>
   </data>
-  <data name="Locked" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAABAA
-        AAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAgICAAMDAwAAAAP8AAP8AAAD//wD/AAAA/wD/AP//
-        AAD///8AAAAAAAAAAAAA+Pj4+PgAAAB3d3d3dwcAAI+Pj4+PBwAAd3d3d3cHAAD4+Pj4+AcAAAAAAAAA
-        BwAACIiIiIBwAAAACAiAgIAAAAAIAACAAAAAAA8AAPAAAAAAD4AI8AAAAAAA//8AAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAACABwAAgAMAAIABAACAAQAAgAEAAIABAACAAQAAwAEAAOABAADwAwAA8Y8AAPAP
-        AAD4HwAA/D8AAP//AAD//wAA
-</value>
+  <data name="KeywordBoxTooltip" xml:space="preserve">
+    <value>Change the destination appliction for sending characters</value>
+  </data>
+  <data name="KeywordLastWindowCantBeDeleted" xml:space="preserve">
+    <value>Keyword 'Last Window' cannot be deleted. It represents the window underneath Quick Key.</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>&amp;Keywords</value>
+  </data>
+  <data name="KeywordsAddBottom" xml:space="preserve">
+    <value>Add Item to Bottom</value>
+  </data>
+  <data name="KeywordsAddTop" xml:space="preserve">
+    <value>Add Item to Top</value>
+  </data>
+  <data name="KeywordsDelBottom" xml:space="preserve">
+    <value>DeleteBottomItem</value>
+  </data>
+  <data name="KeywordsDelTop" xml:space="preserve">
+    <value>Delete Top Item</value>
+  </data>
+  <data name="KeywordsEdit" xml:space="preserve">
+    <value>&amp;Edit Keyword List...</value>
+  </data>
+  <data name="KeywordsMenu" xml:space="preserve">
+    <value>&amp;Keywords</value>
+  </data>
+  <data name="LastWindow" xml:space="preserve">
+    <value>Last Window</value>
+    <comment>The keyword that represents the next window in the z-order</comment>
+  </data>
+  <data name="LightEdge" xml:space="preserve">
+    <value>Light Edge</value>
+  </data>
+  <data name="LockButton" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="LockButtonTooltip" xml:space="preserve">
+    <value>Enables/disables the resizing and moving of the
+Character Grid and accessory windows.</value>
+  </data>
+  <data name="Locked" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Locked.ICO;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Locked1" xml:space="preserve">
+    <value>Lock Position</value>
+  </data>
+  <data name="Locked2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Locked.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LockedText" xml:space="preserve">
+    <value>You have locked the Character Grid, the Toolbar, and the Auto-Hide Window. You will not be able to resize or move these windows until you unlock Quick Key. This does not prevent your character set from being changed. Please use 'Lock Characters' for this purpose.</value>
+  </data>
+  <data name="LockedTitle" xml:space="preserve">
+    <value>This feature prevents accidental movement of the Character Grid</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="MenuAutohide" xml:space="preserve">
+    <value>Auto-hide</value>
+  </data>
+  <data name="MenuCharacterGrid" xml:space="preserve">
+    <value>Character Grid</value>
+  </data>
+  <data name="MenuEventLog" xml:space="preserve">
+    <value>Event Log</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="MenuHelpTopics" xml:space="preserve">
+    <value>Help Topics</value>
+  </data>
+  <data name="MenuHideTips" xml:space="preserve">
+    <value>Hide Tips</value>
+  </data>
+  <data name="MenuOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="MenuResetTips" xml:space="preserve">
+    <value>Reset Tips</value>
+  </data>
+  <data name="MenuToolbar" xml:space="preserve">
+    <value>Toolbar</value>
+  </data>
+  <data name="MouseButtonActions" xml:space="preserve">
+    <value>Mouse Button Actions</value>
+  </data>
+  <data name="MouseButtonLeft" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="MouseButtonMiddle" xml:space="preserve">
+    <value>Middle</value>
+  </data>
+  <data name="MouseButtonRight" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="MouseButtonX1" xml:space="preserve">
+    <value>XButton1</value>
+  </data>
+  <data name="MouseButtonX2" xml:space="preserve">
+    <value>XButton2</value>
+  </data>
+  <data name="MouseSettings" xml:space="preserve">
+    <value>Mouse Settings</value>
+  </data>
+  <data name="NoCharacterEntered" xml:space="preserve">
+    <value>No Character Entered</value>
+  </data>
+  <data name="Nohide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Nohide.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NormalOutline" xml:space="preserve">
+    <value>Button Outline</value>
+  </data>
+  <data name="OKButton" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="Open" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -552,6 +1098,96 @@
         AAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD/5wAA/gcAAPADAADAAwAAgAEAAIABAACAAQAAgAEAAIAD
         AACAHwAAgD8AAPD/AAD//wAA//8AAA==
 </value>
+  </data>
+  <data name="OpenCharsetDialogCaption" xml:space="preserve">
+    <value>Open Charset</value>
+  </data>
+  <data name="OpenCharsetDialogFilter" xml:space="preserve">
+    <value>Charset Files (*.charset)|*.charset</value>
+  </data>
+  <data name="OpenCharsetErrorCaption" xml:space="preserve">
+    <value>Error Loading File</value>
+  </data>
+  <data name="OpenCharsetFileCorrupt" xml:space="preserve">
+    <value>File is corrupt!</value>
+  </data>
+  <data name="OpenCharsetFileDoesNotExist" xml:space="preserve">
+    <value>File Does Not Exist!</value>
+  </data>
+  <data name="OpenCharsetFileEmpty" xml:space="preserve">
+    <value>File is empty!</value>
+  </data>
+  <data name="OptionsAddButton" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="OptionsAddButtonTooltip" xml:space="preserve">
+    <value>Add a keyword to the list</value>
+  </data>
+  <data name="OptionsApplyButtonTooltip" xml:space="preserve">
+    <value>Saves all settings changes, but does not hide this dialog box</value>
+  </data>
+  <data name="OptionsCancelButtonTooltip" xml:space="preserve">
+    <value>Ignores all settings changes and closes this dialog box</value>
+  </data>
+  <data name="OptionsClipboardSendKeys" xml:space="preserve">
+    <value>Clipboard + SendKeys(Paste) Use this when 'Send Input' fails.</value>
+  </data>
+  <data name="OptionsDialog" xml:space="preserve">
+    <value>Here you can assign mouse buttons to actions. Each button has a tab, which contains a listing of all actions. Check the actions you want the mouse button to perform.
+Keywords are the internal code names for applications, or application classes. For example, Microsoft Word is always OpusApp, wheras Outlook Express has a different keyword (class name) for the message composer (ATH_Note) than for the main window (Outlook Express Browser Class).
+To add a new keyword, you must click 'Add', then 'Find'. This opens a separate application, which will retrieve the class name once given the exact title bar text for the window.
+For users of GTK+ applications, it may be neccesary to change the send mode to Clipboard + SendKeys(). This method works with a larger portion of applications, but overwrites any text or information you may store in the clipboard.</value>
+  </data>
+  <data name="OptionsDialogTitle" xml:space="preserve">
+    <value>Details, details, details...</value>
+  </data>
+  <data name="OptionsMoveDownButton" xml:space="preserve">
+    <value>Move Down</value>
+  </data>
+  <data name="OptionsMoveUpButton" xml:space="preserve">
+    <value>Move Up</value>
+  </data>
+  <data name="OptionsOKButtonTooltip" xml:space="preserve">
+    <value>Saves all settings changes and closes this dialog box</value>
+  </data>
+  <data name="OptionsRemoveButton" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="OptionsRemoveButtonTooltip" xml:space="preserve">
+    <value>Remove the currently selected keyword from the list</value>
+  </data>
+  <data name="OptionsSendDelay" xml:space="preserve">
+    <value>Milliseconds to wait between switching windows and sending the character.</value>
+  </data>
+  <data name="OptionsSendInput" xml:space="preserve">
+    <value>Send Input API (Reccomended) Does not affect the clipboard</value>
+  </data>
+  <data name="OptionsSendKeys" xml:space="preserve">
+    <value>Send Keys (Safer, but more limited)</value>
+  </data>
+  <data name="OptionsSendMethod" xml:space="preserve">
+    <value>Please choose what method to use for character transfer.</value>
+  </data>
+  <data name="OptionsWindowTitle" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="OriBottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="Orientation" xml:space="preserve">
+    <value>Titlebar Location</value>
+  </data>
+  <data name="OriLeft" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="OriRight" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="OriTop" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="OutsideRimColor" xml:space="preserve">
+    <value>Outside Rim Color</value>
   </data>
   <data name="Paste" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -600,830 +1236,20 @@
         KADAAQAA4AEAAOABAADwAwAA8A8AAPmPAAD//wAA
 </value>
   </data>
-  <data name="Quick_Key" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAgAICAQAAAAAADoAgAAhgAAABAQEAAAAAAAKAEAAG4DAAAwMBAAAAAAAGgGAACWBAAAQEAQAAAA
-        AABoCgAA/goAABAQAAAAAAAAaAUAAGYVAAAgIAAAAAAAAKgIAADOGgAAMDAAAAAAAACoDgAAdiMAAEBA
-        AAAAAAAAKBYAAB4yAAAoAAAAIAAAAEAAAAABAAQAAAAAAAACAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAA
-        gAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmZkAAJmZAAAAAAAAAAAAAJmZAAmZ
-        mQAAAAAAAAAAAACZmQCZmZAAAAAAAAAAAAAAmZkJmZkAAAAAAAAAAAAAAJmZmZmQAAAAAAAAAAAAAACZ
-        mZmZAAAAAAAAAAAAAAAAmZmZmQAAAAAAAAAAAAAAAJmZmZmQAAAAAAAAAAAAAACZmQmZmQAAAAAAAAAA
-        AAAAmZkAmZmQAAAAAAAAAAAAAJmZAAmZmQAAAAAAAAAAAACZmQAAmZkAAAAAAAAAAAAAmZkAAAAAAAAA
-        AAAAAAAAAJmZAAAAAAAAAAAAAAAAAACZmQAAAAAAAAAAAAAAAAAAmZkAAAAAAAAAAAAAAAAAAJmZAAAA
-        AAAAAAAAAAAAAACZmQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////////////8PD///Dg///wwf//8IP///AH///
-        wD///8A////AH//Awg//wMMH/w/Dg/4Hw8PwA8P/4AHD/8Pww//D8MP/w/DD/8Pww//D8P//w/D//8Pw
-        ///D8P//w/D//8Pw///D8P//w/D///AB///wA/////////////8oAAAAEAAAACAAAAABAAQAAAAAAIAA
-        AAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/
-        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAAAmQCZAAAAAACZCZAAAAAAAJmZAAAAAAAAmZ
-        kAAAAAAACZmZAAAAAAAJkJmQAAAAAAmQAAAAAAAACZAAAAAAAAAJkAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP+ZAAD/kwAA/4cAAP+HAAD4gwAA85EAAMGf
-        AACcnwAAnJ8AAJz/AACc/wAAnP8AAJz/AADB/wAA//8AACgAAAAwAAAAYAAAAAEABAAAAAAAgAQAAAAA
-        AAAAAAAAEAAAABAAAAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAICAgAAAAP8AAP8AAAD/
-        /wD/AAAA/wD/AP//AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAA
-        DMAADAAMAAAADMwAAMAADAAAAADAwAAAwAwADAAAAAAAwADAAAAADAAAAADAwAAMAADADAAAAAAAwAAM
-        AAAADAAAAADAwAAMAAAADAAAAAAAAAAMAAAADAAAAAwADAAMzMzADAAAAAAAAAAMAAAADAAAAAwADAAM
-        AADADAAAAAAAzADAAAAADAAAAAwADAAAwAwADMAAAAAAwMwAAAAADAAAAMAAAMAADMAADAwAAAAAwAAA
-        AAAADAAAAMAAAMAAAAAAAAAAAAAADAAAAAAADAAAAMAAAMAAAAAAAAAAAAAADAAAAAAADAAADAAAAAwA
-        AAAAAAAAAAAADMzMAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACZkAAAAAAAAAAAAAAAAAAAAAAAAAAAAACZCQAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAAJmZmQmZmQCZmQAACZAAAAAAAAAAAAAAAACZAACZAAmQAJAA
-        CZAAAAAAAAAAAAAAAACZAAmQAAmQAAAAmZAAAAAAAAAAAAAAAACZAJkAAAmZmZAAmQkAAAAAAAAAAAAA
-        AACZCZAAAAmQCZAJmQkAAAAAAAAAAAAAAACZmQAAAAmQCZAJkACQAAAAAAAAAAAAAACZCQAAAACZmQCZ
-        mQmZAAAAAAAAAAAAAACZAJkAAAAAAAAAAAAAAAAAAAAAAAAAAACZAACQAAAAAAAAAAAAAAAAAAAAAAAA
-        AACZAAAJAAAAAAAAAAAAAAAAAAAAAAAAAJmZmQCZmQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////AAD///////8AAP///////wAA////////
-        AAD7+e7+Pe8AAPX27/3f7wAA9e9v/e/vAAD17+//7+8AAO7gb//v7wAA7u9v/N/vAADu9uf9P+8AAN95
-        6/3/7wAA33///v/vAADff//+/+8AAL+///4P7wAA////////AAD///////8AAP/////H/wAA/////8v/
-        AAD/////+/8AAP/8CDD5/wAA//8853n/AAD//znn8f8AAP//M+By/wAA//8n5mL/AAD//w/mZ38AAP//
-        L/DCPwAA//8z////AAD//z3///8AAP//Pv///wAA/4wMP///AAD/P/////8AAP5//////wAA/D8AMYQ/
-        AADzzmZmzP8AAPPOZmfJ/wAA5+ZmZ8P/AADn5mZny/8AAOfmZmTN/wAA5+REcMx/AADn5///z/8AAPPP
-        ///P/wAA88/+f8//AAD8P/5/j/8AAP///////wAA////////AAD///////8AAP///////wAAKAAAAEAA
-        AACAAAAAAQAEAAAAAAAACAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAIAAAIAAAACAgACAAAAAgACAAICA
-        AADAwMAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//////////////////////
-        //APAAAAAAAAAAAAAAAA////////////////////////D/AAAAAAAAAAAAAAAAD/////////////////
-        /w////D/DwAAAAAAAAAAAAAAAP////////////AAAA//AA//D/D/AAAAAAAAAAAAAAAA////////////
-        //AP//8P8PD/D/8AAAAAAAAAAAAAAAD/////////////8A///w//D/D//wAAAAAAAAAAAAAAAP////AP
-        8A/wAP/wD///D///D///AAAAAAAAAAAAAAAA////8A8A/wD///AP//8P///w//8AAAAAAAAAAAAAAAD/
-        ///wAA//AAAP8A///w////8P/wAAAAAAAAAAAAAAAP////AA//8A8A/wD///D/////D/AAAAAAAAAAAA
-        AAAA////8AAP//AA//AP//8P///wD/8AAAAAAAAAAAAAAAD////wDwD/////8A///w//8A///wAAAAAA
-        AAAAAAAAAP////AP8A/////wD///D/AP////AAAAAAAAAAAAAAAA//////////////AP//8AD/////8A
-        AAAAAAAAAAAAAAD/////////////8A///w///////wAAAAAAAAAAAAAAAP////////////AAAA//////
-        ////AAAAAAAAAAAAAAAA//////////////////////////8AAAAAAAAAAAAAAAD/8AAAAAAAAAAAAAAA
-        AAAAAAAA/wAAAAAAAAAAAAAAAP/wAAAAAAAAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAAA////////////
-        ///////////wAAAAAAAAAAAAAAAAAAD///////////////////////AAAAAPd3d3f3d3d3cAAP//////
-        ////////AA//////8Hd3dw93AHd/d3AHdwAA/////wD////////wD//////wdwAHD3cAd393cAd3AAD/
-        /wAAD/8AAPAP/wAP8A8A//BwBwAPdwB3f3dwB3cAAP/wD/AA8A8A8A/wDwDwAA//8HcABw93AHd/d3AH
-        dwAA//APAADwDwDwD/AP//AA///wd3AHD3d3d393d3d3AAD/8A//APAPAPAP8A8A8AD///B3AAcPcAAH
-        f3cAAHcAAP/wD/8A8A8A8A//AA/wAA//8Hd3dw93d3d/d3AHdwAA//AP/wD///////////AP///wAAAA
-        D3d3d393d3d3AAD//wAAD/8A/wAA////8A////////////////////8AAP////////AP////////////
-        93cAd393AAd/d3d3dwAA///////////////////////3dwB3f3dwB38AcAAAAAD/8AAAAAAAAAAAAAAA
-        AAAAD/d3AHd/dwAHfwAAB3cAAP/wAAAAAAAAAAAAAAAAAAAP93cAd39wBwB/cAAHdwAA////////////
-        ///////////3cAAHf3AHd393AAAAAAD///////////////////////cAdwB/cAd3f3cAB3cAAP//////
-        ////////////////93cAd39wBwB/d3AAAAAA//AAAAAAAAAAAAAAAAAAAA/3d3AHf3cAB393d3d3AAD/
-        8AAAAAAAAAAAAAAAAAAAD/d3d3d/d3d3f3d3d3cAAP//////////////////////////////////////
-        /wAA///////////////////////3cAAAf3cAB393cAd3AAD///////////////////////dwB3APdwAH
-        f3dwB3cAAP//////////////////////93AHcA93AAd/d3AHdwAAAAAAAAAAAAAAAAAAAAAAAA/3AABw
-        D3AAB393cAd3AAAAAAAAAAAAAAAAAAAAAAAAD/dwB3APcAAHf3d3d3cAAAAAAAAAAAAAAAAAAAAAAAAP
-        93AAAH9wAAd/d3AHdwAAAAAAAAAAAAAAAAAAAAAAAA/3d3d3f3cAB393dwB3AAAAAAAAAAAAAAAAAAAA
-        AAAAD/////////////////8AAAAAAAAAAAAAAAAAAAAAAAAP93d3d393d3d/d3d3dwAAAAAAAAAAAAAA
-        AAAAAAAAAA/3dwB3f3cAd39wAAB3AAAAAAAAAAAAAAAAAAAAAAAAD/dwAAd/dwB3f3AAcAcAAAAAAAAA
-        AAAAAAAAAAAAAAAP93cAd393AHd/cAAABwAAAAAAAAAAAAAAAAAAAAAAAA/3cAAHf3cAd39wBwAHAAAA
-        AAAAAAAAAAAAAAAAAAAAD/d3AHd/d3d3f3cAAAcAAAAAAAAAAAAAAAAAAAAAAAAP93AAB39wAAd/d3d3
-        dwAAAAAAAAAAAAAAAAAAAAAAAA/3d3d3d3d3d3d3d3d3AAAAAAAAAAAAAAAAAAAAAAAAD/zMzMzMx3AA
-        8AD/Dw8AAAAAAAAAAAAAAAAAAAAAAAAP/MzMzMzHcPDwAP/w/wAAAAAAAAAAAAAAAAAAAAAAAA/8zMzM
-        zMdwAPDw/w8PAAAAAAAAAAAAAAAAAAAAAAAAD/zMzMzMx3D//w////8AAAAAAAAAAAAAAAAAAAAAAAAP
-        //////////////////AAAAAAAAAAAAAAAAAAAAAAAA//////////////////////////////gAAAAAAf
-        //+AAAAAAB///4AAAAAAH///gAAAAAAf//+AAAAAAB///4AAAAAAH///gAAAAAAf//+AAAAAAB///4AA
-        AAAAH///gAAAAAAf//+AAAAAAB///4AAAAAAH///gAAAAAAf//+AAAAAAB///4AAAAAAH///gAAAAAAf
-        //+AAAAAAB///4AAAAAAH///gAAAAAAf//+AAAAAAB///4AAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAA
-        AAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAA
-        AAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAA
-        AAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAAB/////+AA
-        AAH/////4AAAAf/////gAAAB/////+AAAAH/////4AAAAf/////gAAAB/////+AAAAH/////4AAAAf//
-        ///gAAAB/////+AAAAH/////4AAAAf/////gAAAB/////+AAAAH/////4AAAAf/////gAAAB/////+AA
-        AAH/////4AAAAf/////gAAAAKAAAABAAAAAgAAAAAQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAA
-        AAAAAIAAAIAAAACAgACAAAAAgACAAICAAADAwMAAwNzAAPDKpgAEBAQACAgIAAwMDAAREREAFhYWABwc
-        HAAiIiIAKSkpAFVVVQBNTU0AQkJCADk5OQCAfP8AUFD/AJMA1gD/7MwAxtbvANbn5wCQqa0AAAAzAAAA
-        ZgAAAJkAAADMAAAzAAAAMzMAADNmAAAzmQAAM8wAADP/AABmAAAAZjMAAGZmAABmmQAAZswAAGb/AACZ
-        AAAAmTMAAJlmAACZmQAAmcwAAJn/AADMAAAAzDMAAMxmAADMmQAAzMwAAMz/AAD/ZgAA/5kAAP/MADMA
-        AAAzADMAMwBmADMAmQAzAMwAMwD/ADMzAAAzMzMAMzNmADMzmQAzM8wAMzP/ADNmAAAzZjMAM2ZmADNm
-        mQAzZswAM2b/ADOZAAAzmTMAM5lmADOZmQAzmcwAM5n/ADPMAAAzzDMAM8xmADPMmQAzzMwAM8z/ADP/
-        MwAz/2YAM/+ZADP/zAAz//8AZgAAAGYAMwBmAGYAZgCZAGYAzABmAP8AZjMAAGYzMwBmM2YAZjOZAGYz
-        zABmM/8AZmYAAGZmMwBmZmYAZmaZAGZmzABmmQAAZpkzAGaZZgBmmZkAZpnMAGaZ/wBmzAAAZswzAGbM
-        mQBmzMwAZsz/AGb/AABm/zMAZv+ZAGb/zADMAP8A/wDMAJmZAACZM5kAmQCZAJkAzACZAAAAmTMzAJkA
-        ZgCZM8wAmQD/AJlmAACZZjMAmTNmAJlmmQCZZswAmTP/AJmZMwCZmWYAmZmZAJmZzACZmf8AmcwAAJnM
-        MwBmzGYAmcyZAJnMzACZzP8Amf8AAJn/MwCZzGYAmf+ZAJn/zACZ//8AzAAAAJkAMwDMAGYAzACZAMwA
-        zACZMwAAzDMzAMwzZgDMM5kAzDPMAMwz/wDMZgAAzGYzAJlmZgDMZpkAzGbMAJlm/wDMmQAAzJkzAMyZ
-        ZgDMmZkAzJnMAMyZ/wDMzAAAzMwzAMzMZgDMzJkAzMzMAMzM/wDM/wAAzP8zAJn/ZgDM/5kAzP/MAMz/
-        /wDMADMA/wBmAP8AmQDMMwAA/zMzAP8zZgD/M5kA/zPMAP8z/wD/ZgAA/2YzAMxmZgD/ZpkA/2bMAMxm
-        /wD/mQAA/5kzAP+ZZgD/mZkA/5nMAP+Z/wD/zAAA/8wzAP/MZgD/zJkA/8zMAP/M/wD//zMAzP9mAP//
-        mQD//8wAZmb/AGb/ZgBm//8A/2ZmAP9m/wD//2YAIQClAF9fXwB3d3cAhoaGAJaWlgDLy8sAsrKyANfX
-        1wDd3d0A4+PjAOrq6gDx8fEA+Pj4APD7/wCkoKAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP//
-        /wAKCgoKCgoKCgAKCgoKCgoKCgoKCgoKCgoA+fkKCvn5CgoKCgoKCgoKAPn5Cvn5CgoKCgoKCgoKCgD5
-        +fn5CgoKCgoKCgoKCgoA+fn5+QoKCgoKCgoKCgoKAPn5+fn5CgoKCgoKCgoKCgD5+Qr5+fkKCgoKCgoK
-        CgoA+fkKCgoKCgoKCgoKCgoKAPn5CgoKCgoKCgoKCgoKCgD5+QoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoK//8AAP+ZAAD/kwAA/4cAAP+HAAD4gwAA85EAAMGfAACcnwAAnJ8AAJz/
-        AACc/wAAnP8AAJz/AADB/wAA//8AACgAAAAgAAAAQAAAAAEACAAAAAAAAAQAAAAAAAAAAAAAAAEAAAAB
-        AAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAMDcwADwyqYABAQEAAgICAAMDAwAERERABYW
-        FgAcHBwAIiIiACkpKQBVVVUATU1NAEJCQgA5OTkAgHz/AFBQ/wCTANYA/+zMAMbW7wDW5+cAkKmtAAAA
-        MwAAAGYAAACZAAAAzAAAMwAAADMzAAAzZgAAM5kAADPMAAAz/wAAZgAAAGYzAABmZgAAZpkAAGbMAABm
-        /wAAmQAAAJkzAACZZgAAmZkAAJnMAACZ/wAAzAAAAMwzAADMZgAAzJkAAMzMAADM/wAA/2YAAP+ZAAD/
-        zAAzAAAAMwAzADMAZgAzAJkAMwDMADMA/wAzMwAAMzMzADMzZgAzM5kAMzPMADMz/wAzZgAAM2YzADNm
-        ZgAzZpkAM2bMADNm/wAzmQAAM5kzADOZZgAzmZkAM5nMADOZ/wAzzAAAM8wzADPMZgAzzJkAM8zMADPM
-        /wAz/zMAM/9mADP/mQAz/8wAM///AGYAAABmADMAZgBmAGYAmQBmAMwAZgD/AGYzAABmMzMAZjNmAGYz
-        mQBmM8wAZjP/AGZmAABmZjMAZmZmAGZmmQBmZswAZpkAAGaZMwBmmWYAZpmZAGaZzABmmf8AZswAAGbM
-        MwBmzJkAZszMAGbM/wBm/wAAZv8zAGb/mQBm/8wAzAD/AP8AzACZmQAAmTOZAJkAmQCZAMwAmQAAAJkz
-        MwCZAGYAmTPMAJkA/wCZZgAAmWYzAJkzZgCZZpkAmWbMAJkz/wCZmTMAmZlmAJmZmQCZmcwAmZn/AJnM
-        AACZzDMAZsxmAJnMmQCZzMwAmcz/AJn/AACZ/zMAmcxmAJn/mQCZ/8wAmf//AMwAAACZADMAzABmAMwA
-        mQDMAMwAmTMAAMwzMwDMM2YAzDOZAMwzzADMM/8AzGYAAMxmMwCZZmYAzGaZAMxmzACZZv8AzJkAAMyZ
-        MwDMmWYAzJmZAMyZzADMmf8AzMwAAMzMMwDMzGYAzMyZAMzMzADMzP8AzP8AAMz/MwCZ/2YAzP+ZAMz/
-        zADM//8AzAAzAP8AZgD/AJkAzDMAAP8zMwD/M2YA/zOZAP8zzAD/M/8A/2YAAP9mMwDMZmYA/2aZAP9m
-        zADMZv8A/5kAAP+ZMwD/mWYA/5mZAP+ZzAD/mf8A/8wAAP/MMwD/zGYA/8yZAP/MzAD/zP8A//8zAMz/
-        ZgD//5kA///MAGZm/wBm/2YAZv//AP9mZgD/Zv8A//9mACEApQBfX18Ad3d3AIaGhgCWlpYAy8vLALKy
-        sgDX19cA3d3dAOPj4wDq6uoA8fHxAPj4+ADw+/8ApKCgAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//
-        AAD///8ACgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCvn5+fkKCgoK+fn5+QoKCgoKCgoKCgoKCgoKCgoKCgoK
-        +fn5+QoKCvn5+fn5CgoKCgoKCgoKCgoKCgoKCgoKCgr5+fn5Cgr5+fn5+QoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCvn5+fkK+fn5+fkKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fn5+fn5+fn5CgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgr5+fn5+fn5+QoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCvn5+fn5+fn5CgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoK+fn5+fn5+fn5CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr5+fn5Cvn5+fn5CgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCvn5+fkKCvn5+fn5CgoKCgoKCgoKCgoKCgoKCgoKCgoK+fn5+QoKCvn5+fn5
-        CgoKCgoKCgoKCgoKCgoKCgoKCgr5+fn5CgoKCvn5+fkKCgoKCgoKCgoKCgoKCgoKCgoKCvn5+fkKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fn5+QoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr5+fn5
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCvn5+fkKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        +fn5+QoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr5+fn5CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKAAAKCgoK
-        AAAKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoAAAoKCgoAAAoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgAA
-        CgoKCgAACgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKAAAKCgoKAAAKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoAAAAACgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgAAAAAKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKAAAAAAAAAAAKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoAAAAAAAAAAAoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCv/////////////Dw///w4P//8MH///CD///wB///8A////AP///wB//wMIP/8DDB/8P
-        w4P+B8PD8APD/+ABw//D8MP/w/DD/8Pww//D8MP/w/D//8Pw///D8P//w/D//8Pw///D8P//w/D//8Pw
-        ///wAf//8AP/////////////KAAAADAAAABgAAAAAQAIAAAAAAAACQAAAAAAAAAAAAAAAQAAAAEAAAAA
-        AAAAAIAAAIAAAACAgACAAAAAgACAAICAAADAwMAAwNzAAPDKpgAEBAQACAgIAAwMDAAREREAFhYWABwc
-        HAAiIiIAKSkpAFVVVQBNTU0AQkJCADk5OQCAfP8AUFD/AJMA1gD/7MwAxtbvANbn5wCQqa0AAAAzAAAA
-        ZgAAAJkAAADMAAAzAAAAMzMAADNmAAAzmQAAM8wAADP/AABmAAAAZjMAAGZmAABmmQAAZswAAGb/AACZ
-        AAAAmTMAAJlmAACZmQAAmcwAAJn/AADMAAAAzDMAAMxmAADMmQAAzMwAAMz/AAD/ZgAA/5kAAP/MADMA
-        AAAzADMAMwBmADMAmQAzAMwAMwD/ADMzAAAzMzMAMzNmADMzmQAzM8wAMzP/ADNmAAAzZjMAM2ZmADNm
-        mQAzZswAM2b/ADOZAAAzmTMAM5lmADOZmQAzmcwAM5n/ADPMAAAzzDMAM8xmADPMmQAzzMwAM8z/ADP/
-        MwAz/2YAM/+ZADP/zAAz//8AZgAAAGYAMwBmAGYAZgCZAGYAzABmAP8AZjMAAGYzMwBmM2YAZjOZAGYz
-        zABmM/8AZmYAAGZmMwBmZmYAZmaZAGZmzABmmQAAZpkzAGaZZgBmmZkAZpnMAGaZ/wBmzAAAZswzAGbM
-        mQBmzMwAZsz/AGb/AABm/zMAZv+ZAGb/zADMAP8A/wDMAJmZAACZM5kAmQCZAJkAzACZAAAAmTMzAJkA
-        ZgCZM8wAmQD/AJlmAACZZjMAmTNmAJlmmQCZZswAmTP/AJmZMwCZmWYAmZmZAJmZzACZmf8AmcwAAJnM
-        MwBmzGYAmcyZAJnMzACZzP8Amf8AAJn/MwCZzGYAmf+ZAJn/zACZ//8AzAAAAJkAMwDMAGYAzACZAMwA
-        zACZMwAAzDMzAMwzZgDMM5kAzDPMAMwz/wDMZgAAzGYzAJlmZgDMZpkAzGbMAJlm/wDMmQAAzJkzAMyZ
-        ZgDMmZkAzJnMAMyZ/wDMzAAAzMwzAMzMZgDMzJkAzMzMAMzM/wDM/wAAzP8zAJn/ZgDM/5kAzP/MAMz/
-        /wDMADMA/wBmAP8AmQDMMwAA/zMzAP8zZgD/M5kA/zPMAP8z/wD/ZgAA/2YzAMxmZgD/ZpkA/2bMAMxm
-        /wD/mQAA/5kzAP+ZZgD/mZkA/5nMAP+Z/wD/zAAA/8wzAP/MZgD/zJkA/8zMAP/M/wD//zMAzP9mAP//
-        mQD//8wAZmb/AGb/ZgBm//8A/2ZmAP9m/wD//2YAIQClAF9fXwB3d3cAhoaGAJaWlgDLy8sAsrKyANfX
-        1wDd3d0A4+PjAOrq6gDx8fEA+Pj4APD7/wCkoKAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP//
-        /wAKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCvwKCgoKCgoK/PwKCgoK/AoKCvwKCgoKCgoK/Pz8CgoKCvwKCgoK/AoK
-        CgoKCgoK/Ar8CgoKCgr8Cgr8CgoK/AoKCgoKCgoKCgr8CgoK/AoKCgoKCgoK/AoKCgoKCgoK/Ar8CgoK
-        CvwKCgoK/AoK/AoKCgoKCgoKCgr8CgoKCvwKCgoKCgoK/AoKCgoKCgoK/Ar8CgoKCvwKCgoKCgoK/AoK
-        CgoKCgoKCgoKCgoKCvwKCgoKCgoK/AoKCgoKCgr8CgoK/AoKCvz8/Pz8/AoK/AoKCgoKCgoKCgoKCgoK
-        CvwKCgoKCgoK/AoKCgoKCgr8CgoK/AoKCvwKCgoK/AoK/AoKCgoKCgoKCgr8/AoK/AoKCgoKCgoK/AoK
-        CgoKCgr8CgoK/AoKCgr8Cgr8CgoK/PwKCgoKCgoKCgr8Cvz8CgoKCgoKCgoK/AoKCgoKCvwKCgoKCvwK
-        CgoK/PwKCgoK/Ar8CgoKCgoKCgr8CgoKCgoKCgoKCgoK/AoKCgoKCvwKCgoKCvwKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoK/AoKCgoKCgoKCgoK/AoKCgoKCvwKCgoKCvwKCgoKCgoKCgoKCgoKCgoKCgoKCgoK/AoK
-        CgoKCgoKCgoK/AoKCgoK/AoKCgoKCgr8CgoKCgoKCgoKCgoKCgoKCgoKCgoK/Pz8/PwKCgoKCgoK/AoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoK+fn5CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        +fkK+QoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+QoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCvn5+fn5+Qr5+fn5+QoK+fn5+QoKCgoK+fkKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoK+fkKCgoK+fkKCgr5+QoKCvkKCgoK+fkKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fkKCgr5
-        +QoKCgr5+QoKCgoKCgr5+fkKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fkKCvn5CgoKCgr5+fn5+fkK
-        Cgr5+Qr5CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fkK+fkKCgoKCgr5+QoK+fkKCvn5+Qr5CgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoK+fn5+QoKCgoKCgr5+QoK+fkKCvn5CgoK+QoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoK+fkK+QoKCgoKCgoK+fn5+QoK+fn5+Qr5+fkKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fkKCvn5
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fkKCgoK+QoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fkKCgoKCvkKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCvn5+fn5+QoK+fn5+QoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr///////8AAP///////wAA////////AAD///////8AAPv5
-        7v497wAA9fbv/d/vAAD172/97+8AAPXv7//v7wAA7uBv/+/vAADu72/83+8AAO725/0/7wAA33nr/f/v
-        AADff//+/+8AAN9///7/7wAAv7///g/vAAD///////8AAP///////wAA/////8f/AAD/////y/8AAP//
-        ///7/wAA//wIMPn/AAD//zznef8AAP//Oefx/wAA//8z4HL/AAD//yfmYv8AAP//D+ZnfwAA//8v8MI/
-        AAD//zP///8AAP//Pf///wAA//8+////AAD/jAw///8AAP8//////wAA/n//////AAD8PwAxhD8AAPPO
-        ZmbM/wAA885mZ8n/AADn5mZnw/8AAOfmZmfL/wAA5+ZmZM3/AADn5ERwzH8AAOfn///P/wAA88///8//
-        AADzz/5/z/8AAPw//n+P/wAA////////AAD///////8AAP///////wAA////////AAAoAAAAQAAAAIAA
-        AAABAAgAAAAAAAAQAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDA
-        wADA3MAA8MqmAAQEBAAICAgADAwMABEREQAWFhYAHBwcACIiIgApKSkAVVVVAE1NTQBCQkIAOTk5AIB8
-        /wBQUP8AkwDWAP/szADG1u8A1ufnAJCprQAAADMAAABmAAAAmQAAAMwAADMAAAAzMwAAM2YAADOZAAAz
-        zAAAM/8AAGYAAABmMwAAZmYAAGaZAABmzAAAZv8AAJkAAACZMwAAmWYAAJmZAACZzAAAmf8AAMwAAADM
-        MwAAzGYAAMyZAADMzAAAzP8AAP9mAAD/mQAA/8wAMwAAADMAMwAzAGYAMwCZADMAzAAzAP8AMzMAADMz
-        MwAzM2YAMzOZADMzzAAzM/8AM2YAADNmMwAzZmYAM2aZADNmzAAzZv8AM5kAADOZMwAzmWYAM5mZADOZ
-        zAAzmf8AM8wAADPMMwAzzGYAM8yZADPMzAAzzP8AM/8zADP/ZgAz/5kAM//MADP//wBmAAAAZgAzAGYA
-        ZgBmAJkAZgDMAGYA/wBmMwAAZjMzAGYzZgBmM5kAZjPMAGYz/wBmZgAAZmYzAGZmZgBmZpkAZmbMAGaZ
-        AABmmTMAZplmAGaZmQBmmcwAZpn/AGbMAABmzDMAZsyZAGbMzABmzP8AZv8AAGb/MwBm/5kAZv/MAMwA
-        /wD/AMwAmZkAAJkzmQCZAJkAmQDMAJkAAACZMzMAmQBmAJkzzACZAP8AmWYAAJlmMwCZM2YAmWaZAJlm
-        zACZM/8AmZkzAJmZZgCZmZkAmZnMAJmZ/wCZzAAAmcwzAGbMZgCZzJkAmczMAJnM/wCZ/wAAmf8zAJnM
-        ZgCZ/5kAmf/MAJn//wDMAAAAmQAzAMwAZgDMAJkAzADMAJkzAADMMzMAzDNmAMwzmQDMM8wAzDP/AMxm
-        AADMZjMAmWZmAMxmmQDMZswAmWb/AMyZAADMmTMAzJlmAMyZmQDMmcwAzJn/AMzMAADMzDMAzMxmAMzM
-        mQDMzMwAzMz/AMz/AADM/zMAmf9mAMz/mQDM/8wAzP//AMwAMwD/AGYA/wCZAMwzAAD/MzMA/zNmAP8z
-        mQD/M8wA/zP/AP9mAAD/ZjMAzGZmAP9mmQD/ZswAzGb/AP+ZAAD/mTMA/5lmAP+ZmQD/mcwA/5n/AP/M
-        AAD/zDMA/8xmAP/MmQD/zMwA/8z/AP//MwDM/2YA//+ZAP//zABmZv8AZv9mAGb//wD/ZmYA/2b/AP//
-        ZgAhAKUAX19fAHd3dwCGhoYAlpaWAMvLywCysrIA19fXAN3d3QDj4+MA6urqAPHx8QD4+PgA8Pv/AKSg
-        oACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/////////////////////
-        ///////////////19fX19fX19fX1Cgr1AAoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK////////////////
-        ////////////////////9fX19fX19fX1Cv//CgAKAAAAAAAAAAAAAAAAAAAKCgoKCgoKCv//////////
-        //////////////////////////UK9fX19fX1Cv//CvUACgAAAAAAAAAAAAAAAAAACgoKCgoKCgr/////
-        ////////////////////AAAAAAAA///1CgoK9fX1Cv//CvX1AAoAAAAAAAAAAAAAAAAAAAoKCgoKCgoK
-        ////////////////////////////AAD/////9Qr//wr1Cv//CvX19QAKAAAAAAAAAAAAAAAAAAAKCgoK
-        CgoKCv///////////////////////////wAA//////UK////Cv//CvX19fUACgAAAAAAAAAAAAAAAAAA
-        CgoKCgoKCgr/////////AAD//wAA//8AAAD///8AAP/////1Cv//////CvX19fX1AAoAAAAAAAAAAAAA
-        AAAAAAoKCgoKCgoK/////////wAA/wAA//8AAP//////AAD/////9Qr///////8K9fX19QAKAAAAAAAA
-        AAAAAAAAAAAKCgoKCgoKCv////////8AAAAA////AAAAAAD//wAA//////UK/////////wr19fUACgAA
-        AAAAAAAAAAAAAAAACgoKCgoKCgr/////////AAAA/////wAA/wAA//8AAP/////1Cv//////////CvX1
-        AAoAAAAAAAAAAAAAAAAAAAoKCgoKCgoK/////////wAAAAD/////AAAA////AAD/////9Qr///////8K
-        CvX19QAKAAAAAAAAAAAAAAAAAAAKCgoKCgoKCv////////8AAP8AAP///////////wAA//////UK////
-        /woK9fX19fUACgAAAAAAAAAAAAAAAAAACgoKCgoKCgr/////////AAD//wAA//////////8AAP/////1
-        Cv//Cgr19fX19fX1AAoAAAAAAAAAAAAAAAAAAAoKCgoKCgoK////////////////////////////AAD/
-        ////9QoKCvX19fX19fX19QAKAAAAAAAAAAAAAAAAAAAKCgoKCgoKCv//////////////////////////
-        /wAA//////UK9fX19fX19fX19fUACgAAAAAAAAAAAAAAAAAACgoKCgoKCgr/////////////////////
-        ////AAAAAAAA////////////////////CgoAAAAAAAAAAAAAAAAAAAoKCgoKCgoK////////////////
-        /////////////////////////////////////woKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCv///woKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK//8KCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr///8K
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCvLyCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        ////////////////////////////////////////////8v8KCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCv////////////////////////////////////////////L/DAwMDAwMDAwbHBwcHBwcHBscHBwc
-        HBwcHAoKCgr/////////////////////////////CgoK///////////y/wwcHBwcHBwMGxwcCgocHBwb
-        HBwcCgocHBwKCgoK//////////8KCv////////////////8KCv//////////8v8MHBwKCgocDBscHAoK
-        HBwcGxwcHAoKHBwcCgoKCv////8KCgoKCv///woKCgr/Cgr///8KCgr//woK/woK//L/DBwKChwKCgwb
-        HBwKChwcHBscHBwKChwcHAoKCgr///8KCv//CgoK/woK/woK/woK//8KCv8KCv8KCgoK///y/wwcHAoK
-        ChwMGxwcCgocHBwbHBwcCgocHBwKCgoK////Cgr/CgoKCv8KCv8KCv8KCv//Cgr/////CgoK////8v8M
-        HBwcCgocDBscHBwcHBwcGxwcHBwcHBwcCgoKCv///woK////Cgr/Cgr/Cgr/Cgr//woK/woK/woKCv//
-        //L/DBwcCgoKHAwbHAoKCgocHBscHAoKCgocHAoKCgr///8KCv///woK/woK/woK/woK////CgoK//8K
-        CgoK///y/wwcHBwcHBwMGxwcHBwcHBwbHBwcCgocHBwKCgoK////Cgr///8KCv//////////////////
-        ////Cgr/////8v8MDAwMDAwMDBscHBwcHBwcGxwcHBwcHBwcCgoKCv////8KCgoKCv///woK//8KCgoK
-        /////////woK//////L/GxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGwoKCgr/////////////////Cgr/
-        ///////////////////////y/xwcHAoKHBwcGxwcCgoKHBwbHBwcHBwcHBwKCgoK////////////////
-        ////////////////////////////8v8cHBwKChwcHBscHBwKChwcGwoKHAoKCgoKCgoKCv///woKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCvL/HBwcCgocHBwbHBwKCgocHBsKCgoKChwcHAoKCgr///8K
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgry/xwcHAoKHBwcGxwKChwKChwbHAoKCgocHBwKCgoK
-        ////////////////////////////////////////////8v8cHAoKCgocHBscCgocHBwcGxwcCgoKCgoK
-        CgoKCv////////////////////////////////////////////L/HAoKHBwKChwbHAoKHBwcHBscHAoK
-        ChwcHAoKCgr////////////////////////////////////////////y/xwcHAoKHBwcGxwKChwKChwb
-        HBwcCgoKCgoKCgoK////CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK8v8cHBwcCgocHBscHAoK
-        ChwcGxwcHBwcHBwcCgoKCv///woKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCvL/HBwcHBwcHBwb
-        HBwcHBwcHBscHBwcHBwcHAoKCgr////////////////////////////////////////////yGxsbGxsb
-        GxsbGxsbGxsbGxsbGxsbGxsbGxsKCgoK////////////////////////////////////////////8v8c
-        HAoKCgoKHBscHAoKChwcGxwcHAoKHBwcCgoKCv//////////////////////////////////////////
-        //L/HBwKChwcCgobHBwKCgocHBscHBwKChwcHAoKCgr/////////////////////////////////////
-        ///////y/xwcCgocHAoKGxwcCgoKHBwbHBwcCgocHBwKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoK8v8cCgoKChwKChscCgoKChwcGxwcHAoKHBwcCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCvL/HBwKChwcCgobHAoKCgocHBscHBwcHBwcHAoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgry/xwcCgoKCgocGxwKCgoKHBwbHBwcCgocHBwKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoK8hscHBwcHBwcHBscHAoKChwcGxwcHBwKChwcCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCvL/GxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGwoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgry/xwcHBwcHBwcGxwcHBwcHBwbHBwcHBwcHBwKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK8v8cHBwKChwcHBscHAoKHBwcGxwKCgoKChwc
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCvL/HBwKCgoKHBwbHBwKChwcHBscCgoK
-        HAoKHAoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgry/xwcHAoKHBwcGxwcCgocHBwb
-        HAoKCgoKChwKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK8v8cHAoKCgocHBscHAoK
-        HBwcGxwKChwKCgocCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCvL/HBwcCgocHBwb
-        HBwcHBwcHBscHAoKCgoKHAoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgry/xwcCgoK
-        ChwcGxwKCgoKHBwbHBwcHBwcHBwKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK8v8c
-        HBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CvL/x8fHx8fHx8fHxxoaCgoKGwoKChsbChsKGwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgry/8fHx8fHx8fHx8caGgobChsKCgobGxsKGxsKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoK8v/Hx8fHx8fHx8fHGhoKCgobChsKGxsKGwobCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCvL/x8fHx8fHx8fHxxoaChsbGxsKGxsbGxsbGwoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgry////////////////////////////////////CgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoK8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vL//////////4AA
-        AAAAH///gAAAAAAf//+AAAAAAB///4AAAAAAH///gAAAAAAf//+AAAAAAB///4AAAAAAH///gAAAAAAf
-        //+AAAAAAB///4AAAAAAH///gAAAAAAf//+AAAAAAB///4AAAAAAH///gAAAAAAf//+AAAAAAB///4AA
-        AAAAH///gAAAAAAf//+AAAAAAB///4AAAAAAH///gAAAAAAf//+AAAAAAAAAAYAAAAAAAAABgAAAAAAA
-        AAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAA
-        AAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAA
-        AAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAf//
-        ///gAAAB/////+AAAAH/////4AAAAf/////gAAAB/////+AAAAH/////4AAAAf/////gAAAB/////+AA
-        AAH/////4AAAAf/////gAAAB/////+AAAAH/////4AAAAf/////gAAAB/////+AAAAH/////4AAAAf//
-        ///gAAAB/////+AAAAH/////4AAAAA==
-</value>
+  <data name="Paste1" xml:space="preserve">
+    <value>Paste</value>
   </data>
-  <data name="Quick_Key_Charset_File" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAMAMDAAAAAAAACoDgAANgAAAEBAAAAAAAAAKBYAAN4OAAAgIAAAAAAAAKgIAAAGJQAAKAAAADAA
-        AABgAAAAAQAIAAAAAAAACQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAIAAAIAAAACAgACAAAAAgACAAICA
-        AADAwMAAwNzAAPDKpgAEBAQACAgIAAwMDAAREREAFhYWABwcHAAiIiIAKSkpAFVVVQBNTU0AQkJCADk5
-        OQCAfP8AUFD/AJMA1gD/7MwAxtbvANbn5wCQqa0AAAAzAAAAZgAAAJkAAADMAAAzAAAAMzMAADNmAAAz
-        mQAAM8wAADP/AABmAAAAZjMAAGZmAABmmQAAZswAAGb/AACZAAAAmTMAAJlmAACZmQAAmcwAAJn/AADM
-        AAAAzDMAAMxmAADMmQAAzMwAAMz/AAD/ZgAA/5kAAP/MADMAAAAzADMAMwBmADMAmQAzAMwAMwD/ADMz
-        AAAzMzMAMzNmADMzmQAzM8wAMzP/ADNmAAAzZjMAM2ZmADNmmQAzZswAM2b/ADOZAAAzmTMAM5lmADOZ
-        mQAzmcwAM5n/ADPMAAAzzDMAM8xmADPMmQAzzMwAM8z/ADP/MwAz/2YAM/+ZADP/zAAz//8AZgAAAGYA
-        MwBmAGYAZgCZAGYAzABmAP8AZjMAAGYzMwBmM2YAZjOZAGYzzABmM/8AZmYAAGZmMwBmZmYAZmaZAGZm
-        zABmmQAAZpkzAGaZZgBmmZkAZpnMAGaZ/wBmzAAAZswzAGbMmQBmzMwAZsz/AGb/AABm/zMAZv+ZAGb/
-        zADMAP8A/wDMAJmZAACZM5kAmQCZAJkAzACZAAAAmTMzAJkAZgCZM8wAmQD/AJlmAACZZjMAmTNmAJlm
-        mQCZZswAmTP/AJmZMwCZmWYAmZmZAJmZzACZmf8AmcwAAJnMMwBmzGYAmcyZAJnMzACZzP8Amf8AAJn/
-        MwCZzGYAmf+ZAJn/zACZ//8AzAAAAJkAMwDMAGYAzACZAMwAzACZMwAAzDMzAMwzZgDMM5kAzDPMAMwz
-        /wDMZgAAzGYzAJlmZgDMZpkAzGbMAJlm/wDMmQAAzJkzAMyZZgDMmZkAzJnMAMyZ/wDMzAAAzMwzAMzM
-        ZgDMzJkAzMzMAMzM/wDM/wAAzP8zAJn/ZgDM/5kAzP/MAMz//wDMADMA/wBmAP8AmQDMMwAA/zMzAP8z
-        ZgD/M5kA/zPMAP8z/wD/ZgAA/2YzAMxmZgD/ZpkA/2bMAMxm/wD/mQAA/5kzAP+ZZgD/mZkA/5nMAP+Z
-        /wD/zAAA/8wzAP/MZgD/zJkA/8zMAP/M/wD//zMAzP9mAP//mQD//8wAZmb/AGb/ZgBm//8A/2ZmAP9m
-        /wD//2YAIQClAF9fXwB3d3cAhoaGAJaWlgDLy8sAsrKyANfX1wDd3d0A4+PjAOrq6gDx8fEA+Pj4APD7
-        /wCkoKAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP///wDDGhoaGggavAgICAgIB7sIu7sHs7O6
-        tLS0tLOzs7Ozs7Ozs7KysrKysrKysrKysrLDGhrDwwgIGrwICAgIBwi7u7u7u7q6tLq6urSzs7Ozs7Oz
-        s7OysrKysrKysrKysrLDw8MaGsMaGhoaCAgICAgICAe7s7u7urq0tLq0s7Ozs7Ozs7OzsrKysrKysrKy
-        srLDw8PDGhoaGsMIvAgICAgHB7u7u7uzurO6tLq6tLOzs7Ozs7OzsrKysrKysrKysrLDGsMawxrDGhoa
-        GrwICAgICAi7uwe7uwe6tLS0tLSzs7Ozs7Ozs7KysrKysrKysrLDw8PDw8Maw8MaCBoaCAgICAcHCAe7
-        uwe7urq0urS6s7qzs7Ozs7OzsrKysrKysrLDw8PDwxoawxoICAgaCAgICAgHCLu7swezurqztLS0tLOz
-        s7Ozs7OzsrKysrKysrLDw8PDGsPDGhrDGggaGrwICAgIB7u7u7u7u7q6tLS6tLSzs7Ozs7Ozs7KysrKy
-        srLDw8Maw8PDwxoaGhoaGhq8CAgICAcHu7u7u7u7urq0tLq0s7Ozs7Ozs7OysrKysrLDw8PDw8PD7Ozr
-        GhoaHJkaHO0I7+zs7+z37JG7urqRkLS0tLOLi7Ozs5CLsrKysrLDw8PDw8NzCgoK6hoaCusaFQoIDAoK
-        wwrrCkO7ukMKCgyQkA4KCg6LkAwKs7KysrLDw8PDw+oKw8PDChAaCusaFQq8CuuSwwoHCkO7kWyRbAwK
-        CkK0s2yLiwpss7OzsrLDw8PDwxAOw8PDcxwaCusaFQoaDgoKCgoHCkO7u+sOCgpsCg5CQkJCiwpss7Oz
-        srLDw8PDwwoUw8PDw8MaCm0aFQoa7ezsDAoIChC79woKbJG6Cg5CQgwKiwpss7Ozs7LDw8PDwxAKw8PD
-        HBrDCgoKCm0aEQoKChIICgoKbRAKCgyRkAwKCgyQCgoKs7Ozs7PDw8PDw+sKw8PDCurDCm3s7BoavOzr
-        7AgI7JJt7+9tbJG7upFsbJG0bApCs7Ozs7PDw8PDw7wO6hzsChzDCuzDGhoaGhoavAgICAgIB7u7u7u7
-        u7O6tLS0iwpss7Ozs7PDw8PDw8PDvBwcw8PDw8PDwxrDGsMaGhq8CAgICAgIuwezu7u7urq6tLS0s7Oz
-        s7PDw8PDw8PDw8PDw8PDGsPDGsPDwxoaCBoICAgICAgIu7u7u7O7urq6tLS0s7qzs7PDw8PDw8PDw8PD
-        w8PDw8Maw8PDGsMaGggaCAgICAgIB7sHu7u7u7qztLq0tLOzs7P2w8PDw8PDw8PDw8PDw8PDw8PDwxoI
-        wxoIGhq8CAgICAcICLsHs7u7B7S0tLS0s7P29sPDw8PDw8PDw8MawxrDw8PDw8MaCMMawwgaCAgICAgH
-        CAe7uwe7s7q0tLq0s7P29vbDw8PDw8PDw8PDw8PDwxoaGsPDGsMaGhoavAgICAgHBwi7B7u7urq6tLS0
-        tLP29vb2w8PDw8PDw8PDw8PDw8PDw8MawxoaGhoaGhq87eoKBwgHBwe7B7u6urS0urT2w/bDw8PDw8PD
-        w8PDw8PDw8PDHMPDw8McGhq8HAe8CAgUkgcHu7u7B7OzurO0urT29sP29vbDw8PDw8PDw8PDw8PDCsPD
-        w20KGm0KCgptvAgU6ggHu7u7swe7urq6tLT29vb29vb2w8PDw8PDw8PDw8PDCsPDDg6ZEwocGhzrGuwK
-        CuwIBwi7u7u7u7O6urT29vbD9vb2w8PDw8PDw8PDw8PDCnMaChzDFQoVFRUVGhEKChIICAcIuwe7u7u7
-        urP29vb2w/b29sPDw8PDw8PDw8PDCgoUbcPDFQoVFREKmQoRDAwICAgHCLu7B7u7urr29vb2w8P29vb2
-        w8PDw8PDw8PDCpkOc8PDwxUKCgrqEQq87AoSCAgIBwe7u7O7uwf29vb29vb29vb2w8PDw8PDw8PDCsOZ
-        CnPDw8Mc7BwaHBwaGhwcCAgICAgIu7sHu7v29vb29vb29vb29sPDw8PDw8PDCsPDEApzw8PDw8MaGhoa
-        GhoaCAgICAgHu7u7u7v29vb29vb29sPDw/b2w8PDw8PDw8PDw8PDw8MawxrDGsMaCMMIGrwICAgIBwcI
-        u7P/9vb29vb29sP2w8PD9sPDw8PDw8PDw8PDw8PDw8PDwxoaw8MaGhq8CAgICAcICLv/9vb29vb29vb2
-        9vb29vbDw8PDw8PDw8PDw8PDw8MaGsMaGhoawxoICAgICAcH77v////29vb29vb29vb29vb2w8PDw8PD
-        w8PDw8PDw8PDw8PDGhoIwxoavJkc7Ozs7Oz/////9vb29vb29vb29vb2w8PDw8PDw8PDw8PDw8PDw8PD
-        wxoaGhqZ7e3t7Ozs7Oz/////9vb27Ozs7A5t9hvvG+8aGhwbw8McGsPDHMPDHJnDGsOZ7Ozs6+vr6+vr
-        bev///////cK9+8OCuv2EgrqDgrs7AocCg7tEAocCsPsFcPDwxwUGhoaGhoaGrwIDu3//////xAK9vcS
-        EArwFAr27Qrs7ArvCuzDHBQcCpkOvMPDwxwUwxoICBoaGhoc7Ar/////8AoS9vb27ArtFAr27wrs7Aoc
-        ChzDw8PDCgoKw8PDwxwUwwgaGhoaGu0OCgr/////7wrs//b27wrsFAr27wrs7ArvChAaEAqZCuoKGsPD
-        wxwUw8MICBoaEAoKCgr/////8wpD///26wr3FAr27wrs7Arv6goKCurDCsPsQxrDw5lDwwgIwxrqCgoK
-        Cgr//////xQK////Dg7zvO/2G+/w8O8bw+/sHMPDCsPDHBrDw5kRw8PDGhMVCgoKCgr////////vCgoK
-        7P/29vb29vb27Arv9vb2w8PDCsPDw8PDw5kRw8MabQoKCgoKCgr/////////vO/v///29vb29vb29vb2
-        9vb2w8PDw8PDw8PDw5kRw5kQCgoKCgoKCgr/////////////////9vb29vb29vb29vb29sPDw8PDw8PD
-        w5kRmQ4cCgoKCgoKCgr///////////////////b29vb29vb29vb29vb2w8PDw8PDw7wTmQoKCgoKCgoK
-        CgoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAwAAAAAAAAAPAAAAAAAAAB8AAAAAAAAAHwAAAAAAAAB/
-        AAAAAAAAAP8AAAAAAAAA/wAAAAAAAAP/AAAoAAAAQAAAAIAAAAABAAgAAAAAAAAQAAAAAAAAAAAAAAAB
-        AAAAAQAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwADA3MAA8MqmAAQEBAAICAgADAwMABER
-        EQAWFhYAHBwcACIiIgApKSkAVVVVAE1NTQBCQkIAOTk5AIB8/wBQUP8AkwDWAP/szADG1u8A1ufnAJCp
-        rQAAADMAAABmAAAAmQAAAMwAADMAAAAzMwAAM2YAADOZAAAzzAAAM/8AAGYAAABmMwAAZmYAAGaZAABm
-        zAAAZv8AAJkAAACZMwAAmWYAAJmZAACZzAAAmf8AAMwAAADMMwAAzGYAAMyZAADMzAAAzP8AAP9mAAD/
-        mQAA/8wAMwAAADMAMwAzAGYAMwCZADMAzAAzAP8AMzMAADMzMwAzM2YAMzOZADMzzAAzM/8AM2YAADNm
-        MwAzZmYAM2aZADNmzAAzZv8AM5kAADOZMwAzmWYAM5mZADOZzAAzmf8AM8wAADPMMwAzzGYAM8yZADPM
-        zAAzzP8AM/8zADP/ZgAz/5kAM//MADP//wBmAAAAZgAzAGYAZgBmAJkAZgDMAGYA/wBmMwAAZjMzAGYz
-        ZgBmM5kAZjPMAGYz/wBmZgAAZmYzAGZmZgBmZpkAZmbMAGaZAABmmTMAZplmAGaZmQBmmcwAZpn/AGbM
-        AABmzDMAZsyZAGbMzABmzP8AZv8AAGb/MwBm/5kAZv/MAMwA/wD/AMwAmZkAAJkzmQCZAJkAmQDMAJkA
-        AACZMzMAmQBmAJkzzACZAP8AmWYAAJlmMwCZM2YAmWaZAJlmzACZM/8AmZkzAJmZZgCZmZkAmZnMAJmZ
-        /wCZzAAAmcwzAGbMZgCZzJkAmczMAJnM/wCZ/wAAmf8zAJnMZgCZ/5kAmf/MAJn//wDMAAAAmQAzAMwA
-        ZgDMAJkAzADMAJkzAADMMzMAzDNmAMwzmQDMM8wAzDP/AMxmAADMZjMAmWZmAMxmmQDMZswAmWb/AMyZ
-        AADMmTMAzJlmAMyZmQDMmcwAzJn/AMzMAADMzDMAzMxmAMzMmQDMzMwAzMz/AMz/AADM/zMAmf9mAMz/
-        mQDM/8wAzP//AMwAMwD/AGYA/wCZAMwzAAD/MzMA/zNmAP8zmQD/M8wA/zP/AP9mAAD/ZjMAzGZmAP9m
-        mQD/ZswAzGb/AP+ZAAD/mTMA/5lmAP+ZmQD/mcwA/5n/AP/MAAD/zDMA/8xmAP/MmQD/zMwA/8z/AP//
-        MwDM/2YA//+ZAP//zABmZv8AZv9mAGb//wD/ZmYA/2b/AP//ZgAhAKUAX19fAHd3dwCGhoYAlpaWAMvL
-        ywCysrIA19fXAN3d3QDj4+MA6urqAPHx8QD4+PgA8Pv/AKSgoACAgIAAAAD/AAD/AAAA//8A/wAAAP8A
-        /wD//wAA////AMMaGhoaGhoaGhq7CLsIuwi7Bwe7u7q7u7u6urq6urS0urqzurqzs7Ozs7Ozs7OzsrKy
-        srKysrKysrKysrKysrIawxoaGhoaGhq7CAgICAgICAi7B7u7u7u7uru6urq0tLq6urOzs7qzs7q6s7Oz
-        s7OysrKysrKysrKysrKysrKyGhrDGhoaGhoICBoIuwgICLsIB7u7u7u7uru7u7qzurq6urOztLO6urOz
-        s7q6s7Ozs7KysrKysrKysrKysrKyssMaGhoaGhoaCBoICLsIu7sICAi7u7u7u7u7u7u7s7Ozurq6urqz
-        urOzurq6urOzs7OzsrKysrKysrKysrKysrIaGsMawxoaCBoICAi7CLsICAgICAgIu7u7uru7u7u6s7q6
-        urq6urq6s7q6urO6s7Ozs7KysrKysrKysrKysrKyw8MaGhoaGhoaCAgICAgavAgICAgIBwi7u7u7u7O7
-        urq6urq6urO6urq6urq6s7Ozs7OzsrKysrKysrKysrKyssPDGhoaGsMaGhoIGggIGrwICAgICAgIu7u7
-        u7u7u7q6urOzurq6urS6s7Ozurqzs7Ozs7OysrKysrKysrKysrLDw8Maw8MaGhoICAgaCBoICAgICAgI
-        CAi7u7u7u7u7uru6urO6tLS0urq6urqzs7Ozs7Ozs7KysrKysrKysrKywxrDw8PDwxoaGhoIGhoaGhoI
-        CAgICAi7u7u7u7u7urq6urq6urS0urq6urq6s7q6s7Ozs7OzsrKysrKysrKyssPDGsPDGhoaGhoaGhoa
-        GhoaGggICAgICLsHu7u7u7u6urq7urq6tLS0tLq0urq6s7Ozs7Ozs7OysrKysrKysrLDw8PDGsMaGsPD
-        GhoaGhoaGggICLwICAi7u7sHu7u7u7u6u7u6urq0urS0tLSzurOzs7Ozs7Ozs7KysrKysrKyw8PDGsMa
-        GsPDw8MaGhoaGhoaGgi8CAgICAgIBwe7u7u7u7u7u7q6urS6urq6tLOzs7Ozs7Ozs7OysrKysrKyssPD
-        w8PDw8PDw5ns7OuZGhoavByZGrwc7QgI7+zs7+/s97vskbu7urqRkJC0tLS0s4uLi7Ozs7OQi4uysrKy
-        srLDw8PDw8PDw3MKCgoKCuoaGhwK6xoaFQoI7QwKCgwKCuu7CkO7u7pDCgoKDJC0kA4KCgoOi7OQDAoM
-        s7KysrKyw8PDw8PDw5kKDnPDHEMK6xocCusaGhUKCBUKbewUCgq7uwpDu7ttChCQbAwOtA4KQotCCkKz
-        iwpCi7OzsrKyssPDw8PDw8PqChzDw8OZChAaHArrGhoVCrwUCuuSCAoKB7sKQ7u7kWyRkWwMCpAKQrSz
-        s2yLs4sKbLOzs7OysrLDw8PDw8PDEA7Dw8PDw3McGhwK6xoaFQoaHA4KCgoKCgcHCkO7u7vrDgoKCmyQ
-        Cg5CEEJCQrOLCmyzs7Ozs7Kyw8PDw8PDwwoUw8PDw8PDwxocCm0aGhUKGhrt7OzqDAoIBwoQu7v3CgpD
-        bJG6kAoOQkJCDAqziwpss7Ozs7OzssPDw8PDw8MKFMPDw8PDw8PDHAoOHBwOChrrChMH7woKCAgKCu3t
-        6wpDu2wKbLoMDJC0bApCkGwKQouzs7Ozs7PDw8PDw8PDEArDw8PDwxwawxwKCgoKCm0avBEKCgoKEggI
-        CgoKCm0QCrsKDJG6kAwKCgoMkIsKCgpCs7Ozs7Ozw8PDw8PDw+sK7MPDw3MK6sMcCm3s6+waGhq87Ovr
-        7AgICOySbW3vu7u7u5G7u7qRbGxskbSQbApCi7Ozs7Ozs8PDw8PDw8O8DgrqHOwOChzDHArswxoaGhoa
-        GhoaGrwICAgICAgHB7u7u7u7u7u7urq6tLS0tIsKbLOzs7Ozs7PDw8PDw8PDw5kUCgoKDnPDwxwK7Boa
-        GhoaGhoaGhoaCAgICAgICLsHu7u7u7u7u7q6urq0tLS0bGyzs7Ozs7Ozw8PDw8PDw8PDw7wcHMPDw8PD
-        wxrDGsMaGhoaGhoaGhoICAgICAi7u7u7u7u7uru6urq6urq6urS0s7Ozs7Ozs8PDw8PDw8PDw8PDw8PD
-        w8PDw8PDwxrDGhoaGhoaGhoaCLwICAgIu7u7u7u7u7u7u7u7urq6urq6tLSzs7Ozs7PDw8PDw8PDw8PD
-        w8PDw8PDw8MaGhoaGhrDGhoaGhoaCAgICAgICLu7uwe7u7u7u7u7u7u6urO6tLS0tLOzs7Oz9sPDw8PD
-        w8PDw8PDw8PDw8PDw8MaGsMaGhoaGhoaGggICAgICAgIu7u7uwe7u7q7urq6u7O6s7O6urS0s7Ozs/b2
-        w8PDw8PDw8PDw8PDw8PDw8PDGhoaGhoawxoaGggIGggICAgICAgIu7u7u7u6u7u7u7q7urO6urq6urSz
-        s7P29vbDw8PDw8PDw8PDw8PDw8PDw8PDGhoawxrDGhoaCAgaGggaCAgICAgIu7u7u7u7urq6u7q6s7q6
-        urq6tLOz9vb29sPDw8PDw8PDw8PDw8PDw8PDwxrDGhoaGsMaGggaCAgICAi8CAgICAi7B7u7u7u6uruz
-        urq6urq6tLS0s/b29vb2w8PDw8PDw8PDw8PDw8PDw8PDGhoaw8PDGhoaGhoICBoaGrwICOwKu7u7u7u7
-        u7Ozurq6urq0urq0tLT29vb29vbDw8PDw8PDw8PDw8PDw8PDw8PDGsPDw8PDGhoaGhoaGhoavAjt6goR
-        uwe7u7u7u7u6urq6urq6tLS09vb29vb29sPDw8PDw8PDw8PDw8PDw8PDw5kcw8PDw8McHBoavBwcB7wI
-        CAgUCpIHB7u7u7u6uru6urq6tLS0tPb29vb29vb2w8PDw8PDw8PDw8PDw8PDw8MUCsPDw8NtCuoabQoK
-        CgptvLwIFArqCAcHu7u7urq6urq6urq6tLr29vb29sP29vbDw8PDw8PDw8PDw8PDw8PDFArDw8NzCkMa
-        7AoO7OwMChy8BwoKCggIBwe7urq6urq6urq6urO09vb2w/b29vb29sPDw8PDw8PDw8PDw8PDwxQKw8OZ
-        Dg6ZwxMKHBoaHOuZGuwKDArsCAgHB7u7uru6urq6urqzs/b29vb29sP29vbDw/bDw/bDw8PDw8PDw8MU
-        CnMaQwocw8MVChUVFRUV7BoRCusKEggICAgHCLq6urqzurOzs7P29vb29sP2w/b2w8P2w/b2w8PDw8PD
-        w8PDFAoKFAptw8PDFQoVFRURCuuZChG8DAwICAgICAi6CLu7urO6s7O69sPDw8PD9vb2w/b29vb29vbD
-        w8PDw8PDwxQKDgpDw8PDw+wK6hqZEQoc6wrrGhIK7AgICAgHuwi6u7O6uruzusP2w/b29sP29vb29sP2
-        9vb2w/bDw8PDw8MUCpkOCnPDw8PDFQoKCgrqGhEKGhrsChIICAgIuwi7CLuzs7Ozs7r2w/b2w8P29vb2
-        w8P29sP29vbDw8PDw8PDFArDmQ4Kc8PDw8Mc7OwaGhoaGhoaGhwcCAgIu7sICLu7u7O7s7Oz9vb29vb2
-        w/b29sP29vb2w/b2w8PDw8PDwxQKw8OZEApzw8PDw8MaGhoaGhoaGhoaGrwICLu7CAi7u7u7u7O7u/b2
-        9vb29vb29sP2w/b2w/b2w8PDw8PDw8MUCsPDwxpDChzDwxrDGhoaGhoaGhoaGhoaCAgICLu7u7sHu7u7
-        u7v29vb29vb29vb2w8PDw/bDw8PDw8PDw8PDw8PDw8PDw8PDw8PDGhoaGhoaGhoaGhoaGhq8u7u7u7u7
-        uwe7u7u7//b29vb29vbDw8PDw8PDw8P29sPDw8PDw8PDw8PDw8PDw8MaGhoaGhoaGhoaGhoaGhoaGru7
-        u7u7u7sHB7u7u///9vb29vb29vbD9sP2w8PD9vb2w8PDw8PDw8PDw8PDw8PDwxoaGsPDGhoaGhoaGhoa
-        Ghoau7u7CLsIBwcH77v///b29vb29vb29vbD9sPDw/b29sPDw8PDw8PDw8PDw8PDw8MaGsPDGsMaGhoa
-        GhoaGhoaGhq8uwgI7+/s7Ozs//////b29vb29vb29vbD9vb29vb29sPDw8PDw8PDw8PDw8PDwxrDGhrD
-        w8MawxoaGhoaGhoavJkc7Ozs7Ozs7P//////9vb29vb29vb29vb29vb29vbDw8PDw8PDw8PDw8PDw8PD
-        wxrDw8PDw8PDGhoaGhqZHO3t7e3s7Ozs7Oz////////29vbw7OzsB+wObfb2G+8HG+8awxocG8PDwxwc
-        GsPDmRzDwxocmcPDw8OZHOzs7Ovr6+vr6+vr623r//////////btCgoKCgoKQ+/27w4KChAK7MPsChzD
-        7Q4KCgrrwxQKw8MUCuzDw8McDhEREREREREREREREREQEP/////////3ChD37w4KCuv29hIK6u0OCuzD
-        7AocGgoO7RwQChwUCsPsChXDw8PDHBTDGhoaGhoaGhoavAjvDu3/////////EAq89vcS9xAK8PYUCvb2
-        7Qrs9uwK7+wK7MPDHBQcFAqZDg68w8PDwxwUw8MaGhoaGhoaGhocDuwK////////8AoS//b29vbsCu32
-        FAr29u8K7PbsChzsChzDw8PDwxQKCgocw8PDw8McFMPDwxoaGhoaGhrtDhwKCv///////+8K7P/29vb2
-        7wrs9hQK9vbvCuz27Arv7Artw8MamcMUCgoOGsPDw8PDHBTDw8PDGhoaGhrsCgoKCgr////////vCuz/
-        //b29u8K7PYUCvb27wrs9uwK7wcKEBoaEAqZFArqCkMaw8PDwxwUw8PDw8MaGhrrEAoKCgoK////////
-        8wpD////9vbrCvf2FAr29u8K7PbsCu/26goKCgrqwxQKw+wKQxrDw8OZQ8PDw8PDwxrqEQoKCgoKCv//
-        //////8UCu////+8Dg7z9rzv9vYb7/D28O8b9sPv7Owcw8MUCsPDmRwaw8PDmRHDw8PDwxoTFQoKCgoK
-        Cgr/////////vAoK6+/sDgrs9vb29vb29vb29u/s8Pb2w8PDw8PDFArDw8PDw8PDw5kRw8PDwxoVEgoK
-        CgoKCgoK///////////vEAoKCg7s//b29vb29vb29vbsCu/29vbDw8PDwxQKw8PDw8PDw8OZEcPDwxoR
-        bQoKCgoKCgoKCv////////////+87+/////29vb29vb29vb29vb29vbDw8PDw8PDw8PDw8PDw8PDmRHD
-        w5kQ7AoKCgoKCgoKCgr///////////////////////b29vb29vb29vb29vb29sPDw8PDw8PDw8PDw8PD
-        w5kRw5kOHAoKCgoKCgoKCgoK////////////////////////9vb29vb29vb29vb2w8PDw8PDw8PDw8PD
-        w8PDw8OZERwOHAoKCgoKCgoKCgoKCv/////////////////////////29vb29vb29vb29vb2w8PDw8PD
-        w8PDw8PDw8PDvBMOmQoKCgoKCgoKCgoKCgoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAMAAAAAAAAAHwAAAAAAAAAfAAAAAAAA
-        AD8AAAAAAAAAfwAAAAAAAAD/AAAAAAAAAf8AAAAAAAAD/wAAAAAAAAf/AAAAAAAAD/8AAAAAAAAf/ygA
-        AAAgAAAAQAAAAAEACAAAAAAAAAQAAAAAAAAAAAAAAAEAAAABAAAAAAAAAACAAACAAAAAgIAAgAAAAIAA
-        gACAgAAAwMDAAMDcwADwyqYABAQEAAgICAAMDAwAERERABYWFgAcHBwAIiIiACkpKQBVVVUATU1NAEJC
-        QgA5OTkAgHz/AFBQ/wCTANYA/+zMAMbW7wDW5+cAkKmtAAAAMwAAAGYAAACZAAAAzAAAMwAAADMzAAAz
-        ZgAAM5kAADPMAAAz/wAAZgAAAGYzAABmZgAAZpkAAGbMAABm/wAAmQAAAJkzAACZZgAAmZkAAJnMAACZ
-        /wAAzAAAAMwzAADMZgAAzJkAAMzMAADM/wAA/2YAAP+ZAAD/zAAzAAAAMwAzADMAZgAzAJkAMwDMADMA
-        /wAzMwAAMzMzADMzZgAzM5kAMzPMADMz/wAzZgAAM2YzADNmZgAzZpkAM2bMADNm/wAzmQAAM5kzADOZ
-        ZgAzmZkAM5nMADOZ/wAzzAAAM8wzADPMZgAzzJkAM8zMADPM/wAz/zMAM/9mADP/mQAz/8wAM///AGYA
-        AABmADMAZgBmAGYAmQBmAMwAZgD/AGYzAABmMzMAZjNmAGYzmQBmM8wAZjP/AGZmAABmZjMAZmZmAGZm
-        mQBmZswAZpkAAGaZMwBmmWYAZpmZAGaZzABmmf8AZswAAGbMMwBmzJkAZszMAGbM/wBm/wAAZv8zAGb/
-        mQBm/8wAzAD/AP8AzACZmQAAmTOZAJkAmQCZAMwAmQAAAJkzMwCZAGYAmTPMAJkA/wCZZgAAmWYzAJkz
-        ZgCZZpkAmWbMAJkz/wCZmTMAmZlmAJmZmQCZmcwAmZn/AJnMAACZzDMAZsxmAJnMmQCZzMwAmcz/AJn/
-        AACZ/zMAmcxmAJn/mQCZ/8wAmf//AMwAAACZADMAzABmAMwAmQDMAMwAmTMAAMwzMwDMM2YAzDOZAMwz
-        zADMM/8AzGYAAMxmMwCZZmYAzGaZAMxmzACZZv8AzJkAAMyZMwDMmWYAzJmZAMyZzADMmf8AzMwAAMzM
-        MwDMzGYAzMyZAMzMzADMzP8AzP8AAMz/MwCZ/2YAzP+ZAMz/zADM//8AzAAzAP8AZgD/AJkAzDMAAP8z
-        MwD/M2YA/zOZAP8zzAD/M/8A/2YAAP9mMwDMZmYA/2aZAP9mzADMZv8A/5kAAP+ZMwD/mWYA/5mZAP+Z
-        zAD/mf8A/8wAAP/MMwD/zGYA/8yZAP/MzAD/zP8A//8zAMz/ZgD//5kA///MAGZm/wBm/2YAZv//AP9m
-        ZgD/Zv8A//9mACEApQBfX18Ad3d3AIaGhgCWlpYAy8vLALKysgDX19cA3d3dAOPj4wDq6uoA8fHxAPj4
-        +ADw+/8ApKCgAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//AAD///8AGhrDGhoICAgHu7u7u7O6tLSz
-        s7Ozs7OysrKysrKysrLDGhoaBwcICAgHu7u7u7q6tLSzs7Ozs7OysrKysrKyssPDGsMaBxoICAgHu7uz
-        u7q0tLSzs7Ozs7OysrKysrKywxrDGhoaGrwICAgHu7u7s7q0tLSzs7Ozs7OysrKysrLDGhrDGhoaGrwI
-        CAgHu7u7u7q0tLSzs7Ozs7OysrKyssPDw8PDGhoaGrwICAgHu7u7u7q0tLSzs7Ozs7OysrKywxrDw5ns
-        mRq8mbztCOzv7LuRu7qQtLSzi7OzkIuysrLDw8OZDsND6xzrGgoVbRQKu0O7CpAMtAqLCrMKi7OyssPD
-        wxDDw8McHOsaChwKCgoHQ7vrCgqQDhBCswqzs7Oyw8PDCsPDw8McDhwK6xPvCggK7Qq7CroMtAqQCouz
-        s7PDw8Pr7MNz6hxt6xoa7OsICJJt72yRu5FskZAKi7Ozs8PDw8MUCg7DHOzDGhoaGrwICAgHu7u7u7q0
-        tGyzs7Ozw8PDw8PDw8PDwxoaGsPDGrwICAgHu7uzu7O0tLSzs7PDw8PDw8PDw8PDw8PDGhoaB7wICAgH
-        u7u7u7q0tLSzs/bDw8PDw8PDwxoawxrDGhoaGrwICAgHu7u7urq0tLSz9vbDw8PDw8PDw8PDw8MaGhoa
-        GrwICpIHu7uzs7q0tLT29vbDw8PDw8PDw8OZw8PDHBocBwgICge7u7u7urq0tPbD9vbDw8PDw8PDwxTD
-        wwoaCuwMHAcKCAe7u7u7s7qz9vb29vbDw8PDw8PDFHNDHMMKFRXsEesSCAe7u7u7urP29vb2w/bDw8PD
-        w8MUDkPDwwoaERwKGgoICAe7u7u7uvb2w/b29vbDw8PDwxTDDnPDw+wcGhwaHAgICAe7u7u79vbD9vb2
-        9vbDw8PDFMPDQxzDw8MaGhoaGggICAe7u7v29vb29vbD9vbDw8PDw8PDw8PDwxoawxoaGggICAe7u//2
-        9vb29vb29vbDw8PDw8PDw8Maw8MaGhoaGggI7+zs///29vb29vb29vbDw8PDw8PDw8PDw8MaGhoc7e3s
-        7Oz////2CgoKQ/YOCgrDCsMOCusUwxTswxwREREREREREP///xC89/cK9gr2CvYK7OzDFBSZDsPDHMMa
-        GhoaGg4K////Cv/29gr2CvYK9grs7cOZFAoaw8Mcw8MaGhoKCgr///8K///2CvYK9gr2CvYKCuoUwwoa
-        w5nDw8MaEQoKCv///7wK7w7s9vb29vbs9sPDwxTDw8PDmcPDGhIKCgoK///////v///29vb29vb29vbD
-        w8PDw8OZw5nsCgoKCgr////////////29vb29vb29sPDw8PDw5kcHAoKCgoKCgAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAcAAAAHAAAADwAAAB8AAAA/
-</value>
+  <data name="PasteButton" xml:space="preserve">
+    <value>Paste</value>
   </data>
-  <data name="Quick_Key_Disabled" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAgAICAQAAAAAADoAgAAhgAAABAQEAAAAAAAKAEAAG4DAAAwMBAAAAAAAGgGAACWBAAAQEAQAAAA
-        AABoCgAA/goAABAQAAAAAAAAaAUAAGYVAAAgIAAAAAAAAKgIAADOGgAAMDAAAAAAAACoDgAAdiMAAEBA
-        AAAAAAAAKBYAAB4yAAAoAAAAIAAAAEAAAAABAAQAAAAAAAACAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAA
-        gAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJmZmZmZmZmZABERAAAAAACZmZmZmZmZmQAR
-        EQAAAACZmZmZmZmZmZmZEQAAAAAAmZmZmZmZmZmZmREAAAAAmZmZAAAAABERmZmZAAAAAJmZmQAAAAAR
-        EZmZmQAAAJmZmQAAAAAAEZmZmZkAAACZmZkAAAAAABGZmZmZAAAAmZkAAAAAAACZmRERmZkAAJmZAAAA
-        AAAAmZkREZmZAACZmQAAAAAAmZkRABGZmQAAmZkAAAAAAJmZEQARmZkAAJmZAAAAAJmZEREAAJmZAACZ
-        mQAAAACZmRERAACZmQAAmZkAAACZmQAREQAAmZkAAJmZAAAAmZkAEREAAJmZAACZmQAAmZkAABERAACZ
-        mQAAmZkAAJmZAAAREQAAmZkAAJmZAJmZAAAAAAAAAJmZAACZmQCZmQAAAAAAAACZmQAAmZmZmQAAAAAA
-        AACZmQAAAJmZmZkAAAAAAAAAmZkAAAAAmZmZAAAAAAAAmZmZAAAAAJmZmQAAAAAAAJmZmQAAAAAAmZmZ
-        mZmZmZmZmQAAAAAAAJmZmZmZmZmZmZkAAAAAAAAAmZmZmZmZmZkAAAAAAAAAAJmZmZmZmZmZAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////////AADD/wAAw/wAAA/8AAAP8D/AD/A/
-        wA/A/8APwP/AD8PAwAPDwMADww8DA8MPAwPAAAPDwAADw8Pww8PD8MPDw8DDw8PAw8PDAP/DwwD/w8Aw
-        /w/AMP8PwDD8D8Aw/A/AAAA/wAAAP/AAAP/wAAD///////////8oAAAAEAAAACAAAAABAAQAAAAAAIAA
-        AAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwACAgIAAAAD/AAD/
-        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAACZmZmZAAAACZmZmZmQAACZkAAACZkACZkAAACZ
-        mQAJkAAACZAJkAmQAACZAAmQCZAACZAACZAJkACZAAAJkAmQCZAAAAmQCZCZAAAACZAJmZAAAACZAACZ
-        kAAACZkAAAmZmZmZkAAAAJmZmZkAAAAAAAAAAAAA//8AAPAJAADgAwAAx4MAAI+DAACYgQAAkxEAAIAZ
-        AACcmQAAmJkAAJD5AACE8wAAhOMAAIAHAADADwAA//8AACgAAAAwAAAAYAAAAAEABAAAAAAAgAQAAAAA
-        AAAAAAAAEAAAABAAAAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAICAgAAAAP8AAP8AAAD/
-        /wD/AAAA/wD/AP//AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACZmZmZkAAAAA
-        AAAAAAAAAAAAAAAAAJmZmZmZmZmZmZAAAAAAAAAAAAAAAAAACZmZmZmZmZmZmZmQAAAAAAAAAAAEAAAJ
-        mZmZmZmZmZmZmZmZkEAABEAAAABAQACZmZmZmQAAAAAJmZmZmQAAQAQAAABAQAmZmZlABAAAAAAAQJmZ
-        mZAEAABAAABASZmZmQAABAAAAAAAAACZmZmUAABAAAQACZmZlERABAAAAAAAAAAJmZmUAABAAAQAmZmZ
-        AABABAAAAAAARABAmZmZAABAAAQJmZkAQAQABEAAAAAAQEQAmZmZkABAAECZmZkABEAABAQAAAAAQAAJ
-        mZmZmQBAAECZmZAAAAAAAAAAAAAABACZmZmZmQBAAEmZmUAAAAAAAAAAAAAABAmZmZmZmZQABAmZkAQA
-        AAAAAAAAAAAABJmZmZAJmZAAAJmZkAAAAAAAAAAAAAAACZmZmQAJmZkAAJmZAAAAAAAAAAAAAAAAmZmZ
-        kAAAmZkAAJmZAAAAAAAAAAAAAAAJmZmZEAAAmZkAAJmZAAAAAAAAAAAAAACZmZmRAQAAmZkAAJmQAAAA
-        AAAAAAAAAAmZmZkAAQAACZkACZmQAAAAABEREQEREZmZmZAAARAACZmQCZmQAAAAAAARAAARCZmZmRAA
-        ARAACZmQCZmQAAAAAAARAAEZmZmZkAAAERAACZmQCZkAAAAAAAARABGZmZmZERAAEQEACZmQmZmQAAAA
-        AAARARmZmZmQARABEQEACZmQCZmQAAAAAAAREZmZmZkQARABEAAQCZmQCZmQAAAAAAARCZmZmQAREQAR
-        EQERCZmQCZmQAAAAAAARmZmZkAAAAAAAAAAACZmQCZmZAAAAAAAZmZmZAAAAAAAAAAAAmZmQAJmZAAAA
-        AACZmZmRAAAAAAAAAAAAmZkAAJmZAAAAABmZmZkREQAAAAAAAAAAmZkAAJmZAAAAAJmZmZAAAAAAAAAA
-        AAAAmZkAAJmZkAAACZmZmQAAAAAAAAAAAAAJmZkAAAmZkAAAmZmZkAAAAAAAAAAAAAAJmZAAAAmZmQAJ
-        mZmZAAAAAAAAAAAAAACZmZAAAACZmZCZmZmQAAAAAAAAAAAAAAmZmQAAAACZmZmZmZkAAAAAAAAAAAAA
-        AJmZmQAAAAAJmZmZmZAAAAAAAAAAAAAAAJmZkAAAAAAAmZmZmQAAAAAAAAAAAAAAmZmZAAAAAAAACZmZ
-        kAAAAAAAAAAAAAAJmZmQAAAAAAAACZmZmQAAAAAAAAAAAACZmZmQAAAAAAAAAAmZmZkAAAAAAAAAAJmZ
-        mZAAAAAAAAAAAACZmZmZmQAAAAAJmZmZmQAAAAAAAAAAAAAJmZmZmZmZmZmZmZmZkAAAAAAAAAAAAAAA
-        CZmZmZmZmZmZmZmQAAAAAAAAAAAAAAAAAJmZmZmZmZmZmZAAAAAAAAAAAAAAAAAAAAAACZmZmZkAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////AAD//+AP//8AAP/8AAB//wAA//gAAB//
-        AAD74AAABecAAPXAD/gD2wAA9YBv/QG9AAD0A+//wD0AAO4Ab//gPQAA7A9v/NA9AADoNuf9MB0AANA5
-        6/3gDQAA0H///sANAADAf//+gAMAAKG///4BhwAAwf///gODAADD///8B8MAAMP///gHwwAAw///8AvD
-        AADH///gO+MAAIf8CAB54QAAh/88gHnhAACH/zgB8eEAAI//MABy4QAAB/8gBmLhAACH/wAGZ2EAAIf/
-        IDDCIQAAh/8Af//hAACD/wD//8EAAMP/AP//wwAAw4wAP//DAADDPAf//8MAAMB4D///gwAA4DAAMYQH
-        AADgwCZmzAcAAPBAZmfIDwAA4ABmZ8APAADgAGZnyB8AAOQCZmTAPwAA5gREcMB/AADmA///wH8AAPOA
-        //8B/wAA88AOeAP/AAD8IAAAB/8AAP/4AAAf/wAA//wAAH//AAD//+AP//8AAP///////wAAKAAAAEAA
-        AACAAAAAAQAEAAAAAAAACAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAIAAAIAAAACAgACAAAAAgACAAICA
-        AADAwMAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAJmZmZmZmZmZAAAAAAAAAAAAAAAAAP////////////mZmZmZmZmZ
-        mZmZkAAAAAAAAAAAAAAA///////////5mZmZmZmZmZmZmZmZkAAAAAAAAAAAAAD/////////+ZmZmZmZ
-        mZmZmZmZmZmZkAAAAAAAAAAAAP////////mZmZmZmZmZmZmZmZmZmZmZkAAAAAAAAAAA///////5mZmZ
-        mZmZmZmZmZmZmZmZmZmZkAAAAAAAAAD//////5mZmZmZmZn//w//D/CZmZmZmZmZAAAAAAAAAP////AJ
-        mZmZmZnwD///D///D///mZmZmZmQAAAAAAAA////8JmZmZmZn/AP//8P///w//8JmZmZmZkAAAAAAAD/
-        ///5mZmZmZAP8A///w////8P/wAJmZmZmZAAAAAAAP///5mZmZmZ8A/wD///D/////D/AACZmZmZmQAA
-        AAAA///5mZmZmfAA//AP//8P///wD/8AAJmZmZmZkAAAAAD//5mZmZmf////8A///w//8A///wAJmZmZ
-        mZmZAAAAAP//mZmZmQ/////wD///D/AP////AJmZmZmZmZkAAAAA//mZmZmf//////AP//8AD/////8A
-        mZmZmZmZmZAAAAD/+ZmZmf//////8A///w///////wmZmZmZmZmZkAAAAP+ZmZmZ//////AAAA//////
-        ////mZmZmZCZmZmZAAAA/5mZmZ////////////////////mZmZmZAAmZmZkAAAD5mZmZAAAAAAAAAAAA
-        AAAAAAAAmZmZmZAAAJmZmZAAAPmZmZkAAAAAAAAAAAAAAAAAAAmZmZmZkAAAmZmZkAAAmZmZn///////
-        ///////////wmZmZmZkAAAAJmZmZAACZmZn///////////////////mZmZmZl3d3f3eZmZkAAJmZmf//
-        ////////AA//////mZmZmZl3AHd/d5mZmQAJmZmZ/wD////////wD/////mZmZmZn3cAd393mZmZkAmZ
-        mZkAD/8AAPAP/wAP8A8A+ZmZmZkPdwB3f3eZmZmQCZmZn/AA8A8A8A/wDwDwAA+ZmZmZlw93AHd/d3mZ
-        mZAJmZmfAADwDwDwD/AP//AA+ZmZmZkHD3d3d393eZmZkAmZmZ//APAPAPAP8A8A8ACZmZmZkAcPcAAH
-        f3cJmZmQCZmZn/8A8A8A8A//AA/wCZmZmZl3dw93d3d/d3mZmZAJmZmf/wD///////////CZmZmZmQAA
-        D3d3d393eZmZkAmZmQAAD/8A/wAA////+ZmZmZmf///////////5mZmQmZmZn/////AP//////+ZmZmZ
-        mXcAd393AAd/d3mZmZAJmZmf////////////+ZmZmZmXdwB3f3dwB38AeZmZkAmZmZAAAAAAAAAAAACZ
-        mZmZmfd3AHd/dwAHfwAJmZmQCZmZkAAAAAAAAAAAAJmZmZmf93cAd39wBwB/cAmZmZAJmZmf////////
-        ///5mZmZmf/3cAAHf3AHd393CZmZkAmZmZ///////////5mZmZmf//cAdwB/cAd3f3cJmZmQCZmZmf//
-        ///////5mZmZmf//93cAd39wBwB/d5mZmZAJmZmZAAAAAAAAAJmZmZmQAA/3d3AHf3cAB393mZmZkACZ
-        mZkAAAAAAAAJmZmZmZAAD/d3d3d/d3d3f3eZmZkAAJmZmf///////5mZmZmZ/////////////////5mZ
-        mQAAmZmZn//////5mZmZmZ/////3cAAAf3cAB395mZmZAAD5mZmZ/////5mZmZmZ//////dwB3APdwAH
-        f5mZmZcAAPmZmZn////5mZmZmZ//////93AHcA93AAd/mZmZlwAAAJmZmZAAAAmZmZmZAAAAAA/3AABw
-        D3AAB3mZmZl3AAAAmZmZmQAAmZmZmZAAAAAAD/dwB3APcAAHmZmZmXcAAAAJmZmZAAmZmZmZAAAAAAAP
-        93AAAH9wAAeZmZmXdwAAAAmZmZmQmZmZmZAAAAAAAA/3d3d3f3cACZmZmZB3AAAAAJmZmZmZmZmZAAAA
-        AAAAD/////////+ZmZmZ//8AAAAAmZmZmZmZmZkAAAAAAAAP93d3d393eZmZmZl3dwAAAAAJmZmZmZmZ
-        kAAAAAAAAA/3dwB3f3eZmZmZkAB3AAAAAACZmZmZmZkAAAAAAAAAD/dwAAd/mZmZmZkAcAcAAAAAAAmZ
-        mZmZkAAAAAAAAAAP93cAd3mZmZmZkAAABwAAAAAAAJmZmZmZkAAAAAAAAA/3cAAJmZmZmZlwBwAHAAAA
-        AAAACZmZmZmZAAAAAAAAD/d3AJmZmZmZn3cAAAcAAAAAAAAAmZmZmZmZmQAAAAAP95mZmZmZmZl/d3d3
-        dwAAAAAAAAAJmZmZmZmZmZmZmZmZmZmZmZmZl3d3d3d3AAAAAAAAAAAJmZmZmZmZmZmZmZmZmZmZmZAA
-        8AD/Dw8AAAAAAAAAAAAJmZmZmZmZmZmZmZmZmZmXcPDwAP/w/wAAAAAAAAAAAAAJmZmZmZmZmZmZmZmZ
-        nMdwAPDw/w8PAAAAAAAAAAAAAAAJmZmZmZmZmZmZmZzMx3D//w////8AAAAAAAAAAAAAAAAAmZmZmZmZ
-        mZn///////////////AAAAAAAAAAAAAAAAAAAAAAAA//////////////////////////////gAAAAAAf
-        //+AAAAAAB///4AAAAAAB///gAAAAAAB//+AAAAAAAB//4AAAAAAAB//gAAAAAAAD/+AAAAAAAAH/4AA
-        AAAAAAP/gAAAAAAYAf+AAAAAABwA/4AAAAAAHAB/gAAAAAAYAD+AAAAAABAAP4AAAAAAEAAfgAAAAAAA
-        AB+AAAAAAAAQD4AAAAAAADgPgAAAAAAAfAeAAAAAAAB8B4AAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAA
-        AAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAA
-        AAEAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAA
-        AAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAAB8A8Af+AA
-        AAH4DgD/4AAAAfgEAf/gAAAB/AAD/+AAAAH8AAP/4AAAAf4AB//gAAAB/wAP/+AAAAH/gB//4AAAAf/A
-        B//gAAAB/+AD/+AAAAH/8AA/4AAAAf/4AAAAAAAB//4AAAAAAAH//4AAAAAAAf//4AAAAAAB///4AAAA
-        AAH///8AAAAAAf/////gAAAAKAAAABAAAAAgAAAAAQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAA
-        AAAAAIAAAIAAAACAgACAAAAAgACAAICAAADAwMAAwNzAAPDKpgAEBAQACAgIAAwMDAAREREAFhYWABwc
-        HAAiIiIAKSkpAFVVVQBNTU0AQkJCADk5OQCAfP8AUFD/AJMA1gD/7MwAxtbvANbn5wCQqa0AAAAzAAAA
-        ZgAAAJkAAADMAAAzAAAAMzMAADNmAAAzmQAAM8wAADP/AABmAAAAZjMAAGZmAABmmQAAZswAAGb/AACZ
-        AAAAmTMAAJlmAACZmQAAmcwAAJn/AADMAAAAzDMAAMxmAADMmQAAzMwAAMz/AAD/ZgAA/5kAAP/MADMA
-        AAAzADMAMwBmADMAmQAzAMwAMwD/ADMzAAAzMzMAMzNmADMzmQAzM8wAMzP/ADNmAAAzZjMAM2ZmADNm
-        mQAzZswAM2b/ADOZAAAzmTMAM5lmADOZmQAzmcwAM5n/ADPMAAAzzDMAM8xmADPMmQAzzMwAM8z/ADP/
-        MwAz/2YAM/+ZADP/zAAz//8AZgAAAGYAMwBmAGYAZgCZAGYAzABmAP8AZjMAAGYzMwBmM2YAZjOZAGYz
-        zABmM/8AZmYAAGZmMwBmZmYAZmaZAGZmzABmmQAAZpkzAGaZZgBmmZkAZpnMAGaZ/wBmzAAAZswzAGbM
-        mQBmzMwAZsz/AGb/AABm/zMAZv+ZAGb/zADMAP8A/wDMAJmZAACZM5kAmQCZAJkAzACZAAAAmTMzAJkA
-        ZgCZM8wAmQD/AJlmAACZZjMAmTNmAJlmmQCZZswAmTP/AJmZMwCZmWYAmZmZAJmZzACZmf8AmcwAAJnM
-        MwBmzGYAmcyZAJnMzACZzP8Amf8AAJn/MwCZzGYAmf+ZAJn/zACZ//8AzAAAAJkAMwDMAGYAzACZAMwA
-        zACZMwAAzDMzAMwzZgDMM5kAzDPMAMwz/wDMZgAAzGYzAJlmZgDMZpkAzGbMAJlm/wDMmQAAzJkzAMyZ
-        ZgDMmZkAzJnMAMyZ/wDMzAAAzMwzAMzMZgDMzJkAzMzMAMzM/wDM/wAAzP8zAJn/ZgDM/5kAzP/MAMz/
-        /wDMADMA/wBmAP8AmQDMMwAA/zMzAP8zZgD/M5kA/zPMAP8z/wD/ZgAA/2YzAMxmZgD/ZpkA/2bMAMxm
-        /wD/mQAA/5kzAP+ZZgD/mZkA/5nMAP+Z/wD/zAAA/8wzAP/MZgD/zJkA/8zMAP/M/wD//zMAzP9mAP//
-        mQD//8wAZmb/AGb/ZgBm//8A/2ZmAP9m/wD//2YAIQClAF9fXwB3d3cAhoaGAJaWlgDLy8sAsrKyANfX
-        1wDd3d0A4+PjAOrq6gDx8fEA+Pj4APD7/wCkoKAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP//
-        /wAAAAAAAAAAAAAAAAAAAAAAAAAAAPn5+fn5+fn5AAoKAAAAAPn5+fn5+fn5+fkKAAAAAPn5+QAAAAAK
-        Cvn5+QAAAPn5+QAAAAAACvn5+fkAAAD5+QAACgoKAPn5Cgr5+QAA+fkACgoAAPn5CgAK+fkAAPn5CgoK
-        Cvn5CgoAAPn5AAD5+QAAAPn5AAoKAAD5+QAA+fkAAPn5CgAKCgAA+fkAAPn5APn5CgoAAAAAAPn5AAD5
-        +fn5AAoKAAAAAPn5AAAACvn5+QAKCgAAAPn5+QAAAAoK+fn5+fn5+fn5+QAAAAAACgr5+fn5+fn5+QAA
-        AAAAAAAAAAAAAAAAAAAAAAAA//8AAPAJAADgAwAAx4MAAI+DAACYgQAAkxEAAIAZAACcmQAAmJkAAJD5
-        AACE8wAAhOMAAIAHAADADwAA//8AACgAAAAgAAAAQAAAAAEACAAAAAAAAAQAAAAAAAAAAAAAAAEAAAAB
-        AAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAMDcwADwyqYABAQEAAgICAAMDAwAERERABYW
-        FgAcHBwAIiIiACkpKQBVVVUATU1NAEJCQgA5OTkAgHz/AFBQ/wCTANYA/+zMAMbW7wDW5+cAkKmtAAAA
-        MwAAAGYAAACZAAAAzAAAMwAAADMzAAAzZgAAM5kAADPMAAAz/wAAZgAAAGYzAABmZgAAZpkAAGbMAABm
-        /wAAmQAAAJkzAACZZgAAmZkAAJnMAACZ/wAAzAAAAMwzAADMZgAAzJkAAMzMAADM/wAA/2YAAP+ZAAD/
-        zAAzAAAAMwAzADMAZgAzAJkAMwDMADMA/wAzMwAAMzMzADMzZgAzM5kAMzPMADMz/wAzZgAAM2YzADNm
-        ZgAzZpkAM2bMADNm/wAzmQAAM5kzADOZZgAzmZkAM5nMADOZ/wAzzAAAM8wzADPMZgAzzJkAM8zMADPM
-        /wAz/zMAM/9mADP/mQAz/8wAM///AGYAAABmADMAZgBmAGYAmQBmAMwAZgD/AGYzAABmMzMAZjNmAGYz
-        mQBmM8wAZjP/AGZmAABmZjMAZmZmAGZmmQBmZswAZpkAAGaZMwBmmWYAZpmZAGaZzABmmf8AZswAAGbM
-        MwBmzJkAZszMAGbM/wBm/wAAZv8zAGb/mQBm/8wAzAD/AP8AzACZmQAAmTOZAJkAmQCZAMwAmQAAAJkz
-        MwCZAGYAmTPMAJkA/wCZZgAAmWYzAJkzZgCZZpkAmWbMAJkz/wCZmTMAmZlmAJmZmQCZmcwAmZn/AJnM
-        AACZzDMAZsxmAJnMmQCZzMwAmcz/AJn/AACZ/zMAmcxmAJn/mQCZ/8wAmf//AMwAAACZADMAzABmAMwA
-        mQDMAMwAmTMAAMwzMwDMM2YAzDOZAMwzzADMM/8AzGYAAMxmMwCZZmYAzGaZAMxmzACZZv8AzJkAAMyZ
-        MwDMmWYAzJmZAMyZzADMmf8AzMwAAMzMMwDMzGYAzMyZAMzMzADMzP8AzP8AAMz/MwCZ/2YAzP+ZAMz/
-        zADM//8AzAAzAP8AZgD/AJkAzDMAAP8zMwD/M2YA/zOZAP8zzAD/M/8A/2YAAP9mMwDMZmYA/2aZAP9m
-        zADMZv8A/5kAAP+ZMwD/mWYA/5mZAP+ZzAD/mf8A/8wAAP/MMwD/zGYA/8yZAP/MzAD/zP8A//8zAMz/
-        ZgD//5kA///MAGZm/wBm/2YAZv//AP9mZgD/Zv8A//9mACEApQBfX18Ad3d3AIaGhgCWlpYAy8vLALKy
-        sgDX19cA3d3dAOPj4wDq6uoA8fHxAPj4+ADw+/8ApKCgAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//
-        AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAA+fn5+fn5+fn5+fn5+fn5+QAAAQEBAQAAAAAAAAAAAAD5+fn5+fn5+fn5
-        +fn5+fn5AAABAQEBAAAAAAAAAAD5+fn5+fn5+fn5+fn5+fn5+fn5+QEBAAAAAAAAAAAAAPn5+fn5+fn5
-        +fn5+fn5+fn5+fn5AQEAAAAAAAAAAPn5+fn5+QAAAAAAAAAAAQEBAfn5+fn5+QAAAAAAAAAA+fn5+fn5
-        AAAAAAAAAAABAQEB+fn5+fn5AAAAAAAA+fn5+fn5AAAAAAAAAAAAAAEB+fn5+fn5+fkAAAAAAAD5+fn5
-        +fkAAAAAAAAAAAAAAQH5+fn5+fn5+QAAAAAAAPn5+fkAAAAACgoKCgoKAAD5+fn5AQEBAfn5+fkAAAAA
-        +fn5+QAAAAAKCgoKCgoAAPn5+fkBAQEB+fn5+QAAAAD5+fn5AAAKCgoKAAAAAPn5+fkBAQAAAQH5+fn5
-        AAAAAPn5+fkAAAoKCgoAAAAA+fn5+QEBAAABAfn5+fkAAAAA+fn5+QoKCgoKCgoK+fn5+QEBAQEAAAAA
-        +fn5+QAAAAD5+fn5CgoKCgoKCgr5+fn5AQEBAQAAAAD5+fn5AAAAAPn5+fkAAAAAAAD5+fn5AAABAQEB
-        AAAAAPn5+fkAAAAA+fn5+QAAAAAAAPn5+fkAAAEBAQEAAAAA+fn5+QAAAAD5+fn5AAAAAPn5+fkKCgAA
-        AQEBAQAAAAD5+fn5AAAAAPn5+fkAAAAA+fn5+QoKAAABAQEBAAAAAPn5+fkAAAAA+fn5+QAA+fn5+QoK
-        CgoAAAAAAAAAAAAA+fn5+QAAAAD5+fn5AAD5+fn5CgoKCgAAAAAAAAAAAAD5+fn5AAAAAPn5+fn5+fn5
-        AAAKCgoKAAAAAAAAAAD5+fn5AAAAAAAA+fn5+fn5+fkAAAoKCgoAAAAAAAAAAPn5+fkAAAAAAAAKCvn5
-        +fn5+QAACgoKCgAAAAAAAPn5+fn5+QAAAAAAAAoK+fn5+fn5AAAKCgoKAAAAAAAA+fn5+fn5AAAAAAAA
-        CgoKCvn5+fn5+fn5+fn5+fn5+fn5+fn5AAAAAAAAAAAKCgoK+fn5+fn5+fn5+fn5+fn5+fn5+fkAAAAA
-        AAAAAAAACgoKCvn5+fn5+fn5+fn5+fn5+fkAAAAAAAAAAAAAAAAKCgoK+fn5+fn5+fn5+fn5+fn5+QAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAP///////////wAAw/8AAMP8AAAP/AAAD/A/wA/wP8APwP/AD8D/wA/DwMADw8DAA8MP
-        AwPDDwMDwAADw8AAA8PD8MPDw/DDw8PAw8PDwMPDwwD/w8MA/8PAMP8PwDD/D8Aw/A/AMPwPwAAAP8AA
-        AD/wAAD/8AAA////////////KAAAADAAAABgAAAAAQAIAAAAAAAACQAAAAAAAAAAAAAAAQAAAAEAAAAA
-        AAAAAIAAAIAAAACAgACAAAAAgACAAICAAADAwMAAwNzAAPDKpgAEBAQACAgIAAwMDAAREREAFhYWABwc
-        HAAiIiIAKSkpAFVVVQBNTU0AQkJCADk5OQCAfP8AUFD/AJMA1gD/7MwAxtbvANbn5wCQqa0AAAAzAAAA
-        ZgAAAJkAAADMAAAzAAAAMzMAADNmAAAzmQAAM8wAADP/AABmAAAAZjMAAGZmAABmmQAAZswAAGb/AACZ
-        AAAAmTMAAJlmAACZmQAAmcwAAJn/AADMAAAAzDMAAMxmAADMmQAAzMwAAMz/AAD/ZgAA/5kAAP/MADMA
-        AAAzADMAMwBmADMAmQAzAMwAMwD/ADMzAAAzMzMAMzNmADMzmQAzM8wAMzP/ADNmAAAzZjMAM2ZmADNm
-        mQAzZswAM2b/ADOZAAAzmTMAM5lmADOZmQAzmcwAM5n/ADPMAAAzzDMAM8xmADPMmQAzzMwAM8z/ADP/
-        MwAz/2YAM/+ZADP/zAAz//8AZgAAAGYAMwBmAGYAZgCZAGYAzABmAP8AZjMAAGYzMwBmM2YAZjOZAGYz
-        zABmM/8AZmYAAGZmMwBmZmYAZmaZAGZmzABmmQAAZpkzAGaZZgBmmZkAZpnMAGaZ/wBmzAAAZswzAGbM
-        mQBmzMwAZsz/AGb/AABm/zMAZv+ZAGb/zADMAP8A/wDMAJmZAACZM5kAmQCZAJkAzACZAAAAmTMzAJkA
-        ZgCZM8wAmQD/AJlmAACZZjMAmTNmAJlmmQCZZswAmTP/AJmZMwCZmWYAmZmZAJmZzACZmf8AmcwAAJnM
-        MwBmzGYAmcyZAJnMzACZzP8Amf8AAJn/MwCZzGYAmf+ZAJn/zACZ//8AzAAAAJkAMwDMAGYAzACZAMwA
-        zACZMwAAzDMzAMwzZgDMM5kAzDPMAMwz/wDMZgAAzGYzAJlmZgDMZpkAzGbMAJlm/wDMmQAAzJkzAMyZ
-        ZgDMmZkAzJnMAMyZ/wDMzAAAzMwzAMzMZgDMzJkAzMzMAMzM/wDM/wAAzP8zAJn/ZgDM/5kAzP/MAMz/
-        /wDMADMA/wBmAP8AmQDMMwAA/zMzAP8zZgD/M5kA/zPMAP8z/wD/ZgAA/2YzAMxmZgD/ZpkA/2bMAMxm
-        /wD/mQAA/5kzAP+ZZgD/mZkA/5nMAP+Z/wD/zAAA/8wzAP/MZgD/zJkA/8zMAP/M/wD//zMAzP9mAP//
-        mQD//8wAZmb/AGb/ZgBm//8A/2ZmAP9m/wD//2YAIQClAF9fXwB3d3cAhoaGAJaWlgDLy8sAsrKyANfX
-        1wDd3d0A4+PjAOrq6gDx8fEA+Pj4APD7/wCkoKAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP//
-        /wAKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoK+fn5+fn5+fn5CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCvn5+fn5+fn5
-        +fn5+fn5+fn5+fkKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +QoKCgoKCgoKCgoKCgoKCgoKCgQKCgoKCvn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5CgQKCgoKBAQK
-        CgoKCgoKBAoECgoK+fn5+fn5+fn5+QoKCgoKCgoKCvn5+fn5+fn5+QoKCgoECgoECgoKCgoKBAoECgr5
-        +fn5+fn5BAoKBAoKCgoKCgoKCgoECvn5+fn5+fkKCgQKCgoKBAoKCgoKBAoE+fn5+fn5+QoKCgoKBAoK
-        CgoKCgoKCgoKCgoK+fn5+fn5+QQKCgoKBAoKCgoECgoK+fn5+fn5BAQEBAoKBAoKCgoKCgoKCgoKCgoK
-        Cvn5+fn5+QQKCgoKBAoKCgoECgr5+fn5+fkKCgoKBAoKBAoKCgoKCgoKCgoEBAoKBAr5+fn5+fkKCgoK
-        BAoKCgoECvn5+fn5CgoECgoECgoKBAQKCgoKCgoKCgoECgQECgr5+fn5+fn5CgoKBAoKCgQK+fn5+fn5
-        CgoKBAQKCgoKBAoECgoKCgoKCgoECgoKCvn5+fn5+fn5+QoKBAoKCgQK+fn5+fkKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKBAoK+fn5+fn5+fn5+QoKBAoKCgT5+fn5+QQKCgoKCgoKCgoKCgoKCgoKCgoKCgoKBAr5
-        +fn5+fn5+fn5+fkECgoKBAr5+fn5CgoECgoKCgoKCgoKCgoKCgoKCgoKCgoKBPn5+fn5+fkKCvn5+fkK
-        CgoKCvn5+fn5CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fn5+fn5+QoKCvn5+fn5CgoKCvn5+fkKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgr5+fn5+fn5CgoKCgr5+fn5CgoKCvn5+fkKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCvn5+fn5+fkBCgoKCgr5+fn5CgoKCvn5+fkKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fn5+fn5
-        +QEKAQoKCgr5+fn5CgoKCvn5+QoKCgoKCgoKCgoKCgoKCgoKCgoKCgr5+fn5+fn5CgoKAQoKCgoK+fn5
-        CgoK+fn5+QoKCgoKCgoKCgEBAQEBAQoBAQEBAfn5+fn5+fkKCgoKAQEKCgoK+fn5+QoK+fn5+QoKCgoK
-        CgoKCgoKAQEKCgoKAQEK+fn5+fn5+QEKCgoKAQEKCgoK+fn5+QoK+fn5+QoKCgoKCgoKCgoKAQEKCgoB
-        Afn5+fn5+fn5CgoKCgoBAQEKCgoK+fn5+QoK+fn5CgoKCgoKCgoKCgoKAQEKCgEB+fn5+fn5+fkBAQEK
-        CgoBAQoBCgoK+fn5+Qr5+fn5+QoKCgoKCgoKCgoKAQEKAQH5+fn5+fn5+QoKAQEKCgEBAQoBCgoK+fn5
-        +QoK+fn5+QoKCgoKCgoKCgoKAQEBAfn5+fn5+fn5AQoKAQEKCgEBCgoKAQoK+fn5+QoK+fn5+QoKCgoK
-        CgoKCgoKAQEK+fn5+fn5+QoKAQEBAQoKAQEBAQoBAQEK+fn5+QoK+fn5+QoKCgoKCgoKCgoKAQH5+fn5
-        +fn5CgoKCgoKCgoKCgoKCgoKCgoK+fn5+QoK+fn5+fkKCgoKCgoKCgoKAfn5+fn5+fkKCgoKCgoKCgoK
-        CgoKCgoKCgr5+fn5+QoKCvn5+fkKCgoKCgoKCgoK+fn5+fn5+QEKCgoKCgoKCgoKCgoKCgoKCgr5+fn5
-        CgoKCvn5+fkKCgoKCgoKCgH5+fn5+fn5AQEBAQoKCgoKCgoKCgoKCgoKCgr5+fn5CgoKCvn5+fkKCgoK
-        CgoKCvn5+fn5+fkKCgoKCgoKCgoKCgoKCgoKCgoKCgr5+fn5CgoKCvn5+fn5CgoKCgoK+fn5+fn5+QoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCvn5+fn5CgoKCgr5+fn5CgoKCgr5+fn5+fn5CgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCvn5+fkKCgoKCgr5+fn5+QoKCvn5+fn5+fkKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fn5+fkK
-        CgoKCgoK+fn5+fkK+fn5+fn5+QoKCgoKCgoKCgoKCgoKCgoKCgoKCgr5+fn5+QoKCgoKCgoK+fn5+fn5
-        +fn5+fn5CgoKCgoKCgoKCgoKCgoKCgoKCgoKCvn5+fn5+QoKCgoKCgoKCvn5+fn5+fn5+fkKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCvn5+fn5CgoKCgoKCgoKCgr5+fn5+fn5+QoKCgoKCgoKCgoKCgoKCgoKCgoK
-        Cgr5+fn5+fkKCgoKCgoKCgoKCgoK+fn5+fn5CgoKCgoKCgoKCgoKCgoKCgoKCgoKCvn5+fn5+QoKCgoK
-        CgoKCgoKCgoK+fn5+fn5+QoKCgoKCgoKCgoKCgoKCgoKCgoK+fn5+fn5+QoKCgoKCgoKCgoKCgoKCgr5
-        +fn5+fn5CgoKCgoKCgoKCgoKCgoKCvn5+fn5+fkKCgoKCgoKCgoKCgoKCgoKCgoK+fn5+fn5+fn5+QoK
-        CgoKCgoKCvn5+fn5+fn5+QoKCgoKCgoKCgoKCgoKCgoKCgoKCvn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK+fn5+fn5+fn5+fn5+fn5+fn5+fn5+QoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCvn5+fn5+fn5+fn5+fn5+fn5+fkKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoK+fn5+fn5+fn5CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr///////8AAP//4A///wAA//wAAH//AAD/+AAAH/8AAPvg
-        AAAF5wAA9cAP+APbAAD1gG/9Ab0AAPQD7//APQAA7gBv/+A9AADsD2/80D0AAOg25/0wHQAA0Dnr/eAN
-        AADQf//+wA0AAMB///6AAwAAob///gGHAADB///+A4MAAMP///wHwwAAw///+AfDAADD///wC8MAAMf/
-        /+A74wAAh/wIAHnhAACH/zyAeeEAAIf/OAHx4QAAj/8wAHLhAAAH/yAGYuEAAIf/AAZnYQAAh/8gMMIh
-        AACH/wB//+EAAIP/AP//wQAAw/8A///DAADDjAA//8MAAMM8B///wwAAwHgP//+DAADgMAAxhAcAAODA
-        JmbMBwAA8EBmZ8gPAADgAGZnwA8AAOAAZmfIHwAA5AJmZMA/AADmBERwwH8AAOYD///AfwAA84D//wH/
-        AADzwA54A/8AAPwgAAAH/wAA//gAAB//AAD//AAAf/8AAP//4A///wAA////////AAAoAAAAQAAAAIAA
-        AAABAAgAAAAAAAAQAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDA
-        wADA3MAA8MqmAAQEBAAICAgADAwMABEREQAWFhYAHBwcACIiIgApKSkAVVVVAE1NTQBCQkIAOTk5AIB8
-        /wBQUP8AkwDWAP/szADG1u8A1ufnAJCprQAAADMAAABmAAAAmQAAAMwAADMAAAAzMwAAM2YAADOZAAAz
-        zAAAM/8AAGYAAABmMwAAZmYAAGaZAABmzAAAZv8AAJkAAACZMwAAmWYAAJmZAACZzAAAmf8AAMwAAADM
-        MwAAzGYAAMyZAADMzAAAzP8AAP9mAAD/mQAA/8wAMwAAADMAMwAzAGYAMwCZADMAzAAzAP8AMzMAADMz
-        MwAzM2YAMzOZADMzzAAzM/8AM2YAADNmMwAzZmYAM2aZADNmzAAzZv8AM5kAADOZMwAzmWYAM5mZADOZ
-        zAAzmf8AM8wAADPMMwAzzGYAM8yZADPMzAAzzP8AM/8zADP/ZgAz/5kAM//MADP//wBmAAAAZgAzAGYA
-        ZgBmAJkAZgDMAGYA/wBmMwAAZjMzAGYzZgBmM5kAZjPMAGYz/wBmZgAAZmYzAGZmZgBmZpkAZmbMAGaZ
-        AABmmTMAZplmAGaZmQBmmcwAZpn/AGbMAABmzDMAZsyZAGbMzABmzP8AZv8AAGb/MwBm/5kAZv/MAMwA
-        /wD/AMwAmZkAAJkzmQCZAJkAmQDMAJkAAACZMzMAmQBmAJkzzACZAP8AmWYAAJlmMwCZM2YAmWaZAJlm
-        zACZM/8AmZkzAJmZZgCZmZkAmZnMAJmZ/wCZzAAAmcwzAGbMZgCZzJkAmczMAJnM/wCZ/wAAmf8zAJnM
-        ZgCZ/5kAmf/MAJn//wDMAAAAmQAzAMwAZgDMAJkAzADMAJkzAADMMzMAzDNmAMwzmQDMM8wAzDP/AMxm
-        AADMZjMAmWZmAMxmmQDMZswAmWb/AMyZAADMmTMAzJlmAMyZmQDMmcwAzJn/AMzMAADMzDMAzMxmAMzM
-        mQDMzMwAzMz/AMz/AADM/zMAmf9mAMz/mQDM/8wAzP//AMwAMwD/AGYA/wCZAMwzAAD/MzMA/zNmAP8z
-        mQD/M8wA/zP/AP9mAAD/ZjMAzGZmAP9mmQD/ZswAzGb/AP+ZAAD/mTMA/5lmAP+ZmQD/mcwA/5n/AP/M
-        AAD/zDMA/8xmAP/MmQD/zMwA/8z/AP//MwDM/2YA//+ZAP//zABmZv8AZv9mAGb//wD/ZmYA/2b/AP//
-        ZgAhAKUAX19fAHd3dwCGhoYAlpaWAMvLywCysrIA19fXAN3d3QDj4+MA6urqAPHx8QD4+PgA8Pv/AKSg
-        oACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgomJiYmJiYmJiYmJiYmJiYmCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/////////////////////
-        ////JiYmJiYmJiYmJiYmJiYmJiYmJiYmJgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK////////////////
-        //////8mJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJgoKCgoKCgoKCgoKCgoKCgoKCgoKCv//////////
-        /////////yYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJgoKCgoKCgoKCgoKCgoKCgoKCgr/////
-        ////////////JiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJgoKCgoKCgoKCgoKCgoKCgoK
-        //////////////8mJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJgoKCgoKCgoKCgoK
-        CgoKCv////////////8mJiYmJiYmJiYmJiYmJv////8K////Cv//CiYmJiYmJiYmJiYmJiYmCgoKCgoK
-        CgoKCgoKCgr/////////CgomJiYmJiYmJiYmJv8KCv//////Cv//////Cv//////JiYmJiYmJiYmJiYK
-        CgoKCgoKCgoKCgoK/////////womJiYmJiYmJiYmJv//Cgr//////wr///////8K/////womJiYmJiYm
-        JiYmJgoKCgoKCgoKCgoKCv////////8mJiYmJiYmJiYmCgr//woK//////8K/////////wr///8KCgom
-        JiYmJiYmJiYmCgoKCgoKCgoKCgr///////8mJiYmJiYmJiYm/woK//8KCv//////Cv//////////Cv//
-        CgoKCiYmJiYmJiYmJiYKCgoKCgoKCgoK//////8mJiYmJiYmJib/CgoK////Cgr//////wr///////8K
-        Cv///woKCgomJiYmJiYmJiYmJgoKCgoKCgoKCv////8mJiYmJiYmJib//////////woK//////8K////
-        /woK//////8KCgomJiYmJiYmJiYmJiYmCgoKCgoKCgr/////JiYmJiYmJiYK//////////8KCv//////
-        Cv//Cgr/////////CgomJiYmJiYmJiYmJiYmJgoKCgoKCgoK////JiYmJiYmJib/////////////Cgr/
-        /////woKCv///////////woKJiYmJiYmJiYmJiYmJiYmCgoKCgoKCv///yYmJiYmJib/////////////
-        /woK//////8K//////////////8KJiYmJiYmJiYmJiYmJiYmJgoKCgoKCgr//yYmJiYmJiYm////////
-        ////CgoKCgoK////////////////////JiYmJiYmJiYmCiYmJiYmJiYmCgoKCgoK//8mJiYmJiYm////
-        ////////////////////////////////////JiYmJiYmJiYmCgoKJiYmJiYmJgoKCgoKCv8mJiYmJiYm
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKJiYmJiYmJiYmCgoKCgomJiYmJiYmCgoKCgr/JiYm
-        JiYmJgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKJiYmJiYmJiYmJgoKCgoKJiYmJiYmJgoKCgoK
-        JiYmJiYmJv//////////////////////////////////8v8KJiYmJiYmJiYmJgoKCgoKCgomJiYmJiYm
-        CgoKCiYmJiYmJv////////////////////////////////////L/JiYmJiYmJiYmJhwcHBwcHBscHCYm
-        JiYmJgoKCgomJiYmJib/////////////////////CgoK///////////yJiYmJiYmJiYmJhwcCgocHBwb
-        HBwmJiYmJiYKCgomJiYmJiYm//8KCv////////////////8KCv//////////JiYmJiYmJiYmJhscHAoK
-        HBwcGxwcJiYmJiYmJgoKJiYmJiYmJgoKCv///woKCgr/Cgr///8KCgr//woK/woK/yYmJiYmJiYmJgwb
-        HBwKChwcHBscHCYmJiYmJiYKCiYmJiYmJv//CgoK/woK/woK/woK//8KCv8KCv8KCgoK/yYmJiYmJiYm
-        JhwMGxwcCgocHBwbHBwcJiYmJiYmCgomJiYmJib/CgoKCv8KCv8KCv8KCv//Cgr/////CgoK/yYmJiYm
-        JiYmJgocDBscHBwcHBwcGxwcHCYmJiYmJgoKJiYmJiYm////Cgr/Cgr/Cgr/Cgr//woK/woK/woKCiYm
-        JiYmJiYmJgoKHAwbHAoKCgocHBscHAomJiYmJiYKCiYmJiYmJv///woK/woK/woK/woK////CgoK//8K
-        CiYmJiYmJiYmJhwcHBwMGxwcHBwcHBwbHBwcJiYmJiYmCgomJiYmJib///8KCv//////////////////
-        ////CiYmJiYmJiYmJiYMDAwMDBscHBwcHBwcGxwcHCYmJiYmJgoKJiYmJiYKCgoKCv///woK//8KCgoK
-        /////////yYmJiYmJiYmJiYbGxsbGxsbGxsbGxsbGxsbGxsmJiYmJiYKJiYmJiYmJv//////////Cgr/
-        /////////////yYmJiYmJiYmJiYcHAoKHBwcGxwcCgoKHBwbHBwcJiYmJiYmCgomJiYmJib/////////
-        /////////////////yYmJiYmJiYmJiYcHBwKChwcHBscHBwKChwcGwoKHCYmJiYmJgoKJiYmJiYmCgoK
-        CgoKCgoKCgoKCgoKCgoKCiYmJiYmJiYmJib/HBwcCgocHBwbHBwKCgocHBsKCgomJiYmJiYKCiYmJiYm
-        JgoKCgoKCgoKCgoKCgoKCgoKCgomJiYmJiYmJiby/xwcHAoKHBwcGxwKChwKChwbHAoKJiYmJiYmCgom
-        JiYmJib///////////////////////8mJiYmJiYmJib/8v8cHAoKCgocHBscCgocHBwcGxwcCiYmJiYm
-        JgoKJiYmJiYm//////////////////////8mJiYmJiYmJib///L/HAoKHBwKChwbHAoKHBwcHBscHAom
-        JiYmJiYKCiYmJiYmJib///////////////////8mJiYmJiYmJib////y/xwcHAoKHBwcGxwKChwKChwb
-        HBwmJiYmJiYmCgomJiYmJiYmCgoKCgoKCgoKCgoKCgomJiYmJiYmJiYKCgoK8v8cHBwcCgocHBscHAoK
-        ChwcGxwcJiYmJiYmJgoKCiYmJiYmJgoKCgoKCgoKCgoKCgomJiYmJiYmJiYmCgoKCvL/HBwcHBwcHBwb
-        HBwcHBwcHBscHCYmJiYmJgoKCgomJiYmJib///////////////8mJiYmJiYmJiYm///////yGxsbGxsb
-        GxsbGxsbGxsbGxsbGxsmJiYmJiYKCgoKJiYmJiYmJv////////////8mJiYmJiYmJiYm////////8v8c
-        HAoKCgoKHBscHAoKChwcGxwmJiYmJiYmCgoKCv8mJiYmJiYm//////////8mJiYmJiYmJiYm////////
-        //L/HBwKChwcCgobHBwKCgocHBsmJiYmJiYmHAoKCgr/JiYmJiYmJv////////8mJiYmJiYmJiYm////
-        ///////y/xwcCgocHAoKGxwcCgoKHBwbJiYmJiYmJhwKCgoKCgomJiYmJiYmCgoKCgoKJiYmJiYmJiYm
-        CgoKCgoKCgoK8v8cCgoKChwKChscCgoKChwcJiYmJiYmJhwcCgoKCgoKJiYmJiYmJiYKCgoKJiYmJiYm
-        JiYmCgoKCgoKCgoKCvL/HBwKChwcCgobHAoKCgocJiYmJiYmJiYcHAoKCgoKCgomJiYmJiYmCgoKJiYm
-        JiYmJiYmCgoKCgoKCgoKCgry/xwcCgoKCgocGxwKCgoKHCYmJiYmJiYcHBwKCgoKCgoKJiYmJiYmJiYK
-        JiYmJiYmJiYmCgoKCgoKCgoKCgoK8hscHBwcHBwcHBscHAoKCiYmJiYmJiYmChwcCgoKCgoKCgomJiYm
-        JiYmJiYmJiYmJiYmCgoKCgoKCgoKCgoKCvL/GxsbGxsbGxsbGxsbGyYmJiYmJiYmGxsbGwoKCgoKCgoK
-        JiYmJiYmJiYmJiYmJiYmJgoKCgoKCgoKCgoKCgry/xwcHBwcHBwcGxwcHCYmJiYmJiYmJhwcHBwKCgoK
-        CgoKCgomJiYmJiYmJiYmJiYmJgoKCgoKCgoKCgoKCgoK8v8cHBwKChwcHBscHCYmJiYmJiYmJgoKChwc
-        CgoKCgoKCgoKCiYmJiYmJiYmJiYmJgoKCgoKCgoKCgoKCgoKCvL/HBwKCgoKHBwbJiYmJiYmJiYmJgoK
-        HAoKHAoKCgoKCgoKCgoKJiYmJiYmJiYmJgoKCgoKCgoKCgoKCgoKCgry/xwcHAoKHBwcJiYmJiYmJiYm
-        JgoKCgoKChwKCgoKCgoKCgoKCgomJiYmJiYmJiYmJgoKCgoKCgoKCgoKCgoK8v8cHAoKCgomJiYmJiYm
-        JiYmJhwKChwKCgocCgoKCgoKCgoKCgoKCiYmJiYmJiYmJiYmCgoKCgoKCgoKCgoKCvL/HBwcCgomJiYm
-        JiYmJiYmJhscHAoKCgoKHAoKCgoKCgoKCgoKCgoKJiYmJiYmJiYmJiYmJiYKCgoKCgoKCgry/xwmJiYm
-        JiYmJiYmJiYmJhwbHBwcHBwcHBwKCgoKCgoKCgoKCgoKCgomJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYm
-        JiYmJiYmJiYmJiYmJhwcHBwcHBwcHBwcCgoKCgoKCgoKCgoKCgoKCgomJiYmJiYmJiYmJiYmJiYmJiYm
-        JiYmJiYmJiYmJiYmJiYmCgoKGwoKChsbChsKGwoKCgoKCgoKCgoKCgoKCgoKCgomJiYmJiYmJiYmJiYm
-        JiYmJiYmJiYmJiYmJiYmJiYaGgobChsKCgobGxsKGxsKCgoKCgoKCgoKCgoKCgoKCgoKCgomJiYmJiYm
-        JiYmJiYmJiYmJiYmJiYmJiYmJsfHGhoKCgobChsKGxsKGwobCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgom
-        JiYmJiYmJiYmJiYmJiYmJiYmJiYmx8fHxxoaChsbGxsKGxsbGxsbGwoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKJiYmJiYmJiYmJiYmJiYmJv//////////////////////////////CgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoK8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vL//////////4AA
-        AAAAH///gAAAAAAf//+AAAAAAAf//4AAAAAAAf//gAAAAAAAf/+AAAAAAAAf/4AAAAAAAA//gAAAAAAA
-        B/+AAAAAAAAD/4AAAAAAGAH/gAAAAAAcAP+AAAAAABwAf4AAAAAAGAA/gAAAAAAQAD+AAAAAABAAH4AA
-        AAAAAAAfgAAAAAAAEA+AAAAAAAA4D4AAAAAAAHwHgAAAAAAAfAeAAAAAAAAAAYAAAAAAAAABgAAAAAAA
-        AAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAA
-        AAAAAAABAAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAA
-        AAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAfAP
-        AH/gAAAB+A4A/+AAAAH4BAH/4AAAAfwAA//gAAAB/AAD/+AAAAH+AAf/4AAAAf8AD//gAAAB/4Af/+AA
-        AAH/wAf/4AAAAf/gA//gAAAB//AAP+AAAAH/+AAAAAAAAf/+AAAAAAAB//+AAAAAAAH//+AAAAAAAf//
-        +AAAAAAB////AAAAAAH/////4AAAAA==
-</value>
+  <data name="PermissionDenied" xml:space="preserve">
+    <value>Permission Denied</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="QK" xml:space="preserve">
+    <value>QK</value>
   </data>
   <data name="Quick_Key_Movie" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1684,97 +1510,42 @@
         A3jBMINkBXMN4mTCHOSAAHQa9JxREELUkJfCXuRjb2ToJCFttU+3zA6YBmAfEwRK0HEEBAA7
 </value>
   </data>
-  <data name="Quick_Key01" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAYAICAQAAAAAADoAgAAZgAAACAgAAAAAAAAqAgAAE4DAAAgIAIAAAAAADABAAD2CwAAEBAAAAAA
-        AABoBQAAJg0AABAQEAAAAAAAKAEAAI4SAAAQEAIAAAAAALAAAAC2EwAAKAAAACAAAABAAAAAAQAEAAAA
-        AAAAAgAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAIAAAIAAAACAgACAAAAAgACAAICAAADAwMAAgICAAAAA
-        /wAA/wAAAP//AP8AAAD/AP8A//8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAACZmZmZmQCZmZmZmQAAAAAAAAmZkAAAAJmZmQAAAAAAAAAJmZAAAACZmZAAAAAAAAAACZmQAA
-        AJmZkAAAAAAAAAAAmZkAAAmZmQAAAAAAAAAAAJmZAACZmZAAAAAAAAAAAACZmQAJmZkAAAAAAAAAAAAA
-        mZkAmZmQAAAAAAAAAAAAAJmZCZmZAAAAAAAAAAAAAACZmZmZkAAAAAAAAAAAAAAAmZkJmQAAAAAAAAAA
-        AAAAAJmZAAkAAAAAAAAAAAAAAACZmQAAmQAAAAAAAAAAAAAAmZkAAACQAAAAAAAAAAAAAJmZAAAACQAA
-        AAAAAAAAAACZmQAAAACZAAAAAAAAAAAAmZkAAAAACZAAAAAAAAAAAJmZAAAAAAmZkAAAAAAACZmZmZmQ
-        AAmZmZmQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//
-        /////wMB//+Hg///hwf//4cP//+GH///hB///4A///+Ef///h3+AGAG/8P4Hn/D+B8/w/AcD8PgH//Dw
-        B//w4If/8MGH//CDh//wBwf/8I////Dv///w8///8P3///D+///w/z//8P+f//D/h/+AHgH/////////
-        ////////KAAAACAAAABAAAAAAQAIAAAAAAAABAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAIAAAIAAAACA
-        gACAAAAAgACAAICAAADAwMAAwNzAAPDKpgAEBAQACAgIAAwMDAAREREAFhYWABwcHAAiIiIAKSkpAFVV
-        VQBNTU0AQkJCADk5OQCAfP8AUFD/AJMA1gD/7MwAxtbvANbn5wCQqa0AAAAzAAAAZgAAAJkAAADMAAAz
-        AAAAMzMAADNmAAAzmQAAM8wAADP/AABmAAAAZjMAAGZmAABmmQAAZswAAGb/AACZAAAAmTMAAJlmAACZ
-        mQAAmcwAAJn/AADMAAAAzDMAAMxmAADMmQAAzMwAAMz/AAD/ZgAA/5kAAP/MADMAAAAzADMAMwBmADMA
-        mQAzAMwAMwD/ADMzAAAzMzMAMzNmADMzmQAzM8wAMzP/ADNmAAAzZjMAM2ZmADNmmQAzZswAM2b/ADOZ
-        AAAzmTMAM5lmADOZmQAzmcwAM5n/ADPMAAAzzDMAM8xmADPMmQAzzMwAM8z/ADP/MwAz/2YAM/+ZADP/
-        zAAz//8AZgAAAGYAMwBmAGYAZgCZAGYAzABmAP8AZjMAAGYzMwBmM2YAZjOZAGYzzABmM/8AZmYAAGZm
-        MwBmZmYAZmaZAGZmzABmmQAAZpkzAGaZZgBmmZkAZpnMAGaZ/wBmzAAAZswzAGbMmQBmzMwAZsz/AGb/
-        AABm/zMAZv+ZAGb/zADMAP8A/wDMAJmZAACZM5kAmQCZAJkAzACZAAAAmTMzAJkAZgCZM8wAmQD/AJlm
-        AACZZjMAmTNmAJlmmQCZZswAmTP/AJmZMwCZmWYAmZmZAJmZzACZmf8AmcwAAJnMMwBmzGYAmcyZAJnM
-        zACZzP8Amf8AAJn/MwCZzGYAmf+ZAJn/zACZ//8AzAAAAJkAMwDMAGYAzACZAMwAzACZMwAAzDMzAMwz
-        ZgDMM5kAzDPMAMwz/wDMZgAAzGYzAJlmZgDMZpkAzGbMAJlm/wDMmQAAzJkzAMyZZgDMmZkAzJnMAMyZ
-        /wDMzAAAzMwzAMzMZgDMzJkAzMzMAMzM/wDM/wAAzP8zAJn/ZgDM/5kAzP/MAMz//wDMADMA/wBmAP8A
-        mQDMMwAA/zMzAP8zZgD/M5kA/zPMAP8z/wD/ZgAA/2YzAMxmZgD/ZpkA/2bMAMxm/wD/mQAA/5kzAP+Z
-        ZgD/mZkA/5nMAP+Z/wD/zAAA/8wzAP/MZgD/zJkA/8zMAP/M/wD//zMAzP9mAP//mQD//8wAZmb/AGb/
-        ZgBm//8A/2ZmAP9m/wD//2YAIQClAF9fXwB3d3cAhoaGAJaWlgDLy8sAsrKyANfX1wDd3d0A4+PjAOrq
-        6gDx8fEA+Pj4APD7/wCkoKAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP///wAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAAAAAAAAMDAwMDAwAAAwMDAwMDAwKAAAAAAAA
-        AAAAAAAAAAAAAAAMDAwMAAAAAAwMDAwMAAoAAAAAAAAAAAAAAAAAAAAAAAwMDAwAAAAMDAwMDAAACgAA
-        AAAAAAAAAAAAAAAAAAAADAwMDAAAAAwMDAwAAAAKAAAAAAAAAAAAAAAAAAAAAAAMDAwMAAAMDAwMAAAA
-        AAoAAAAAAAAAAAAAAAAAAAAAAAwMDAwADAwMDAwAAAAACgAAAAAAAAAAAAAAAAAAAAAADAwMDAwMDAwM
-        AAAAAAAKAAAAAAAAAAAAAAAAAAAAAAAMDAwMAAwMDAAAAAAAAAoAAAAAAAAAAAAAAAAAAAAAAAwMDAwA
-        AAAMAAAAAAAACgD5+fn5+fn5+fn5AAD5+fn5+fn5+fn5AAAMAAAAAAAKAAAAAPn5+fkAAAAAAAAA+fn5
-        +fn5AAAAAAwMAAAAAAoAAAAA+fn5+QAAAAAAAAD5+fn5+QwAAAAAAAwMAAAACgAAAAD5+fn5AAAAAAAA
-        +fn5+fkMDAAAAAwMDAwMDAAKAAAAAPn5+fkAAAAAAPn5+fn5DAwMAAAAAAAAAAAAAAoAAAAA+fn5+QAA
-        AAD5+fn5+QwMDAwAAAAAAAAAAAAACgAAAAD5+fn5AAAA+fn5+fkADAwMDAAAAAAAAAAAAAAKAAAAAPn5
-        +fkAAPn5+fn5AAAMDAwMAAAAAAAAAAAAAAoAAAAA+fn5+QD5+fn5+QAAAAwMDAwAAAAAAAAAAAAACgAA
-        AAD5+fn5+fn5+fkAAAAMDAwMDAAAAAAAAAAAAAAKAAAAAPn5+fkA+fn5AAAAAAAAAAAAAAAAAAAAAAAA
-        AAoAAAAA+fn5+QAAAPkAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAD5+fn5AAAAAPn5AAAAAAAAAAAAAAAA
-        AAAAAAAKAAAAAPn5+fkAAAAAAAD5AAAAAAAAAAAAAAAAAAAAAAoAAAAA+fn5+QAAAAAAAAD5AAAAAAAA
-        AAAAAAAAAAAACgAAAAD5+fn5AAAAAAAAAAD5+QAAAAAAAAAAAAAAAAAKAAAAAPn5+fkAAAAAAAAAAAD5
-        +QAAAAAAAAAAAAAAAAoAAAAA+fn5+QAAAAAAAAAAAPn5+fkAAAAAAAAAAAAACgD5+fn5+fn5+fn5AAAA
-        APn5+fn5+fn5AAAAAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAK////////
-        AwH//4eD//+HB///hw///4Yf//+EH///gD///4R///+Hf4AYAb/w/gef8P4Hz/D8BwPw+Af/8PAH//Dg
-        h//wwYf/8IOH//AHB//wj///8O////Dz///w/f//8P7///D/P//w/5//8P+H/4AeAf//////////////
-        //8oAAAAIAAAAEAAAAABAAEAAAAAAIAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAP///wAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//
-        /////wMB//+Hg///hwf//4cP//+GH///hB///4A///+Ef///h3+AGAG/8P4Hn/D+B8/w/AcD8PgH//Dw
-        B//w4If/8MGH//CDh//wBwf/8I////Dv///w8///8P3///D+///w/z//8P+f//D/h/+AHgH/////////
-        ////////KAAAABAAAAAgAAAAAQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAIAAAIAAAACA
-        gACAAAAAgACAAICAAADAwMAAwNzAAPDKpgAEBAQACAgIAAwMDAAREREAFhYWABwcHAAiIiIAKSkpAFVV
-        VQBNTU0AQkJCADk5OQCAfP8AUFD/AJMA1gD/7MwAxtbvANbn5wCQqa0AAAAzAAAAZgAAAJkAAADMAAAz
-        AAAAMzMAADNmAAAzmQAAM8wAADP/AABmAAAAZjMAAGZmAABmmQAAZswAAGb/AACZAAAAmTMAAJlmAACZ
-        mQAAmcwAAJn/AADMAAAAzDMAAMxmAADMmQAAzMwAAMz/AAD/ZgAA/5kAAP/MADMAAAAzADMAMwBmADMA
-        mQAzAMwAMwD/ADMzAAAzMzMAMzNmADMzmQAzM8wAMzP/ADNmAAAzZjMAM2ZmADNmmQAzZswAM2b/ADOZ
-        AAAzmTMAM5lmADOZmQAzmcwAM5n/ADPMAAAzzDMAM8xmADPMmQAzzMwAM8z/ADP/MwAz/2YAM/+ZADP/
-        zAAz//8AZgAAAGYAMwBmAGYAZgCZAGYAzABmAP8AZjMAAGYzMwBmM2YAZjOZAGYzzABmM/8AZmYAAGZm
-        MwBmZmYAZmaZAGZmzABmmQAAZpkzAGaZZgBmmZkAZpnMAGaZ/wBmzAAAZswzAGbMmQBmzMwAZsz/AGb/
-        AABm/zMAZv+ZAGb/zADMAP8A/wDMAJmZAACZM5kAmQCZAJkAzACZAAAAmTMzAJkAZgCZM8wAmQD/AJlm
-        AACZZjMAmTNmAJlmmQCZZswAmTP/AJmZMwCZmWYAmZmZAJmZzACZmf8AmcwAAJnMMwBmzGYAmcyZAJnM
-        zACZzP8Amf8AAJn/MwCZzGYAmf+ZAJn/zACZ//8AzAAAAJkAMwDMAGYAzACZAMwAzACZMwAAzDMzAMwz
-        ZgDMM5kAzDPMAMwz/wDMZgAAzGYzAJlmZgDMZpkAzGbMAJlm/wDMmQAAzJkzAMyZZgDMmZkAzJnMAMyZ
-        /wDMzAAAzMwzAMzMZgDMzJkAzMzMAMzM/wDM/wAAzP8zAJn/ZgDM/5kAzP/MAMz//wDMADMA/wBmAP8A
-        mQDMMwAA/zMzAP8zZgD/M5kA/zPMAP8z/wD/ZgAA/2YzAMxmZgD/ZpkA/2bMAMxm/wD/mQAA/5kzAP+Z
-        ZgD/mZkA/5nMAP+Z/wD/zAAA/8wzAP/MZgD/zJkA/8zMAP/M/wD//zMAzP9mAP//mQD//8wAZmb/AGb/
-        ZgBm//8A/2ZmAP9m/wD//2YAIQClAF9fXwB3d3cAhoaGAJaWlgDLy8sAsrKyANfX1wDd3d0A4+PjAOrq
-        6gDx8fEA+Pj4APD7/wCkoKAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP///wAAAAAAAAAAAAwM
-        DAwADAwMAAAAAAAAAAAADAwAAAwMAAAAAAAAAAAAAAwMAAwMAAD5+fn5+fkA+fn5+fkMAAAAAAD5+QAA
-        AAD5+QwADAAAAAAA+fkAAAD5+QwMAAAMAAAAAPn5AAD5+QAMDAAADAwMAAD5+QD5+QAADAwAAAAAAAAA
-        +fn5+QAAAAwMAAAAAAAAAPn5APkAAAAMDAAAAAAAAAD5+QAA+fkMDAwAAAAAAAAA+fkAAAAA+QAAAAAA
-        AAAAAPn5AAAAAAD5AAAAAAAA+fn5+fn5AAD5+fn5AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAA/wgAAP+ZAAD/kwAAAgcAAM8XAADOGwAAzJgAAMmfAADDnwAAy58AAMwfAADPfwAAz78AAAMP
-        AAD//wAA//8AACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAACAAACA
-        AAAAgIAAgAAAAIAAgACAgAAAwMDAAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//AAD///8AAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAmZmZCZmZAAAAmQAAmQAAAACZAAmQAAAAAJkAmQAAAAAAmQmQAAAAAACZ
-        mQAAAAAAAJkJAAAAAAAAmQCZAAAAAACZAACQAAAAAJkAAAkAAACZmZkAmZkAAAAAAAAAAAAAAAAAAAAA
-        AAD/CAAA/5kAAP+TAAACBwAAzxcAAM4bAADMmAAAyZ8AAMOfAADLnwAAzB8AAM9/AADPvwAAAw8AAP//
-        AAD//wAAKAAAABAAAAAgAAAAAQABAAAAAABAAAAAAAAAAAAAAAACAAAAAgAAAAAAAAD///8AAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8I
-        AAD/mQAA/5MAAAIHAADPFwAAzhsAAMyYAADJnwAAw58AAMufAADMHwAAz38AAM+/AAADDwAA//8AAP//
-        AAA=
-</value>
+  <data name="QuickKey" xml:space="preserve">
+    <value>Quick Key</value>
+  </data>
+  <data name="QuickKeyCharsetFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QuickKeyCharsetFile.ICO;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QuickKeyDisabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QuickKeyDisabled.ICO;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QuickKeyFormNewError" xml:space="preserve">
+    <value>An error occured while initializing the Character Grid. Retry initialization?</value>
+  </data>
+  <data name="QuickKeyIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QuickKey.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QuickKeyText" xml:space="preserve">
+    <value>Please change ‘Last Window’ to ‘OpusApp’ if you are using Microsoft Word. This will make it easier to use your keyboard and Quick Key in conjunction, as well as eliminate the annoying flicker when sending characters.
+Be sure to explore the right-click menus on the title bar and the characters.
+You can rearrange characters by dragging them with the middle mouse button.
+If you need a different set of characters, use the File menu in the Toolbar.
+For some applications, you may need to change the character transfer method in Options. This only applies to GTK+ applications.</value>
+  </data>
+  <data name="QuickKeyTitle" xml:space="preserve">
+    <value>Important Notes</value>
+  </data>
+  <data name="ReadFileError" xml:space="preserve">
+    <value>Sorry, this file cannot be read. Please close all programs using the file and try again.</value>
+  </data>
+  <data name="RecentCharsets" xml:space="preserve">
+    <value>Recent Charsets</value>
+  </data>
+  <data name="ResetAllButton" xml:space="preserve">
+    <value>Reset ALL</value>
+  </data>
+  <data name="ResetButton" xml:space="preserve">
+    <value>Reset</value>
   </data>
   <data name="Save" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1823,6 +1594,68 @@
         AHjAAQCAwAEAeeABAIDgBwB58D8AgPH/AHn//wCA
 </value>
   </data>
+  <data name="SaveCharsetDialogFilter" xml:space="preserve">
+    <value>Charset Files (*.charset)|*.charset</value>
+  </data>
+  <data name="SaveCharsetDialogTitle" xml:space="preserve">
+    <value>Save Charset As</value>
+  </data>
+  <data name="SaveCharsetErrorCaption" xml:space="preserve">
+    <value>Error Saving File</value>
+  </data>
+  <data name="SaveCharsetOverwriteCaption" xml:space="preserve">
+    <value>Overwrite File?</value>
+  </data>
+  <data name="SaveCharsetOverwriteText" xml:space="preserve">
+    <value>A file already exists by this name. 
+Are you sure that you wish to overwrite this file?</value>
+  </data>
+  <data name="SaveCharsetReadOnlyErrorText" xml:space="preserve">
+    <value>The file you have chose to overwrite is read-only!
+You must choose either a different file name, or select 'Save As Readonly' before attempting to overwrite a read-only file.</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SendBadCharacter" xml:space="preserve">
+    <value>You have chosen to send one of the following reserved characters: (){}+^%~  . If you need to use one of these characters in a document, drag and drop or copy it instead.</value>
+  </data>
+  <data name="SendSettings" xml:space="preserve">
+    <value>Send Settings</value>
+  </data>
+  <data name="SettingsCouldNotBeSavedPrefix" xml:space="preserve">
+    <value>Quick Key's settings could not be saved. Make sure you are logged in as an administrator.</value>
+  </data>
+  <data name="SettingsCouldNotBeSavedSuffix" xml:space="preserve">
+    <value>could not be saved.</value>
+  </data>
+  <data name="SettingsFileError" xml:space="preserve">
+    <value>An error was found in the settings file. Click Yes to continue and load default settings. Click No to close program.</value>
+  </data>
+  <data name="SettingsFileErrorTitle" xml:space="preserve">
+    <value>Error in configuration file</value>
+  </data>
+  <data name="SettingsSavingError" xml:space="preserve">
+    <value>An error occured while saving the settings for Quick Key! All unsaved changes may have been lost.</value>
+  </data>
+  <data name="ShowToolbar" xml:space="preserve">
+    <value>Show Toolbar</value>
+  </data>
+  <data name="SizePrefix" xml:space="preserve">
+    <value>Size: </value>
+  </data>
+  <data name="StartupTip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StartupTip.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StartupTipText" xml:space="preserve">
+    <value>Welcome to Quick Key!</value>
+  </data>
+  <data name="StartupTipTitle" xml:space="preserve">
+    <value>Thank you for downloading Quick Key!</value>
+  </data>
+  <data name="StatusBarTooltip" xml:space="preserve">
+    <value>This status bar displays information about the character under the mouse cursor</value>
+  </data>
   <data name="Strikeout" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAMAEBAAAAAAAABoBQAANgAAABAQEAAAAAAAKAEAAJ4FAAAQEAIAAAAAALAAAADGBgAAKAAAABAA
@@ -1858,6 +1691,60 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD//wAA//8AAP//
         AAD//wAAEDgAALrXAAAAAAAA1jcAAMbXAADu1gAA7DgAAP//AAD//wAA//8AAP//AAA=
 </value>
+  </data>
+  <data name="SystemInfo" xml:space="preserve">
+    <value>System Info...</value>
+  </data>
+  <data name="TabCharacters" xml:space="preserve">
+    <value>Characters</value>
+  </data>
+  <data name="TabKeywords" xml:space="preserve">
+    <value>Program Keywords</value>
+  </data>
+  <data name="TabMouseSettings" xml:space="preserve">
+    <value>Mouse Settings</value>
+  </data>
+  <data name="TabSendSettings" xml:space="preserve">
+    <value>Char Transfer</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>Text Color</value>
+  </data>
+  <data name="TextTab" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="TitleBar" xml:space="preserve">
+    <value>Title Bar</value>
+  </data>
+  <data name="ToolbarTitle" xml:space="preserve">
+    <value>Quick Key Toolbar</value>
+  </data>
+  <data name="ToolbarTitleNewCharset" xml:space="preserve">
+    <value>Quick Key [Toolbar] - New Charset</value>
+  </data>
+  <data name="ToolbarTitlePrefix" xml:space="preserve">
+    <value>Quick Key [Toolbar] - </value>
+  </data>
+  <data name="ToolsEditText" xml:space="preserve">
+    <value>&amp;Edit Characters as Text</value>
+  </data>
+  <data name="ToolsGetUnicodeChar" xml:space="preserve">
+    <value>Get Character from Unicode</value>
+  </data>
+  <data name="ToolsGetUnicodeChars" xml:space="preserve">
+    <value>Add a range of characters</value>
+  </data>
+  <data name="ToolsMenu" xml:space="preserve">
+    <value>&amp;Tools</value>
+  </data>
+  <data name="ToolsOptions" xml:space="preserve">
+    <value>&amp;Options</value>
+  </data>
+  <data name="ToolsSortAsc" xml:space="preserve">
+    <value>Sort Characters by Unicode Value (Ascending)</value>
+  </data>
+  <data name="ToolsSortDes" xml:space="preserve">
+    <value>Sort Characters by Unicode Value (Descending)</value>
   </data>
   <data name="Underline" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1895,66 +1782,83 @@
         AAD4PwAA858AAPOfAADznwAA858AAPOfAADznwAA858AAOEPAAD//wAA//8AAP//AAA=
 </value>
   </data>
-  <data name="Undocked" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAB
-        AAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAMDcwADwyqYABAQEAAgICAAMDAwAERERABYW
-        FgAcHBwAIiIiACkpKQBVVVUATU1NAEJCQgA5OTkAgHz/AFBQ/wCTANYA/+zMAMbW7wDW5+cAkKmtAAAA
-        MwAAAGYAAACZAAAAzAAAMwAAADMzAAAzZgAAM5kAADPMAAAz/wAAZgAAAGYzAABmZgAAZpkAAGbMAABm
-        /wAAmQAAAJkzAACZZgAAmZkAAJnMAACZ/wAAzAAAAMwzAADMZgAAzJkAAMzMAADM/wAA/2YAAP+ZAAD/
-        zAAzAAAAMwAzADMAZgAzAJkAMwDMADMA/wAzMwAAMzMzADMzZgAzM5kAMzPMADMz/wAzZgAAM2YzADNm
-        ZgAzZpkAM2bMADNm/wAzmQAAM5kzADOZZgAzmZkAM5nMADOZ/wAzzAAAM8wzADPMZgAzzJkAM8zMADPM
-        /wAz/zMAM/9mADP/mQAz/8wAM///AGYAAABmADMAZgBmAGYAmQBmAMwAZgD/AGYzAABmMzMAZjNmAGYz
-        mQBmM8wAZjP/AGZmAABmZjMAZmZmAGZmmQBmZswAZpkAAGaZMwBmmWYAZpmZAGaZzABmmf8AZswAAGbM
-        MwBmzJkAZszMAGbM/wBm/wAAZv8zAGb/mQBm/8wAzAD/AP8AzACZmQAAmTOZAJkAmQCZAMwAmQAAAJkz
-        MwCZAGYAmTPMAJkA/wCZZgAAmWYzAJkzZgCZZpkAmWbMAJkz/wCZmTMAmZlmAJmZmQCZmcwAmZn/AJnM
-        AACZzDMAZsxmAJnMmQCZzMwAmcz/AJn/AACZ/zMAmcxmAJn/mQCZ/8wAmf//AMwAAACZADMAzABmAMwA
-        mQDMAMwAmTMAAMwzMwDMM2YAzDOZAMwzzADMM/8AzGYAAMxmMwCZZmYAzGaZAMxmzACZZv8AzJkAAMyZ
-        MwDMmWYAzJmZAMyZzADMmf8AzMwAAMzMMwDMzGYAzMyZAMzMzADMzP8AzP8AAMz/MwCZ/2YAzP+ZAMz/
-        zADM//8AzAAzAP8AZgD/AJkAzDMAAP8zMwD/M2YA/zOZAP8zzAD/M/8A/2YAAP9mMwDMZmYA/2aZAP9m
-        zADMZv8A/5kAAP+ZMwD/mWYA/5mZAP+ZzAD/mf8A/8wAAP/MMwD/zGYA/8yZAP/MzAD/zP8A//8zAMz/
-        ZgD//5kA///MAGZm/wBm/2YAZv//AP9mZgD/Zv8A//9mACEApQBfX18Ad3d3AIaGhgCWlpYAy8vLALKy
-        sgDX19cA3d3dAOPj4wDq6uoA8fHxAPj4+ADw+/8ApKCgAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//
-        AAD///8ACgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
-        CgoKCgoKCgoKCgoKCgoKCgoKCgoKCv//AAD//wAA//8AAP//AAD5/wAA+f8AAPgDAAD4AwAAwfsAAPn7
-        AAD4AwAA+f8AAPn/AAD//wAA//8AAP//AAA=
-</value>
+  <data name="Undocked" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Undocked.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Unlocked" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAIAEBAQAAAAAAAoAQAAJgAAABAQAAAAAAAAaAUAAE4BAAAoAAAAEAAAACAAAAABAAQAAAAAAIAA
-        AAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAICAgADAwMAAAAD/AAD/
-        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAPj4+Pj4AAAAd3d3d3cHAACPj4+PjwcAAHd3d3d3
-        BwAA+Pj4+PgHAAAAAAAAAAcAAAiHiIiAcAAAAHd4gICAAAAAAAAAgAAAAAAAAADwAAAAAAAAAPAAAAAA
-        CAAA8AAAAAAPgAjwAAAAAAD//wAAAAAAAAAAAAAAgAcAAIADAACAAQAAgAEAAIABAACAAQAAgAEAAMAB
-        AADgAQAA8AMAAP+PAADxjwAA8Y8AAPAPAAD4HwAA/D8AACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAA
-        AAAAAAAAAAEAAAABAAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAMDcwADwyqYABAQEAAgI
-        CAAMDAwAERERABYWFgAcHBwAIiIiACkpKQBVVVUATU1NAEJCQgA5OTkAgHz/AFBQ/wCTANYA/+zMAMbW
-        7wDW5+cAkKmtAAAAMwAAAGYAAACZAAAAzAAAMwAAADMzAAAzZgAAM5kAADPMAAAz/wAAZgAAAGYzAABm
-        ZgAAZpkAAGbMAABm/wAAmQAAAJkzAACZZgAAmZkAAJnMAACZ/wAAzAAAAMwzAADMZgAAzJkAAMzMAADM
-        /wAA/2YAAP+ZAAD/zAAzAAAAMwAzADMAZgAzAJkAMwDMADMA/wAzMwAAMzMzADMzZgAzM5kAMzPMADMz
-        /wAzZgAAM2YzADNmZgAzZpkAM2bMADNm/wAzmQAAM5kzADOZZgAzmZkAM5nMADOZ/wAzzAAAM8wzADPM
-        ZgAzzJkAM8zMADPM/wAz/zMAM/9mADP/mQAz/8wAM///AGYAAABmADMAZgBmAGYAmQBmAMwAZgD/AGYz
-        AABmMzMAZjNmAGYzmQBmM8wAZjP/AGZmAABmZjMAZmZmAGZmmQBmZswAZpkAAGaZMwBmmWYAZpmZAGaZ
-        zABmmf8AZswAAGbMMwBmzJkAZszMAGbM/wBm/wAAZv8zAGb/mQBm/8wAzAD/AP8AzACZmQAAmTOZAJkA
-        mQCZAMwAmQAAAJkzMwCZAGYAmTPMAJkA/wCZZgAAmWYzAJkzZgCZZpkAmWbMAJkz/wCZmTMAmZlmAJmZ
-        mQCZmcwAmZn/AJnMAACZzDMAZsxmAJnMmQCZzMwAmcz/AJn/AACZ/zMAmcxmAJn/mQCZ/8wAmf//AMwA
-        AACZADMAzABmAMwAmQDMAMwAmTMAAMwzMwDMM2YAzDOZAMwzzADMM/8AzGYAAMxmMwCZZmYAzGaZAMxm
-        zACZZv8AzJkAAMyZMwDMmWYAzJmZAMyZzADMmf8AzMwAAMzMMwDMzGYAzMyZAMzMzADMzP8AzP8AAMz/
-        MwCZ/2YAzP+ZAMz/zADM//8AzAAzAP8AZgD/AJkAzDMAAP8zMwD/M2YA/zOZAP8zzAD/M/8A/2YAAP9m
-        MwDMZmYA/2aZAP9mzADMZv8A/5kAAP+ZMwD/mWYA/5mZAP+ZzAD/mf8A/8wAAP/MMwD/zGYA/8yZAP/M
-        zAD/zP8A//8zAMz/ZgD//5kA///MAGZm/wBm/2YAZv//AP9mZgD/Zv8A//9mACEApQBfX18Ad3d3AIaG
-        hgCWlpYAy8vLALKysgDX19cA3d3dAOPj4wDq6uoA8fHxAPj4+ADw+/8ApKCgAICAgAAAAP8AAP8AAAD/
-        /wD/AAAA/wD/AP//AAD///8AAAAAAAAAAAAAAAAAAAAAAAAA/wf/B/8H/wf/BwAAAAAAAPj4+Pj4+Pj4
-        +PgA+AAAAAAH/wf/B/8H/wf/APgAAAAA+Pj4+Pj4+Pj4+AD4AAAAAP8H/wf/B/8H/wcA+AAAAAAAAAAA
-        AAAAAAAAAPgAAAAAAAcH+AcHBwcHAPgAAAAAAAAA+Pj4BwcABwAHAAAAAAAAAAAAAAAAAAcAAAAAAAAA
-        AAD7+/v7AAD/AAAAAAAAAAAAAAAAAAAA/wAAAAAAAAAAAAAHAAAAAP8AAAAAAAAAAAAA/wcAAAf/AAAA
-        AAAAAAAAAAD/////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAHAACAAwAAgAEAAIABAACAAQAAgAEAAIAB
-        AADAAQAA4AEAAPADAADwjwAA8Y8AAPGPAADwDwAA+B8AAPw/AAA=
-</value>
+  <data name="UnicodeCategoryPrefix" xml:space="preserve">
+    <value>Unicode Category: </value>
+  </data>
+  <data name="UnicodeValuePrefix" xml:space="preserve">
+    <value>Unicode Value: </value>
+  </data>
+  <data name="Unlocked" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\smallunLock.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Unlocked1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Unlocked.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Upgrade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Upgrade.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UpgradeTipText" xml:space="preserve">
+    <value>Thank you for your support</value>
+  </data>
+  <data name="UpgradeTipTitle" xml:space="preserve">
+    <value>Think of what you're missing...</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="ViewCharsOrientation" xml:space="preserve">
+    <value>Character Sorting Orientation</value>
+  </data>
+  <data name="ViewCharsOrientationBottom" xml:space="preserve">
+    <value>Downward rows</value>
+  </data>
+  <data name="ViewCharsOrientationLeft" xml:space="preserve">
+    <value>Rightward rows</value>
+  </data>
+  <data name="ViewCharsOrientationRight" xml:space="preserve">
+    <value>Leftward rows</value>
+  </data>
+  <data name="ViewCharsOrientationTop" xml:space="preserve">
+    <value>Upward rows</value>
+  </data>
+  <data name="ViewCommandBar" xml:space="preserve">
+    <value>Command Bar</value>
+  </data>
+  <data name="ViewFontAttrs" xml:space="preserve">
+    <value>Font Styles</value>
+  </data>
+  <data name="ViewFontName" xml:space="preserve">
+    <value>Font Name</value>
+  </data>
+  <data name="ViewFontSize" xml:space="preserve">
+    <value>Font Size</value>
+  </data>
+  <data name="ViewKeywords" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="ViewMenu" xml:space="preserve">
+    <value>&amp;View</value>
+  </data>
+  <data name="ViewOrientation" xml:space="preserve">
+    <value>Character Grid Titlebar Position</value>
+  </data>
+  <data name="ViewOrientationBottom" xml:space="preserve">
+    <value>&amp;Bottom</value>
+  </data>
+  <data name="ViewOrientationLeft" xml:space="preserve">
+    <value>&amp;Left</value>
+  </data>
+  <data name="ViewOrientationRight" xml:space="preserve">
+    <value>&amp;Right</value>
+  </data>
+  <data name="ViewOrientationTop" xml:space="preserve">
+    <value>&amp;Top</value>
+  </data>
+  <data name="ViewStatus" xml:space="preserve">
+    <value>Status Bar</value>
   </data>
   <data name="Waste" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

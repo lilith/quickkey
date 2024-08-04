@@ -1,0 +1,1 @@
+Please do not try to display the characters in these charsets. Please only use the Edit As Text feature.

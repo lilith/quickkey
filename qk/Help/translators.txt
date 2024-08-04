@@ -1,0 +1,374 @@
+﻿[Keyword]		[Replace this column with the translated text]
+
+AboutLine1	Application licensed under the General Public License. resources	
+AboutLine2	JCL libraries licensed under the Lesser General Public License.	
+AboutLine3	Web Address: http://quickkeydotnet.sourceforge.net	
+AboutLine4	Email: nathanaeljones@users.sourceforge.net	
+AboutLine5	Special thanks to Christoph for his German translation of Quick Key!	
+AboutPrefix	About	
+ActionCopy	Copy to clipboard	
+ActionDrag	Drag and drop	
+ActionFocus	Select character	
+ActionMenu	Display pop-up menu	
+ActionSend	Send as keystroke	
+ActionTooltipPart1	Select actions to take when the 	
+ActionTooltipPart2	mouse button is clicked	
+AddButton	&Add	
+AddCharacterRange	Add Character Range	
+AddKeywordInstructions	Please enter the program keyword	
+AddUnicodeChar	Get Character from Unicode Value	
+AnsiiValuePrefix	Ansii value: 	
+Appearance	Change appearance...	
+AppLoadedTooltip	Quick Key is Now Loaded	
+AppLoadingTooltip	Quick Key is loading...	
+ApplyButton	&Apply	
+AppRunningTooltip	Quick Key Character Keyboard	
+AutoHideButton	Auto-hide	
+AutoHideButtonTooltip	"Enables/disables Auto-Hide. This window and the Toolbar will dissapear
+when the mouse pointer is not over them. They will reappear when the
+auto-hide window is clicked or the mouse is moved over it."	
+ButtonColor	Button Color	
+CancelButton	&Cancel	
+ChangeAppearance	Change the Character Grid appearance	
+CharacterButton	Character Button	
+CharacterDoesNotExist	Character does not exist!	
+CharacterGridAppearance	Character Grid Appearance	
+CharacterProperties	Character Properties	
+CharacterRangeConfirmation1	If you click Yes,	
+CharacterRangeConfirmation2	characters will be added. This will significantly hamper operation of Quick Key. Please click No and choose a smaller range of characters	
+CharacterRangeConfirmationTitle	Too many characters!	
+CharsetChangedQuerySave	"The charset has been modified.
+Do you want to save the changes?"	
+CharsetChangedSuffix	Charset Changed	
+CharsetNotFoundMessageText	Sorry, this character set cannot be found. The file may have be moved or deleted.	
+CharsetNotFoundMessageTitle	Could not load Charset	
+CharsLocked	Lock Charset	
+CharsLockedText	You have locked the characters in the character grid. You will not be able to move or change the characters until you unlock them.	
+CharsLockedTitle	Entering read-only mode	
+CloseButton	Close	
+CloseButtonTooltip	Hides the Character Grid and its accessory windows.	
+CommandsToolbarTooltip	These buttons control character set file operations and clipboard actions	
+Copy1	Copy	
+CopyHTML	Copy HTML code	
+COriBottom	Leftward rows	
+COrientation	Sort Order	
+COriLeft	Downward rows	
+COriRight	Upward rows	
+COriTop	Rightward rows	
+CouldNotAddCharacter	Could Not Add Character!	
+CouldNotModifyCharacter	Could Not Modify Character!	
+Cut1	Cut	
+DarkEdge	Dark Edge	
+DecimalMode	Decimal Value	
+DefaultTipTitle	Tip	
+Delete1	Delete	
+DisableAutoHide	Disable AutoHide	
+Docked1	Enable Auto-hide	
+DockedText	You have enabled the Auto-Hide Feature. When you are not using the Toolbar or Character Grid, they will disappear; however, the Auto-Hide Window will remain. If you move the mouse over the Auto-Hide Window, the Character Grid and the Toolbar will reappear.	
+DockedTitle	Auto-hide saves screen space	
+DoneButton	Done	
+DontShowTip	Do not show this tip again	
+EditCharsAsTextDialogCaption	Edit Characters As Text	
+EditCopy	Copy Character	
+EditCopyAllChars	Copy All Characters	
+EditCopyHTML	Copy HTML Code	
+EditCopyVisibleChars	Copy Visible Chars	
+EditCut	Cut Character	
+EditDelete	Delete Character	
+EditMenu	&Edit	
+EditPaste	Paste Character(s)	
+EditSend	Send Character	
+ErrorLoadingCharacterSet	Error Loading Character Set!	
+ErrorOpeningFile	There was an error opening the file. The file may be corrupted or unavailable.	
+ExportFiltersDialogCaption	Export Charset Filters	
+ExportFiltersDialogFilter	Charset Files (*.charset)|*.charset	
+ExportFiltersReadOnlyErrorCaption	Overwrite read-only file?	
+ExportFiltersReadOnlyErrorText	"The filters charset that you have chosen to overwrite is readonly. 
+Are you positve that you wish to change this file?"	
+FileCharsLocked	&Chars Locked	
+FileDocked	&Auto-hide	
+FileExit	E&xit	
+FileExport	&Export to Report...	
+FileHide	Close Toolbar	
+FileHideQuickKey	Close	
+FileImport	&Import	
+FileImportCharset	From C&harset...	
+FileImportCharsetAttrs	All &Attributes from Charset	
+FileImportClipboard	From &Clipboard...	
+FileImportFile	From &File...	
+FileLocked	&Locked	
+FileMenu	&File	
+FilenamePrefix	Filename: 	
+FileNew	&New	
+FileNewBlank	&Blank Charset	
+FileNewCopy	&Copy of this Charset	
+FileNewCopyAttrs	Copy of these &Attributes	
+FileOpen	&Open	
+FileReadOnly	Save Read-Only	
+FileRecent	&Recent	
+FileSave	&Save	
+FileSaveAllInfo	Save All Information	
+FileSaveAs	Save &As...	
+FileSaveCharacters	Save Characters	
+FileSaveFilters	Save Filters	
+FileSaveFont	Save Font	
+FileSaveFontAttrs	Save Font Attributes	
+FileSaveOnlyCharacters	Save Characters Only	
+FileSaveSize	Save Font Size	
+Filter	F&ilter	
+FilterDefaults	Select Default Filters	
+FilterDeSelAll	Deselect All Filters	
+FilterExport	Export Filters...	
+FilterImport	Import Filters...	
+FilterMenu	F&ilter	
+FilterReadOnly	Export (Read-Only) Filters...	
+FilterSelAll	Select All Filters	
+FindButton	Find	
+FocusedOutline	Focused Outline	
+FontBold	&Bold	
+FontBoxTooltip	This changes the font	
+FontItalic	&Italic	
+FontMenu	F&ont	
+FontName	Font: 	
+FontPrefix	Font: 	
+FontSize	Size: 	
+FontSizeTooltip	This changes the font size	
+FontStrikeout	&Strikeout	
+FontStyleTooltip	This toolbar controls the graphical attributes of the font	
+FontUnderline	&Underline	
+GenericErrorMessage	"I messed up! Congratulations, you just found a bug.
+Whatever just happened was very unexpected.
+Please open up your email editor and send a message to me at
+nathanaeljones@users.sourceforge.net
+Just tell me what you clicked on when this happened, and include the error information.
+The easiest way to get the error information is to right-click on the icon and choose 'Error Log'.
+It is very important that you report this bug, because otherwise it may never be fixed.
+It is recommended that you save your work and restart Quick Key as soon as possible.
+Thank you for your support.
+
+Please click Yes to continue using Quick Key, or No if these messages keep appearing."	
+HelpAbout	&About	
+HelpHelpTopics	&Help Topics	
+HelpMenu	&Help	
+HelpTips	Tips	
+HelpTipsHide	Hide Tips	
+HelpTipsReset	Reset Tips	
+HexadecimalMode	Hexadecimal Value	
+HideMe	Close	
+HideQuickKey	Please note that you have only minimized Quick Key to the icon in the notification area. To completely close Quick Key, please click 'Exit'.	
+IconLoadingError	An error occured while loading the Character Grid's titlebar icons. They may not display correctly.	
+ImportCharsetAttrsDialogCaption	Import Attributes from charset"	
+ImportCharsetAttrsDialogFilter	Charset Files (*.charset)|*.charset	
+ImportCharsetDialogCaption	Import from charset	
+ImportCharsetDialogFilter	Charset Files (*.charset)|*.charset	
+ImportClipboardDialogCaption	Import from clipboard	
+ImportFileDialogCaption	Import from file	
+ImportFileDialogFilter	All Files (*.*)|*.*|Text Files (*.txt;*.doc;*.rtf;*.htm)|*.txt;*.doc;*.rtf;*.htm)	
+ImportFiltersDialogCaption	Import Filters from charset	
+ImportFiltersDialogFilter	Charset Files (*.charset)|*.charset	
+InvalidPath	An invalid path was entered. Please try again with a valid filename.	
+KeywordBoxTooltip	Change the destination appliction for sending characters	
+KeywordLastWindowCantBeDeleted	Keyword 'Last Window' cannot be deleted. It represents the window underneath Quick Key.	
+Keywords	&Keywords	
+KeywordsAddBottom	Add Item to Bottom	
+KeywordsAddTop	Add Item to Top	
+KeywordsDelBottom	DeleteBottomItem	
+KeywordsDelTop	Delete Top Item	
+KeywordsEdit	&Edit Keyword List...	
+KeywordsMenu	&Keywords	
+LastWindow	Last Window	The keyword that represents the next window in the z-order
+LightEdge	Light Edge	
+LockButton	Lock	
+LockButtonTooltip	"Enables/disables the resizing and moving of the
+Character Grid and accessory windows."	
+Locked1	Lock Position	
+LockedText	You have locked the Character Grid, the Toolbar, and the Auto-Hide Window. You will not be able to resize or move these windows until you unlock Quick Key. This does not prevent your character set from being changed. Please use 'Lock Characters' for this purpose.	
+LockedTitle	This feature prevents accidental movement of the Character Grid	
+MenuAbout	About	
+MenuAutohide	Auto-hide	
+MenuCharacterGrid	Character Grid	
+MenuEventLog	Event Log	
+MenuExit	Exit	
+MenuHelp	Help	
+MenuHelpTopics	Help Topics	
+MenuHideTips	Hide Tips	
+MenuOptions	Options	
+MenuResetTips	Reset Tips	
+MenuToolbar	Toolbar	
+MouseButtonActions	Mouse Button Actions	
+MouseButtonLeft	Left	
+MouseButtonMiddle	Middle	
+MouseButtonRight	Right	
+MouseButtonX1	XButton1	
+MouseButtonX2	XButton2	
+MouseSettings	Mouse Settings	
+NoCharacterEntered	No Character Entered	
+NormalOutline	Button Outline	
+OKButton	OK	
+OpenCharsetDialogCaption	Open Charset	
+OpenCharsetDialogFilter	Charset Files (*.charset)|*.charset	
+OpenCharsetErrorCaption	Error Loading File	
+OpenCharsetFileCorrupt	File is corrupt!	
+OpenCharsetFileDoesNotExist	File Does Not Exist!	
+OpenCharsetFileEmpty	File is empty!	
+OptionsAddButton	Add	
+OptionsAddButtonTooltip	Add a keyword to the list	
+OptionsApplyButtonTooltip	Saves all settings changes, but does not hide this dialog box	
+OptionsCancelButtonTooltip	Ignores all settings changes and closes this dialog box	
+OptionsClipboardSendKeys	Clipboard + SendKeys(Paste) Use this when 'Send Input' fails.	
+OptionsDialog	"Here you can assign mouse buttons to actions. Each button has a tab, which contains a listing of all actions. Check the actions you want the mouse button to perform.
+Keywords are the internal code names for applications, or application classes. For example, Microsoft Word is always OpusApp, wheras Outlook Express has a different keyword (class name) for the message composer (ATH_Note) than for the main window (Outlook Express Browser Class).
+To add a new keyword, you must click 'Add', then 'Find'. This opens a separate application, which will retrieve the class name once given the exact title bar text for the window.
+For users of GTK+ applications, it may be neccesary to change the send mode to Clipboard + SendKeys(). This method works with a larger portion of applications, but overwrites any text or information you may store in the clipboard."	
+OptionsDialogTitle	Details, details, details...	
+OptionsMoveDownButton	Move Down	
+OptionsMoveUpButton	Move Up	
+OptionsOKButtonTooltip	Saves all settings changes and closes this dialog box	
+OptionsRemoveButton	Remove	
+OptionsRemoveButtonTooltip	Remove the currently selected keyword from the list	
+OptionsSendDelay	Milliseconds to wait between switching windows and sending the character.	
+OptionsSendInput	Send Input API (Reccomended) Does not affect the clipboard	
+OptionsSendKeys	Send Keys (Safer, but more limited)	
+OptionsSendMethod	Please choose what method to use for character transfer.	
+OptionsWindowTitle	Options	
+OriBottom	Bottom	
+Orientation	Titlebar Location	
+OriLeft	Left	
+OriRight	Right	
+OriTop	Top	
+OutsideRimColor	Outside Rim Color	
+Paste1	Paste	
+PasteButton	Paste	
+PermissionDenied	Permission Denied	
+Properties	Properties	
+QK	QK	
+QuickKey	Quick Key	
+QuickKeyFormNewError	An error occured while initializing the Character Grid. Retry initialization?	
+QuickKeyText	"Please change ‘Last Window’ to ‘OpusApp’ if you are using Microsoft Word. This will make it easier to use your keyboard and Quick Key in conjunction, as well as eliminate the annoying flicker when sending characters.
+Be sure to explore the right-click menus on the title bar and the characters.
+You can rearrange characters by dragging them with the middle mouse button.
+If you need a different set of characters, use the File menu in the Toolbar.
+For some applications, you may need to change the character transfer method in Options. This only applies to GTK+ applications."	
+QuickKeyTitle	Important Notes	
+ReadFileError	Sorry, this file cannot be read. Please close all programs using the file and try again.	
+RecentCharsets	Recent Charsets	
+ResetAllButton	Reset ALL	
+ResetButton	Reset	
+SaveCharsetDialogFilter	Charset Files (*.charset)|*.charset	
+SaveCharsetDialogTitle	Save Charset As	
+SaveCharsetErrorCaption	Error Saving File	
+SaveCharsetOverwriteCaption	Overwrite File?	
+SaveCharsetOverwriteText	"A file already exists by this name. 
+Are you sure that you wish to overwrite this file?"	
+SaveCharsetReadOnlyErrorText	"The file you have chose to overwrite is read-only!
+You must choose either a different file name, or select 'Save As Readonly' before attempting to overwrite a read-only file."	
+Send	Send	
+SendBadCharacter	You have chosen to send one of the following reserved characters: (){}+^%~  . If you need to use one of these characters in a document, drag and drop or copy it instead.	
+SendSettings	Send Settings	
+SettingsCouldNotBeSavedPrefix	Quick Key's settings could not be saved. Make sure you are logged in as an administrator.	
+SettingsCouldNotBeSavedSuffix	could not be saved.	
+SettingsFileError	An error was found in the settings file. Click Yes to continue and load default settings. Click No to close program.	
+SettingsFileErrorTitle	Error in configuration file	
+SettingsSavingError	An error occured while saving the settings for Quick Key! All unsaved changes may have been lost.	
+ShowToolbar	Show Toolbar	
+SizePrefix	Size: 	
+StartupTipText	Welcome to Quick Key!	
+StartupTipTitle	Thank you for downloading Quick Key!	
+StatusBarTooltip	This status bar displays information about the character under the mouse cursor	
+SystemInfo	System Info...	
+TabCharacters	Characters	
+TabKeywords	Program Keywords	
+TabMouseSettings	Mouse Settings	
+TabSendSettings	Char Transfer	
+TextColor	Text Color	
+TextTab	Text	
+TitleBar	Title Bar	
+ToolbarTitle	Quick Key Toolbar	
+ToolbarTitleNewCharset	Quick Key [Toolbar] - New Charset	
+ToolbarTitlePrefix	Quick Key [Toolbar] - 	
+ToolsEditText	&Edit Characters as Text	
+ToolsGetUnicodeChar	Get Character from Unicode	
+ToolsGetUnicodeChars	Add a range of characters	
+ToolsMenu	&Tools	
+ToolsOptions	&Options	
+ToolsSortAsc	Sort Characters by Unicode Value (Ascending)	
+ToolsSortDes	Sort Characters by Unicode Value (Descending)	
+UnicodeCategoryPrefix	Unicode Category: 	
+UnicodeValuePrefix	Unicode Value: 	
+UpgradeTipText	Thank you for your support	
+UpgradeTipTitle	Think of what you're missing...	
+Version	Version	
+ViewCharsOrientation	Character Sorting Orientation	
+ViewCharsOrientationBottom	Downward rows	
+ViewCharsOrientationLeft	Rightward rows	
+ViewCharsOrientationRight	Leftward rows	
+ViewCharsOrientationTop	Upward rows	
+ViewCommandBar	Command Bar	
+ViewFontAttrs	Font Styles	
+ViewFontName	Font Name	
+ViewFontSize	Font Size	
+ViewKeywords	Keywords	
+ViewMenu	&View	
+ViewOrientation	Character Grid Titlebar Position	
+ViewOrientationBottom	&Bottom	
+ViewOrientationLeft	&Left	
+ViewOrientationRight	&Right	
+ViewOrientationTop	&Top	
+ViewStatus	Status Bar	
+ClickToShowChars	Click to display characters  
+LargeCharsetPart1	This is a very large charset (     
+LargeCharsetPart2	Characters), and may take several minutes to display!
+Do you wish to display the characters?
+You may prefer to make your edits through the 'Edit Characters as Text' feature in the Tools menu.
+Remember that the smallest change will take a painfully long time.
+LargeCharsetTitle	Large Character Set    
+LoadingChars	Loading characters...  
+NoCharacters	No characters!    This is displayed with a blank charset
+ResizingChars	Resizing characters...  
+btnCopy.Text	Copy
+btnOK.Text	&Ok
+btnRefresh.Text	&Refresh
+chkError.Text	Error Events
+chkLifetime.Text	Lifetime Events
+chkMajor.Text	Major Events
+chkMinor.Text	Minor Events
+chkWarning.Text	Warning Events
+lblDisplay.Text	Choose which events to display
+lblDisplayApps.Text	Choose which application instances to display
+optAll.Text		All
+optFive.Text	Last Five
+optOne.Text	This instance
+optTen.Text	Last Ten
+optTwo.Text	Last two
+LogViewer	Log Viewer
+BothLockedText	You have just disabled editing in the character set (you can still use the Edit As Text feature). This also locks the position of the Character Grid and Toolbar.
+BothLockedTitle	Lock
+BothLockedTooltip	Disables editing the character set or moving the widows.
+BothLocked	Lock
+
+Quick Key displays two graphical tips containing text. I extracted the text
+for you below:
+
+[The Welcome tip] (Feel free to rephrase this to make it more understandable)
+
+Quick Key
+Foreign Character Keyboard
+Left click any character to type it. Mouse settings are modified in Options.
+Keystrokes are sent to the last application used; however, it is better if
+you manually chose which application to send to by selecting the associated
+Keyword.
+
+Tired of Tips?
+Just click Hide Tips in the Help menu. The Help menu can be found by
+right-clicking the icon.
+
+Open Quick Key by right-clicking this icon:
+
+
+[The upgrade message]
+
+Please Upgrade Soon
+Your version of Quick Key is out of date. Please go to
+http://quickeydotnet.sourceforge.net to download the latest version for
+free. Upgrades include new features, bug fixes, and fewer annoying messages
+like these.

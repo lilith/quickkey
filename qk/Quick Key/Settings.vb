@@ -80,13 +80,25 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
     Public Event ButtonColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
     Public Event TitleColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
 	Public Event CustomColorsChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-	Public Event ShowTipsChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+    Public Event ShowTipsChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+    Public Event SendDelayChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+    Public Event SendMethodChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+    Public Event AutoSizeChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+    Public Event SendToEndChanged(ByVal sender As Object, ByVal e As System.EventArgs)
 #End Region
 
 #Region "Class Consructors"
 
     Public Sub New()
+        'Set defaults here
         Me.Charset = New Charset()
+        Me.MouseSettings.Left = MouseSettingsClass.Action.Focus Or MouseSettingsClass.Action.Send
+        Me.MouseSettings.Middle = MouseSettingsClass.Action.Drag
+        Me.MouseSettings.Right = MouseSettingsClass.Action.Menu
+		Me.MouseSettings.XButton1 = MouseSettingsClass.Action.Copy
+		Me.MouseSettings.XButton2 = MouseSettingsClass.Action.Focus
+
+
         'Me.Charset.Filters.Filters = Charset.Filters.GetSelectAllFilters
 
     End Sub
@@ -99,36 +111,41 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 		Log.LogMajorInfo("+Performing Settings Changes (Sending Events)...")
 		Try
 
-			RaiseEvent CharsetChanged(Me, Nothing)
-			RaiseEvent CharsetCharactersChanged(Me, Nothing)
-			RaiseEvent CharsetFiltersChanged(Me, Nothing)
-			RaiseEvent CharsetFontChanged(Me, Nothing)
-			RaiseEvent CharsLockedChanged(Me, Nothing)
-			RaiseEvent CharsOrientationChanged(Me, Nothing)
+            RaiseEvent FocusedColorChanged(Me, Nothing)
+            RaiseEvent NormalOutlineColorChanged(Me, Nothing)
+            RaiseEvent LightEdgeColorChanged(Me, Nothing)
+            RaiseEvent DarkEdgeColorChanged(Me, Nothing)
+            RaiseEvent BackColorChanged(Me, Nothing)
+            RaiseEvent TextColorChanged(Me, Nothing)
+            RaiseEvent ButtonColorChanged(Me, Nothing)
+            RaiseEvent CharsOrientationChanged(Me, Nothing)
+            RaiseEvent TitleColorChanged(Me, Nothing)
 
-			RaiseEvent FileChangedChanged(Me, Nothing)
-			RaiseEvent FileNameChanged(Me, Nothing)
-			RaiseEvent FileReadOnlyChanged(Me, Nothing)
-			RaiseEvent FileSavePropertiesChanged(Me, Nothing)
-			RaiseEvent ImportFileDialogDirChanged(Me, Nothing)
-			RaiseEvent KeywordChanged(Me, Nothing)
-			RaiseEvent KeywordsChanged(Me, Nothing)
+            RaiseEvent CharsetChanged(Me, Nothing)
+            RaiseEvent CharsetCharactersChanged(Me, Nothing)
+            RaiseEvent CharsetFiltersChanged(Me, Nothing)
+            RaiseEvent CharsetFontChanged(Me, Nothing)
+            RaiseEvent CharsLockedChanged(Me, Nothing)
 
-			RaiseEvent MouseSettingsChanged(Me, Nothing)
-			RaiseEvent FileDialogDirChanged(Me, Nothing)
-			RaiseEvent OrientationChanged(Me, Nothing)
 
-			RaiseEvent RecentFilesChanged(Me, Nothing)
-			'RaiseEvent SaveFileDialogDirChanged(Me, Nothing)
-			RaiseEvent SaveReportFileDialogDirChanged(Me, Nothing)
 
-			RaiseEvent FocusedColorChanged(Me, Nothing)
-			RaiseEvent NormalOutlineColorChanged(Me, Nothing)
-			RaiseEvent LightEdgeColorChanged(Me, Nothing)
-			RaiseEvent DarkEdgeColorChanged(Me, Nothing)
-			RaiseEvent BackColorChanged(Me, Nothing)
-			RaiseEvent TextColorChanged(Me, Nothing)
-			RaiseEvent ButtonColorChanged(Me, Nothing)
+            RaiseEvent FileChangedChanged(Me, Nothing)
+            RaiseEvent FileNameChanged(Me, Nothing)
+            RaiseEvent FileReadOnlyChanged(Me, Nothing)
+            RaiseEvent FileSavePropertiesChanged(Me, Nothing)
+            RaiseEvent ImportFileDialogDirChanged(Me, Nothing)
+            RaiseEvent KeywordChanged(Me, Nothing)
+            RaiseEvent KeywordsChanged(Me, Nothing)
+
+            RaiseEvent MouseSettingsChanged(Me, Nothing)
+            RaiseEvent FileDialogDirChanged(Me, Nothing)
+            RaiseEvent OrientationChanged(Me, Nothing)
+
+            RaiseEvent RecentFilesChanged(Me, Nothing)
+
+            RaiseEvent SaveReportFileDialogDirChanged(Me, Nothing)
+
+
 			RaiseEvent CustomColorsChanged(Me, Nothing)
 			RaiseEvent SaveReportFileDialogDirChanged(Me, Nothing)
 
@@ -139,17 +156,17 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 			RaiseEvent ToolbarChanged(Me, Nothing)
 			RaiseEvent QuickKeyChanged(Me, Nothing)
 			RaiseEvent DockedChanged(Me, Nothing)
-			RaiseEvent TitleColorChanged(Me, Nothing)
+
 			RaiseEvent ToolbarSettingsChanged(Me, Nothing)
 			RaiseEvent LockedChanged(Me, Nothing)
 			RaiseEvent ShowTipsChanged(Me, Nothing)
 		Catch ex As Exception
-			Select Case Log.HandleError("An error occured while loading application settings. If this error persists, search for the settings file, ""Quick Key.exe.xml"" and deleting it.", ex, , MessageBoxButtons.AbortRetryIgnore)
-				Case DialogResult.Abort
-					Application.Exit()
-				Case DialogResult.Retry
-					PerformSettingsChanges()
-			End Select
+            Select Case Log.HandleError("An error occured while loading application settings. If this error persists, search for the settings file, ""Quick Key\" & Application.ProductVersion & "\settings.xml"" and delete it.", ex, , MessageBoxButtons.AbortRetryIgnore)
+                Case DialogResult.Abort
+                    Application.Exit()
+                Case DialogResult.Retry
+                    PerformSettingsChanges()
+            End Select
 		Finally
 			Log.LogMajorInfo("-Completed Operation")
 		End Try
@@ -171,13 +188,10 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
                         Try
                             'Create directory
                             IO.Directory.CreateDirectory(IO.Path.GetDirectoryName(filename))
-                        Catch ex As UnauthorizedAccessException
-                            Log.HandleError("Quick Key's settings could not be saved because you do not have permission to change files. To allow settings to be saved next time, log in as an administrator.", _
-                                        """" & filename & """ could not be saved.", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            Exit Sub
+
                         Catch ex As Exception
-                            Log.HandleError("Quick Key's settings could not be saved. Make sure you are logged in as an administrator.", _
-                                                         """" & filename & """ could not be saved.", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Log.HandleError(My.Resources.SettingsCouldNotBeSavedPrefix, _
+                                """" & filename & """ " & My.Resources.SettingsCouldNotBeSavedSuffix, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             Exit Sub
                         End Try
                     End If
@@ -191,13 +205,10 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
                     Try
                         'Create Output File Stream
                         writer = New IO.StreamWriter(filename)
-                    Catch ex As UnauthorizedAccessException
-                        Log.HandleError("Quick Key's settings could not be saved because you do not have permission to change files. To allow settings to be saved next time, log in as an administrator.", _
-                                    """" & filename & """ could not be saved.", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Exit Sub
+
                     Catch ex As Exception
-                        Log.HandleError("Quick Key's settings could not be saved. Make sure you are logged in as an administrator.", _
-                                                     """" & filename & """ could not be saved.", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Log.HandleError(My.Resources.SettingsCouldNotBeSavedPrefix, _
+                                """" & filename & """ " & My.Resources.SettingsCouldNotBeSavedSuffix, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
                     End Try
 
@@ -225,13 +236,16 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
                     c.Characters = strEChars
 
                     'Set charset to encoded charset
-                    Me.m_Charset = c
+					Me.m_Charset = c
+
+					'Remove duplicate hidden tips
+					RemoveDuplicateTips()
 
                     'Attempt serialization
                     Try
                         ser.Serialize(writer, Me)
                     Catch ex As Exception
-                        Log.HandleError("An error occured while saving Quick Key Settings! Mouse and keyword settings may have been lost.", _
+                        Log.HandleError(My.Resources.SettingsSavingError, _
                          , MessageBoxButtons.OK)
                     Finally
                         'Try to close writer
@@ -269,14 +283,15 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
             Log.LogMinorInfo("+Opening Settings File...")
             ' Create an instance of the XmlSerializer class;
             ' specify the type of object to be deserialized.
-            Dim serializer As New System.Xml.Serialization.XmlSerializer(GetType(SettingsClass))
+			Dim serializer As New System.Xml.Serialization.XmlSerializer(GetType(SettingsClass))
+
             ' If the XML document has been altered with unknown
             ' nodes or attributes, handle them with the
             ' UnknownNode and UnknownAttribute events.
             'AddHandler serializer.UnknownNode, AddressOf serializer_UnknownNode
             'AddHandler serializer.UnknownAttribute, AddressOf _
             'serializer_UnknownAttribute
-            '
+			Log.LogMinorInfo("Serializer created...", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
             ' A FileStream is needed to read the XML document.
             Dim fs As New IO.FileStream(filename, IO.FileMode.Open, IO.FileAccess.Read)
             ' Declare an object variable of the type to be deserialized.
@@ -291,15 +306,15 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
                 s = CType(serializer.Deserialize(fs), SettingsClass)
             Catch ex As Exception
                 Log.LogError("+An error was encounterd loading the settings file...", ex)
-                Select Case MessageBox.Show("An error was found in the settings file. Click Yes to continue and load default settings. Click No to close program.", "Error in settings file", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                Select Case MessageBox.Show(My.Resources.SettingsFileError, My.Resources.SettingsFileErrorTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                     Case DialogResult.Yes
                         Log.LogError("-User chose to load default settings and continue using the program")
                         s = New SettingsClass
                     Case DialogResult.No
                         Log.LogError("-User chose to about program")
                         fs.Close()
-						blnClose = True
-				End Select
+                        blnClose = True
+                End Select
 
 			End Try
 			Log.LogMinorInfo("-Completed Serializing Settings", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
@@ -321,163 +336,123 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 			Next
 			s.Charset.Characters = strChars.ToString
 			Return s
-		Else
-			Dim dtComp As Date = Now
-			Log.LogMinorInfo("+Interpreting the settings character list...")
-			Dim blnFileChanged As Boolean = s.FileChanged
+        Else
+            Dim defaultclass As New SettingsClass()
+            Dim dtComp As Date = Now
+            Log.LogMinorInfo("+Interpreting the settings character list...")
+            Dim blnFileChanged As Boolean = s.FileChanged
 
-			'Because of certain XML attributes, the Characters String must be encoded so that no illegal characters are used;
-			'This is accomplish by replacing every character with it's Unicode numeric value
-			'In the following format: H(Hex) For Example H1HFF would represent the seconcd character and the 256th character.
-			'Since we are loading a file here, we must decode the string
-			'Create variable to hold encoded value
-			Dim strbEChars As New System.Text.StringBuilder(s.Charset.Characters)
-			'Create Variable to hold decoded value
-			Dim strbChars As New System.Text.StringBuilder
-			'Create String Varible to Hold last Character Value
-			Dim strbLastChar As New System.Text.StringBuilder
-			'Create integer to hold current string position
-			Dim intPos As Integer = 0
-			'Loop through each character until the end of the string is reached; for every "&H" string found, add the 
-			'Character to the resulting string
-			Do Until strbEChars.Length = 0 Or intPos >= strbEChars.Length
-				'If no chars have been read into the strLastChar variable, and the current char is the header letter for a hexadecimal
-				'Then we can start reading characters
-				If strbLastChar.Length = 0 And strbEChars.Chars(intPos) = "H" Then
-					'Add this character to the strLastChar Buffer variable
-					'strbLastChar.Append(strbEChars.Chars(intPos))
+            'Because of certain XML attributes, the Characters String must be encoded so that no illegal characters are used;
+            'This is accomplish by replacing every character with it's Unicode numeric value
+            'In the following format: H(Hex) For Example H1HFF would represent the seconcd character and the 256th character.
+            'Since we are loading a file here, we must decode the string
+            'Create variable to hold encoded value
+            Dim strbEChars As New System.Text.StringBuilder(s.Charset.Characters)
+            'Create Variable to hold decoded value
+            Dim strbChars As New System.Text.StringBuilder
+            'Create String Varible to Hold last Character Value
+            Dim strbLastChar As New System.Text.StringBuilder
+            'Create integer to hold current string position
+            Dim intPos As Integer = 0
+            'Loop through each character until the end of the string is reached; for every "&H" string found, add the 
+            'Character to the resulting string
+            Do Until strbEChars.Length = 0 Or intPos >= strbEChars.Length
+                'If no chars have been read into the strLastChar variable, and the current char is the header letter for a hexadecimal
+                'Then we can start reading characters
+                If strbLastChar.Length = 0 And strbEChars.Chars(intPos) = "H" Then
+                    'Add this character to the strLastChar Buffer variable
+                    'strbLastChar.Append(strbEChars.Chars(intPos))
 
-				ElseIf strbLastChar.Length > 0 And strbEChars.Chars(intPos) = "H" Then
-					'If there are chars in the buffer variable and we are seeing the start of another hexadecimal, it is time to 
-					'convert the hex to a char and clear the buffer for more
-					'Add converted chars to character list
-					'Debug.WriteLine(strLastChar)
-					'Debug.WriteLine(CInt("&" & strLastChar))
-					'Debug.WriteLine(Val("&" & strLastChar))
-					'Debug.WriteLine(ChrW(CInt("&" & strLastChar)))
-					If CInt("&H" & strbLastChar.ToString) > 0 Then
-						strbChars.Append(ChrW(CInt("&H" & strbLastChar.ToString)))
+                ElseIf strbLastChar.Length > 0 And strbEChars.Chars(intPos) = "H" Then
+                    'If there are chars in the buffer variable and we are seeing the start of another hexadecimal, it is time to 
+                    'convert the hex to a char and clear the buffer for more
+                    'Add converted chars to character list
+                    'Debug.WriteLine(strLastChar)
+                    'Debug.WriteLine(CInt("&" & strLastChar))
+                    'Debug.WriteLine(Val("&" & strLastChar))
+                    'Debug.WriteLine(ChrW(CInt("&" & strLastChar)))
+                    If CInt("&H" & strbLastChar.ToString) > 0 Then
+                        strbChars.Append(ChrW(CInt("&H" & strbLastChar.ToString)))
+                    End If
+
+                    'Debug.WriteLine(strChars)
+                    'Clear Buffer
+                    strbLastChar = New System.Text.StringBuilder
+                    'Add this first header character to buffer
+                    'strbLastChar.Append(strbEChars.Chars(intPos))
+                ElseIf strbEChars.Chars(intPos) <> "H" Then
+                    'If there are chars in the buffer and this chara is not a header, we know that it is a number we should add to the buffer
+                    strbLastChar.Append(strbEChars.Chars(intPos))
+                Else
+                    'This should not happen, so create an error
+                    'TODO Implement a log here
+                    Log.LogWarning("There was an mistake in the chaarcter interptretation section of the settings loading procedure. Invalid data encountered.")
+                End If
+                'Move character position up one.
+                intPos += 1
+            Loop
+            'If there are chars in the buffer, but we have not reached another header, and we are at the end, then converta and add this 
+            'Last character to the character list
+            If strbLastChar.Length > 0 Then
+                strbChars.Append(ChrW(CInt(Val("&H" & strbLastChar.ToString))))
+            End If
+
+            'Update character
+            s.Charset.Characters = strbChars.ToString
+
+
+
+            s.FileChanged = blnFileChanged
+
+            Log.LogMinorInfo("-Completed interpreting characters", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+            dtComp = Now
+            Log.LogMinorInfo("+Cleaning up settings...")
+            If (s.Keywords.Length = 0) Then
+				s.Keywords = New String() {My.Resources.LastWindow}
+				s.Keyword = My.Resources.LastWindow
+			Else
+
+				'Only add it if it doesn't exist
+				Dim indexofculturelastwindow As Integer = Array.IndexOf(Of String)(s.Keywords, My.Resources.LastWindow)
+				If indexofculturelastwindow < 0 Then
+					Dim newkeywords(s.Keywords.Length) As String
+					newkeywords(0) = My.Resources.LastWindow
+					s.Keywords.CopyTo(newkeywords, 1)
+					s.Keywords = newkeywords
+					'If the user previously selected a Last Window (in their culture), now select the new top item
+					If (My.Resources.AllCulturesLastWindow.Contains(s.Keyword)) Then
+						s.Keyword = s.Keywords(0)
 					End If
-
-					'Debug.WriteLine(strChars)
-					'Clear Buffer
-					strbLastChar = New System.Text.StringBuilder
-					'Add this first header character to buffer
-					'strbLastChar.Append(strbEChars.Chars(intPos))
-				ElseIf strbEChars.Chars(intPos) <> "H" Then
-					'If there are chars in the buffer and this chara is not a header, we know that it is a number we should add to the buffer
-					strbLastChar.Append(strbEChars.Chars(intPos))
 				Else
-					'This should not happen, so create an error
-					'TODO Implement a log here
-					Log.LogWarning("There was an mistake in the chaarcter interptretation section of the settings loading procedure. Invalid data encountered.")
+					'If the user previously selected a Last Window (in their culture), now select this culture's last window
+					If (My.Resources.AllCulturesLastWindow.Contains(s.Keyword)) Then
+						s.Keyword = s.Keywords(indexofculturelastwindow)
+					End If
 				End If
-				'Move character position up one.
-				intPos += 1
-			Loop
-			'If there are chars in the buffer, but we have not reached another header, and we are at the end, then converta and add this 
-			'Last character to the character list
-			If strbLastChar.Length > 0 Then
-				strbChars.Append(ChrW(CInt(Val("&H" & strbLastChar.ToString))))
 			End If
 
-			'Update character
-			s.Charset.Characters = strbChars.ToString
 
+			Log.LogMinorInfo("Keywords Section", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
 
-
-			s.FileChanged = blnFileChanged
-
-			Log.LogMinorInfo("-Completed interpreting characters", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
 
 			If s.ImportDialogDir.Length = 0 Then
-				s.ImportDialogDir = IO.Path.GetDirectoryName(Application.ExecutablePath)
+				s.ImportDialogDir = defaultclass.ImportDialogDir
 			End If
 			If s.FileDialogDir.Length = 0 Then
-				s.FileDialogDir = IO.Path.GetDirectoryName(Application.ExecutablePath)
+				s.FileDialogDir = defaultclass.FileDialogDir
 			End If
 			If s.SaveReportDialogDir.Length = 0 Then
-				s.SaveReportDialogDir = IO.Path.GetDirectoryName(Application.ExecutablePath)
+				s.SaveReportDialogDir = defaultclass.SaveReportDialogDir
 			End If
+			Log.LogMinorInfo("Filenames Section", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
 
-			If s.m_strBackColor.Length > 0 Then
-				Try
-					If CInt(s.m_strBackColor) <> 0 Then
-						s.BackColor = Color.FromArgb(CInt(s.m_strBackColor))
-					End If
-				Catch
-					Try
-						s.BackColor = Color.FromName(s.m_strBackColor)
-					Catch
-						s.BackColor = SystemColors.Control
-					End Try
-				End Try
-			End If
-			If s.m_strFocusedColor.Length > 0 Then
-				Try
-					If CInt(s.m_strFocusedColor) <> 0 Then
-						s.FocusedColor = Color.FromArgb(CInt(s.m_strFocusedColor))
-					End If
-				Catch
-					Try
-						s.FocusedColor = Color.FromName(s.m_strFocusedColor)
-					Catch
-						s.FocusedColor = SystemColors.ControlLightLight
-					End Try
-				End Try
-			End If
-			If s.m_strButtonColor.Length > 0 Then
-				Try
-					If CInt(s.m_strButtonColor) <> 0 Then
-						s.ButtonColor = Color.FromArgb(CInt(s.m_strButtonColor))
-					End If
-				Catch
-					Try
-						s.ButtonColor = Color.FromName(s.m_strButtonColor)
-					Catch
-						s.ButtonColor = SystemColors.Control
-					End Try
-				End Try
-			End If
-			If s.m_strNormalOutlineColor.Length > 0 Then
-				Try
-					If CInt(s.m_strNormalOutlineColor) <> 0 Then
-						s.NormalOutlineColor = Color.FromArgb(CInt(s.m_strNormalOutlineColor))
-					End If
-				Catch
-					Try
-						s.NormalOutlineColor = Color.FromName(s.m_strNormalOutlineColor)
-					Catch
-						s.NormalOutlineColor = SystemColors.ControlDark
-					End Try
-				End Try
-			End If
-			If s.m_strLightEdgeColor.Length > 0 Then
-				Try
-					If CInt(s.m_strLightEdgeColor) <> 0 Then
-						s.LightEdgeColor = Color.FromArgb(CInt(s.m_strLightEdgeColor))
-					End If
-				Catch
-					Try
-						s.LightEdgeColor = Color.FromName(s.m_strLightEdgeColor)
-					Catch
-						s.LightEdgeColor = SystemColors.ControlLightLight
-					End Try
-				End Try
-			End If
-			If s.m_strDarkEdgeColor.Length > 0 Then
-				Try
-					If CInt(s.m_strDarkEdgeColor) <> 0 Then
-						s.DarkEdgeColor = Color.FromArgb(CInt(s.m_strDarkEdgeColor))
-					End If
-				Catch
-					Try
-						s.DarkEdgeColor = Color.FromName(s.m_strDarkEdgeColor)
-					Catch
-						s.DarkEdgeColor = SystemColors.ControlDarkDark
-					End Try
-				End Try
-			End If
+			s.BackColor = GetColor(s.m_strBackColor, defaultclass.BackColor)
+			s.FocusedColor = GetColor(s.m_strFocusedColor, defaultclass.FocusedColor)
+			s.ButtonColor = GetColor(s.m_strButtonColor, defaultclass.ButtonColor)
+			s.NormalOutlineColor = GetColor(s.m_strNormalOutlineColor, defaultclass.NormalOutlineColor)
+			s.LightEdgeColor = GetColor(s.m_strLightEdgeColor, defaultclass.LightEdgeColor)
+			s.DarkEdgeColor = GetColor(s.m_strDarkEdgeColor, defaultclass.DarkEdgeColor)
+
 			If Not s.m_intCustomColors Is Nothing Then
 				If s.m_intCustomColors.GetUpperBound(0) > -1 Then
 					Dim intColor As Integer
@@ -493,49 +468,47 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 					End If
 				End If
 			End If
-			If s.m_strTextColor.Length > 0 Then
-				Try
-					If CInt(s.m_strTextColor) <> 0 Then
-						s.TextColor = Color.FromArgb(CInt(s.m_strTextColor))
-					End If
-				Catch
-					Try
-						s.TextColor = Color.FromName(s.m_strTextColor)
-					Catch
-						s.TextColor = SystemColors.ControlText
-					End Try
-				End Try
-			End If
-			If s.m_strTitleColor.Length > 0 Then
-				Try
-					If CInt(s.m_strTitleColor) <> 0 Then
-						s.TitleColor = Color.FromArgb(CInt(s.m_strTitleColor))
-					End If
-				Catch
-					Try
-						s.TitleColor = Color.FromName(s.m_strTitleColor)
-					Catch
-						s.TitleColor = SystemColors.ActiveCaption
-					End Try
-				End Try
-			End If
+
+			s.TextColor = GetColor(s.m_strTextColor, defaultclass.TextColor)
+			s.TitleColor = GetColor(s.m_strTitleColor, defaultclass.TitleColor)
+
 			'If s.OpenFileDialogDir.Length = 0 Then
 			'    s.OpenFileDialogDir = IO.Path.GetDirectoryName(Application.ExecutablePath)
 			'End If
+			Log.LogMinorInfo("-Completed cleaning up settings", "Time: (" & Date.op_Subtraction(Now, dtComp).ToString & ")")
+
 			Return s
 		End If
 
 
 	End Function
 
+    Private Shared Function GetColor(ByVal s As String, ByVal defaultcolor As Color) As Color
+        If s.Length > 0 Then
+            If (Not s = defaultcolor.ToString()) Then
+
+                Dim num As Integer
+                If Integer.TryParse(s, num) Then
+                    Return Color.FromArgb(num)
+                Else
+                    Try
+                        Return Color.FromName(s)
+                    Catch
+                        Return SystemColors.Control
+                    End Try
+                End If
+            End If
+        End If
+    End Function
+
 #End Region
 
 #Region "Quick Key Bounds Property"
 
-	Public m_rQuickKey As New Rectangle(CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Width / 2)), _
-										CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Height / 8)) + 150, _
-										CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Width / 4)), _
-										CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Height / 4)))
+    Public m_rQuickKey As New Rectangle(CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Width / 2)), _
+    CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Height / 8)) + 140, _
+    CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Width / 3)), _
+    CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Height / 4)))
 
 	Public Property QuickKeyBounds() As Rectangle
 		Get
@@ -551,10 +524,10 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 
 #Region "Toolbar Bounds Property"
 
-	Public m_bToolbar As New Rectangle(CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Width / 2)), _
-										CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Height / 8)), _
-										CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Width / 4)), _
-										150)
+    Public m_bToolbar As New Rectangle(CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Width / 2)), _
+             CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Height / 8)), _
+             CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Width / 3)), _
+             150)
 
 	Public Property ToolbarBounds() As Rectangle
 		Get
@@ -570,10 +543,10 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 
 #Region "Dock Icon Bounds Property"
 
-	Public m_bDockIcon As New Rectangle(CInt((Screen.PrimaryScreen.WorkingArea.Width - 112) / 2), _
-											0, _
-											112, _
-											20)
+    Public m_bDockIcon As New Rectangle(CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Width / 2)), _
+    CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Height / 8)) - 20, _
+    CInt(Math.Round(Screen.PrimaryScreen.WorkingArea.Width / 3)), _
+    20)
 
 	Public Property DockIconBounds() As Rectangle
 		Get
@@ -606,12 +579,24 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 	End Property
 
 	Public Sub AddDeletedTip(ByVal Message As String)
-		If Tips Is Nothing Then
-			ReDim Tips(0)
+		If p_Tips Is Nothing Then
+			ReDim p_Tips(0)
 		Else
-			ReDim Preserve Tips(Tips.GetUpperBound(0) + 1)
+			ReDim Preserve p_Tips(p_Tips.GetUpperBound(0) + 1)
 		End If
-		Tips(Tips.GetUpperBound(0)) = Message
+		p_Tips(p_Tips.GetUpperBound(0)) = Message
+	End Sub
+
+	Friend Sub RemoveDuplicateTips()
+		Dim temp As New Collections.ArrayList()
+		Dim i As Integer
+		For i = 0 To p_Tips.Length - 1
+			If Not temp.Contains(p_Tips(i)) Then temp.Add(p_Tips(i))
+		Next
+		ReDim p_Tips(temp.Count - 1)
+		For i = 0 To temp.Count - 1
+			p_Tips(i) = temp(i).ToString()
+		Next
 	End Sub
 
 #End Region
@@ -866,7 +851,7 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 			RaiseEvent CharsetCharactersChanged(Me, Nothing)
 			Me.FileReadOnly = ((IO.File.GetAttributes(strFileName) And IO.FileAttributes.ReadOnly) <> 0)
 		Else
-			Log.HandleError("Error Loading Character Set!", "Filename: """ & strFileName & """", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+            Log.HandleError(My.Resources.ErrorLoadingCharacterSet, My.Resources.FilenamePrefix & """" & strFileName & """", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
 		End If
 
 
@@ -978,82 +963,165 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 
 #End Region
 
+#Region "Auto-size Property"
+
+    Private m_blnAutosize As Boolean = True
+    ''' <summary>
+    ''' Determines whether the font size automatically changed to fill or fit the grid.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property Autosize() As Boolean
+        Get
+            Return m_blnAutosize
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnAutosize = Value
+            RaiseEvent AutosizeChanged(Me, Nothing)
+        End Set
+    End Property
+
+#End Region
+
+#Region "SendtoEnd Property"
+
+    Private m_blnSendtoEnd As Boolean = False
+    ''' <summary>
+    ''' Determines whether the font size automatically changed to fill or fit the grid.
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property SendtoEnd() As Boolean
+        Get
+            Return m_blnSendtoEnd
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnSendtoEnd = Value
+            RaiseEvent SendToEndChanged(Me, Nothing)
+        End Set
+    End Property
+
+#End Region
+
+#Region "SendDelay Property"
+
+    Private m_intSendDelay As Integer = 60
+    Public Property SendDelay() As Integer
+        Get
+            Return m_intSendDelay
+        End Get
+        Set(ByVal Value As Integer)
+            m_intSendDelay = Value
+            RaiseEvent SendDelayChanged(Me, Nothing)
+        End Set
+    End Property
+
+#End Region
+
+#Region "SendMethod Property"
+    Public Enum SendMethods
+        SendInputAPI = 1
+        SendKeysAPI = 2
+        ClipboardAndSendKeys = 4
+    End Enum
+
+    Private m_SendMethod As SendMethods = SendMethods.SendInputAPI
+    Public Property SendMethod() As SendMethods
+        Get
+            Return m_SendMethod
+        End Get
+        Set(ByVal Value As SendMethods)
+            m_SendMethod = Value
+            RaiseEvent SendMethodChanged(Me, Nothing)
+        End Set
+    End Property
+
+#End Region
+
 #Region "Characters Locked Property"
 
-	Private m_blnCharsLocked As Boolean = False
-	Public Property CharsLocked() As Boolean
-		Get
-			Return m_blnCharsLocked
-		End Get
-		Set(ByVal Value As Boolean)
-			m_blnCharsLocked = Value
-			RaiseEvent CharsLockedChanged(Me, Nothing)
-		End Set
-	End Property
+    Private m_blnCharsLocked As Boolean = False
+    Public Property CharsLocked() As Boolean
+        Get
+            Return m_blnCharsLocked
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnCharsLocked = Value
+            RaiseEvent CharsLockedChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "ShowTips Property"
 
-	Protected p_blnShowTips As Boolean = True
-	Public Property ShowTips() As Boolean
-		Get
-			Return p_blnShowTips
-		End Get
-		Set(ByVal Value As Boolean)
-			p_blnShowTips = Value
-			RaiseEvent ShowTipsChanged(Me, Nothing)
-		End Set
-	End Property
+    Protected p_blnShowTips As Boolean = True
+    Public Property ShowTips() As Boolean
+        Get
+            Return p_blnShowTips
+        End Get
+        Set(ByVal Value As Boolean)
+            p_blnShowTips = Value
+            RaiseEvent ShowTipsChanged(Me, Nothing)
+        End Set
+    End Property
 
 
 #End Region
 
 #Region "Docked Property"
 
-	Private m_blnDocked As Boolean = False
-	Public Property Docked() As Boolean
-		Get
-			Return m_blnDocked
-		End Get
-		Set(ByVal Value As Boolean)
-			m_blnDocked = Value
-			RaiseEvent DockedChanged(Me, Nothing)
-		End Set
-	End Property
+    Private m_blnDocked As Boolean = False
+    ''' <summary>
+    ''' Enables the Auto-Hide feature
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property Docked() As Boolean
+        Get
+            Return m_blnDocked
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnDocked = Value
+            RaiseEvent DockedChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "Toolbar Property"
 
     Private m_blnToolbar As Boolean = True
-	Public Property Toolbar() As Boolean
-		Get
-			Return m_blnToolbar
-		End Get
-		Set(ByVal Value As Boolean)
-			m_blnToolbar = Value
-			RaiseEvent ToolbarChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property Toolbar() As Boolean
+        Get
+            Return m_blnToolbar
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnToolbar = Value
+            RaiseEvent ToolbarChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "Quick Key Property"
 
-	Private m_blnQuickKey As Boolean = False
+    Private m_blnQuickKey As Boolean = False
 
-	Public Property QuickKey() As Boolean
-		Get
-			Return m_blnQuickKey
-		End Get
-		Set(ByVal Value As Boolean)
-			If m_blnQuickKey <> Value Then
-				m_blnQuickKey = Value
-				RaiseEvent QuickKeyChanged(Me, Nothing)
-			End If
-		End Set
-	End Property
+    Public Property QuickKey() As Boolean
+        Get
+            Return m_blnQuickKey
+        End Get
+        Set(ByVal Value As Boolean)
+            If m_blnQuickKey <> Value Then
+                m_blnQuickKey = Value
+                RaiseEvent QuickKeyChanged(Me, Nothing)
+            End If
+        End Set
+    End Property
 
 
 #End Region
@@ -1061,301 +1129,311 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 
 #Region "Keyword Property"
 
-	Private m_strKeyword As String = "OpusApp"
-	Public Property Keyword() As String
-		Get
-			Return m_strKeyword
-		End Get
-		Set(ByVal Value As String)
-			m_strKeyword = Value
-			RaiseEvent KeywordChanged(Me, Nothing)
-		End Set
-	End Property
+    Private m_strKeyword As String = My.Resources.LastWindow
+    Public Property Keyword() As String
+        Get
+            Return m_strKeyword
+        End Get
+        Set(ByVal Value As String)
+            m_strKeyword = Value
+            RaiseEvent KeywordChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "Keywords Property"
 
-	Private m_strKeywords As String() = _
-	{"OpusApp", "XLMain", "rctrl_renwnd32", "OMain", "PP10FrameClass", "MSBLClass", "Outlook Express Browser Class", "ATH_Note", "WordPadClass", "Notepad", "SciCalc", "CabinetWClass", "IEFrame", "ExplorerWClass", "CabinetW", "RegEdit_RegEdit", "WABBrowseView"}
+    Private m_strKeywords As String() = _
+    {My.Resources.LastWindow, "OpusApp", "XLMain", "rctrl_renwnd32", _
+    "OMain", "PP10FrameClass", "SALFRAME", "MSBLClass", _
+    "Outlook Express Browser Class", "ATH_Note", _
+    "WordPadClass", "Notepad", "SciCalc", "CabinetWClass", _
+    "IEFrame", "MozillaUIWindowClass", "ExplorerWClass", _
+    "CabinetW", "RegEdit_RegEdit", "WABBrowseView", _
+    "wndclass_desked_gsk", "ConsoleWindowClass", "PuTTY", "ytWindow", "gdkWindowToplevel"}
 
-	Public Property Keywords() As String()
-		Get
-			Return m_strKeywords
-		End Get
-		Set(ByVal Value As String())
-			m_strKeywords = Value
-			RaiseEvent KeywordsChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property Keywords() As String()
+        Get
+            Return m_strKeywords
+        End Get
+        Set(ByVal Value As String())
+            m_strKeywords = Value
+            Dim i As Integer
+            For i = m_strKeywords.GetLowerBound(0) To m_strKeywords.GetUpperBound(0)
+                If m_strKeywords(i) Is Nothing Then
+                    m_strKeywords(i) = "(null)"
+                End If
+            Next
+
+            RaiseEvent KeywordsChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
-
 #Region "Orientation Property"
 
-	Public Enum OrientationDirection As Integer
-		Top = 1
-		Left = 2
-		Bottom = 4
-		Right = 8
-	End Enum
+    Public Enum OrientationDirection As Integer
+        Top = 1
+        Left = 2
+        Bottom = 4
+        Right = 8
+    End Enum
 
-	Private m_Orientation As OrientationDirection = OrientationDirection.Top
+    Private m_Orientation As OrientationDirection = OrientationDirection.Top
 
-	Public Property Orientation() As OrientationDirection
-		Get
-			Return m_Orientation
-		End Get
-		Set(ByVal Value As OrientationDirection)
-			m_Orientation = Value
-			RaiseEvent OrientationChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property Orientation() As OrientationDirection
+        Get
+            Return m_Orientation
+        End Get
+        Set(ByVal Value As OrientationDirection)
+            m_Orientation = Value
+            RaiseEvent OrientationChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "CharsOrientation Property"
 
-	Public Enum CharsOrientationDirection As Integer
-		Top = 1
-		Left = 2
-		Bottom = 4
-		Right = 8
-	End Enum
+    Public Enum CharsOrientationDirection As Integer
+        Top = 1
+        Left = 2
+        Bottom = 4
+        Right = 8
+    End Enum
 
-	Private m_CharsOrientation As CharsOrientationDirection = CharsOrientationDirection.Top
+    Private m_CharsOrientation As CharsOrientationDirection = CharsOrientationDirection.Top
 
-	Public Property CharsOrientation() As CharsOrientationDirection
-		Get
-			Return m_CharsOrientation
-		End Get
-		Set(ByVal Value As CharsOrientationDirection)
-			m_CharsOrientation = Value
-			RaiseEvent CharsOrientationChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property CharsOrientation() As CharsOrientationDirection
+        Get
+            Return m_CharsOrientation
+        End Get
+        Set(ByVal Value As CharsOrientationDirection)
+            m_CharsOrientation = Value
+            RaiseEvent CharsOrientationChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
-
 
 #Region "Toolbar Settings"
 
 #Region "ViewFontBar Property"
 
-	Private m_blnViewFontBar As Boolean = True
+    Private m_blnViewFontBar As Boolean = True
 
-	Public Property ViewFontBar() As Boolean
-		Get
-			Return m_blnViewFontBar
-		End Get
-		Set(ByVal Value As Boolean)
-			m_blnViewFontBar = Value
-			RaiseEvent ToolbarSettingsChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property ViewFontBar() As Boolean
+        Get
+            Return m_blnViewFontBar
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnViewFontBar = Value
+            RaiseEvent ToolbarSettingsChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "ViewFontSizeBar Property"
 
-	Private m_blnViewFontSizeBar As Boolean = True
+    Private m_blnViewFontSizeBar As Boolean = True
 
-	Public Property ViewFontSizeBar() As Boolean
-		Get
-			Return m_blnViewFontSizeBar
-		End Get
-		Set(ByVal Value As Boolean)
-			m_blnViewFontSizeBar = Value
-			RaiseEvent ToolbarSettingsChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property ViewFontSizeBar() As Boolean
+        Get
+            Return m_blnViewFontSizeBar
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnViewFontSizeBar = Value
+            RaiseEvent ToolbarSettingsChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "ViewFontAttrsBar Property"
 
-	Private m_blnViewFontAttrsBar As Boolean = True
+    Private m_blnViewFontAttrsBar As Boolean = True
 
-	Public Property ViewFontAttrsBar() As Boolean
-		Get
-			Return m_blnViewFontAttrsBar
-		End Get
-		Set(ByVal Value As Boolean)
-			m_blnViewFontAttrsBar = Value
-			RaiseEvent ToolbarSettingsChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property ViewFontAttrsBar() As Boolean
+        Get
+            Return m_blnViewFontAttrsBar
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnViewFontAttrsBar = Value
+            RaiseEvent ToolbarSettingsChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "ViewKeywordsBar Property"
 
-	Private m_blnViewKeywordsBar As Boolean = True
+    Private m_blnViewKeywordsBar As Boolean = True
 
-	Public Property ViewKeywordsBar() As Boolean
-		Get
-			Return m_blnViewKeywordsBar
-		End Get
-		Set(ByVal Value As Boolean)
-			m_blnViewKeywordsBar = Value
-			RaiseEvent ToolbarSettingsChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property ViewKeywordsBar() As Boolean
+        Get
+            Return m_blnViewKeywordsBar
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnViewKeywordsBar = Value
+            RaiseEvent ToolbarSettingsChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "ViewCommandBar Property"
 
-	Private m_blnViewCommandBar As Boolean = True
+    Private m_blnViewCommandBar As Boolean = True
 
-	Public Property ViewCommandBar() As Boolean
-		Get
-			Return m_blnViewCommandBar
-		End Get
-		Set(ByVal Value As Boolean)
-			m_blnViewCommandBar = Value
-			RaiseEvent ToolbarSettingsChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property ViewCommandBar() As Boolean
+        Get
+            Return m_blnViewCommandBar
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnViewCommandBar = Value
+            RaiseEvent ToolbarSettingsChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "ViewStatusBar Property"
 
-	Private m_blnViewStatusBar As Boolean = True
+    Private m_blnViewStatusBar As Boolean = True
 
-	Public Property ViewStatusBar() As Boolean
-		Get
-			Return m_blnViewStatusBar
-		End Get
-		Set(ByVal Value As Boolean)
-			m_blnViewStatusBar = Value
-			RaiseEvent ToolbarSettingsChanged(Me, Nothing)
-		End Set
-	End Property
-
-#End Region
+    Public Property ViewStatusBar() As Boolean
+        Get
+            Return m_blnViewStatusBar
+        End Get
+        Set(ByVal Value As Boolean)
+            m_blnViewStatusBar = Value
+            RaiseEvent ToolbarSettingsChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
+#End Region
 
 #Region "FileDialogDir Property"
 
-	Private m_strFileDialogDir As String = IO.Path.GetDirectoryName(Application.ExecutablePath) & IO.Path.DirectorySeparatorChar & Constants.Resources.Charset.CharsetDir
+    Private m_strFileDialogDir As String = Constants.Resources.Charset.CharsetDir
 
-	Public Property FileDialogDir() As String
-		Get
-			Return m_strFileDialogDir
-		End Get
-		Set(ByVal Value As String)
-			m_strFileDialogDir = Value
-			RaiseEvent FileDialogDirChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property FileDialogDir() As String
+        Get
+            Return m_strFileDialogDir
+        End Get
+        Set(ByVal Value As String)
+            m_strFileDialogDir = Value
+            RaiseEvent FileDialogDirChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "FocusedColor Property"
 
-	Public m_strFocusedColor As String = ""
-	Private m_cFocusedColor As Color = SystemColors.ControlLightLight
+    Public m_strFocusedColor As String = ""
+    Private m_cFocusedColor As Color = SystemColors.ControlText
 
-	Public Property FocusedColor() As Color
-		Get
-			Return m_cFocusedColor
-		End Get
-		Set(ByVal Value As Color)
-			If Value.ToArgb <> 0 Then
-				m_cFocusedColor = Value
-				If Value.IsNamedColor Then
-					m_strFocusedColor = Value.ToKnownColor.ToString
-				Else
-					m_strFocusedColor = Value.ToArgb.ToString
-				End If
-				RaiseEvent FocusedColorChanged(Me, Nothing)
-			End If
-		End Set
-	End Property
+    Public Property FocusedColor() As Color
+        Get
+            Return m_cFocusedColor
+        End Get
+        Set(ByVal Value As Color)
+            If Value.ToArgb <> 0 Then
+                m_cFocusedColor = Value
+                If Value.IsNamedColor Then
+                    m_strFocusedColor = Value.ToKnownColor.ToString
+                Else
+                    m_strFocusedColor = Value.ToArgb.ToString
+                End If
+                RaiseEvent FocusedColorChanged(Me, Nothing)
+            End If
+        End Set
+    End Property
 
 #End Region
 
 #Region "LightEdgeColor Property"
 
-	Public m_strLightEdgeColor As String = ""
-	Private m_cLightEdgeColor As Color = SystemColors.ControlLightLight
+    Public m_strLightEdgeColor As String = ""
+    Private m_cLightEdgeColor As Color = SystemColors.ButtonHighlight
 
-	Public Property LightEdgeColor() As Color
-		Get
-			Return m_cLightEdgeColor
-		End Get
-		Set(ByVal Value As Color)
-			If Value.ToArgb <> 0 Then
-				m_cLightEdgeColor = Value
-				If Value.IsNamedColor Then
-					m_strLightEdgeColor = Value.ToKnownColor.ToString
-				Else
-					m_strLightEdgeColor = Value.ToArgb.ToString
-				End If
-				RaiseEvent LightEdgeColorChanged(Me, Nothing)
-			End If
-		End Set
-	End Property
+    Public Property LightEdgeColor() As Color
+        Get
+            Return m_cLightEdgeColor
+        End Get
+        Set(ByVal Value As Color)
+            If Value.ToArgb <> 0 Then
+                m_cLightEdgeColor = Value
+                If Value.IsNamedColor Then
+                    m_strLightEdgeColor = Value.ToKnownColor.ToString
+                Else
+                    m_strLightEdgeColor = Value.ToArgb.ToString
+                End If
+                RaiseEvent LightEdgeColorChanged(Me, Nothing)
+            End If
+        End Set
+    End Property
 
 #End Region
 
 #Region "DarkEdgeColor Property"
 
-	Public m_strDarkEdgeColor As String = ""
-	Private m_cDarkEdgeColor As Color = SystemColors.ControlDarkDark
+    Public m_strDarkEdgeColor As String = ""
+    Private m_cDarkEdgeColor As Color = SystemColors.ButtonShadow
 
-	Public Property DarkEdgeColor() As Color
-		Get
-			Return m_cDarkEdgeColor
-		End Get
-		Set(ByVal Value As Color)
-			If Value.ToArgb <> 0 Then
-				m_cDarkEdgeColor = Value
-				If Value.IsNamedColor Then
-					m_strDarkEdgeColor = Value.ToKnownColor.ToString
-				Else
-					m_strDarkEdgeColor = Value.ToArgb.ToString
-				End If
-				RaiseEvent DarkEdgeColorChanged(Me, Nothing)
-			End If
-		End Set
-	End Property
+    Public Property DarkEdgeColor() As Color
+        Get
+            Return m_cDarkEdgeColor
+        End Get
+        Set(ByVal Value As Color)
+            If Value.ToArgb <> 0 Then
+                m_cDarkEdgeColor = Value
+                If Value.IsNamedColor Then
+                    m_strDarkEdgeColor = Value.ToKnownColor.ToString
+                Else
+                    m_strDarkEdgeColor = Value.ToArgb.ToString
+                End If
+                RaiseEvent DarkEdgeColorChanged(Me, Nothing)
+            End If
+        End Set
+    End Property
 
 #End Region
 
 #Region "NormalOutlineColor Property"
 
-	Public m_strNormalOutlineColor As String = ""
-	Private m_cNormalOutlineColor As Color = SystemColors.ControlDark
+    Public m_strNormalOutlineColor As String = ""
+    Private m_cNormalOutlineColor As Color = SystemColors.Window
 
-	Public Property NormalOutlineColor() As Color
-		Get
-			Return m_cNormalOutlineColor
-		End Get
-		Set(ByVal Value As Color)
-			If Value.ToArgb <> 0 Then
-				m_cNormalOutlineColor = Value
-				If Value.IsNamedColor Then
-					m_strNormalOutlineColor = Value.ToKnownColor.ToString
-				Else
-					m_strNormalOutlineColor = Value.ToArgb.ToString
-				End If
-				RaiseEvent NormalOutlineColorChanged(Me, Nothing)
-			End If
-		End Set
-	End Property
+    Public Property NormalOutlineColor() As Color
+        Get
+            Return m_cNormalOutlineColor
+        End Get
+        Set(ByVal Value As Color)
+            If Value.ToArgb <> 0 Then
+                m_cNormalOutlineColor = Value
+                If Value.IsNamedColor Then
+                    m_strNormalOutlineColor = Value.ToKnownColor.ToString
+                Else
+                    m_strNormalOutlineColor = Value.ToArgb.ToString
+                End If
+                RaiseEvent NormalOutlineColorChanged(Me, Nothing)
+            End If
+        End Set
+    End Property
 
 #End Region
 
 #Region "BackColor Property"
 
-	Public m_strBackColor As String = ""
-	Private m_cBackColor As Color = SystemColors.Control
+    Public m_strBackColor As String = ""
+    Private m_cBackColor As Color = SystemColors.Window
 
 	Public Property BackColor() As Color
 		Get
@@ -1378,8 +1456,8 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 #End Region
 
 #Region "TextColor Property"
-	Public m_strTextColor As String = ""
-	Private m_cTextColor As Color = SystemColors.ControlText
+    Public m_strTextColor As String = ""
+    Private m_cTextColor As Color = SystemColors.ControlText
 
 	Public Property TextColor() As Color
 		Get
@@ -1401,109 +1479,107 @@ Imports XMLCharset = QuickKey.Constants.Xml.CharSet
 #End Region
 
 #Region "ButtonColor Property"
-	Public m_strButtonColor As String = ""
-	Private m_cButtonColor As Color = SystemColors.Control
+    Public m_strButtonColor As String = ""
+    Private m_cButtonColor As Color = SystemColors.ButtonFace
 
-	Public Property ButtonColor() As Color
-		Get
-			Return m_cButtonColor
-		End Get
-		Set(ByVal Value As Color)
-			If Value.ToArgb <> 0 Then
-				m_cButtonColor = Value
-				If Value.IsNamedColor Then
-					m_strButtonColor = Value.ToKnownColor.ToString
-				Else
-					m_strButtonColor = Value.ToArgb.ToString
-				End If
-				RaiseEvent ButtonColorChanged(Me, Nothing)
-			End If
-		End Set
-	End Property
+    Public Property ButtonColor() As Color
+        Get
+            Return m_cButtonColor
+        End Get
+        Set(ByVal Value As Color)
+            If Value.ToArgb <> 0 Then
+                m_cButtonColor = Value
+                If Value.IsNamedColor Then
+                    m_strButtonColor = Value.ToKnownColor.ToString
+                Else
+                    m_strButtonColor = Value.ToArgb.ToString
+                End If
+                RaiseEvent ButtonColorChanged(Me, Nothing)
+            End If
+        End Set
+    End Property
 
 #End Region
 
-
 #Region "TitleColor Property"
-	Public m_strTitleColor As String = ""
-	Private m_cTitleColor As Color = SystemColors.ActiveCaption
+    Public m_strTitleColor As String = ""
+    Private m_cTitleColor As Color = SystemColors.ActiveCaption
 
-	Public Property TitleColor() As Color
-		Get
-			Return m_cTitleColor
-		End Get
-		Set(ByVal Value As Color)
-			If Value.ToArgb <> 0 Then
-				m_cTitleColor = Value
-				If Value.IsNamedColor Then
-					m_strTitleColor = Value.ToKnownColor.ToString
-				Else
-					m_strTitleColor = Value.ToArgb.ToString
-				End If
-				RaiseEvent TitleColorChanged(Me, Nothing)
-			End If
-		End Set
-	End Property
+    Public Property TitleColor() As Color
+        Get
+            Return m_cTitleColor
+        End Get
+        Set(ByVal Value As Color)
+            If Value.ToArgb <> 0 Then
+                m_cTitleColor = Value
+                If Value.IsNamedColor Then
+                    m_strTitleColor = Value.ToKnownColor.ToString
+                Else
+                    m_strTitleColor = Value.ToArgb.ToString
+                End If
+                RaiseEvent TitleColorChanged(Me, Nothing)
+            End If
+        End Set
+    End Property
 
 #End Region
 
 #Region "CustomColors Property"
 
-	Public m_intCustomColors() As Integer
-	Private m_cCustomColors() As Color
+    Public m_intCustomColors() As Integer
+    Private m_cCustomColors() As Color
 
-	Public Property CustomColors() As Color()
-		Get
-			Return m_cCustomColors
-		End Get
-		Set(ByVal Value As Color())
-			If Not Value Is Nothing Then
-				m_cCustomColors = Value
-				Dim intCustomLoop As Integer
-				For intCustomLoop = 0 To Value.GetUpperBound(0)
-					ReDim Preserve m_intCustomColors(intCustomLoop)
-					m_intCustomColors(intCustomLoop) = Value(intCustomLoop).ToArgb
-				Next
-				RaiseEvent CustomColorsChanged(Me, Nothing)
-			End If
+    Public Property CustomColors() As Color()
+        Get
+            Return m_cCustomColors
+        End Get
+        Set(ByVal Value As Color())
+            If Not Value Is Nothing Then
+                m_cCustomColors = Value
+                Dim intCustomLoop As Integer
+                For intCustomLoop = 0 To Value.GetUpperBound(0)
+                    ReDim Preserve m_intCustomColors(intCustomLoop)
+                    m_intCustomColors(intCustomLoop) = Value(intCustomLoop).ToArgb
+                Next
+                RaiseEvent CustomColorsChanged(Me, Nothing)
+            End If
 
-		End Set
-	End Property
+        End Set
+    End Property
 
 #End Region
 
 #Region "ImportDialogDir Property"
 
-	Private m_strImportDialogDir As String = IO.Path.GetDirectoryName(Application.ExecutablePath) & IO.Path.DirectorySeparatorChar & Constants.Resources.Charset.CharsetDir
+    Private m_strImportDialogDir As String = Constants.Resources.Charset.CharsetDir
 
-	Public Property ImportDialogDir() As String
-		Get
-			Return m_strImportDialogDir
-		End Get
-		Set(ByVal Value As String)
-			m_strImportDialogDir = Value
-			RaiseEvent ImportFileDialogDirChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property ImportDialogDir() As String
+        Get
+            Return m_strImportDialogDir
+        End Get
+        Set(ByVal Value As String)
+            m_strImportDialogDir = Value
+            RaiseEvent ImportFileDialogDirChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
 
 #Region "SaveReportDialogDir Property"
 
-	Private m_strSaveReportDialogDir As String = IO.Path.GetDirectoryName(Application.ExecutablePath) & IO.Path.DirectorySeparatorChar & Constants.Resources.Charset.CharsetDir
+    Private m_strSaveReportDialogDir As String = Constants.Resources.Charset.CharsetDir
 
-	Public Property SaveReportDialogDir() As String
-		Get
-			Return m_strSaveReportDialogDir
-		End Get
-		Set(ByVal Value As String)
-			m_strSaveReportDialogDir = Value
-			RaiseEvent SaveReportDialogDirChanged(Me, Nothing)
-		End Set
-	End Property
+    Public Property SaveReportDialogDir() As String
+        Get
+            Return m_strSaveReportDialogDir
+        End Get
+        Set(ByVal Value As String)
+            m_strSaveReportDialogDir = Value
+            RaiseEvent SaveReportDialogDirChanged(Me, Nothing)
+        End Set
+    End Property
 
 #End Region
-
 
 End Class
 
@@ -1793,23 +1869,23 @@ End Class
 
 
 					Else
-						MessageBox.Show(Constants.DialogStrings.OpenCharsetFileEmpty, _
-							Constants.DialogStrings.OpenCharsetErrorCaption, _
-							MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        MessageBox.Show(My.Resources.OpenCharsetFileEmpty, _
+       My.Resources.OpenCharsetErrorCaption, _
+       MessageBoxButtons.OK, MessageBoxIcon.Error)
 						Return Nothing
 					End If
 
 				Catch ex As Exception
 
 					'Put in tcwr
-					MessageBox.Show(Constants.DialogStrings.OpenCharsetFileCorrupt, Constants.DialogStrings.OpenCharsetErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                    MessageBox.Show(My.Resources.OpenCharsetFileCorrupt, My.Resources.OpenCharsetErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
 					Return Nothing
 				End Try
 			Else
 
-				MessageBox.Show(Constants.DialogStrings.OpenCharsetFileDoesNotExist, _
-								Constants.DialogStrings.OpenCharsetErrorCaption, _
-								MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(My.Resources.OpenCharsetFileDoesNotExist, _
+                    My.Resources.OpenCharsetErrorCaption, _
+                    MessageBoxButtons.OK, MessageBoxIcon.Error)
 				Return Nothing
 			End If
 
@@ -1829,8 +1905,8 @@ End Class
 	Public Sub SaveFileToDisk(ByVal strFileName As String, ByVal SaveFont As Boolean, ByVal SaveFontSize As Boolean, ByVal SaveFontAttrs As Boolean, ByVal SaveCharacters As Boolean, ByVal SaveFilters As Boolean, ByVal SaveReadOnly As Boolean)
 		If IO.File.Exists(strFileName) Then
 			If ((IO.File.GetAttributes(strFileName) And IO.FileAttributes.ReadOnly) <> 0) And Not SaveReadOnly Then
-				MessageBox.Show(Constants.DialogStrings.SaveCharsetReadOnlyErrorText, _
-											Constants.DialogStrings.SaveCharsetErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                MessageBox.Show(My.Resources.SaveCharsetReadOnlyErrorText, _
+                       My.Resources.SaveCharsetErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Stop)
 				Exit Sub
 			End If
 		End If
@@ -1991,8 +2067,6 @@ End Class
 
 #End Region
 
-
-
 #Region "Characters Property"
 
 	Private m_strCharacters As String = ""
@@ -2028,20 +2102,23 @@ End Class
 	Private Sub m_ComputeFilteredCharacters()
 		If m_strCharacters Is Nothing Then Exit Sub
 
-		Dim strChars As String = m_strCharacters
+		Dim strChars As New System.Text.StringBuilder(m_strCharacters.Length)
+
 		Dim intCharsRemoved As Integer = 0
 		Dim intCharLoop As Integer
 		For intCharLoop = 0 To m_strCharacters.Length - 1
-			If Array.IndexOf(UnicodeFilters.FilterTitles, Char.GetUnicodeCategory(m_strCharacters, intCharLoop).ToString) > -1 Then
-				If Not Filters.Filters(Array.IndexOf(UnicodeFilters.FilterTitles, Char.GetUnicodeCategory(m_strCharacters, intCharLoop).ToString)) Then
-					strChars = strChars.Remove(intCharLoop - intCharsRemoved, 1)
-					intCharsRemoved += 1
+			Dim MatchingFilterIndex As Integer = Array.IndexOf(Of String)(UnicodeFilters.FilterTitles, Char.GetUnicodeCategory(m_strCharacters, intCharLoop).ToString)
+			If MatchingFilterIndex > -1 Then
+				'Only add this character if its class is enable
+				If Filters.Filters(MatchingFilterIndex) Then
+					strChars.Append(m_strCharacters.Chars(intCharLoop))
 				End If
 			Else
-
+				'If this is an unknown category, display it
+				strChars.Append(m_strCharacters.Chars(intCharLoop))
 			End If
 		Next
-		m_strFilteredCharacters = strChars
+		m_strFilteredCharacters = strChars.ToString()
 
 	End Sub
 
@@ -2401,20 +2478,11 @@ End Class
 #End Region
 
 
-
 End Class
 
 #End Region
 
 #Region "OptionsDialog Class"
-
-#Region "ActionPanel Class"
-
-Public Class ActionPanel
-
-End Class
-
-#End Region
 
 Public Class OptionsDialog
 	Inherits System.Windows.Forms.Form
@@ -2429,7 +2497,6 @@ Public Class OptionsDialog
 	Friend WithEvents lstKeywords As ListBox
 
 	Friend WithEvents btnDeleteKeyword As Button
-
 	Friend WithEvents btnAddKeyword As Button
 	Friend WithEvents btnMoveUp As Button
 	Friend WithEvents btnMoveDown As Button
@@ -2444,19 +2511,27 @@ Public Class OptionsDialog
 	Friend WithEvents btnCancel As Button
 	Friend WithEvents btnApply As Button
 
-
-
+    Friend WithEvents tpSend As TabPage
+    Friend WithEvents lblSendDelay As Label
+    Friend WithEvents nudSendDelay As NumericUpDown
+    Friend WithEvents lblSendMethod As Label
+    Friend WithEvents cmbSendMethod As ComboBox
 #End Region
 
 #Region "Control and Component Initialization procedures"
 
 	Private Sub m_InitializeControls()
 
-
-        ttTips = New ToolTip
-
+		Me.SuspendLayout()
         Me.ClientSize = New Size(480, 480)
+		Me.Text = My.Resources.OptionsWindowTitle
+		Me.Icon = Nothing
+		Me.MaximizeBox = False
+		Me.TopMost = True
+		Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
+		Me.Name = "frmOptions"
 
+		ttTips = New ToolTip()
 
 		Const BorderWidth As Integer = 8
 		Const ButtonHeight As Integer = 23
@@ -2464,7 +2539,7 @@ Public Class OptionsDialog
 
 		btnOK = New Button
 		btnOK.Name = "btnOK"
-		btnOK.Text = "&OK"
+        btnOK.Text = My.Resources.OKButton
 		btnOK.Anchor = AnchorStyles.Right Or AnchorStyles.Bottom
 		btnOK.Bounds = New Rectangle(Me.ClientSize.Width - ((ButtonWidth + BorderWidth) * 3), _
 									Me.ClientSize.Height - (ButtonHeight + BorderWidth), _
@@ -2472,11 +2547,11 @@ Public Class OptionsDialog
 		btnOK.FlatStyle = FlatStyle.System
 
 		Me.Controls.Add(btnOK)
-		ttTips.SetToolTip(btnOK, "Saves all settings changes and closes this dialog box")
+        ttTips.SetToolTip(btnOK, My.Resources.OptionsOKButtonTooltip)
 
 		btnCancel = New Button
 		btnCancel.Name = "btnCancel"
-		btnCancel.Text = "&Cancel"
+        btnCancel.Text = My.Resources.CancelButton
 		btnCancel.Anchor = AnchorStyles.Right Or AnchorStyles.Bottom
 		btncancel.Bounds = New Rectangle(Me.ClientSize.Width - ((ButtonWidth + BorderWidth) * 2), _
 									Me.ClientSize.Height - (ButtonHeight + BorderWidth), _
@@ -2484,11 +2559,11 @@ Public Class OptionsDialog
 		btnCancel.FlatStyle = FlatStyle.System
 
 		Me.Controls.Add(btnCancel)
-		ttTips.SetToolTip(btnCancel, "Ignores all settings changes and closes this dialog box")
+        ttTips.SetToolTip(btnCancel, My.Resources.OptionsCancelButtonTooltip)
 
 		btnApply = New Button
 		btnApply.Name = "btnApply"
-		btnApply.Text = "Apply"
+        btnApply.Text = My.Resources.ApplyButton
 		btnApply.Anchor = AnchorStyles.Right Or AnchorStyles.Bottom
 		btnApply.Bounds = New Rectangle(Me.ClientSize.Width - ((ButtonWidth + BorderWidth)), _
 									Me.ClientSize.Height - (ButtonHeight + BorderWidth), _
@@ -2496,7 +2571,7 @@ Public Class OptionsDialog
 		btnApply.FlatStyle = FlatStyle.System
 
 		Me.Controls.Add(btnApply)
-		ttTips.SetToolTip(btnApply, "Saves all settings changes, but does not hide this dialog box")
+        ttTips.SetToolTip(btnApply, My.Resources.OptionsApplyButtonTooltip)
 
 
 		tbMain = New TabControl
@@ -2508,7 +2583,7 @@ Public Class OptionsDialog
 		tbMain.Name = "tbMain"
 		tbMain.BringToFront()
 
-		tpKeywords = New TabPage("Program Keywords")
+        tpKeywords = New TabPage(My.Resources.TabKeywords)
 		tpKeywords.Name = "tpKeywords"
 
 		lstKeywords = New ListBox
@@ -2519,64 +2594,61 @@ Public Class OptionsDialog
 		lstKeywords.Top = BorderWidth
 		lstKeywords.Height = tpKeywords.ClientSize.Height - (2 * BorderWidth)
 		lstKeywords.Width = tpKeywords.ClientSize.Width - (3 * BorderWidth) - ButtonWidth
-		'lstKeywords.Enabled = False
 		tpKeywords.Controls.Add(lstKeywords)
-		ttTips.SetToolTip(tpKeywords, "Organize your program nicknames (Keywords)")
 
 		btnMoveUp = New Button
 		btnMoveUp.Name = "btnMoveUp"
-		btnMoveUp.Text = "Move Up"
+        btnMoveUp.Text = My.Resources.OptionsMoveUpButton
 		btnMoveUp.Anchor = AnchorStyles.Top Or AnchorStyles.Right
 		btnMoveUp.Left = tpKeywords.ClientSize.Width - (ButtonWidth + BorderWidth)
 		btnMoveUp.Width = ButtonWidth
 		btnMoveUp.Height = ButtonHeight
 		btnMoveUp.FlatStyle = FlatStyle.System
 		btnMoveUp.Top = BorderWidth
-		'btnMoveUp.Enabled = False
 		tpKeywords.Controls.Add(btnMoveUp)
-		ttTips.SetToolTip(btnMoveUp, "Move the currently selected item up")
+
 
 
 		btnMoveDown = New Button
 		btnMoveDown.Name = "btnMoveDown"
-		btnMoveDown.Text = "Move Down"
+        btnMoveDown.Text = My.Resources.OptionsMoveDownButton
 		btnMoveDown.Anchor = AnchorStyles.Top Or AnchorStyles.Right
 		btnMoveDown.Left = tpKeywords.ClientSize.Width - (ButtonWidth + BorderWidth)
 		btnMoveDown.Width = ButtonWidth
 		btnMoveDown.Height = ButtonHeight
 		btnMoveDown.FlatStyle = FlatStyle.System
 		btnMoveDown.Top = (2 * (BorderWidth) + ButtonHeight)
-		'btnMoveDown.Enabled = False
+
 		tpKeywords.Controls.Add(btnMoveDown)
-		ttTips.SetToolTip(btnMoveDown, "Move the currently selected item down")
+
 
 		btnAddKeyword = New Button
 		btnAddKeyword.Name = "btnAddKeyword"
-		btnAddKeyword.Text = "Add"
+        btnAddKeyword.Text = My.Resources.OptionsAddButton
 		btnAddKeyword.Anchor = AnchorStyles.Top Or AnchorStyles.Right
 		btnAddKeyword.Left = tpKeywords.ClientSize.Width - (ButtonWidth + BorderWidth)
 		btnAddKeyword.Width = ButtonWidth
 		btnAddKeyword.FlatStyle = FlatStyle.System
 		btnAddKeyword.Height = ButtonHeight
 		btnAddKeyword.Top = (3 * (BorderWidth + ButtonHeight))
-		'btnAddKeyword.Enabled = False
+
 		tpKeywords.Controls.Add(btnAddKeyword)
-		ttTips.SetToolTip(btnAddKeyword, "Add a keyword to the list")
+        ttTips.SetToolTip(btnAddKeyword, My.Resources.OptionsAddButtonTooltip)
 
 		btnDeleteKeyword = New Button
 		btnDeleteKeyword.Name = "btnDeleteKeyword"
-		btnDeleteKeyword.Text = "Remove"
+        btnDeleteKeyword.Text = My.Resources.OptionsRemoveButton
 		btnDeleteKeyword.Anchor = AnchorStyles.Top Or AnchorStyles.Right
 		btnDeleteKeyword.Left = tpKeywords.ClientSize.Width - (ButtonWidth + BorderWidth)
 		btnDeleteKeyword.Width = ButtonWidth
 		btnDeleteKeyword.Height = ButtonHeight
 		btnDeleteKeyword.FlatStyle = FlatStyle.System
 		btnDeleteKeyword.Top = (4 * (BorderWidth + ButtonHeight))
-		'btnDeleteKeyword.Enabled = False
-		tpKeywords.Controls.Add(btnDeleteKeyword)
-		ttTips.SetToolTip(btnDeleteKeyword, "Remove the currently selected keyword from the list")
 
-		tpMouseSettings = New TabPage("Mouse Settings")
+		tpKeywords.Controls.Add(btnDeleteKeyword)
+        ttTips.SetToolTip(btnDeleteKeyword, My.Resources.OptionsRemoveButtonTooltip)
+
+        tpMouseSettings = New TabPage(My.Resources.TabMouseSettings)
 		tpMouseSettings.Name = "tpMouseSettings"
 
 
@@ -2598,18 +2670,18 @@ Public Class OptionsDialog
 
 			Select Case intMouseButtonLoop
 				Case 0
-					tpMouseButtons(intMouseButtonLoop).Text = "Left"
+                    tpMouseButtons(intMouseButtonLoop).Text = My.Resources.MouseButtonLeft
 				Case 1
-					tpMouseButtons(intMouseButtonLoop).Text = "Right"
+                    tpMouseButtons(intMouseButtonLoop).Text = My.Resources.MouseButtonRight
 				Case 2
-					tpMouseButtons(intMouseButtonLoop).Text = "Middle"
+                    tpMouseButtons(intMouseButtonLoop).Text = My.Resources.MouseButtonMiddle
 				Case 3
-					tpMouseButtons(intMouseButtonLoop).Text = "XButton1"
+                    tpMouseButtons(intMouseButtonLoop).Text = My.Resources.MouseButtonX1
 				Case 4
-					tpMouseButtons(intMouseButtonLoop).Text = "XButton2"
+                    tpMouseButtons(intMouseButtonLoop).Text = My.Resources.MouseButtonX2
 			End Select
 
-			ttTips.SetToolTip(tpMouseButtons(intMouseButtonLoop), tpMouseButtons(intMouseButtonLoop).Text & " Mouse Button Actions")
+			ttTips.SetToolTip(tpMouseButtons(intMouseButtonLoop), tpMouseButtons(intMouseButtonLoop).Text & " " & My.Resources.mousebuttonactions)
 
 			Dim lstActions As New CheckedListBox
 
@@ -2618,36 +2690,64 @@ Public Class OptionsDialog
 			lstActions.CheckOnClick = True
 			lstActions.ThreeDCheckBoxes = False
 
-			lstActions.Items.Add("Send as keystroke")
-			lstActions.Items.Add("Copy to clipboard")
-			lstActions.Items.Add("Drag and drop")
-			lstActions.Items.Add("Select character")
-			lstActions.Items.Add("Display pop-up menu")
+            lstActions.Items.Add(My.Resources.ActionSend)
+            lstActions.Items.Add(My.Resources.ActionCopy)
+            lstActions.Items.Add(My.Resources.ActionDrag)
+            lstActions.Items.Add(My.Resources.ActionFocus)
+            lstActions.Items.Add(My.Resources.ActionMenu)
 
 			lstActions.Name = intMouseButtonLoop.ToString
 
 			lstActions.Parent = tpMouseButtons(intMouseButtonLoop)
 
 			AddHandler lstActions.ItemCheck, AddressOf MouseActionChecked
-			ttTips.SetToolTip(lstActions, "Select actions to take when the " & tpMouseButtons(intMouseButtonLoop).Text & " mouse button is clicked")
+			ttTips.SetToolTip(lstActions, My.Resources.ActionTooltipPart1 & tpMouseButtons(intMouseButtonLoop).Text & " " & My.Resources.ActionTooltipPart2)
 
 		Next
 
-		tpMouseSettings.Controls.Add(tbMouseSettings)
+        tpMouseSettings.Controls.Add(tbMouseSettings)
+
 
 		tbMain.TabPages.Add(tpMouseSettings)
+
+        tpSend = New TabPage(My.Resources.TabSendSettings)
+        lblSendDelay = New Label()
+        lblSendDelay.Text = My.Resources.OptionsSendDelay
+		lblSendDelay.Location = New Point(8, 8)
+		lblSendDelay.Height = 32
+		lblSendDelay.Width = tpSend.ClientSize.Width - 16
+		lblSendDelay.Anchor = AnchorStyles.Left Or AnchorStyles.Top Or AnchorStyles.Right
+        nudSendDelay = New NumericUpDown()
+        nudSendDelay.Maximum = 10000
+
+        nudSendDelay.Minimum = 0
+        nudSendDelay.InterceptArrowKeys = True
+		nudSendDelay.Location = New Point(8, lblSendDelay.Bottom)
+
+        lblSendMethod = New Label()
+        lblSendMethod.Text = My.Resources.OptionsSendMethod
+        lblSendMethod.Location = New Point(8, nudSendDelay.Bottom + 8)
+		lblSendMethod.Width = tpSend.ClientSize.Width - 16
+		lblSendMethod.Anchor = AnchorStyles.Left Or AnchorStyles.Top Or AnchorStyles.Right
+        cmbSendMethod = New ComboBox()
+        cmbSendMethod.Location = New Point(8, lblSendMethod.Bottom)
+
+        cmbSendMethod.Items.Add(My.Resources.OptionsSendInput)
+        cmbSendMethod.Items.Add(My.Resources.OptionsClipboardSendKeys)
+        cmbSendMethod.Items.Add(My.Resources.OptionsSendKeys)
+        cmbSendMethod.DropDownStyle = ComboBoxStyle.DropDownList
+        cmbSendMethod.Width = tpSend.ClientSize.Width - 16
+        cmbSendMethod.Anchor = AnchorStyles.Left Or AnchorStyles.Top Or AnchorStyles.Right
+
+        tpSend.Controls.AddRange(New Control() {lblSendDelay, nudSendDelay, lblSendMethod, cmbSendMethod})
+        tbMain.TabPages.Add(tpSend)
+
 
 		Me.Controls.Add(tbMain)
 
 
-		Me.Text = "Options"
-		Me.Icon = Nothing
-		Me.MaximizeBox = False
-		Me.TopMost = True
 
-        Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
-
-		Me.Name = "frmOptions"
+		Me.ResumeLayout()
 	End Sub
 
 #End Region
@@ -2712,19 +2812,39 @@ Public Class OptionsDialog
 				End If
 			Next
 		End If
-		Settings.MouseSettings = msLoad
+        Settings.MouseSettings = msLoad
+        Settings.SendDelay = CInt(nudSendDelay.Value)
+        Select Case cmbSendMethod.SelectedIndex
+            Case 0
+                Settings.SendMethod = SettingsClass.SendMethods.SendInputAPI
+            Case 2
+                Settings.SendMethod = SettingsClass.SendMethods.SendKeysAPI
+            Case 1
+                Settings.SendMethod = SettingsClass.SendMethods.ClipboardAndSendKeys
+        End Select
+
 
 		Dim strKeywords(lstKeywords.Items.Count - 1) As String
 		Dim intItemLoop As Integer
 		For intItemLoop = 0 To lstKeywords.Items.Count - 1
 			strKeywords(intItemLoop) = lstKeywords.Items(intItemLoop).ToString
 		Next
-		Settings.Keywords = strKeywords
+        Settings.Keywords = strKeywords
+        btnApply.Enabled = False
 	End Sub
 
 	Private Sub m_LoadSettings()
 		lstKeywords.Items.Clear()
-		lstKeywords.Items.AddRange(Settings.Keywords)
+        lstKeywords.Items.AddRange(Settings.Keywords)
+        nudSendDelay.Value = Settings.SendDelay
+        Select Case Settings.SendMethod
+            Case SettingsClass.SendMethods.SendInputAPI
+                cmbSendMethod.SelectedIndex = 0
+            Case SettingsClass.SendMethods.SendKeysAPI
+                cmbSendMethod.SelectedIndex = 2
+            Case SettingsClass.SendMethods.ClipboardAndSendKeys
+                cmbSendMethod.SelectedIndex = 1
+        End Select
 		Dim msLoad As MouseSettingsClass = Settings.MouseSettings
 		If tbMouseSettings.TabPages.Count = 5 Then
 			Dim intMBLoop As Integer
@@ -2753,7 +2873,7 @@ Public Class OptionsDialog
 				End If
 			Next
 		End If
-
+        btnApply.Enabled = False
 	End Sub
 
 	Private Sub UpdateMouseButtonListBoxItems(ByRef clb As CheckedListBox, ByVal a As MouseSettingsClass.Action)
@@ -2816,11 +2936,12 @@ Public Class OptionsDialog
 #Region "MouseSettings Events"
 
 	Private Sub MouseActionChecked(ByVal sender As Object, ByVal e As ItemCheckEventArgs)
-
+        btnApply.Enabled = True
 	End Sub
 
 
 #End Region
+
 
 	Private Sub OptionsDialog_VisibleChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.VisibleChanged
 		If Me.Visible Then
@@ -2828,34 +2949,15 @@ Public Class OptionsDialog
 		End If
 	End Sub
 
-	Private Sub OptionsDialog_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
-		e.Cancel = Not ShuttingDown
-        If Not ShuttingDown Then Me.Hide()
+	Private Sub OptionsDialog_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+		If e.CloseReason = CloseReason.UserClosing Then
+			e.Cancel = True
+			Me.Hide()
+		End If
 	End Sub
 
 
-#Region "ShutDown Code"
-	Public Const WM_QUERYENDSESSION As Integer = &H11
-	Public Const WM_ENDSESSION As Integer = &H16
-	Public ShuttingDown As Boolean = False
-	<System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.Demand, Name:="FullTrust")> _
-	   Protected Overrides Sub WndProc(ByRef m As Message)
-		' Listen for operating system messages
-		Select Case (m.Msg)
-			Case WM_QUERYENDSESSION
-				ShuttingDown = True
-                'blnClose = True
-                'Do Until blnClosed
-                '	Application.DoEvents()
-                'Loop
-
-        End Select
-        MyBase.WndProc(m)
-	End Sub
-
-#End Region
-
-
+#Region "Move Keywords"
 	Private Sub btnMoveUp_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnMoveUp.Click
 		Dim objTempItem As Object
 		Dim intItemIndex As Integer
@@ -2869,6 +2971,7 @@ Public Class OptionsDialog
 			End If
 
 		End If
+		btnApply.Enabled = True
 	End Sub
 
 	Private Sub btnMoveDown_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnMoveDown.Click
@@ -2884,12 +2987,18 @@ Public Class OptionsDialog
 			End If
 
 		End If
+		btnApply.Enabled = True
 	End Sub
+#End Region
 
 	Private Sub btnDeleteKeyword_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDeleteKeyword.Click
 
 		Dim intItemIndex As Integer
 		If Not lstKeywords.SelectedItem Is Nothing Then
+			If (lstKeywords.SelectedItem.ToString() = My.Resources.LastWindow) Then
+				ShowTip(My.Resources.KeywordLastWindowCantBeDeleted)
+				Exit Sub
+			End If
 			intItemIndex = lstKeywords.SelectedIndex
 			lstKeywords.Items.RemoveAt(intItemIndex)
 
@@ -2901,6 +3010,7 @@ Public Class OptionsDialog
 			End If
 
 		End If
+		btnApply.Enabled = True
 	End Sub
 
 	Private frmFind As Form
@@ -2927,8 +3037,8 @@ Public Class OptionsDialog
 
 		frmFind.Visible = False
 		frmFind.Name = "frmFind"
-		frmFind.Text = "Please enter the program keyword"
-        frmFind.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
+		frmFind.Text = My.Resources.AddKeywordInstructions
+		frmFind.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
 		frmFind.Icon = Nothing
 		frmFind.ClientSize = New Size((intButtonWidth + 8) * 4 + 8, txtKeyword.Top + txtKeyword.Height + intButtonHeight + 16)
 
@@ -2944,7 +3054,7 @@ Public Class OptionsDialog
 		frmFind.Controls.Add(txtKeyword)
 
 		btnFind.Name = "btnFind"
-		btnFind.Text = "&Find"
+		btnFind.Text = My.Resources.FindButton
 		btnFind.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
 		btnFind.Width = intButtonWidth
 		btnFind.FlatStyle = FlatStyle.System
@@ -2953,7 +3063,7 @@ Public Class OptionsDialog
 		btnFind.Left = frmFind.ClientSize.Width - (2 * (intButtonWidth + 8))
 
 		btnPaste.Name = "btnPaste"
-		btnPaste.Text = "&Paste"
+		btnPaste.Text = My.Resources.PasteButton
 		btnPaste.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
 		btnPaste.Width = intButtonWidth
 		btnPaste.FlatStyle = FlatStyle.System
@@ -2971,7 +3081,7 @@ Public Class OptionsDialog
 
 
 		btnAdd.Name = "btnAdd"
-		btnAdd.Text = "&Add"
+		btnAdd.Text = My.Resources.AddButton
 		btnAdd.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
 		btnAdd.Width = intButtonWidth
 		btnAdd.Height = intButtonHeight
@@ -2982,7 +3092,7 @@ Public Class OptionsDialog
 		AddHandler btnAdd.Click, AddressOf FindAddClick
 
 		btnCancel.Name = "btnCancel"
-		btnCancel.Text = "&Cancel"
+		btnCancel.Text = My.Resources.CancelButton
 		btnCancel.FlatStyle = FlatStyle.System
 		btnCancel.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
 		btnCancel.Width = intButtonWidth
@@ -3023,6 +3133,7 @@ Public Class OptionsDialog
 		End If
 		frmFind.Close()
 		btnAddKeyword.Enabled = True
+		btnApply.Enabled = True
 	End Sub
 
 	'Private blnFindRunning As Boolean = False
@@ -3102,6 +3213,13 @@ Public Class OptionsDialog
 
 #End Region
 
+	Private Sub nudSendDelay_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles nudSendDelay.ValueChanged
+		btnApply.Enabled = True
+	End Sub
+
+	Private Sub cmbSendMethod_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbSendMethod.SelectedIndexChanged
+		btnApply.Enabled = True
+	End Sub
 End Class
 
 #End Region

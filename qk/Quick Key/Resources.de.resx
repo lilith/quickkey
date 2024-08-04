@@ -1,0 +1,1022 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutLine1" xml:space="preserve">
+    <value>Anwendung lizenziert unter der General Public License (GPL).</value>
+  </data>
+  <data name="AboutLine2" xml:space="preserve">
+    <value>JCL Bibliotheken lizenziert unter der Lesser General Public License (LGPL).</value>
+  </data>
+  <data name="AboutLine3" xml:space="preserve">
+    <value>Internet-Adresse: http://quickkeydotnet.sourceforge.net</value>
+  </data>
+  <data name="AboutLine4" xml:space="preserve">
+    <value>E-Mail: nathanaeljones@users.sourceforge.net</value>
+  </data>
+  <data name="AboutPrefix" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="ActionCopy" xml:space="preserve">
+    <value>In Zwischenablage kopieren</value>
+  </data>
+  <data name="ActionDrag" xml:space="preserve">
+    <value>Drag and drop</value>
+  </data>
+  <data name="ActionFocus" xml:space="preserve">
+    <value>Zeichen auswählen</value>
+  </data>
+  <data name="ActionMenu" xml:space="preserve">
+    <value>Pop-Up-Menü anzeigen</value>
+  </data>
+  <data name="ActionSend" xml:space="preserve">
+    <value>Als Tastendruck senden</value>
+  </data>
+  <data name="ActionTooltipPart1" xml:space="preserve">
+    <value>Aktionen auswählen, die bei</value>
+  </data>
+  <data name="ActionTooltipPart2" xml:space="preserve">
+    <value>Mausklick ausgeführt werden</value>
+  </data>
+  <data name="AddButton" xml:space="preserve">
+    <value>&amp;Neu</value>
+  </data>
+  <data name="AddCharacterRange" xml:space="preserve">
+    <value>Bereich von Zeichen hinzufügen</value>
+  </data>
+  <data name="AddKeywordInstructions" xml:space="preserve">
+    <value>Bitte gegen Sie den Klassennamen des Fensters an</value>
+  </data>
+  <data name="AddUnicodeChar" xml:space="preserve">
+    <value>Zeichen aus Unicode-Wert konvertieren</value>
+  </data>
+  <data name="AnsiiValuePrefix" xml:space="preserve">
+    <value>ANSII-Wert: </value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Erscheinungsbild ändern...</value>
+  </data>
+  <data name="AppLoadedTooltip" xml:space="preserve">
+    <value>Quick Key ist jetzt geladen</value>
+  </data>
+  <data name="AppLoadingTooltip" xml:space="preserve">
+    <value>Quick Key lädt...</value>
+  </data>
+  <data name="ApplyButton" xml:space="preserve">
+    <value>&amp;Anwenden</value>
+  </data>
+  <data name="AppRunningTooltip" xml:space="preserve">
+    <value>Quick Key Character Keyboard</value>
+  </data>
+  <data name="AutoHideButton" xml:space="preserve">
+    <value>Automatisch ausblenden</value>
+  </data>
+  <data name="AutoHideButtonTooltip" xml:space="preserve">
+    <value>Aktiviert/Deaktiviert automatisches Ausblenden. Dieses
+Fenster und die Toolbar werden verschwinden, wenn der Mauszeiger nicht darüber
+ist. Sie erscheinen wieder, wenn das 'auto-hide'-Fenster geklickt wird oder die Maus
+darüber ist.</value>
+  </data>
+  <data name="ButtonColor" xml:space="preserve">
+    <value>Button-Farbe</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>&amp;Abbrechen</value>
+  </data>
+  <data name="ChangeAppearance" xml:space="preserve">
+    <value>Erscheinungsbild der Zeichentabelle ändern</value>
+  </data>
+  <data name="CharacterButton" xml:space="preserve">
+    <value>Zeichen</value>
+  </data>
+  <data name="CharacterDoesNotExist" xml:space="preserve">
+    <value>Zeichen existiert nicht!</value>
+  </data>
+  <data name="CharacterGridAppearance" xml:space="preserve">
+    <value>Erscheinungsbild der Zeichentabelle</value>
+  </data>
+  <data name="CharacterProperties" xml:space="preserve">
+    <value>Zeichen-Eigenschaften</value>
+  </data>
+  <data name="CharacterRangeConfirmation1" xml:space="preserve">
+    <value>Wenn Sie "Ja" wählen, werden die Zeichen hinzugefügt;</value>
+  </data>
+  <data name="CharacterRangeConfirmation2" xml:space="preserve">
+    <value>dies wird Quick Key signifikant ausbremsen. Es wird empfohlen "Nein" zu drücken und einen kleineren Bereich zu wählen.</value>
+  </data>
+  <data name="CharacterRangeConfirmationTitle" xml:space="preserve">
+    <value>Zu viele Zeichen!</value>
+  </data>
+  <data name="CharsetChangedQuerySave" xml:space="preserve">
+    <value>Die Zeichentabelle wurde verändert.
+Möchten Sie die Änderungen speichern?</value>
+  </data>
+  <data name="CharsetChangedSuffix" xml:space="preserve">
+    <value>Zeichentabelle verändert</value>
+  </data>
+  <data name="CharsetNotFoundMessageText" xml:space="preserve">
+    <value>Zeichentabelle konnte nicht gefunden werden. Die Datei könnte verschoben oder gelöscht worden sein.</value>
+  </data>
+  <data name="CharsetNotFoundMessageTitle" xml:space="preserve">
+    <value>Zeichentabelle konnte nicht geladen werden</value>
+  </data>
+  <data name="CharsLocked" xml:space="preserve">
+    <value>Zeichentabelle sperren</value>
+  </data>
+  <data name="CharsLockedText" xml:space="preserve">
+    <value>Die Zeichen der Zeichentabelle sind gesperrt und können nicht bewegt oder verändert werden, bevor diese Sperre aufgehoben wird.</value>
+  </data>
+  <data name="CharsLockedTitle" xml:space="preserve">
+    <value>Aktiviere schreibgeschützten Modus</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="CloseButtonTooltip" xml:space="preserve">
+    <value>Blendet die Zeichentabelle und die übrigen Fenster aus.</value>
+  </data>
+  <data name="CommandsToolbarTooltip" xml:space="preserve">
+    <value>Diese Buttons kontrollieren Datei-Operationen der Zeichentabelle und Zwischenablage-Aktionen.</value>
+  </data>
+  <data name="Copy1" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="CopyHTML" xml:space="preserve">
+    <value>HTML-Code kopieren</value>
+  </data>
+  <data name="COriBottom" xml:space="preserve">
+    <value>Zeilen von rechts nach links</value>
+  </data>
+  <data name="COrientation" xml:space="preserve">
+    <value>Anordnung</value>
+  </data>
+  <data name="COriLeft" xml:space="preserve">
+    <value>Zeilen von oben nach unten</value>
+  </data>
+  <data name="COriRight" xml:space="preserve">
+    <value>Zeilen von unten nach oben</value>
+  </data>
+  <data name="COriTop" xml:space="preserve">
+    <value>Zeilen von links nach rechts</value>
+  </data>
+  <data name="CouldNotAddCharacter" xml:space="preserve">
+    <value>Konnte Zeichen nicht hinzufügen!</value>
+  </data>
+  <data name="CouldNotModifyCharacter" xml:space="preserve">
+    <value>Konnte Zeichen nicht verändern!</value>
+  </data>
+  <data name="Cut1" xml:space="preserve">
+    <value>Ausschneiden</value>
+  </data>
+  <data name="DarkEdge" xml:space="preserve">
+    <value>Dunkle Kante</value>
+  </data>
+  <data name="DecimalMode" xml:space="preserve">
+    <value>Dezimal-Wert</value>
+  </data>
+  <data name="DefaultTipTitle" xml:space="preserve">
+    <value>Hinweis</value>
+  </data>
+  <data name="Delete1" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="DisableAutoHide" xml:space="preserve">
+    <value>Automatisches Ausblenden deaktivieren</value>
+  </data>
+  <data name="Docked1" xml:space="preserve">
+    <value>Automatisches Ausblenden aktivieren</value>
+  </data>
+  <data name="DockedText" xml:space="preserve">
+    <value>Sie haben automatisches Ausblenden aktiviert. Wenn Sie Zeichentabelle oder Toolbar nicht benutzen, werden diese verschwinden; das 'auto-hide'-Fenster wird jedoch bleiben. Bewegen Sie Ihre Maus über dieses Fenster, werden Zeichentabelle und Toolbar wieder erscheinen.</value>
+  </data>
+  <data name="DockedTitle" xml:space="preserve">
+    <value>Automatisches Ausblenden spart Bildschirmplatz</value>
+  </data>
+  <data name="DoneButton" xml:space="preserve">
+    <value>Fertig</value>
+  </data>
+  <data name="DontShowTip" xml:space="preserve">
+    <value>Diesen Hinweis nicht wieder zeigen</value>
+  </data>
+  <data name="EditCharsAsTextDialogCaption" xml:space="preserve">
+    <value>Zeichen als Text editieren</value>
+  </data>
+  <data name="EditCopy" xml:space="preserve">
+    <value>Zeichen kopieren</value>
+  </data>
+  <data name="EditCopyAllChars" xml:space="preserve">
+    <value>Alle Zeichen kopieren</value>
+  </data>
+  <data name="EditCopyHTML" xml:space="preserve">
+    <value>HTML-Code kopieren</value>
+  </data>
+  <data name="EditCopyVisibleChars" xml:space="preserve">
+    <value>Druckbare Zeichen kopieren</value>
+  </data>
+  <data name="EditCut" xml:space="preserve">
+    <value>Zeichen ausschneiden</value>
+  </data>
+  <data name="EditDelete" xml:space="preserve">
+    <value>Zeichen entfernen</value>
+  </data>
+  <data name="EditMenu" xml:space="preserve">
+    <value>&amp;Bearbeiten</value>
+  </data>
+  <data name="EditPaste" xml:space="preserve">
+    <value>Zeichen einfügen (ein oder mehrere)</value>
+  </data>
+  <data name="EditSend" xml:space="preserve">
+    <value>Zeichen senden</value>
+  </data>
+  <data name="ErrorLoadingCharacterSet" xml:space="preserve">
+    <value>Fehler beim Laden der Zeichentabelle!</value>
+  </data>
+  <data name="ErrorOpeningFile" xml:space="preserve">
+    <value>Beim Öffnen der Datei ist ein Fehler aufgetreten. Die Datei ist möglicherweise beschädigt oder nicht verfügbar.</value>
+  </data>
+  <data name="ExportFiltersDialogCaption" xml:space="preserve">
+    <value>Zeichentabellen-Filter exportieren</value>
+  </data>
+  <data name="ExportFiltersDialogFilter" xml:space="preserve">
+    <value>Zeichentabelle (*.charset)|*.charset</value>
+  </data>
+  <data name="ExportFiltersReadOnlyErrorCaption" xml:space="preserve">
+    <value>Schreibgeschützte Datei überschreiben?</value>
+  </data>
+  <data name="ExportFiltersReadOnlyErrorText" xml:space="preserve">
+    <value>Die Filter-Datei, die Sie zum Überschreiben gewählt haben, ist schreibgeschützt.
+Sind Sie sicher, dass Sie diese Datei verändern möchten?</value>
+  </data>
+  <data name="FileCharsLocked" xml:space="preserve">
+    <value>&amp;Zeichen gesperrt</value>
+  </data>
+  <data name="FileDocked" xml:space="preserve">
+    <value>&amp;Automatisches Ausblenden</value>
+  </data>
+  <data name="FileExit" xml:space="preserve">
+    <value>&amp;Beenden</value>
+  </data>
+  <data name="FileExport" xml:space="preserve">
+    <value>&amp;Als Bericht exportieren...</value>
+  </data>
+  <data name="FileHide" xml:space="preserve">
+    <value>Toolbar schließen </value>
+  </data>
+  <data name="FileHideQuickKey" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="FileImport" xml:space="preserve">
+    <value>&amp;Importieren</value>
+  </data>
+  <data name="FileImportCharset" xml:space="preserve">
+    <value>Aus Zeichen&amp;tabelle...</value>
+  </data>
+  <data name="FileImportCharsetAttrs" xml:space="preserve">
+    <value>Alle &amp;Attribute aus der Zeichentabelle</value>
+  </data>
+  <data name="FileImportClipboard" xml:space="preserve">
+    <value>Aus der &amp;Zwischenablage...</value>
+  </data>
+  <data name="FileImportFile" xml:space="preserve">
+    <value>Aus &amp;Datei...</value>
+  </data>
+  <data name="FileLocked" xml:space="preserve">
+    <value>&amp;Gesperrt</value>
+  </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>&amp;Datei</value>
+  </data>
+  <data name="FilenamePrefix" xml:space="preserve">
+    <value>Dateiname: </value>
+  </data>
+  <data name="FileNew" xml:space="preserve">
+    <value>&amp;Neu</value>
+  </data>
+  <data name="FileNewBlank" xml:space="preserve">
+    <value>&amp;Leere Zeichentabelle</value>
+  </data>
+  <data name="FileNewCopy" xml:space="preserve">
+    <value>&amp;Kopie dieser Zeichentabelle</value>
+  </data>
+  <data name="FileNewCopyAttrs" xml:space="preserve">
+    <value>Kopie dieser &amp;Attribute</value>
+  </data>
+  <data name="FileOpen" xml:space="preserve">
+    <value>Ö&amp;ffnen</value>
+  </data>
+  <data name="FileReadOnly" xml:space="preserve">
+    <value>Schreibgeschützt speichern</value>
+  </data>
+  <data name="FileRecent" xml:space="preserve">
+    <value>&amp;Kürzlich benutzt</value>
+  </data>
+  <data name="FileSave" xml:space="preserve">
+    <value>&amp;Speichern</value>
+  </data>
+  <data name="FileSaveAllInfo" xml:space="preserve">
+    <value>Alle Informationen speichern</value>
+  </data>
+  <data name="FileSaveAs" xml:space="preserve">
+    <value>Speichern &amp;unter...</value>
+  </data>
+  <data name="FileSaveCharacters" xml:space="preserve">
+    <value>Zeichen speichern</value>
+  </data>
+  <data name="FileSaveFilters" xml:space="preserve">
+    <value>Filter speichern</value>
+  </data>
+  <data name="FileSaveFont" xml:space="preserve">
+    <value>Schriftart speichern</value>
+  </data>
+  <data name="FileSaveFontAttrs" xml:space="preserve">
+    <value>Schriftart-Attribute speichern</value>
+  </data>
+  <data name="FileSaveOnlyCharacters" xml:space="preserve">
+    <value>Ausschließlich Zeichen speichern</value>
+  </data>
+  <data name="FileSaveSize" xml:space="preserve">
+    <value>Schriftart-Größe speichern</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>F&amp;ilter</value>
+  </data>
+  <data name="FilterDefaults" xml:space="preserve">
+    <value>Standard-Filter auswählen</value>
+  </data>
+  <data name="FilterDeSelAll" xml:space="preserve">
+    <value>Alle Filter deaktivieren</value>
+  </data>
+  <data name="FilterExport" xml:space="preserve">
+    <value>Filter exportieren...</value>
+  </data>
+  <data name="FilterImport" xml:space="preserve">
+    <value>Filter importieren...</value>
+  </data>
+  <data name="FilterMenu" xml:space="preserve">
+    <value>F&amp;ilter</value>
+  </data>
+  <data name="FilterReadOnly" xml:space="preserve">
+    <value>Filter schreibgeschützt exportieren...</value>
+  </data>
+  <data name="FilterSelAll" xml:space="preserve">
+    <value>Alle Filter auswählen</value>
+  </data>
+  <data name="FindButton" xml:space="preserve">
+    <value>Finden</value>
+  </data>
+  <data name="FocusedOutline" xml:space="preserve">
+    <value>Äußerer Rahmen (Fokus)</value>
+  </data>
+  <data name="FontBold" xml:space="preserve">
+    <value>&amp;Fett</value>
+  </data>
+  <data name="FontBoxTooltip" xml:space="preserve">
+    <value>Verändert die Schriftart</value>
+  </data>
+  <data name="FontItalic" xml:space="preserve">
+    <value>&amp;Kursiv</value>
+  </data>
+  <data name="FontMenu" xml:space="preserve">
+    <value>&amp;Schriftart</value>
+  </data>
+  <data name="FontName" xml:space="preserve">
+    <value>Schriftart: </value>
+  </data>
+  <data name="FontPrefix" xml:space="preserve">
+    <value>Schriftart: </value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>Größe: </value>
+  </data>
+  <data name="FontSizeTooltip" xml:space="preserve">
+    <value>Verändert die Größe der Schriftart</value>
+  </data>
+  <data name="FontStrikeout" xml:space="preserve">
+    <value>&amp;Durchgestrichen</value>
+  </data>
+  <data name="FontStyleTooltip" xml:space="preserve">
+    <value>Verändert die grafischen Attribute der Schriftart</value>
+  </data>
+  <data name="FontUnderline" xml:space="preserve">
+    <value>&amp;Unterstrichen</value>
+  </data>
+  <data name="GenericErrorMessage" xml:space="preserve">
+    <value>Ich hab mich verheddert! Gratulation, Sie haben gerade einen Bug gefunden.
+Was auch immer gerade passiert ist, es war sehr unerwartet.
+Bitte öffnen Sie Ihr E-Mail-Programm und senden Sie eine Nachricht an:
+nathanaeljones@users.sourceforge.net
+Bitte teilen Sie mir mit, was Sie getan haben, als dieser Fehler aufgetreten ist, und fügen Sie bitte die Fehler-Nachricht hinzu.
+Die Fehler-Nachricht erhalten Sie am einfachsten per Rechts-Klick auf das Tray-Icon und 'Ereignis-Prokoll'.
+Es ist sehr wichtig, dass Sie diesen Fehler melden, da er ansonsten möglicherweise niemals korrigiert wird.
+Es wird empfohlen, dass Sie ihre Arbeit speichern und Quick Key so bald wie möglich neu starten.
+Vielen Dank für Ihre Unterstützung.
+Bitte wählen Sie 'Ja' um Quick Key fortzusetzen oder 'Nein', wenn diese Nachricht immer wieder auftaucht.</value>
+  </data>
+  <data name="HelpAbout" xml:space="preserve">
+    <value>&amp;Info</value>
+  </data>
+  <data name="HelpHelpTopics" xml:space="preserve">
+    <value>&amp;Hilfe-Themen</value>
+  </data>
+  <data name="HelpMenu" xml:space="preserve">
+    <value>&amp;Hilfe</value>
+  </data>
+  <data name="HelpTips" xml:space="preserve">
+    <value>Hinweise</value>
+  </data>
+  <data name="HelpTipsHide" xml:space="preserve">
+    <value>Hinweise verstecken</value>
+  </data>
+  <data name="HelpTipsReset" xml:space="preserve">
+    <value>Hinweise zurücksetzen</value>
+  </data>
+  <data name="HexadecimalMode" xml:space="preserve">
+    <value>Hexadezimal-Wert</value>
+  </data>
+  <data name="HideMe" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="HideQuickKey" xml:space="preserve">
+    <value>Bitte beachten Sie, dass sie Quick Key nur minimiert haben. Um Quick Key komplett zu schließen, wählen sie bitte "Beenden".</value>
+  </data>
+  <data name="IconLoadingError" xml:space="preserve">
+    <value>Beim Laden der Titelzeilen-Icons der Zeichentabelle ist ein Fehler ist aufgetreten. Diese werden möglicherweise fehlerhaft angezeigt.</value>
+  </data>
+  <data name="ImportCharsetAttrsDialogCaption" xml:space="preserve">
+    <value>Attribute aus Zeichentabelle importieren</value>
+  </data>
+  <data name="ImportCharsetAttrsDialogFilter" xml:space="preserve">
+    <value>Zeichentabelle (*.charset)|*.charset</value>
+  </data>
+  <data name="ImportCharsetDialogCaption" xml:space="preserve">
+    <value>Von Zeichentabelle importieren</value>
+  </data>
+  <data name="ImportCharsetDialogFilter" xml:space="preserve">
+    <value>Zeichentabelle (*.charset)|*.charset</value>
+  </data>
+  <data name="ImportClipboardDialogCaption" xml:space="preserve">
+    <value>Aus Zwischenablage importieren</value>
+  </data>
+  <data name="ImportFileDialogCaption" xml:space="preserve">
+    <value>Aus Datei importieren</value>
+  </data>
+  <data name="ImportFileDialogFilter" xml:space="preserve">
+    <value>Alle Dateien (*.*)|*.*|Textdateien (*.txt;*.doc;*.rtf;*.htm)|*.txt;*.doc;*.rtf;*.htm)</value>
+  </data>
+  <data name="ImportFiltersDialogCaption" xml:space="preserve">
+    <value>Filter aus Zeichentabelle importieren</value>
+  </data>
+  <data name="ImportFiltersDialogFilter" xml:space="preserve">
+    <value>Zeichentabelle (*.charset)|*.charset</value>
+  </data>
+  <data name="InvalidPath" xml:space="preserve">
+    <value>Der angegebene Pfad ist ungültig. Bitte geben Sie einen gültigen Dateinamen an.</value>
+  </data>
+  <data name="KeywordBoxTooltip" xml:space="preserve">
+    <value>Die Anwendung ändern, die die Zeichen empfängt.</value>
+  </data>
+  <data name="KeywordLastWindowCantBeDeleted" xml:space="preserve">
+    <value>Das Schlüsselwort "Letztes Fenster" kann nicht entfernt werden. Es repräsentiert das Fenster unter Quick Key.</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>&amp;Schlüsselwörter</value>
+  </data>
+  <data name="KeywordsAddBottom" xml:space="preserve">
+    <value>Eintrag am Ende hinzufügen</value>
+  </data>
+  <data name="KeywordsAddTop" xml:space="preserve">
+    <value>Eintrag am Anfang hinzufügen</value>
+  </data>
+  <data name="KeywordsDelBottom" xml:space="preserve">
+    <value>Untersten Eintrag entfernen</value>
+  </data>
+  <data name="KeywordsDelTop" xml:space="preserve">
+    <value>Obersten Eintrag entfernen</value>
+  </data>
+  <data name="KeywordsEdit" xml:space="preserve">
+    <value>Schlüsselwörter &amp;editieren...</value>
+  </data>
+  <data name="KeywordsMenu" xml:space="preserve">
+    <value>&amp;Schlüsselwörter</value>
+  </data>
+  <data name="LastWindow" xml:space="preserve">
+    <value>Letztes Fenster</value>
+    <comment>Dieses Schlüsselwort repräsentiert das Fenster direkt unter Quick Key.</comment>
+  </data>
+  <data name="LightEdge" xml:space="preserve">
+    <value>Helle Kante</value>
+  </data>
+  <data name="LockButton" xml:space="preserve">
+    <value>Sperren</value>
+  </data>
+  <data name="LockButtonTooltip" xml:space="preserve">
+    <value>Aktiviert/Deaktiviert Größen- und Positionsveränderungen der
+Zeichentabelle und der übrigen Fenster.</value>
+  </data>
+  <data name="Locked1" xml:space="preserve">
+    <value>Sperr-Position</value>
+  </data>
+  <data name="LockedText" xml:space="preserve">
+    <value>Alle Fenster wurden gesperrt und können weder in der Größe noch in der Position verändert werden. Das verhindert jedoch nicht eine Änderung der Zeichentabelle. Um dies zu erreichen, wählen Sie bitte "Zeichen sperren".</value>
+  </data>
+  <data name="LockedTitle" xml:space="preserve">
+    <value>Dieses Feature verhindert unabsichtliche Verschiebung der Zeichentabelle.</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="MenuAutohide" xml:space="preserve">
+    <value>Automatisches Ausblenden</value>
+  </data>
+  <data name="MenuCharacterGrid" xml:space="preserve">
+    <value>Zeichentabelle</value>
+  </data>
+  <data name="MenuEventLog" xml:space="preserve">
+    <value>Ereignis-Protokoll</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="MenuHelpTopics" xml:space="preserve">
+    <value>Hilfe-Themen</value>
+  </data>
+  <data name="MenuHideTips" xml:space="preserve">
+    <value>Hinweise verstecken</value>
+  </data>
+  <data name="MenuOptions" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
+  <data name="MenuResetTips" xml:space="preserve">
+    <value>Hinweise zurücksetzen</value>
+  </data>
+  <data name="MenuToolbar" xml:space="preserve">
+    <value>Toolbar</value>
+  </data>
+  <data name="MouseButtonActions" xml:space="preserve">
+    <value>Mausklick-Aktionen</value>
+  </data>
+  <data name="MouseButtonLeft" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="MouseButtonMiddle" xml:space="preserve">
+    <value>Mitte</value>
+  </data>
+  <data name="MouseButtonRight" xml:space="preserve">
+    <value>Rechts</value>
+  </data>
+  <data name="MouseButtonX1" xml:space="preserve">
+    <value>Extra-Taste 1</value>
+  </data>
+  <data name="MouseButtonX2" xml:space="preserve">
+    <value>Extra-Taste 2</value>
+  </data>
+  <data name="MouseSettings" xml:space="preserve">
+    <value>Maus-Einstellungen</value>
+  </data>
+  <data name="NoCharacterEntered" xml:space="preserve">
+    <value>Kein Zeichen eingegeben</value>
+  </data>
+  <data name="NormalOutline" xml:space="preserve">
+    <value>Äußere Button-Umrandung</value>
+  </data>
+  <data name="OKButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OpenCharsetDialogCaption" xml:space="preserve">
+    <value>Zeichentabelle öffnen</value>
+  </data>
+  <data name="OpenCharsetDialogFilter" xml:space="preserve">
+    <value>Zeichentabelle (*.charset)|*.charset</value>
+  </data>
+  <data name="OpenCharsetErrorCaption" xml:space="preserve">
+    <value>Fehler beim Laden der Datei</value>
+  </data>
+  <data name="OpenCharsetFileCorrupt" xml:space="preserve">
+    <value>Datei ist beschädigt!</value>
+  </data>
+  <data name="OpenCharsetFileDoesNotExist" xml:space="preserve">
+    <value>Datei existiert nicht!</value>
+  </data>
+  <data name="OpenCharsetFileEmpty" xml:space="preserve">
+    <value>Datei ist leer!</value>
+  </data>
+  <data name="OptionsAddButton" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="OptionsAddButtonTooltip" xml:space="preserve">
+    <value>Ein Schlüsselwort zur Liste hinzufügen</value>
+  </data>
+  <data name="OptionsApplyButtonTooltip" xml:space="preserve">
+    <value>Speichert alle Änderungen, schließt aber nicht diesen Dialog.</value>
+  </data>
+  <data name="OptionsCancelButtonTooltip" xml:space="preserve">
+    <value>Schließt den Dialog ohne die Änderungen zu übernehmen.</value>
+  </data>
+  <data name="OptionsClipboardSendKeys" xml:space="preserve">
+    <value>Zwischenablage + SendKeys (Einfügen); benutzen, wenn 'Send Input' fehlschlägt.</value>
+  </data>
+  <data name="OptionsDialog" xml:space="preserve">
+    <value>Hier können den Maustasten Aktionen zugewiesen werden. Jede Taste hat ein Tab, das eine Liste der möglichen Aktionen enthält.
+Schlüsselwörter sind die internen Code-Namen der Fenster, auch Klassenname genannt. Zum Beispiel ist Microsoft Word stets 'OpusApp', während Outlook Express für das Nachrichten-Verfassen- und für das Haupt-Fenster jeweils eigene Klassennamen hat ('ATH_Note' bzw. 'Outlook Express Browser Class').
+Um ein neues Schlüsselwort hinzuzufügen, wählen Sie bitte 'Neu', dann 'Finden'. Dies öffnet ein Werkzeug, mit dem Sie mit Hilfe eines Fenster-Titels dessen Klassenname ermitteln können.
+Für GTK+-Anwendungen ist es vermutlich notwendig, die Übertragungsmethode auf 'Zwischenablage + SendKeys' zu setzen. Diese Methode funktioniert mit mehr Anwendungen, überschreibt aber den Inhalt der Zwischenablage.</value>
+  </data>
+  <data name="OptionsDialogTitle" xml:space="preserve">
+    <value>Details, Details, Details...</value>
+  </data>
+  <data name="OptionsMoveDownButton" xml:space="preserve">
+    <value>Nach unten</value>
+  </data>
+  <data name="OptionsMoveUpButton" xml:space="preserve">
+    <value>Nach oben</value>
+  </data>
+  <data name="OptionsOKButtonTooltip" xml:space="preserve">
+    <value>Speichert alle Änderungen und schließt diesen Dialog.</value>
+  </data>
+  <data name="OptionsRemoveButton" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="OptionsRemoveButtonTooltip" xml:space="preserve">
+    <value>Das ausgewählte Schlüsselwort aus der Liste entfernen</value>
+  </data>
+  <data name="OptionsSendDelay" xml:space="preserve">
+    <value>Millisekunden, für die zwischen Umschalten der Fenster zum Senden der Eingabe gewartet wird.</value>
+  </data>
+  <data name="OptionsSendInput" xml:space="preserve">
+    <value>Send Input API (Empfohlen); verändert nicht die Zwischenablage.</value>
+  </data>
+  <data name="OptionsSendKeys" xml:space="preserve">
+    <value>Send Keys (Sicherer, aber eingeschränkter)</value>
+  </data>
+  <data name="OptionsSendMethod" xml:space="preserve">
+    <value>Bitte wählen Sie die Methode, die zur Übertragung der Zeichen verwendet wird.</value>
+  </data>
+  <data name="OptionsWindowTitle" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
+  <data name="OriBottom" xml:space="preserve">
+    <value>Unten</value>
+  </data>
+  <data name="Orientation" xml:space="preserve">
+    <value>Position der Titelzeile</value>
+  </data>
+  <data name="OriLeft" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="OriRight" xml:space="preserve">
+    <value>Rechts</value>
+  </data>
+  <data name="OriTop" xml:space="preserve">
+    <value>Oben</value>
+  </data>
+  <data name="OutsideRimColor" xml:space="preserve">
+    <value>Äußere Rahmen-Farbe</value>
+  </data>
+  <data name="Paste1" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="PasteButton" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="PermissionDenied" xml:space="preserve">
+    <value>Zugriff verweigert</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Eigenschaften</value>
+  </data>
+  <data name="QK" xml:space="preserve">
+    <value>QK</value>
+  </data>
+  <data name="QuickKey" xml:space="preserve">
+    <value>Quick Key</value>
+  </data>
+  <data name="QuickKeyFormNewError" xml:space="preserve">
+    <value>Beim Initialisieren der Zeichentabelle ist ein Fehler aufgetreten. Noch einmal versuchen?</value>
+  </data>
+  <data name="QuickKeyText" xml:space="preserve">
+    <value>Bitte ändern Sie 'Letztes Fenster' in 'OpusApp', wenn sie Microsoft Word verwenden. Dies vereinfacht die Benutzung der Tastatur in der Verbindung mit Quick Key, außerdem wird das Flackern beim Umschalten der Fenster vermieden.
+Überprüfen Sie auch bitte die Rechts-Klick-Menüs der Titelbar und der Zeichen der Zeichentabelle.
+Die Anordnung der Zeichen kann durch ziehen der Zeichen mit der mittleren Maustaste verändert werden.
+Benötigen Sie einen anderen Zeichenvorrat, benutzen Sie bitte das 'Datei'-Menü der Toolbar.
+Für manche Anwendungen müssen Sie möglicherweise die Zeichenübertragungsmethode in den Optionen ändern. Dies betrifft zur Zeit nur GTK+-Anwendungen.</value>
+  </data>
+  <data name="QuickKeyTitle" xml:space="preserve">
+    <value>Wichtige Hinweise</value>
+  </data>
+  <data name="ReadFileError" xml:space="preserve">
+    <value>Diese Datei kann nicht gelesen werden. Bitte schließen Sie alle Programme, die diese Datei benutzen, und versuchen Sie es erneut.</value>
+  </data>
+  <data name="RecentCharsets" xml:space="preserve">
+    <value>Kürzlich benutzte Zeichentabellen</value>
+  </data>
+  <data name="ResetAllButton" xml:space="preserve">
+    <value>ALLES zurücksetzen</value>
+  </data>
+  <data name="ResetButton" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+  <data name="SaveCharsetDialogFilter" xml:space="preserve">
+    <value>Zeichentabelle (*.charset)|*.charset</value>
+  </data>
+  <data name="SaveCharsetDialogTitle" xml:space="preserve">
+    <value>Zeichentabelle speichern unter</value>
+  </data>
+  <data name="SaveCharsetErrorCaption" xml:space="preserve">
+    <value>Fehler beim Speichern der Datei</value>
+  </data>
+  <data name="SaveCharsetOverwriteCaption" xml:space="preserve">
+    <value>Datei überschreiben?</value>
+  </data>
+  <data name="SaveCharsetOverwriteText" xml:space="preserve">
+    <value>Eine Datei dieses Namens existiert bereits. 
+Sind Sie sicher, dass diese Datei überschrieben werden soll?</value>
+  </data>
+  <data name="SaveCharsetReadOnlyErrorText" xml:space="preserve">
+    <value>Die zu überschreibende Datei ist schreibgeschützt!
+Sie müssen entweder einen anderen Dateinamen oder 'Schreibgeschützt speichern' auswählen.</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Senden</value>
+  </data>
+  <data name="SendBadCharacter" xml:space="preserve">
+    <value>Es wurde versucht eines der folgenden reservierten Zeichen zu senden: (){}+^%~  . Benötigen Sie eines in Ihrem Dokument, ziehen Sie es bitte per Drag &amp; Drop oder über die Zwischenablage hinein.</value>
+  </data>
+  <data name="SendSettings" xml:space="preserve">
+    <value>Einstellungen senden</value>
+  </data>
+  <data name="SettingsCouldNotBeSavedPrefix" xml:space="preserve">
+    <value>Quick Keys Einstellungen konnten nicht gespeichert werden. Überprüfen Sie, ob Sie als Administrator eingeloggt sind.</value>
+  </data>
+  <data name="SettingsCouldNotBeSavedSuffix" xml:space="preserve">
+    <value>konnten nicht gespeichert werden.</value>
+  </data>
+  <data name="SettingsFileError" xml:space="preserve">
+    <value>Ein Fehler wurde in der Konfigurationsdatei entdeckt. Wählen Sie "Ja" zum Fortsetzen und Laden der Standard-Einstellungen oder "Nein" zum Beenden des Programms.</value>
+  </data>
+  <data name="SettingsFileErrorTitle" xml:space="preserve">
+    <value>Fehler in der Konfigurationsdatei</value>
+  </data>
+  <data name="SettingsSavingError" xml:space="preserve">
+    <value>Beim Speichern der Einstellungen von Quick Key ist ein Fehler aufgetreten! Alle ungesicherten Änderungen könnten verloren gegangen sein.</value>
+  </data>
+  <data name="ShowToolbar" xml:space="preserve">
+    <value>Toolbar anzeigen</value>
+  </data>
+  <data name="SizePrefix" xml:space="preserve">
+    <value>Größe: </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="StartupTip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\StartupTip.de.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StartupTipText" xml:space="preserve">
+    <value>Willkommen bei Quick Key!</value>
+  </data>
+  <data name="StartupTipTitle" xml:space="preserve">
+    <value>Vielen Dank, dass Sie Quick Key installiert haben!</value>
+  </data>
+  <data name="StatusBarTooltip" xml:space="preserve">
+    <value>Diese Statuszeile zeigt Informationen über das Zeichen an, über dem der Mauszeiger ist</value>
+  </data>
+  <data name="SystemInfo" xml:space="preserve">
+    <value>System-Info...</value>
+  </data>
+  <data name="TabCharacters" xml:space="preserve">
+    <value>Zeichen</value>
+  </data>
+  <data name="TabKeywords" xml:space="preserve">
+    <value>Schlüsselwörter</value>
+  </data>
+  <data name="TabMouseSettings" xml:space="preserve">
+    <value>Maus-Einstellungen</value>
+  </data>
+  <data name="TabSendSettings" xml:space="preserve">
+    <value>Zeichen-Übertragung</value>
+  </data>
+  <data name="TextColor" xml:space="preserve">
+    <value>Text-Farbe</value>
+  </data>
+  <data name="TextTab" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="TitleBar" xml:space="preserve">
+    <value>Titelzeile</value>
+  </data>
+  <data name="ToolbarTitle" xml:space="preserve">
+    <value>Quick Key Toolbar</value>
+  </data>
+  <data name="ToolbarTitleNewCharset" xml:space="preserve">
+    <value>Quick Key [Toolbar] - Neue Zeichentabelle</value>
+  </data>
+  <data name="ToolbarTitlePrefix" xml:space="preserve">
+    <value>Quick Key [Toolbar] - </value>
+  </data>
+  <data name="ToolsEditText" xml:space="preserve">
+    <value>&amp;Zeichen als Text editieren</value>
+  </data>
+  <data name="ToolsGetUnicodeChar" xml:space="preserve">
+    <value>Zeichen aus Unicode-Wert</value>
+  </data>
+  <data name="ToolsGetUnicodeChars" xml:space="preserve">
+    <value>Einen Bereich von Zeichen hinzufügen</value>
+  </data>
+  <data name="ToolsMenu" xml:space="preserve">
+    <value>Ex&amp;tras</value>
+  </data>
+  <data name="ToolsOptions" xml:space="preserve">
+    <value>&amp;Optionen</value>
+  </data>
+  <data name="ToolsSortAsc" xml:space="preserve">
+    <value>Zeichen nach ihrem Unicode-Wert sortieren (aufsteigend)</value>
+  </data>
+  <data name="ToolsSortDes" xml:space="preserve">
+    <value>Zeichen nach ihrem Unicode-Wert sortieren (absteigend)</value>
+  </data>
+  <data name="UnicodeCategoryPrefix" xml:space="preserve">
+    <value>Unicode-Kategorie: </value>
+  </data>
+  <data name="UnicodeValuePrefix" xml:space="preserve">
+    <value>Unicode-Wert: </value>
+  </data>
+  <data name="Upgrade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Upgrade.de.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UpgradeTipText" xml:space="preserve">
+    <value>Vielen Dank für Ihre Unterstützung</value>
+  </data>
+  <data name="UpgradeTipTitle" xml:space="preserve">
+    <value>Bedenken Sie, was Sie verpassen...</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="ViewCharsOrientation" xml:space="preserve">
+    <value>Orientierung der Zeichen-Sortierung</value>
+  </data>
+  <data name="ViewCharsOrientationBottom" xml:space="preserve">
+    <value>Zeilen von oben nach unten</value>
+  </data>
+  <data name="ViewCharsOrientationLeft" xml:space="preserve">
+    <value>Zeilen von links nach rechts</value>
+  </data>
+  <data name="ViewCharsOrientationRight" xml:space="preserve">
+    <value>Zeilen von rechts nach links</value>
+  </data>
+  <data name="ViewCharsOrientationTop" xml:space="preserve">
+    <value>Zeilen von unten nach oben</value>
+  </data>
+  <data name="ViewCommandBar" xml:space="preserve">
+    <value>Standard-Befehle</value>
+  </data>
+  <data name="ViewFontAttrs" xml:space="preserve">
+    <value>Schriftart-Stil</value>
+  </data>
+  <data name="ViewFontName" xml:space="preserve">
+    <value>Schriftart-Name</value>
+  </data>
+  <data name="ViewFontSize" xml:space="preserve">
+    <value>Schriftart-Größe</value>
+  </data>
+  <data name="ViewKeywords" xml:space="preserve">
+    <value>Schlüsselwörter</value>
+  </data>
+  <data name="ViewMenu" xml:space="preserve">
+    <value>&amp;Ansicht</value>
+  </data>
+  <data name="ViewOrientation" xml:space="preserve">
+    <value>Position der Titelzeile der Zeichentabelle</value>
+  </data>
+  <data name="ViewOrientationBottom" xml:space="preserve">
+    <value>&amp;Unten</value>
+  </data>
+  <data name="ViewOrientationLeft" xml:space="preserve">
+    <value>&amp;Links</value>
+  </data>
+  <data name="ViewOrientationRight" xml:space="preserve">
+    <value>&amp;Rechts</value>
+  </data>
+  <data name="ViewOrientationTop" xml:space="preserve">
+    <value>&amp;Oben</value>
+  </data>
+  <data name="ViewStatus" xml:space="preserve">
+    <value>Status-Zeile</value>
+  </data>
+</root>

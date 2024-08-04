@@ -1,0 +1,130 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+UIElements
+</name>
+</assembly>
+<members>
+<member name="E:UIElements.CharacterDisplay.OffCharacter">
+	<summary>
+ This event occurs when the character leaves a character button, or the main area.
+ This event can occur multiple times
+ </summary>
+	<param name="sender"></param>
+	<remarks></remarks>
+</member><member name="E:UIElements.CharacterDisplay.OnCharacter">
+	<summary>
+ This event occurs when the cursor enters the client region of a character button
+ This event can be used to display a tool-tip, etc.
+ </summary>
+	<param name="sender">The CharacterDisplay instace</param>
+	<param name="e">The character that was enteresd</param>
+	<remarks></remarks>
+</member><member name="E:UIElements.CharacterDisplay.CharsInserted">
+	<summary>
+ Occurs when characters are inserted into the character list
+ </summary>
+	<param name="sender">The CharacterDisplay instace</param>
+	<param name="e">The button and index to insert after, and the text to insert</param>
+	<remarks></remarks>
+</member><member name="E:UIElements.CharacterDisplay.CharDeleted">
+	<summary>
+ Occurs when a character is deleted (or moved, which is a insert/delete combination)
+ </summary>
+	<param name="sender">The CharacterDisplay instace</param>
+	<param name="e">The deleted character</param>
+	<remarks></remarks>
+</member><member name="E:UIElements.CharacterDisplay.ViewOnlyChanged">
+	<summary>
+ The parent should disable all context menu commands in viewonly mode
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="E:UIElements.CharacterDisplay.EditableChanged">
+	<summary>
+ The parent should disable all non-readonly commands in non-editable mode
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="E:UIElements.CharacterDisplay.SendCharacter">
+	<summary>
+ This event tells the parent to perform a send operation on the specified character
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="E:UIElements.CharacterDisplay.ShowCharMenu">
+	<summary>
+ This event tells the parent to display a context menu for the character
+ </summary>
+	<param name="sender">The CharacterDisplay instace</param>
+	<param name="e">The character that was right-clicked</param>
+	<remarks></remarks>
+</member><member name="E:UIElements.CharacterDisplay.ShowNoCharsMenu">
+	<summary>
+ This event tells the parent that the context menu for the "No Chars" message should be shown
+ </summary>
+	<param name="sender">The CharacterDisplay instace</param>
+	<remarks></remarks>
+</member><member name="P:UIElements.CharacterDisplay.Autoresize">
+	<summary>
+ TODO: Make this enable checks that change the font size if a factor of 2 out of place
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:UIElements.UnicodeProvider">
+	<summary>
+ Provides detailed information about unicode characters.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:UIElements.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:UIElements.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:UIElements.My.Resources.Resources.ClickToShowChars">
+	<summary>
+  Looks up a localized string similar to Click to display characters.
+</summary>
+</member><member name="P:UIElements.My.Resources.Resources.LargeCharsetPart1">
+	<summary>
+  Looks up a localized string similar to This is a very large charset (.
+</summary>
+</member><member name="P:UIElements.My.Resources.Resources.LargeCharsetPart2">
+	<summary>
+  Looks up a localized string similar to  Characters), and may take several minutes to display!
+Do you wish to display the characters?
+You may prefer to make your edits through the 'Edit Characters as Text' feature in the Tools menu.
+Remember that the smallest change will take a painfully long time..
+</summary>
+</member><member name="P:UIElements.My.Resources.Resources.LargeCharsetTitle">
+	<summary>
+  Looks up a localized string similar to Large Character Set.
+</summary>
+</member><member name="P:UIElements.My.Resources.Resources.LoadingChars">
+	<summary>
+  Looks up a localized string similar to Loading characters....
+</summary>
+</member><member name="P:UIElements.My.Resources.Resources.NoCharacters">
+	<summary>
+  Looks up a localized string similar to No characters!.
+</summary>
+</member><member name="P:UIElements.My.Resources.Resources.ResizingChars">
+	<summary>
+  Looks up a localized string similar to Resizing characters....
+</summary>
+</member><member name="T:UIElements.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

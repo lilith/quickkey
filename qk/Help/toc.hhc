@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="Window Styles" value="0x800025">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Online Help">
+		<param name="Local" value="http://quickkeydotnet.sourceforge.net/index.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Basics">
+		<param name="Local" value="index.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Installation">
+			<param name="Local" value="index.html#gettingstarted">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Using Quick Key">
+			<param name="Local" value="index.html#usage">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Bugs?">
+			<param name="Local" value="index.html#bugs">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Licensing">
+			<param name="Local" value="index.html#licensing">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Grouping Characters">
+		<param name="Local" value="charsets.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Making your own charsets">
+			<param name="Local" value="charsets.html#makecharset">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Filtering Character Categories">
+			<param name="Local" value="charsets.html#filters">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Picking a Font">
+			<param name="Local" value="charsets.html#fontrec">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="The Toolbar">
+			<param name="Local" value="charsets.html#toolbar">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Character Grid">
+			<param name="Local" value="charsets.html#chargrid">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Legacy charsets">
+			<param name="Local" value="charsets.html#legacy">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Keystroke Emulation">
+		<param name="Local" value="keystroke.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Sending Characters">
+			<param name="Local" value="keystroke.html#keystroke">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Targeting specific windows">
+			<param name="Local" value="keystroke.html#keywords">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Options">
+			<param name="Local" value="keystroke.html#options">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Other ways to type characters">
+		<param name="Local" value="alt.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Alt codes">
+			<param name="Local" value="alt.html#altcodes">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Keyboard Layouts">
+			<param name="Local" value="alt.html#layouts">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Translate Quick Key into another language!">
+		<param name="Local" value="translate.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Supported Languages">
+			<param name="Local" value="translate.html#current">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="About Quick Key">
+		<param name="Local" value="about.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="History">
+			<param name="Local" value="about.html#about">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Ways that you can help">
+			<param name="Local" value="about.html#waystohelp">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Contact Info">
+			<param name="Local" value="about.html#contact">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Licensing">
+			<param name="Local" value="about.html#licensing">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

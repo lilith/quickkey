@@ -1,0 +1,2 @@
+Modify SendChars() Utility to support surrogate character entry
+Use StringInformation class to separate strings into text elements (graphemes) instead of characters.

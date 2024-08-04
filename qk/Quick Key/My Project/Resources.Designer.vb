@@ -67,10 +67,461 @@ Namespace My.Resources
             End Get
         End Property
         
+        '''<summary>
+        '''  Looks up a localized string similar to Application licensed under the General Public License. resources.
+        '''</summary>
+        Friend ReadOnly Property AboutLine1() As String
+            Get
+                Return ResourceManager.GetString("AboutLine1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to JCL libraries licensed under the Lesser General Public License..
+        '''</summary>
+        Friend ReadOnly Property AboutLine2() As String
+            Get
+                Return ResourceManager.GetString("AboutLine2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Web Address: http://quickkeydotnet.sourceforge.net.
+        '''</summary>
+        Friend ReadOnly Property AboutLine3() As String
+            Get
+                Return ResourceManager.GetString("AboutLine3", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Email: nathanaeljones@users.sourceforge.net.
+        '''</summary>
+        Friend ReadOnly Property AboutLine4() As String
+            Get
+                Return ResourceManager.GetString("AboutLine4", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Special thanks to Christoph for his German translation of Quick Key!.
+        '''</summary>
+        Friend ReadOnly Property AboutLine5() As String
+            Get
+                Return ResourceManager.GetString("AboutLine5", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to About.
+        '''</summary>
+        Friend ReadOnly Property AboutPrefix() As String
+            Get
+                Return ResourceManager.GetString("AboutPrefix", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Copy to clipboard.
+        '''</summary>
+        Friend ReadOnly Property ActionCopy() As String
+            Get
+                Return ResourceManager.GetString("ActionCopy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Drag and drop.
+        '''</summary>
+        Friend ReadOnly Property ActionDrag() As String
+            Get
+                Return ResourceManager.GetString("ActionDrag", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select character.
+        '''</summary>
+        Friend ReadOnly Property ActionFocus() As String
+            Get
+                Return ResourceManager.GetString("ActionFocus", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Display pop-up menu.
+        '''</summary>
+        Friend ReadOnly Property ActionMenu() As String
+            Get
+                Return ResourceManager.GetString("ActionMenu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Send as keystroke.
+        '''</summary>
+        Friend ReadOnly Property ActionSend() As String
+            Get
+                Return ResourceManager.GetString("ActionSend", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select actions to take when the .
+        '''</summary>
+        Friend ReadOnly Property ActionTooltipPart1() As String
+            Get
+                Return ResourceManager.GetString("ActionTooltipPart1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to mouse button is clicked.
+        '''</summary>
+        Friend ReadOnly Property ActionTooltipPart2() As String
+            Get
+                Return ResourceManager.GetString("ActionTooltipPart2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Add.
+        '''</summary>
+        Friend ReadOnly Property AddButton() As String
+            Get
+                Return ResourceManager.GetString("AddButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Add Character Range.
+        '''</summary>
+        Friend ReadOnly Property AddCharacterRange() As String
+            Get
+                Return ResourceManager.GetString("AddCharacterRange", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Please enter the program keyword.
+        '''</summary>
+        Friend ReadOnly Property AddKeywordInstructions() As String
+            Get
+                Return ResourceManager.GetString("AddKeywordInstructions", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Get Character from Unicode Value.
+        '''</summary>
+        Friend ReadOnly Property AddUnicodeChar() As String
+            Get
+                Return ResourceManager.GetString("AddUnicodeChar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Letztes Fenster Last Window.
+        '''</summary>
+        Friend ReadOnly Property AllCulturesLastWindow() As String
+            Get
+                Return ResourceManager.GetString("AllCulturesLastWindow", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ansii value: .
+        '''</summary>
+        Friend ReadOnly Property AnsiiValuePrefix() As String
+            Get
+                Return ResourceManager.GetString("AnsiiValuePrefix", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Change appearance....
+        '''</summary>
+        Friend ReadOnly Property Appearance() As String
+            Get
+                Return ResourceManager.GetString("Appearance", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quick Key is Now Loaded.
+        '''</summary>
+        Friend ReadOnly Property AppLoadedTooltip() As String
+            Get
+                Return ResourceManager.GetString("AppLoadedTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quick Key is loading....
+        '''</summary>
+        Friend ReadOnly Property AppLoadingTooltip() As String
+            Get
+                Return ResourceManager.GetString("AppLoadingTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Apply.
+        '''</summary>
+        Friend ReadOnly Property ApplyButton() As String
+            Get
+                Return ResourceManager.GetString("ApplyButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quick Key Character Keyboard.
+        '''</summary>
+        Friend ReadOnly Property AppRunningTooltip() As String
+            Get
+                Return ResourceManager.GetString("AppRunningTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Autohide() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Autohide", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Auto-hide.
+        '''</summary>
+        Friend ReadOnly Property AutoHideButton() As String
+            Get
+                Return ResourceManager.GetString("AutoHideButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enables/disables Auto-Hide. This window and the Toolbar will dissapear
+        '''when the mouse pointer is not over them. They will reappear when the
+        '''auto-hide window is clicked or the mouse is moved over it..
+        '''</summary>
+        Friend ReadOnly Property AutoHideButtonTooltip() As String
+            Get
+                Return ResourceManager.GetString("AutoHideButtonTooltip", resourceCulture)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Bold() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("Bold", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Lock.
+        '''</summary>
+        Friend ReadOnly Property BothLocked() As String
+            Get
+                Return ResourceManager.GetString("BothLocked", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to You have just locked the position of the Character Grid and the Toolbar so that they cannot be accidentally moved. This also disables editing the character set directly. Please not that you can still edit it using the Edit as Text feature..
+        '''</summary>
+        Friend ReadOnly Property BothLockedText() As String
+            Get
+                Return ResourceManager.GetString("BothLockedText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Lock.
+        '''</summary>
+        Friend ReadOnly Property BothLockedTitle() As String
+            Get
+                Return ResourceManager.GetString("BothLockedTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Disables editing the character set or moving the widows..
+        '''</summary>
+        Friend ReadOnly Property BothLockedTooltip() As String
+            Get
+                Return ResourceManager.GetString("BothLockedTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Button Color.
+        '''</summary>
+        Friend ReadOnly Property ButtonColor() As String
+            Get
+                Return ResourceManager.GetString("ButtonColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Cancel.
+        '''</summary>
+        Friend ReadOnly Property CancelButton() As String
+            Get
+                Return ResourceManager.GetString("CancelButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Change the Character Grid appearance.
+        '''</summary>
+        Friend ReadOnly Property ChangeAppearance() As String
+            Get
+                Return ResourceManager.GetString("ChangeAppearance", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Character Button.
+        '''</summary>
+        Friend ReadOnly Property CharacterButton() As String
+            Get
+                Return ResourceManager.GetString("CharacterButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Character does not exist!.
+        '''</summary>
+        Friend ReadOnly Property CharacterDoesNotExist() As String
+            Get
+                Return ResourceManager.GetString("CharacterDoesNotExist", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Character Grid Appearance.
+        '''</summary>
+        Friend ReadOnly Property CharacterGridAppearance() As String
+            Get
+                Return ResourceManager.GetString("CharacterGridAppearance", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Character Properties.
+        '''</summary>
+        Friend ReadOnly Property CharacterProperties() As String
+            Get
+                Return ResourceManager.GetString("CharacterProperties", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to If you click Yes,.
+        '''</summary>
+        Friend ReadOnly Property CharacterRangeConfirmation1() As String
+            Get
+                Return ResourceManager.GetString("CharacterRangeConfirmation1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to characters will be added. This will significantly hamper operation of Quick Key. Please click No and choose a smaller range of characters.
+        '''</summary>
+        Friend ReadOnly Property CharacterRangeConfirmation2() As String
+            Get
+                Return ResourceManager.GetString("CharacterRangeConfirmation2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Too many characters!.
+        '''</summary>
+        Friend ReadOnly Property CharacterRangeConfirmationTitle() As String
+            Get
+                Return ResourceManager.GetString("CharacterRangeConfirmationTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The charset has been modified.
+        '''Do you want to save the changes?.
+        '''</summary>
+        Friend ReadOnly Property CharsetChangedQuerySave() As String
+            Get
+                Return ResourceManager.GetString("CharsetChangedQuerySave", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Charset Changed.
+        '''</summary>
+        Friend ReadOnly Property CharsetChangedSuffix() As String
+            Get
+                Return ResourceManager.GetString("CharsetChangedSuffix", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sorry, this character set cannot be found. The file may have be moved or deleted..
+        '''</summary>
+        Friend ReadOnly Property CharsetNotFoundMessageText() As String
+            Get
+                Return ResourceManager.GetString("CharsetNotFoundMessageText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Could not load Charset.
+        '''</summary>
+        Friend ReadOnly Property CharsetNotFoundMessageTitle() As String
+            Get
+                Return ResourceManager.GetString("CharsetNotFoundMessageTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Lock Charset.
+        '''</summary>
+        Friend ReadOnly Property CharsLocked() As String
+            Get
+                Return ResourceManager.GetString("CharsLocked", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to You have locked the characters in the character grid. You will not be able to move or change the characters until you unlock them..
+        '''</summary>
+        Friend ReadOnly Property CharsLockedText() As String
+            Get
+                Return ResourceManager.GetString("CharsLockedText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Entering read-only mode.
+        '''</summary>
+        Friend ReadOnly Property CharsLockedTitle() As String
+            Get
+                Return ResourceManager.GetString("CharsLockedTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Close.
+        '''</summary>
+        Friend ReadOnly Property CloseButton() As String
+            Get
+                Return ResourceManager.GetString("CloseButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Hides the Character Grid and its accessory windows..
+        '''</summary>
+        Friend ReadOnly Property CloseButtonTooltip() As String
+            Get
+                Return ResourceManager.GetString("CloseButtonTooltip", resourceCulture)
             End Get
         End Property
         
@@ -81,10 +532,100 @@ Namespace My.Resources
             End Get
         End Property
         
+        '''<summary>
+        '''  Looks up a localized string similar to These buttons control character set file operations and clipboard actions.
+        '''</summary>
+        Friend ReadOnly Property CommandsToolbarTooltip() As String
+            Get
+                Return ResourceManager.GetString("CommandsToolbarTooltip", resourceCulture)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Copy() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("Copy", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Copy.
+        '''</summary>
+        Friend ReadOnly Property Copy1() As String
+            Get
+                Return ResourceManager.GetString("Copy1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Copy HTML code.
+        '''</summary>
+        Friend ReadOnly Property CopyHTML() As String
+            Get
+                Return ResourceManager.GetString("CopyHTML", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Leftward rows.
+        '''</summary>
+        Friend ReadOnly Property COriBottom() As String
+            Get
+                Return ResourceManager.GetString("COriBottom", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sort Order.
+        '''</summary>
+        Friend ReadOnly Property COrientation() As String
+            Get
+                Return ResourceManager.GetString("COrientation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Downward rows.
+        '''</summary>
+        Friend ReadOnly Property COriLeft() As String
+            Get
+                Return ResourceManager.GetString("COriLeft", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Upward rows.
+        '''</summary>
+        Friend ReadOnly Property COriRight() As String
+            Get
+                Return ResourceManager.GetString("COriRight", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Rightward rows.
+        '''</summary>
+        Friend ReadOnly Property COriTop() As String
+            Get
+                Return ResourceManager.GetString("COriTop", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Could Not Add Character!.
+        '''</summary>
+        Friend ReadOnly Property CouldNotAddCharacter() As String
+            Get
+                Return ResourceManager.GetString("CouldNotAddCharacter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Could Not Modify Character!.
+        '''</summary>
+        Friend ReadOnly Property CouldNotModifyCharacter() As String
+            Get
+                Return ResourceManager.GetString("CouldNotModifyCharacter", resourceCulture)
             End Get
         End Property
         
@@ -95,10 +636,64 @@ Namespace My.Resources
             End Get
         End Property
         
+        '''<summary>
+        '''  Looks up a localized string similar to Cut.
+        '''</summary>
+        Friend ReadOnly Property Cut1() As String
+            Get
+                Return ResourceManager.GetString("Cut1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Dark Edge.
+        '''</summary>
+        Friend ReadOnly Property DarkEdge() As String
+            Get
+                Return ResourceManager.GetString("DarkEdge", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Decimal Value.
+        '''</summary>
+        Friend ReadOnly Property DecimalMode() As String
+            Get
+                Return ResourceManager.GetString("DecimalMode", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Tip.
+        '''</summary>
+        Friend ReadOnly Property DefaultTipTitle() As String
+            Get
+                Return ResourceManager.GetString("DefaultTipTitle", resourceCulture)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Delete() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("Delete", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Delete.
+        '''</summary>
+        Friend ReadOnly Property Delete1() As String
+            Get
+                Return ResourceManager.GetString("Delete1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Disable AutoHide.
+        '''</summary>
+        Friend ReadOnly Property DisableAutoHide() As String
+            Get
+                Return ResourceManager.GetString("DisableAutoHide", resourceCulture)
             End Get
         End Property
         
@@ -109,10 +704,675 @@ Namespace My.Resources
             End Get
         End Property
         
+        '''<summary>
+        '''  Looks up a localized string similar to Enable Auto-hide.
+        '''</summary>
+        Friend ReadOnly Property Docked1() As String
+            Get
+                Return ResourceManager.GetString("Docked1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to You have enabled the Auto-Hide Feature. When you are not using the Toolbar or Character Grid, they will disappear; however, the Auto-Hide Window will remain. If you move the mouse over the Auto-Hide Window, the Character Grid and the Toolbar will reappear..
+        '''</summary>
+        Friend ReadOnly Property DockedText() As String
+            Get
+                Return ResourceManager.GetString("DockedText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Auto-hide saves screen space.
+        '''</summary>
+        Friend ReadOnly Property DockedTitle() As String
+            Get
+                Return ResourceManager.GetString("DockedTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Done.
+        '''</summary>
+        Friend ReadOnly Property DoneButton() As String
+            Get
+                Return ResourceManager.GetString("DoneButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Do not show this tip again.
+        '''</summary>
+        Friend ReadOnly Property DontShowTip() As String
+            Get
+                Return ResourceManager.GetString("DontShowTip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Edit Characters As Text.
+        '''</summary>
+        Friend ReadOnly Property EditCharsAsTextDialogCaption() As String
+            Get
+                Return ResourceManager.GetString("EditCharsAsTextDialogCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Copy Character.
+        '''</summary>
+        Friend ReadOnly Property EditCopy() As String
+            Get
+                Return ResourceManager.GetString("EditCopy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Copy All Characters.
+        '''</summary>
+        Friend ReadOnly Property EditCopyAllChars() As String
+            Get
+                Return ResourceManager.GetString("EditCopyAllChars", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Copy HTML Code.
+        '''</summary>
+        Friend ReadOnly Property EditCopyHTML() As String
+            Get
+                Return ResourceManager.GetString("EditCopyHTML", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Copy Visible Chars.
+        '''</summary>
+        Friend ReadOnly Property EditCopyVisibleChars() As String
+            Get
+                Return ResourceManager.GetString("EditCopyVisibleChars", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Cut Character.
+        '''</summary>
+        Friend ReadOnly Property EditCut() As String
+            Get
+                Return ResourceManager.GetString("EditCut", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Delete Character.
+        '''</summary>
+        Friend ReadOnly Property EditDelete() As String
+            Get
+                Return ResourceManager.GetString("EditDelete", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Edit.
+        '''</summary>
+        Friend ReadOnly Property EditMenu() As String
+            Get
+                Return ResourceManager.GetString("EditMenu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Paste Character(s).
+        '''</summary>
+        Friend ReadOnly Property EditPaste() As String
+            Get
+                Return ResourceManager.GetString("EditPaste", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Send Character.
+        '''</summary>
+        Friend ReadOnly Property EditSend() As String
+            Get
+                Return ResourceManager.GetString("EditSend", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Error Loading Character Set!.
+        '''</summary>
+        Friend ReadOnly Property ErrorLoadingCharacterSet() As String
+            Get
+                Return ResourceManager.GetString("ErrorLoadingCharacterSet", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to There was an error opening the file. The file may be corrupted or unavailable..
+        '''</summary>
+        Friend ReadOnly Property ErrorOpeningFile() As String
+            Get
+                Return ResourceManager.GetString("ErrorOpeningFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Export Charset Filters.
+        '''</summary>
+        Friend ReadOnly Property ExportFiltersDialogCaption() As String
+            Get
+                Return ResourceManager.GetString("ExportFiltersDialogCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Charset Files (*.charset)|*.charset.
+        '''</summary>
+        Friend ReadOnly Property ExportFiltersDialogFilter() As String
+            Get
+                Return ResourceManager.GetString("ExportFiltersDialogFilter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Overwrite read-only file?.
+        '''</summary>
+        Friend ReadOnly Property ExportFiltersReadOnlyErrorCaption() As String
+            Get
+                Return ResourceManager.GetString("ExportFiltersReadOnlyErrorCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The filters charset that you have chosen to overwrite is readonly. 
+        '''Are you positve that you wish to change this file?.
+        '''</summary>
+        Friend ReadOnly Property ExportFiltersReadOnlyErrorText() As String
+            Get
+                Return ResourceManager.GetString("ExportFiltersReadOnlyErrorText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Chars Locked.
+        '''</summary>
+        Friend ReadOnly Property FileCharsLocked() As String
+            Get
+                Return ResourceManager.GetString("FileCharsLocked", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Auto-hide.
+        '''</summary>
+        Friend ReadOnly Property FileDocked() As String
+            Get
+                Return ResourceManager.GetString("FileDocked", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to E&amp;xit.
+        '''</summary>
+        Friend ReadOnly Property FileExit() As String
+            Get
+                Return ResourceManager.GetString("FileExit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Export to Report....
+        '''</summary>
+        Friend ReadOnly Property FileExport() As String
+            Get
+                Return ResourceManager.GetString("FileExport", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Close Toolbar.
+        '''</summary>
+        Friend ReadOnly Property FileHide() As String
+            Get
+                Return ResourceManager.GetString("FileHide", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Close.
+        '''</summary>
+        Friend ReadOnly Property FileHideQuickKey() As String
+            Get
+                Return ResourceManager.GetString("FileHideQuickKey", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Import.
+        '''</summary>
+        Friend ReadOnly Property FileImport() As String
+            Get
+                Return ResourceManager.GetString("FileImport", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to From C&amp;harset....
+        '''</summary>
+        Friend ReadOnly Property FileImportCharset() As String
+            Get
+                Return ResourceManager.GetString("FileImportCharset", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to All &amp;Attributes from Charset.
+        '''</summary>
+        Friend ReadOnly Property FileImportCharsetAttrs() As String
+            Get
+                Return ResourceManager.GetString("FileImportCharsetAttrs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to From &amp;Clipboard....
+        '''</summary>
+        Friend ReadOnly Property FileImportClipboard() As String
+            Get
+                Return ResourceManager.GetString("FileImportClipboard", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to From &amp;File....
+        '''</summary>
+        Friend ReadOnly Property FileImportFile() As String
+            Get
+                Return ResourceManager.GetString("FileImportFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Locked.
+        '''</summary>
+        Friend ReadOnly Property FileLocked() As String
+            Get
+                Return ResourceManager.GetString("FileLocked", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;File.
+        '''</summary>
+        Friend ReadOnly Property FileMenu() As String
+            Get
+                Return ResourceManager.GetString("FileMenu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Filename: .
+        '''</summary>
+        Friend ReadOnly Property FilenamePrefix() As String
+            Get
+                Return ResourceManager.GetString("FilenamePrefix", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;New.
+        '''</summary>
+        Friend ReadOnly Property FileNew() As String
+            Get
+                Return ResourceManager.GetString("FileNew", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Blank Charset.
+        '''</summary>
+        Friend ReadOnly Property FileNewBlank() As String
+            Get
+                Return ResourceManager.GetString("FileNewBlank", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Copy of this Charset.
+        '''</summary>
+        Friend ReadOnly Property FileNewCopy() As String
+            Get
+                Return ResourceManager.GetString("FileNewCopy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Copy of these &amp;Attributes.
+        '''</summary>
+        Friend ReadOnly Property FileNewCopyAttrs() As String
+            Get
+                Return ResourceManager.GetString("FileNewCopyAttrs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Open.
+        '''</summary>
+        Friend ReadOnly Property FileOpen() As String
+            Get
+                Return ResourceManager.GetString("FileOpen", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save Read-Only.
+        '''</summary>
+        Friend ReadOnly Property FileReadOnly() As String
+            Get
+                Return ResourceManager.GetString("FileReadOnly", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Recent.
+        '''</summary>
+        Friend ReadOnly Property FileRecent() As String
+            Get
+                Return ResourceManager.GetString("FileRecent", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Save.
+        '''</summary>
+        Friend ReadOnly Property FileSave() As String
+            Get
+                Return ResourceManager.GetString("FileSave", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save All Information.
+        '''</summary>
+        Friend ReadOnly Property FileSaveAllInfo() As String
+            Get
+                Return ResourceManager.GetString("FileSaveAllInfo", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save &amp;As....
+        '''</summary>
+        Friend ReadOnly Property FileSaveAs() As String
+            Get
+                Return ResourceManager.GetString("FileSaveAs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save Characters.
+        '''</summary>
+        Friend ReadOnly Property FileSaveCharacters() As String
+            Get
+                Return ResourceManager.GetString("FileSaveCharacters", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save Filters.
+        '''</summary>
+        Friend ReadOnly Property FileSaveFilters() As String
+            Get
+                Return ResourceManager.GetString("FileSaveFilters", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save Font.
+        '''</summary>
+        Friend ReadOnly Property FileSaveFont() As String
+            Get
+                Return ResourceManager.GetString("FileSaveFont", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save Font Attributes.
+        '''</summary>
+        Friend ReadOnly Property FileSaveFontAttrs() As String
+            Get
+                Return ResourceManager.GetString("FileSaveFontAttrs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save Characters Only.
+        '''</summary>
+        Friend ReadOnly Property FileSaveOnlyCharacters() As String
+            Get
+                Return ResourceManager.GetString("FileSaveOnlyCharacters", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save Font Size.
+        '''</summary>
+        Friend ReadOnly Property FileSaveSize() As String
+            Get
+                Return ResourceManager.GetString("FileSaveSize", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to F&amp;ilter.
+        '''</summary>
+        Friend ReadOnly Property Filter() As String
+            Get
+                Return ResourceManager.GetString("Filter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select Default Filters.
+        '''</summary>
+        Friend ReadOnly Property FilterDefaults() As String
+            Get
+                Return ResourceManager.GetString("FilterDefaults", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Deselect All Filters.
+        '''</summary>
+        Friend ReadOnly Property FilterDeSelAll() As String
+            Get
+                Return ResourceManager.GetString("FilterDeSelAll", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Export Filters....
+        '''</summary>
+        Friend ReadOnly Property FilterExport() As String
+            Get
+                Return ResourceManager.GetString("FilterExport", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Import Filters....
+        '''</summary>
+        Friend ReadOnly Property FilterImport() As String
+            Get
+                Return ResourceManager.GetString("FilterImport", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to F&amp;ilter.
+        '''</summary>
+        Friend ReadOnly Property FilterMenu() As String
+            Get
+                Return ResourceManager.GetString("FilterMenu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Export (Read-Only) Filters....
+        '''</summary>
+        Friend ReadOnly Property FilterReadOnly() As String
+            Get
+                Return ResourceManager.GetString("FilterReadOnly", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select All Filters.
+        '''</summary>
+        Friend ReadOnly Property FilterSelAll() As String
+            Get
+                Return ResourceManager.GetString("FilterSelAll", resourceCulture)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Find() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("Find", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Find.
+        '''</summary>
+        Friend ReadOnly Property FindButton() As String
+            Get
+                Return ResourceManager.GetString("FindButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Focused Outline.
+        '''</summary>
+        Friend ReadOnly Property FocusedOutline() As String
+            Get
+                Return ResourceManager.GetString("FocusedOutline", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Bold.
+        '''</summary>
+        Friend ReadOnly Property FontBold() As String
+            Get
+                Return ResourceManager.GetString("FontBold", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to This changes the font.
+        '''</summary>
+        Friend ReadOnly Property FontBoxTooltip() As String
+            Get
+                Return ResourceManager.GetString("FontBoxTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Italic.
+        '''</summary>
+        Friend ReadOnly Property FontItalic() As String
+            Get
+                Return ResourceManager.GetString("FontItalic", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to F&amp;ont.
+        '''</summary>
+        Friend ReadOnly Property FontMenu() As String
+            Get
+                Return ResourceManager.GetString("FontMenu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Font: .
+        '''</summary>
+        Friend ReadOnly Property FontName() As String
+            Get
+                Return ResourceManager.GetString("FontName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Font: .
+        '''</summary>
+        Friend ReadOnly Property FontPrefix() As String
+            Get
+                Return ResourceManager.GetString("FontPrefix", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Size: .
+        '''</summary>
+        Friend ReadOnly Property FontSize() As String
+            Get
+                Return ResourceManager.GetString("FontSize", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to This changes the font size.
+        '''</summary>
+        Friend ReadOnly Property FontSizeTooltip() As String
+            Get
+                Return ResourceManager.GetString("FontSizeTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Strikeout.
+        '''</summary>
+        Friend ReadOnly Property FontStrikeout() As String
+            Get
+                Return ResourceManager.GetString("FontStrikeout", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to This toolbar controls the graphical attributes of the font.
+        '''</summary>
+        Friend ReadOnly Property FontStyleTooltip() As String
+            Get
+                Return ResourceManager.GetString("FontStyleTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Underline.
+        '''</summary>
+        Friend ReadOnly Property FontUnderline() As String
+            Get
+                Return ResourceManager.GetString("FontUnderline", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to I messed up! Congratulations, you just found a bug.
+        '''Whatever just happened was very unexpected.
+        '''Please open up your email editor and send a message to me at
+        '''nathanaeljones@users.sourceforge.net
+        '''Just tell me what you clicked on when this happened, and include the error information.
+        '''The easiest way to get the error information is to right-click on the icon and choose &apos;Error Log&apos;.
+        '''It is very important that you report this bug, because otherwise it may never be fixed.
+        '''It is recommended that you save your [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property GenericErrorMessage() As String
+            Get
+                Return ResourceManager.GetString("GenericErrorMessage", resourceCulture)
             End Get
         End Property
         
@@ -123,10 +1383,308 @@ Namespace My.Resources
             End Get
         End Property
         
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;About.
+        '''</summary>
+        Friend ReadOnly Property HelpAbout() As String
+            Get
+                Return ResourceManager.GetString("HelpAbout", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Help Topics.
+        '''</summary>
+        Friend ReadOnly Property HelpHelpTopics() As String
+            Get
+                Return ResourceManager.GetString("HelpHelpTopics", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Help.
+        '''</summary>
+        Friend ReadOnly Property HelpMenu() As String
+            Get
+                Return ResourceManager.GetString("HelpMenu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Tips.
+        '''</summary>
+        Friend ReadOnly Property HelpTips() As String
+            Get
+                Return ResourceManager.GetString("HelpTips", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Hide Tips.
+        '''</summary>
+        Friend ReadOnly Property HelpTipsHide() As String
+            Get
+                Return ResourceManager.GetString("HelpTipsHide", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Reset Tips.
+        '''</summary>
+        Friend ReadOnly Property HelpTipsReset() As String
+            Get
+                Return ResourceManager.GetString("HelpTipsReset", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Hexadecimal Value.
+        '''</summary>
+        Friend ReadOnly Property HexadecimalMode() As String
+            Get
+                Return ResourceManager.GetString("HexadecimalMode", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Close.
+        '''</summary>
+        Friend ReadOnly Property HideMe() As String
+            Get
+                Return ResourceManager.GetString("HideMe", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Please note that you have only minimized Quick Key to the icon in the notification area. To completely close Quick Key, please click &apos;Exit&apos;..
+        '''</summary>
+        Friend ReadOnly Property HideQuickKey() As String
+            Get
+                Return ResourceManager.GetString("HideQuickKey", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to An error occured while loading the Character Grid&apos;s titlebar icons. They may not display correctly..
+        '''</summary>
+        Friend ReadOnly Property IconLoadingError() As String
+            Get
+                Return ResourceManager.GetString("IconLoadingError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Import Attributes from charset&quot;.
+        '''</summary>
+        Friend ReadOnly Property ImportCharsetAttrsDialogCaption() As String
+            Get
+                Return ResourceManager.GetString("ImportCharsetAttrsDialogCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Charset Files (*.charset)|*.charset.
+        '''</summary>
+        Friend ReadOnly Property ImportCharsetAttrsDialogFilter() As String
+            Get
+                Return ResourceManager.GetString("ImportCharsetAttrsDialogFilter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Import from charset.
+        '''</summary>
+        Friend ReadOnly Property ImportCharsetDialogCaption() As String
+            Get
+                Return ResourceManager.GetString("ImportCharsetDialogCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Charset Files (*.charset)|*.charset.
+        '''</summary>
+        Friend ReadOnly Property ImportCharsetDialogFilter() As String
+            Get
+                Return ResourceManager.GetString("ImportCharsetDialogFilter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Import from clipboard.
+        '''</summary>
+        Friend ReadOnly Property ImportClipboardDialogCaption() As String
+            Get
+                Return ResourceManager.GetString("ImportClipboardDialogCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Import from file.
+        '''</summary>
+        Friend ReadOnly Property ImportFileDialogCaption() As String
+            Get
+                Return ResourceManager.GetString("ImportFileDialogCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to All Files (*.*)|*.*|Text Files (*.txt;*.doc;*.rtf;*.htm)|*.txt;*.doc;*.rtf;*.htm).
+        '''</summary>
+        Friend ReadOnly Property ImportFileDialogFilter() As String
+            Get
+                Return ResourceManager.GetString("ImportFileDialogFilter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Import Filters from charset.
+        '''</summary>
+        Friend ReadOnly Property ImportFiltersDialogCaption() As String
+            Get
+                Return ResourceManager.GetString("ImportFiltersDialogCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Charset Files (*.charset)|*.charset.
+        '''</summary>
+        Friend ReadOnly Property ImportFiltersDialogFilter() As String
+            Get
+                Return ResourceManager.GetString("ImportFiltersDialogFilter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to An invalid path was entered. Please try again with a valid filename..
+        '''</summary>
+        Friend ReadOnly Property InvalidPath() As String
+            Get
+                Return ResourceManager.GetString("InvalidPath", resourceCulture)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Italic() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("Italic", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Change the destination appliction for sending characters.
+        '''</summary>
+        Friend ReadOnly Property KeywordBoxTooltip() As String
+            Get
+                Return ResourceManager.GetString("KeywordBoxTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Keyword &apos;Last Window&apos; cannot be deleted. It represents the window underneath Quick Key..
+        '''</summary>
+        Friend ReadOnly Property KeywordLastWindowCantBeDeleted() As String
+            Get
+                Return ResourceManager.GetString("KeywordLastWindowCantBeDeleted", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Keywords.
+        '''</summary>
+        Friend ReadOnly Property Keywords() As String
+            Get
+                Return ResourceManager.GetString("Keywords", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Add Item to Bottom.
+        '''</summary>
+        Friend ReadOnly Property KeywordsAddBottom() As String
+            Get
+                Return ResourceManager.GetString("KeywordsAddBottom", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Add Item to Top.
+        '''</summary>
+        Friend ReadOnly Property KeywordsAddTop() As String
+            Get
+                Return ResourceManager.GetString("KeywordsAddTop", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to DeleteBottomItem.
+        '''</summary>
+        Friend ReadOnly Property KeywordsDelBottom() As String
+            Get
+                Return ResourceManager.GetString("KeywordsDelBottom", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Delete Top Item.
+        '''</summary>
+        Friend ReadOnly Property KeywordsDelTop() As String
+            Get
+                Return ResourceManager.GetString("KeywordsDelTop", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Edit Keyword List....
+        '''</summary>
+        Friend ReadOnly Property KeywordsEdit() As String
+            Get
+                Return ResourceManager.GetString("KeywordsEdit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Keywords.
+        '''</summary>
+        Friend ReadOnly Property KeywordsMenu() As String
+            Get
+                Return ResourceManager.GetString("KeywordsMenu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Last Window.
+        '''</summary>
+        Friend ReadOnly Property LastWindow() As String
+            Get
+                Return ResourceManager.GetString("LastWindow", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Light Edge.
+        '''</summary>
+        Friend ReadOnly Property LightEdge() As String
+            Get
+                Return ResourceManager.GetString("LightEdge", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Lock.
+        '''</summary>
+        Friend ReadOnly Property LockButton() As String
+            Get
+                Return ResourceManager.GetString("LockButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enables/disables the resizing and moving of the
+        '''Character Grid and accessory windows..
+        '''</summary>
+        Friend ReadOnly Property LockButtonTooltip() As String
+            Get
+                Return ResourceManager.GetString("LockButtonTooltip", resourceCulture)
             End Get
         End Property
         
@@ -137,10 +1695,503 @@ Namespace My.Resources
             End Get
         End Property
         
+        '''<summary>
+        '''  Looks up a localized string similar to Lock Position.
+        '''</summary>
+        Friend ReadOnly Property Locked1() As String
+            Get
+                Return ResourceManager.GetString("Locked1", resourceCulture)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Locked2() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Locked2", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to You have locked the Character Grid, the Toolbar, and the Auto-Hide Window. You will not be able to resize or move these windows until you unlock Quick Key. This does not prevent your character set from being changed. Please use &apos;Lock Characters&apos; for this purpose..
+        '''</summary>
+        Friend ReadOnly Property LockedText() As String
+            Get
+                Return ResourceManager.GetString("LockedText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to This feature prevents accidental movement of the Character Grid.
+        '''</summary>
+        Friend ReadOnly Property LockedTitle() As String
+            Get
+                Return ResourceManager.GetString("LockedTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to About.
+        '''</summary>
+        Friend ReadOnly Property MenuAbout() As String
+            Get
+                Return ResourceManager.GetString("MenuAbout", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Auto-hide.
+        '''</summary>
+        Friend ReadOnly Property MenuAutohide() As String
+            Get
+                Return ResourceManager.GetString("MenuAutohide", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Character Grid.
+        '''</summary>
+        Friend ReadOnly Property MenuCharacterGrid() As String
+            Get
+                Return ResourceManager.GetString("MenuCharacterGrid", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Event Log.
+        '''</summary>
+        Friend ReadOnly Property MenuEventLog() As String
+            Get
+                Return ResourceManager.GetString("MenuEventLog", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Exit.
+        '''</summary>
+        Friend ReadOnly Property MenuExit() As String
+            Get
+                Return ResourceManager.GetString("MenuExit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Help.
+        '''</summary>
+        Friend ReadOnly Property MenuHelp() As String
+            Get
+                Return ResourceManager.GetString("MenuHelp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Help Topics.
+        '''</summary>
+        Friend ReadOnly Property MenuHelpTopics() As String
+            Get
+                Return ResourceManager.GetString("MenuHelpTopics", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Hide Tips.
+        '''</summary>
+        Friend ReadOnly Property MenuHideTips() As String
+            Get
+                Return ResourceManager.GetString("MenuHideTips", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Options.
+        '''</summary>
+        Friend ReadOnly Property MenuOptions() As String
+            Get
+                Return ResourceManager.GetString("MenuOptions", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Reset Tips.
+        '''</summary>
+        Friend ReadOnly Property MenuResetTips() As String
+            Get
+                Return ResourceManager.GetString("MenuResetTips", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Toolbar.
+        '''</summary>
+        Friend ReadOnly Property MenuToolbar() As String
+            Get
+                Return ResourceManager.GetString("MenuToolbar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Mouse Button Actions.
+        '''</summary>
+        Friend ReadOnly Property MouseButtonActions() As String
+            Get
+                Return ResourceManager.GetString("MouseButtonActions", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Left.
+        '''</summary>
+        Friend ReadOnly Property MouseButtonLeft() As String
+            Get
+                Return ResourceManager.GetString("MouseButtonLeft", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Middle.
+        '''</summary>
+        Friend ReadOnly Property MouseButtonMiddle() As String
+            Get
+                Return ResourceManager.GetString("MouseButtonMiddle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Right.
+        '''</summary>
+        Friend ReadOnly Property MouseButtonRight() As String
+            Get
+                Return ResourceManager.GetString("MouseButtonRight", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to XButton1.
+        '''</summary>
+        Friend ReadOnly Property MouseButtonX1() As String
+            Get
+                Return ResourceManager.GetString("MouseButtonX1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to XButton2.
+        '''</summary>
+        Friend ReadOnly Property MouseButtonX2() As String
+            Get
+                Return ResourceManager.GetString("MouseButtonX2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Mouse Settings.
+        '''</summary>
+        Friend ReadOnly Property MouseSettings() As String
+            Get
+                Return ResourceManager.GetString("MouseSettings", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to No Character Entered.
+        '''</summary>
+        Friend ReadOnly Property NoCharacterEntered() As String
+            Get
+                Return ResourceManager.GetString("NoCharacterEntered", resourceCulture)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Nohide() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Nohide", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Button Outline.
+        '''</summary>
+        Friend ReadOnly Property NormalOutline() As String
+            Get
+                Return ResourceManager.GetString("NormalOutline", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to OK.
+        '''</summary>
+        Friend ReadOnly Property OKButton() As String
+            Get
+                Return ResourceManager.GetString("OKButton", resourceCulture)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Open() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("Open", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Open Charset.
+        '''</summary>
+        Friend ReadOnly Property OpenCharsetDialogCaption() As String
+            Get
+                Return ResourceManager.GetString("OpenCharsetDialogCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Charset Files (*.charset)|*.charset.
+        '''</summary>
+        Friend ReadOnly Property OpenCharsetDialogFilter() As String
+            Get
+                Return ResourceManager.GetString("OpenCharsetDialogFilter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Error Loading File.
+        '''</summary>
+        Friend ReadOnly Property OpenCharsetErrorCaption() As String
+            Get
+                Return ResourceManager.GetString("OpenCharsetErrorCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to File is corrupt!.
+        '''</summary>
+        Friend ReadOnly Property OpenCharsetFileCorrupt() As String
+            Get
+                Return ResourceManager.GetString("OpenCharsetFileCorrupt", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to File Does Not Exist!.
+        '''</summary>
+        Friend ReadOnly Property OpenCharsetFileDoesNotExist() As String
+            Get
+                Return ResourceManager.GetString("OpenCharsetFileDoesNotExist", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to File is empty!.
+        '''</summary>
+        Friend ReadOnly Property OpenCharsetFileEmpty() As String
+            Get
+                Return ResourceManager.GetString("OpenCharsetFileEmpty", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Add.
+        '''</summary>
+        Friend ReadOnly Property OptionsAddButton() As String
+            Get
+                Return ResourceManager.GetString("OptionsAddButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Add a keyword to the list.
+        '''</summary>
+        Friend ReadOnly Property OptionsAddButtonTooltip() As String
+            Get
+                Return ResourceManager.GetString("OptionsAddButtonTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Saves all settings changes, but does not hide this dialog box.
+        '''</summary>
+        Friend ReadOnly Property OptionsApplyButtonTooltip() As String
+            Get
+                Return ResourceManager.GetString("OptionsApplyButtonTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ignores all settings changes and closes this dialog box.
+        '''</summary>
+        Friend ReadOnly Property OptionsCancelButtonTooltip() As String
+            Get
+                Return ResourceManager.GetString("OptionsCancelButtonTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Clipboard + SendKeys(Paste) Use this when &apos;Send Input&apos; fails..
+        '''</summary>
+        Friend ReadOnly Property OptionsClipboardSendKeys() As String
+            Get
+                Return ResourceManager.GetString("OptionsClipboardSendKeys", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Here you can assign mouse buttons to actions. Each button has a tab, which contains a listing of all actions. Check the actions you want the mouse button to perform.
+        '''Keywords are the internal code names for applications, or application classes. For example, Microsoft Word is always OpusApp, wheras Outlook Express has a different keyword (class name) for the message composer (ATH_Note) than for the main window (Outlook Express Browser Class).
+        '''To add a new keyword, you must click &apos;Add&apos;, then &apos;Find&apos;. This op [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property OptionsDialog() As String
+            Get
+                Return ResourceManager.GetString("OptionsDialog", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Details, details, details....
+        '''</summary>
+        Friend ReadOnly Property OptionsDialogTitle() As String
+            Get
+                Return ResourceManager.GetString("OptionsDialogTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Move Down.
+        '''</summary>
+        Friend ReadOnly Property OptionsMoveDownButton() As String
+            Get
+                Return ResourceManager.GetString("OptionsMoveDownButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Move Up.
+        '''</summary>
+        Friend ReadOnly Property OptionsMoveUpButton() As String
+            Get
+                Return ResourceManager.GetString("OptionsMoveUpButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Saves all settings changes and closes this dialog box.
+        '''</summary>
+        Friend ReadOnly Property OptionsOKButtonTooltip() As String
+            Get
+                Return ResourceManager.GetString("OptionsOKButtonTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Remove.
+        '''</summary>
+        Friend ReadOnly Property OptionsRemoveButton() As String
+            Get
+                Return ResourceManager.GetString("OptionsRemoveButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Remove the currently selected keyword from the list.
+        '''</summary>
+        Friend ReadOnly Property OptionsRemoveButtonTooltip() As String
+            Get
+                Return ResourceManager.GetString("OptionsRemoveButtonTooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Milliseconds to wait between switching windows and sending the character..
+        '''</summary>
+        Friend ReadOnly Property OptionsSendDelay() As String
+            Get
+                Return ResourceManager.GetString("OptionsSendDelay", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Send Input API (Reccomended) Does not affect the clipboard.
+        '''</summary>
+        Friend ReadOnly Property OptionsSendInput() As String
+            Get
+                Return ResourceManager.GetString("OptionsSendInput", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Send Keys (Safer, but more limited).
+        '''</summary>
+        Friend ReadOnly Property OptionsSendKeys() As String
+            Get
+                Return ResourceManager.GetString("OptionsSendKeys", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Please choose what method to use for character transfer..
+        '''</summary>
+        Friend ReadOnly Property OptionsSendMethod() As String
+            Get
+                Return ResourceManager.GetString("OptionsSendMethod", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Options.
+        '''</summary>
+        Friend ReadOnly Property OptionsWindowTitle() As String
+            Get
+                Return ResourceManager.GetString("OptionsWindowTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Bottom.
+        '''</summary>
+        Friend ReadOnly Property OriBottom() As String
+            Get
+                Return ResourceManager.GetString("OriBottom", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Titlebar Location.
+        '''</summary>
+        Friend ReadOnly Property Orientation() As String
+            Get
+                Return ResourceManager.GetString("Orientation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Left.
+        '''</summary>
+        Friend ReadOnly Property OriLeft() As String
+            Get
+                Return ResourceManager.GetString("OriLeft", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Right.
+        '''</summary>
+        Friend ReadOnly Property OriRight() As String
+            Get
+                Return ResourceManager.GetString("OriRight", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Top.
+        '''</summary>
+        Friend ReadOnly Property OriTop() As String
+            Get
+                Return ResourceManager.GetString("OriTop", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Outside Rim Color.
+        '''</summary>
+        Friend ReadOnly Property OutsideRimColor() As String
+            Get
+                Return ResourceManager.GetString("OutsideRimColor", resourceCulture)
             End Get
         End Property
         
@@ -151,24 +2202,48 @@ Namespace My.Resources
             End Get
         End Property
         
-        Friend ReadOnly Property Quick_Key() As System.Drawing.Icon
+        '''<summary>
+        '''  Looks up a localized string similar to Paste.
+        '''</summary>
+        Friend ReadOnly Property Paste1() As String
             Get
-                Dim obj As Object = ResourceManager.GetObject("Quick_Key", resourceCulture)
-                Return CType(obj,System.Drawing.Icon)
+                Return ResourceManager.GetString("Paste1", resourceCulture)
             End Get
         End Property
         
-        Friend ReadOnly Property Quick_Key_Charset_File() As System.Drawing.Icon
+        '''<summary>
+        '''  Looks up a localized string similar to Paste.
+        '''</summary>
+        Friend ReadOnly Property PasteButton() As String
             Get
-                Dim obj As Object = ResourceManager.GetObject("Quick_Key_Charset_File", resourceCulture)
-                Return CType(obj,System.Drawing.Icon)
+                Return ResourceManager.GetString("PasteButton", resourceCulture)
             End Get
         End Property
         
-        Friend ReadOnly Property Quick_Key_Disabled() As System.Drawing.Icon
+        '''<summary>
+        '''  Looks up a localized string similar to Permission Denied.
+        '''</summary>
+        Friend ReadOnly Property PermissionDenied() As String
             Get
-                Dim obj As Object = ResourceManager.GetObject("Quick_Key_Disabled", resourceCulture)
-                Return CType(obj,System.Drawing.Icon)
+                Return ResourceManager.GetString("PermissionDenied", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Properties.
+        '''</summary>
+        Friend ReadOnly Property Properties() As String
+            Get
+                Return ResourceManager.GetString("Properties", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to QK.
+        '''</summary>
+        Friend ReadOnly Property QK() As String
+            Get
+                Return ResourceManager.GetString("QK", resourceCulture)
             End Get
         End Property
         
@@ -179,10 +2254,100 @@ Namespace My.Resources
             End Get
         End Property
         
-        Friend ReadOnly Property Quick_Key01() As System.Drawing.Icon
+        '''<summary>
+        '''  Looks up a localized string similar to Quick Key.
+        '''</summary>
+        Friend ReadOnly Property QuickKey() As String
             Get
-                Dim obj As Object = ResourceManager.GetObject("Quick_Key01", resourceCulture)
+                Return ResourceManager.GetString("QuickKey", resourceCulture)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property QuickKeyCharsetFile() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("QuickKeyCharsetFile", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property QuickKeyDisabled() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("QuickKeyDisabled", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to An error occured while initializing the Character Grid. Retry initialization?.
+        '''</summary>
+        Friend ReadOnly Property QuickKeyFormNewError() As String
+            Get
+                Return ResourceManager.GetString("QuickKeyFormNewError", resourceCulture)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property QuickKeyIcon() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("QuickKeyIcon", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Please change ‘Last Window’ to ‘OpusApp’ if you are using Microsoft Word. This will make it easier to use your keyboard and Quick Key in conjunction, as well as eliminate the annoying flicker when sending characters.
+        '''Be sure to explore the right-click menus on the title bar and the characters.
+        '''You can rearrange characters by dragging them with the middle mouse button.
+        '''If you need a different set of characters, use the File menu in the Toolbar.
+        '''For some applications, you may need to change the character  [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property QuickKeyText() As String
+            Get
+                Return ResourceManager.GetString("QuickKeyText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Important Notes.
+        '''</summary>
+        Friend ReadOnly Property QuickKeyTitle() As String
+            Get
+                Return ResourceManager.GetString("QuickKeyTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sorry, this file cannot be read. Please close all programs using the file and try again..
+        '''</summary>
+        Friend ReadOnly Property ReadFileError() As String
+            Get
+                Return ResourceManager.GetString("ReadFileError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Recent Charsets.
+        '''</summary>
+        Friend ReadOnly Property RecentCharsets() As String
+            Get
+                Return ResourceManager.GetString("RecentCharsets", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Reset ALL.
+        '''</summary>
+        Friend ReadOnly Property ResetAllButton() As String
+            Get
+                Return ResourceManager.GetString("ResetAllButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Reset.
+        '''</summary>
+        Friend ReadOnly Property ResetButton() As String
+            Get
+                Return ResourceManager.GetString("ResetButton", resourceCulture)
             End Get
         End Property
         
@@ -193,10 +2358,352 @@ Namespace My.Resources
             End Get
         End Property
         
+        '''<summary>
+        '''  Looks up a localized string similar to Charset Files (*.charset)|*.charset.
+        '''</summary>
+        Friend ReadOnly Property SaveCharsetDialogFilter() As String
+            Get
+                Return ResourceManager.GetString("SaveCharsetDialogFilter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save Charset As.
+        '''</summary>
+        Friend ReadOnly Property SaveCharsetDialogTitle() As String
+            Get
+                Return ResourceManager.GetString("SaveCharsetDialogTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Error Saving File.
+        '''</summary>
+        Friend ReadOnly Property SaveCharsetErrorCaption() As String
+            Get
+                Return ResourceManager.GetString("SaveCharsetErrorCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Overwrite File?.
+        '''</summary>
+        Friend ReadOnly Property SaveCharsetOverwriteCaption() As String
+            Get
+                Return ResourceManager.GetString("SaveCharsetOverwriteCaption", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to A file already exists by this name. 
+        '''Are you sure that you wish to overwrite this file?.
+        '''</summary>
+        Friend ReadOnly Property SaveCharsetOverwriteText() As String
+            Get
+                Return ResourceManager.GetString("SaveCharsetOverwriteText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The file you have chose to overwrite is read-only!
+        '''You must choose either a different file name, or select &apos;Save As Readonly&apos; before attempting to overwrite a read-only file..
+        '''</summary>
+        Friend ReadOnly Property SaveCharsetReadOnlyErrorText() As String
+            Get
+                Return ResourceManager.GetString("SaveCharsetReadOnlyErrorText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Send.
+        '''</summary>
+        Friend ReadOnly Property Send() As String
+            Get
+                Return ResourceManager.GetString("Send", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to You have chosen to send one of the following reserved characters: (){}+^%~  . If you need to use one of these characters in a document, drag and drop or copy it instead..
+        '''</summary>
+        Friend ReadOnly Property SendBadCharacter() As String
+            Get
+                Return ResourceManager.GetString("SendBadCharacter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Send Settings.
+        '''</summary>
+        Friend ReadOnly Property SendSettings() As String
+            Get
+                Return ResourceManager.GetString("SendSettings", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quick Key&apos;s settings could not be saved. Make sure you are logged in as an administrator..
+        '''</summary>
+        Friend ReadOnly Property SettingsCouldNotBeSavedPrefix() As String
+            Get
+                Return ResourceManager.GetString("SettingsCouldNotBeSavedPrefix", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to could not be saved..
+        '''</summary>
+        Friend ReadOnly Property SettingsCouldNotBeSavedSuffix() As String
+            Get
+                Return ResourceManager.GetString("SettingsCouldNotBeSavedSuffix", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to An error was found in the settings file. Click Yes to continue and load default settings. Click No to close program..
+        '''</summary>
+        Friend ReadOnly Property SettingsFileError() As String
+            Get
+                Return ResourceManager.GetString("SettingsFileError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Error in configuration file.
+        '''</summary>
+        Friend ReadOnly Property SettingsFileErrorTitle() As String
+            Get
+                Return ResourceManager.GetString("SettingsFileErrorTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to An error occured while saving the settings for Quick Key! All unsaved changes may have been lost..
+        '''</summary>
+        Friend ReadOnly Property SettingsSavingError() As String
+            Get
+                Return ResourceManager.GetString("SettingsSavingError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Show Toolbar.
+        '''</summary>
+        Friend ReadOnly Property ShowToolbar() As String
+            Get
+                Return ResourceManager.GetString("ShowToolbar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Size: .
+        '''</summary>
+        Friend ReadOnly Property SizePrefix() As String
+            Get
+                Return ResourceManager.GetString("SizePrefix", resourceCulture)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property StartupTip() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("StartupTip", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Welcome to Quick Key!.
+        '''</summary>
+        Friend ReadOnly Property StartupTipText() As String
+            Get
+                Return ResourceManager.GetString("StartupTipText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Thank you for downloading Quick Key!.
+        '''</summary>
+        Friend ReadOnly Property StartupTipTitle() As String
+            Get
+                Return ResourceManager.GetString("StartupTipTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to This status bar displays information about the character under the mouse cursor.
+        '''</summary>
+        Friend ReadOnly Property StatusBarTooltip() As String
+            Get
+                Return ResourceManager.GetString("StatusBarTooltip", resourceCulture)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Strikeout() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("Strikeout", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to System Info....
+        '''</summary>
+        Friend ReadOnly Property SystemInfo() As String
+            Get
+                Return ResourceManager.GetString("SystemInfo", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Characters.
+        '''</summary>
+        Friend ReadOnly Property TabCharacters() As String
+            Get
+                Return ResourceManager.GetString("TabCharacters", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Program Keywords.
+        '''</summary>
+        Friend ReadOnly Property TabKeywords() As String
+            Get
+                Return ResourceManager.GetString("TabKeywords", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Mouse Settings.
+        '''</summary>
+        Friend ReadOnly Property TabMouseSettings() As String
+            Get
+                Return ResourceManager.GetString("TabMouseSettings", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Char Transfer.
+        '''</summary>
+        Friend ReadOnly Property TabSendSettings() As String
+            Get
+                Return ResourceManager.GetString("TabSendSettings", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Text Color.
+        '''</summary>
+        Friend ReadOnly Property TextColor() As String
+            Get
+                Return ResourceManager.GetString("TextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Text.
+        '''</summary>
+        Friend ReadOnly Property TextTab() As String
+            Get
+                Return ResourceManager.GetString("TextTab", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Title Bar.
+        '''</summary>
+        Friend ReadOnly Property TitleBar() As String
+            Get
+                Return ResourceManager.GetString("TitleBar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quick Key Toolbar.
+        '''</summary>
+        Friend ReadOnly Property ToolbarTitle() As String
+            Get
+                Return ResourceManager.GetString("ToolbarTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quick Key [Toolbar] - New Charset.
+        '''</summary>
+        Friend ReadOnly Property ToolbarTitleNewCharset() As String
+            Get
+                Return ResourceManager.GetString("ToolbarTitleNewCharset", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quick Key [Toolbar] - .
+        '''</summary>
+        Friend ReadOnly Property ToolbarTitlePrefix() As String
+            Get
+                Return ResourceManager.GetString("ToolbarTitlePrefix", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Edit Characters as Text.
+        '''</summary>
+        Friend ReadOnly Property ToolsEditText() As String
+            Get
+                Return ResourceManager.GetString("ToolsEditText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Get Character from Unicode.
+        '''</summary>
+        Friend ReadOnly Property ToolsGetUnicodeChar() As String
+            Get
+                Return ResourceManager.GetString("ToolsGetUnicodeChar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Add a range of characters.
+        '''</summary>
+        Friend ReadOnly Property ToolsGetUnicodeChars() As String
+            Get
+                Return ResourceManager.GetString("ToolsGetUnicodeChars", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Tools.
+        '''</summary>
+        Friend ReadOnly Property ToolsMenu() As String
+            Get
+                Return ResourceManager.GetString("ToolsMenu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Options.
+        '''</summary>
+        Friend ReadOnly Property ToolsOptions() As String
+            Get
+                Return ResourceManager.GetString("ToolsOptions", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sort Characters by Unicode Value (Ascending).
+        '''</summary>
+        Friend ReadOnly Property ToolsSortAsc() As String
+            Get
+                Return ResourceManager.GetString("ToolsSortAsc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sort Characters by Unicode Value (Descending).
+        '''</summary>
+        Friend ReadOnly Property ToolsSortDes() As String
+            Get
+                Return ResourceManager.GetString("ToolsSortDes", resourceCulture)
             End Get
         End Property
         
@@ -214,10 +2721,222 @@ Namespace My.Resources
             End Get
         End Property
         
+        '''<summary>
+        '''  Looks up a localized string similar to Unicode Category: .
+        '''</summary>
+        Friend ReadOnly Property UnicodeCategoryPrefix() As String
+            Get
+                Return ResourceManager.GetString("UnicodeCategoryPrefix", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Unicode Value: .
+        '''</summary>
+        Friend ReadOnly Property UnicodeValuePrefix() As String
+            Get
+                Return ResourceManager.GetString("UnicodeValuePrefix", resourceCulture)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Unlocked() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("Unlocked", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Unlocked1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Unlocked1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property Upgrade() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Upgrade", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Thank you for your support.
+        '''</summary>
+        Friend ReadOnly Property UpgradeTipText() As String
+            Get
+                Return ResourceManager.GetString("UpgradeTipText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Think of what you&apos;re missing....
+        '''</summary>
+        Friend ReadOnly Property UpgradeTipTitle() As String
+            Get
+                Return ResourceManager.GetString("UpgradeTipTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Version.
+        '''</summary>
+        Friend ReadOnly Property Version() As String
+            Get
+                Return ResourceManager.GetString("Version", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Character Sorting Orientation.
+        '''</summary>
+        Friend ReadOnly Property ViewCharsOrientation() As String
+            Get
+                Return ResourceManager.GetString("ViewCharsOrientation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Downward rows.
+        '''</summary>
+        Friend ReadOnly Property ViewCharsOrientationBottom() As String
+            Get
+                Return ResourceManager.GetString("ViewCharsOrientationBottom", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Rightward rows.
+        '''</summary>
+        Friend ReadOnly Property ViewCharsOrientationLeft() As String
+            Get
+                Return ResourceManager.GetString("ViewCharsOrientationLeft", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Leftward rows.
+        '''</summary>
+        Friend ReadOnly Property ViewCharsOrientationRight() As String
+            Get
+                Return ResourceManager.GetString("ViewCharsOrientationRight", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Upward rows.
+        '''</summary>
+        Friend ReadOnly Property ViewCharsOrientationTop() As String
+            Get
+                Return ResourceManager.GetString("ViewCharsOrientationTop", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Command Bar.
+        '''</summary>
+        Friend ReadOnly Property ViewCommandBar() As String
+            Get
+                Return ResourceManager.GetString("ViewCommandBar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Font Styles.
+        '''</summary>
+        Friend ReadOnly Property ViewFontAttrs() As String
+            Get
+                Return ResourceManager.GetString("ViewFontAttrs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Font Name.
+        '''</summary>
+        Friend ReadOnly Property ViewFontName() As String
+            Get
+                Return ResourceManager.GetString("ViewFontName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Font Size.
+        '''</summary>
+        Friend ReadOnly Property ViewFontSize() As String
+            Get
+                Return ResourceManager.GetString("ViewFontSize", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Keywords.
+        '''</summary>
+        Friend ReadOnly Property ViewKeywords() As String
+            Get
+                Return ResourceManager.GetString("ViewKeywords", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;View.
+        '''</summary>
+        Friend ReadOnly Property ViewMenu() As String
+            Get
+                Return ResourceManager.GetString("ViewMenu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Character Grid Titlebar Position.
+        '''</summary>
+        Friend ReadOnly Property ViewOrientation() As String
+            Get
+                Return ResourceManager.GetString("ViewOrientation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Bottom.
+        '''</summary>
+        Friend ReadOnly Property ViewOrientationBottom() As String
+            Get
+                Return ResourceManager.GetString("ViewOrientationBottom", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Left.
+        '''</summary>
+        Friend ReadOnly Property ViewOrientationLeft() As String
+            Get
+                Return ResourceManager.GetString("ViewOrientationLeft", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Right.
+        '''</summary>
+        Friend ReadOnly Property ViewOrientationRight() As String
+            Get
+                Return ResourceManager.GetString("ViewOrientationRight", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Top.
+        '''</summary>
+        Friend ReadOnly Property ViewOrientationTop() As String
+            Get
+                Return ResourceManager.GetString("ViewOrientationTop", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Status Bar.
+        '''</summary>
+        Friend ReadOnly Property ViewStatus() As String
+            Get
+                Return ResourceManager.GetString("ViewStatus", resourceCulture)
             End Get
         End Property
         

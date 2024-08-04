@@ -1,0 +1,390 @@
+﻿AboutLine1	Anwendung lizenziert unter der General Public License (GPL).	
+AboutLine2	JCL Bibliotheken lizenziert unter der Lesser General Public License (LGPL).	
+AboutLine3	Internet-Adresse: http://quickkeydotnet.sourceforge.net	
+AboutLine4	E-Mail: nathanaeljones@users.sourceforge.net	
+AboutPrefix	Info	
+ActionCopy	In Zwischenablage kopieren	
+ActionDrag	Drag and drop	
+ActionFocus	Zeichen auswählen	
+ActionMenu	Pop-Up-Menü anzeigen	
+ActionSend	Als Tastendruck senden	
+ActionTooltipPart1	Aktionen auswählen, die bei	
+ActionTooltipPart2	Mausklick ausgeführt werden	
+AddButton	&Neu	
+AddCharacterRange	Bereich von Zeichen hinzufügen	
+AddKeywordInstructions	Bitte gegen Sie den Klassennamen des Fensters an	
+AddUnicodeChar	Zeichen aus Unicode-Wert konvertieren	
+AnsiiValuePrefix	ANSII-Wert: 	
+Appearance	Erscheinungsbild ändern...	
+AppLoadedTooltip	Quick Key ist jetzt geladen	
+AppLoadingTooltip	Quick Key lädt...	
+ApplyButton	&Anwenden	
+AppRunningTooltip	Quick Key Character Keyboard	
+AutoHideButton	Automatisch ausblenden	
+AutoHideButtonTooltip	"Aktiviert/Deaktiviert automatisches Ausblenden. Dieses
+Fenster und die Toolbar werden verschwinden, wenn der Mauszeiger nicht darüber
+ist. Sie erscheinen wieder, wenn das 'auto-hide'-Fenster geklickt wird oder die Maus
+darüber ist."	
+ButtonColor	Button-Farbe	
+CancelButton	&Abbrechen	
+ChangeAppearance	Erscheinungsbild der Zeichentabelle ändern	
+CharacterButton	Zeichen	
+CharacterDoesNotExist	Zeichen existiert nicht!	
+CharacterGridAppearance	Erscheinungsbild der Zeichentabelle	
+CharacterProperties	Zeichen-Eigenschaften	
+CharacterRangeConfirmation1	Wenn Sie "Ja" wählen, werden die Zeichen hinzugefügt;	
+CharacterRangeConfirmation2	dies wird Quick Key signifikant ausbremsen. Es wird empfohlen "Nein" zu drücken und einen kleineren Bereich zu wählen.	
+CharacterRangeConfirmationTitle	Zu viele Zeichen!	
+CharsetChangedQuerySave	"Die Zeichentabelle wurde verändert.
+Möchten Sie die Änderungen speichern?"	
+CharsetChangedSuffix	Zeichentabelle verändert	
+CharsetNotFoundMessageText	Zeichentabelle konnte nicht gefunden werden. Die Datei könnte verschoben oder gelöscht worden sein.	
+CharsetNotFoundMessageTitle	Zeichentabelle konnte nicht geladen werden	
+CharsLocked	Zeichentabelle sperren	
+CharsLockedText	Die Zeichen der Zeichentabelle sind gesperrt und können nicht bewegt oder verändert werden, bevor diese Sperre aufgehoben wird.	
+CharsLockedTitle	Aktiviere schreibgeschützten Modus	
+CloseButton	Schließen	
+CloseButtonTooltip	Blendet die Zeichentabelle und die übrigen Fenster aus.	
+CommandsToolbarTooltip	Diese Buttons kontrollieren Datei-Operationen der Zeichentabelle und Zwischenablage-Aktionen.	
+Copy1	Kopieren	
+CopyHTML	HTML-Code kopieren	
+COriBottom	Zeilen von rechts nach links	
+COrientation	Anordnung	
+COriLeft	Zeilen von oben nach unten	
+COriRight	Zeilen von unten nach oben	
+COriTop	Zeilen von links nach rechts	
+CouldNotAddCharacter	Konnte Zeichen nicht hinzufügen!	
+CouldNotModifyCharacter	Konnte Zeichen nicht verändern!	
+Cut1	Ausschneiden	
+DarkEdge	Dunkle Kante	
+DecimalMode	Dezimal-Wert	
+DefaultTipTitle	Hinweis	
+Delete1	Entfernen	
+DisableAutoHide	Automatisches Ausblenden deaktivieren	
+Docked1	Automatisches Ausblenden aktivieren	
+DockedText	Sie haben automatisches Ausblenden aktiviert. Wenn Sie Zeichentabelle oder Toolbar nicht benutzen, werden diese verschwinden; das 'auto-hide'-Fenster wird jedoch bleiben. Bewegen Sie Ihre Maus über dieses Fenster, werden Zeichentabelle und Toolbar wieder erscheinen.	
+DockedTitle	Automatisches Ausblenden spart Bildschirmplatz	
+DoneButton	Fertig	
+DontShowTip	Diesen Hinweis nicht wieder zeigen	
+EditCharsAsTextDialogCaption	Zeichen als Text editieren	
+EditCopy	Zeichen kopieren	
+EditCopyAllChars	Alle Zeichen kopieren	
+EditCopyHTML	HTML-Code kopieren	
+EditCopyVisibleChars	Druckbare Zeichen kopieren	
+EditCut	Zeichen ausschneiden	
+EditDelete	Zeichen entfernen	
+EditMenu	&Bearbeiten	
+EditPaste	Zeichen einfügen (ein oder mehrere)	
+EditSend	Zeichen senden	
+ErrorLoadingCharacterSet	Fehler beim Laden der Zeichentabelle!	
+ErrorOpeningFile	Beim Öffnen der Datei ist ein Fehler aufgetreten. Die Datei ist möglicherweise beschädigt oder nicht verfügbar.	
+ExportFiltersDialogCaption	Zeichentabellen-Filter exportieren	
+ExportFiltersDialogFilter	Zeichentabelle (*.charset)|*.charset	
+ExportFiltersReadOnlyErrorCaption	Schreibgeschützte Datei überschreiben?	
+ExportFiltersReadOnlyErrorText	"Die Filter-Datei, die Sie zum Überschreiben gewählt haben, ist schreibgeschützt.
+Sind Sie sicher, dass Sie diese Datei verändern möchten?"	
+FileCharsLocked	&Zeichen gesperrt	
+FileDocked	&Automatisches Ausblenden	
+FileExit	&Beenden	
+FileExport	&Als Bericht exportieren...	
+FileHide	Toolbar schließen 	
+FileHideQuickKey	Schließen	
+FileImport	&Importieren	
+FileImportCharset	Aus Zeichen&tabelle...	
+FileImportCharsetAttrs	Alle &Attribute aus der Zeichentabelle	
+FileImportClipboard	Aus der &Zwischenablage...	
+FileImportFile	Aus &Datei...	
+FileLocked	&Gesperrt	
+FileMenu	&Datei	
+FilenamePrefix	Dateiname: 	
+FileNew	&Neu	
+FileNewBlank	&Leere Zeichentabelle	
+FileNewCopy	&Kopie dieser Zeichentabelle	
+FileNewCopyAttrs	Kopie dieser &Attribute	
+FileOpen	Ö&ffnen	
+FileReadOnly	Schreibgeschützt speichern	
+FileRecent	&Kürzlich benutzt	
+FileSave	&Speichern	
+FileSaveAllInfo	Alle Informationen speichern	
+FileSaveAs	Speichern &unter...	
+FileSaveCharacters	Zeichen speichern	
+FileSaveFilters	Filter speichern	
+FileSaveFont	Schriftart speichern	
+FileSaveFontAttrs	Schriftart-Attribute speichern	
+FileSaveOnlyCharacters	Ausschließlich Zeichen speichern	
+FileSaveSize	Schriftart-Größe speichern	
+Filter	F&ilter	
+FilterDefaults	Standard-Filter auswählen	
+FilterDeSelAll	Alle Filter deaktivieren	
+FilterExport	Filter exportieren...	
+FilterImport	Filter importieren...	
+FilterMenu	F&ilter	
+FilterReadOnly	Filter schreibgeschützt exportieren...	
+FilterSelAll	Alle Filter auswählen	
+FindButton	Finden	
+FocusedOutline	Äußerer Rahmen (Fokus)	
+FontBold	&Fett	
+FontBoxTooltip	Verändert die Schriftart	
+FontItalic	&Kursiv	
+FontMenu	&Schriftart	
+FontName	Schriftart: 	
+FontPrefix	Schriftart: 	
+FontSize	Größe: 	
+FontSizeTooltip	Verändert die Größe der Schriftart	
+FontStrikeout	&Durchgestrichen	
+FontStyleTooltip	Verändert die grafischen Attribute der Schriftart	
+FontUnderline	&Unterstrichen	
+GenericErrorMessage	"Ich hab mich verheddert! Gratulation, Sie haben gerade einen Bug gefunden.
+Was auch immer gerade passiert ist, es war sehr unerwartet.
+Bitte öffnen Sie Ihr E-Mail-Programm und senden Sie eine Nachricht an:
+nathanaeljones@users.sourceforge.net
+Bitte teilen Sie mir mit, was Sie getan haben, als dieser Fehler aufgetreten ist, und fügen Sie bitte die Fehler-Nachricht hinzu.
+Die Fehler-Nachricht erhalten Sie am einfachsten per Rechts-Klick auf das Tray-Icon und 'Ereignis-Prokoll'.
+Es ist sehr wichtig, dass Sie diesen Fehler melden, da er ansonsten möglicherweise niemals korrigiert wird.
+Es wird empfohlen, dass Sie ihre Arbeit speichern und Quick Key so bald wie möglich neu starten.
+Vielen Dank für Ihre Unterstützung.
+Bitte wählen Sie 'Ja' um Quick Key fortzusetzen oder 'Nein', wenn diese Nachricht immer wieder auftaucht."	
+HelpAbout	&Info	
+HelpHelpTopics	&Hilfe-Themen	
+HelpMenu	&Hilfe	
+HelpTips	Hinweise	
+HelpTipsHide	Hinweise verstecken	
+HelpTipsReset	Hinweise zurücksetzen	
+HexadecimalMode	Hexadezimal-Wert	
+HideMe	Schließen	
+HideQuickKey	Bitte beachten Sie, dass sie Quick Key nur minimiert haben. Um Quick Key komplett zu schließen, wählen sie bitte "Beenden".	
+IconLoadingError	Beim Laden der Titelzeilen-Icons der Zeichentabelle ist ein Fehler ist aufgetreten. Diese werden möglicherweise fehlerhaft angezeigt.	
+ImportCharsetAttrsDialogCaption	Attribute aus Zeichentabelle importieren	
+ImportCharsetAttrsDialogFilter	Zeichentabelle (*.charset)|*.charset	
+ImportCharsetDialogCaption	Von Zeichentabelle importieren	
+ImportCharsetDialogFilter	Zeichentabelle (*.charset)|*.charset	
+ImportClipboardDialogCaption	Aus Zwischenablage importieren	
+ImportFileDialogCaption	Aus Datei importieren	
+ImportFileDialogFilter	Alle Dateien (*.*)|*.*|Textdateien (*.txt;*.doc;*.rtf;*.htm)|*.txt;*.doc;*.rtf;*.htm)	
+ImportFiltersDialogCaption	Filter aus Zeichentabelle importieren	
+ImportFiltersDialogFilter	Zeichentabelle (*.charset)|*.charset	
+InvalidPath	Der angegebene Pfad ist ungültig. Bitte geben Sie einen gültigen Dateinamen an.	
+KeywordBoxTooltip	Die Anwendung ändern, die die Zeichen empfängt.	
+KeywordLastWindowCantBeDeleted	Das Schlüsselwort "Letztes Fenster" kann nicht entfernt werden. Es repräsentiert das Fenster unter Quick Key.	
+Keywords	&Schlüsselwörter	
+KeywordsAddBottom	Eintrag am Ende hinzufügen	
+KeywordsAddTop	Eintrag am Anfang hinzufügen	
+KeywordsDelBottom	Untersten Eintrag entfernen	
+KeywordsDelTop	Obersten Eintrag entfernen	
+KeywordsEdit	Schlüsselwörter &editieren...	
+KeywordsMenu	&Schlüsselwörter	
+LastWindow	Letztes Fenster	Dieses Schlüsselwort repräsentiert das Fenster direkt unter Quick Key.
+LightEdge	Helle Kante	
+LockButton	Sperren	
+LockButtonTooltip	"Aktiviert/Deaktiviert Größen- und Positionsveränderungen der
+Zeichentabelle und der übrigen Fenster."	
+Locked1	Sperr-Position	
+LockedText	Alle Fenster wurden gesperrt und können weder in der Größe noch in der Position verändert werden. Das verhindert jedoch nicht eine Änderung der Zeichentabelle. Um dies zu erreichen, wählen Sie bitte "Zeichen sperren".	
+LockedTitle	Dieses Feature verhindert unabsichtliche Verschiebung der Zeichentabelle.	
+MenuAbout	Info	
+MenuAutohide	Automatisches Ausblenden	
+MenuCharacterGrid	Zeichentabelle	
+MenuEventLog	Ereignis-Protokoll	
+MenuExit	Beenden	
+MenuHelp	Hilfe	
+MenuHelpTopics	Hilfe-Themen	
+MenuHideTips	Hinweise verstecken	
+MenuOptions	Optionen	
+MenuResetTips	Hinweise zurücksetzen	
+MenuToolbar	Toolbar	
+MouseButtonActions	Mausklick-Aktionen	
+MouseButtonLeft	Links	
+MouseButtonMiddle	Mitte	
+MouseButtonRight	Rechts	
+MouseButtonX1	Extra-Taste 1	
+MouseButtonX2	Extra-Taste 2	
+MouseSettings	Maus-Einstellungen	
+NoCharacterEntered	Kein Zeichen eingegeben	
+NormalOutline	Äußere Button-Umrandung	
+OKButton	OK	
+OpenCharsetDialogCaption	Zeichentabelle öffnen	
+OpenCharsetDialogFilter	Zeichentabelle (*.charset)|*.charset	
+OpenCharsetErrorCaption	Fehler beim Laden der Datei	
+OpenCharsetFileCorrupt	Datei ist beschädigt!	
+OpenCharsetFileDoesNotExist	Datei existiert nicht!	
+OpenCharsetFileEmpty	Datei ist leer!	
+OptionsAddButton	Neu	
+OptionsAddButtonTooltip	Ein Schlüsselwort zur Liste hinzufügen	
+OptionsApplyButtonTooltip	Speichert alle Änderungen, schließt aber nicht diesen Dialog.	
+OptionsCancelButtonTooltip	Schließt den Dialog ohne die Änderungen zu übernehmen.	
+OptionsClipboardSendKeys	Zwischenablage + SendKeys (Einfügen); benutzen, wenn 'Send Input' fehlschlägt.	
+OptionsDialog	"Hier können den Maustasten Aktionen zugewiesen werden. Jede Taste hat ein Tab, das eine Liste der möglichen Aktionen enthält.
+Schlüsselwörter sind die internen Code-Namen der Fenster, auch Klassenname genannt. Zum Beispiel ist Microsoft Word stets 'OpusApp', während Outlook Express für das Nachrichten-Verfassen- und für das Haupt-Fenster jeweils eigene Klassennamen hat ('ATH_Note' bzw. 'Outlook Express Browser Class').
+Um ein neues Schlüsselwort hinzuzufügen, wählen Sie bitte 'Neu', dann 'Finden'. Dies öffnet ein Werkzeug, mit dem Sie mit Hilfe eines Fenster-Titels dessen Klassenname ermitteln können.
+Für GTK+-Anwendungen ist es vermutlich notwendig, die Übertragungsmethode auf 'Zwischenablage + SendKeys' zu setzen. Diese Methode funktioniert mit mehr Anwendungen, überschreibt aber den Inhalt der Zwischenablage."	
+OptionsDialogTitle	Details, Details, Details...	
+OptionsMoveDownButton	Nach unten	
+OptionsMoveUpButton	Nach oben	
+OptionsOKButtonTooltip	Speichert alle Änderungen und schließt diesen Dialog.	
+OptionsRemoveButton	Entfernen	
+OptionsRemoveButtonTooltip	Das ausgewählte Schlüsselwort aus der Liste entfernen	
+OptionsSendDelay	Millisekunden, für die zwischen Umschalten der Fenster zum Senden der Eingabe gewartet wird.	
+OptionsSendInput	Send Input API (Empfohlen); verändert nicht die Zwischenablage.	
+OptionsSendKeys	Send Keys (Sicherer, aber eingeschränkter)	
+OptionsSendMethod	Bitte wählen Sie die Methode, die zur Übertragung der Zeichen verwendet wird.	
+OptionsWindowTitle	Optionen	
+OriBottom	Unten	
+Orientation	Position der Titelzeile	
+OriLeft	Links	
+OriRight	Rechts	
+OriTop	Oben	
+OutsideRimColor	Äußere Rahmen-Farbe	
+Paste1	Einfügen	
+PasteButton	Einfügen	
+PermissionDenied	Zugriff verweigert	
+Properties	Eigenschaften	
+QK	QK	
+QuickKey	Quick Key	
+QuickKeyFormNewError	Beim Initialisieren der Zeichentabelle ist ein Fehler aufgetreten. Noch einmal versuchen?	
+QuickKeyText	"Bitte ändern Sie 'Letztes Fenster' in 'OpusApp', wenn sie Microsoft Word verwenden. Dies vereinfacht die Benutzung der Tastatur in der Verbindung mit Quick Key, außerdem wird das Flackern beim Umschalten der Fenster vermieden.
+Überprüfen Sie auch bitte die Rechts-Klick-Menüs der Titelbar und der Zeichen der Zeichentabelle.
+Die Anordnung der Zeichen kann durch ziehen der Zeichen mit der mittleren Maustaste verändert werden.
+Benötigen Sie einen anderen Zeichenvorrat, benutzen Sie bitte das 'Datei'-Menü der Toolbar.
+Für manche Anwendungen müssen Sie möglicherweise die Zeichenübertragungsmethode in den Optionen ändern. Dies betrifft zur Zeit nur GTK+-Anwendungen."	
+QuickKeyTitle	Wichtige Hinweise	
+ReadFileError	Diese Datei kann nicht gelesen werden. Bitte schließen Sie alle Programme, die diese Datei benutzen, und versuchen Sie es erneut.	
+RecentCharsets	Kürzlich benutzte Zeichentabellen	
+ResetAllButton	ALLES zurücksetzen	
+ResetButton	Zurücksetzen	
+SaveCharsetDialogFilter	Zeichentabelle (*.charset)|*.charset	
+SaveCharsetDialogTitle	Zeichentabelle speichern unter	
+SaveCharsetErrorCaption	Fehler beim Speichern der Datei	
+SaveCharsetOverwriteCaption	Datei überschreiben?	
+SaveCharsetOverwriteText	"Eine Datei dieses Namens existiert bereits. 
+Sind Sie sicher, dass diese Datei überschrieben werden soll?"	
+SaveCharsetReadOnlyErrorText	"Die zu überschreibende Datei ist schreibgeschützt!
+Sie müssen entweder einen anderen Dateinamen oder 'Schreibgeschützt speichern' auswählen."	
+Send	Senden	
+SendBadCharacter	Es wurde versucht eines der folgenden reservierten Zeichen zu senden: (){}+^%~  . Benötigen Sie eines in Ihrem Dokument, ziehen Sie es bitte per Drag & Drop oder über die Zwischenablage hinein.	
+SendSettings	Einstellungen senden	
+SettingsCouldNotBeSavedPrefix	Quick Keys Einstellungen konnten nicht gespeichert werden. Überprüfen Sie, ob Sie als Administrator eingeloggt sind.	
+SettingsCouldNotBeSavedSuffix	konnten nicht gespeichert werden.	
+SettingsFileError	Ein Fehler wurde in der Konfigurationsdatei entdeckt. Wählen Sie "Ja" zum Fortsetzen und Laden der Standard-Einstellungen oder "Nein" zum Beenden des Programms.	
+SettingsFileErrorTitle	Fehler in der Konfigurationsdatei	
+SettingsSavingError	Beim Speichern der Einstellungen von Quick Key ist ein Fehler aufgetreten! Alle ungesicherten Änderungen könnten verloren gegangen sein.	
+ShowToolbar	Toolbar anzeigen	
+SizePrefix	Größe: 	
+StartupTipText	Willkommen bei Quick Key!	
+StartupTipTitle	Vielen Dank, dass Sie Quick Key installiert haben!	
+StatusBarTooltip	Diese Statuszeile zeigt Informationen über das Zeichen an, über dem der Mauszeiger ist	
+SystemInfo	System-Info...	
+TabCharacters	Zeichen	
+TabKeywords	Schlüsselwörter	
+TabMouseSettings	Maus-Einstellungen	
+TabSendSettings	Zeichen-Übertragung	
+TextColor	Text-Farbe	
+TextTab	Text	
+TitleBar	Titelzeile	
+ToolbarTitle	Quick Key Toolbar	
+ToolbarTitleNewCharset	Quick Key [Toolbar] - Neue Zeichentabelle	
+ToolbarTitlePrefix	Quick Key [Toolbar] - 	
+ToolsEditText	&Zeichen als Text editieren	
+ToolsGetUnicodeChar	Zeichen aus Unicode-Wert	
+ToolsGetUnicodeChars	Einen Bereich von Zeichen hinzufügen	
+ToolsMenu	Ex&tras	
+ToolsOptions	&Optionen	
+ToolsSortAsc	Zeichen nach ihrem Unicode-Wert sortieren (aufsteigend)	
+ToolsSortDes	Zeichen nach ihrem Unicode-Wert sortieren (absteigend)	
+UnicodeCategoryPrefix	Unicode-Kategorie: 	
+UnicodeValuePrefix	Unicode-Wert: 	
+UpgradeTipText	Vielen Dank für Ihre Unterstützung	
+UpgradeTipTitle	Bedenken Sie, was Sie verpassen...	
+Version	Version	
+ViewCharsOrientation	Orientierung der Zeichen-Sortierung	
+ViewCharsOrientationBottom	Zeilen von oben nach unten	
+ViewCharsOrientationLeft	Zeilen von links nach rechts	
+ViewCharsOrientationRight	Zeilen von rechts nach links	
+ViewCharsOrientationTop	Zeilen von unten nach oben	
+ViewCommandBar	Standard-Befehle	
+ViewFontAttrs	Schriftart-Stil	
+ViewFontName	Schriftart-Name	
+ViewFontSize	Schriftart-Größe	
+ViewKeywords	Schlüsselwörter	
+ViewMenu	&Ansicht	
+ViewOrientation	Position der Titelzeile der Zeichentabelle	
+ViewOrientationBottom	&Unten	
+ViewOrientationLeft	&Links	
+ViewOrientationRight	&Rechts	
+ViewOrientationTop	&Oben	
+ViewStatus	Status-Zeile	
+	
+
+
+ClickToShowChars	Klicken zum Anzeigen der Zeichen	
+LargeCharsetPart1	Dies ist eine sehr große Zeichentabelle (	
+LargeCharsetPart2	" Zeichen) und benötigt eventuell mehrere Minuten zum Anzeigen!
+Möchten Sie die Zeichen wirklich anzeigen lassen?
+Beachten Sie, dass jede kleinste Änderung sehr lange dauern wird.
+Möglicherweise ist das Feature 'Zeichen als Text editieren' aus dem
+Werkzeuge-Menü besser geeignet."	
+LargeCharsetTitle	Große Zeichentabelle	
+LoadingChars	Lade Zeichen...	
+NoCharacters	Keine Zeichen!	
+ResizingChars	Skaliere Zeichen...	
+
+
+
+btnCopy.Text    Kopieren
+btnOK.Text      &Ok
+btnRefresh.Text &Aktualisieren
+chkError.Text   Fehler
+chkLifetime.Text        Lebensdauer
+chkMajor.Text   Wichtige Ereignisse
+chkMinor.Text   Geringfügige Ereignisse
+chkWarning.Text Warnungen
+lblDisplay.Text Anzuzeigende Ereignisse wählen:
+lblDisplayApps.Text     Zu berücksichtigende Instanzen des Programms:
+optAll.Text     Alle
+optFive.Text    Die letzten fünf
+optOne.Text     Diese Instanz
+optTen.Text     Die letzten zehn
+optTwo.Text     Die letzten zwei
+
+> Quick Key displays two graphical tips containing text. I extracted
+> the text for you below, and attached the images.
+
+
+> The Welcome tip: (Feel free to rephrase this to make it more
+> understandable)
+>
+> Quick Key
+> Foreign Character Keyboard
+> Left click any character to type it. Mouse settings are modified in Options.
+> Keystrokes are sent to the last application used; however, it is better if
+> you manually chose which application to send to by selecting the associated
+> Keyword.
+
+Quick Key
+Foreign Character Keyboard
+-> Links-Klick auf ein Zeichen, um es einzugeben. Mauseinstellungen
+können unter Optionen geändert werden.
+-> Die Zeichen werden zum letztbenutzten Fenster gesendet; es ist aber
+empfohlen, das Zielfenster per Schlüsselwort präziser festzulegen.
+
+
+
+> Tired of Tips?
+Genug der Hinweise?
+> Just click Hide Tips in the Help menu. The Help menu can be found by
+> right-clicking the icon.
+Einfach "Hinweise verstecken" im Hilfe-Menü wählen. Das Hilfe-Menü kann
+per Rechts-Klick auf das Tray-Icon aufgerufen werden.
+
+> Open Quick Key by right-clicking this icon:
+Quick Key öffnen per Rechts-Klick auf dieses Icon:
+
+> Please Upgrade Soon
+> Your version of Quick Key is out of date. Please go to
+> http://quickeydotnet.sourceforge.net to download the latest version for
+> free. Upgrades include new features, bug fixes, and fewer annoying messages
+> like these.
+Bitte aktualisieren Sie Quick Key
+Es gibt eine aktuellere Version von Quick Key. Bitte gehen Sie auf
+http://quickeydotnet.sourceforge.net zum Downloaden der neuesten
+Version. Neue Versionen enthalten neue Features, Bug-Fixes and weniger
+irritierende Nachrichten wie diese.

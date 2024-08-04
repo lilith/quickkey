@@ -1,0 +1,20 @@
+[OPTIONS]
+Auto Index=Yes
+Compatibility=1.1 or later
+Compiled file=QuickKeyHelp.chm
+Contents file=toc.hhc
+Default Window=Main
+Default topic=QuickKey Overview.htm
+Display compile progress=Yes
+Language=0x409 English (United States)
+Title=Quick Key Help
+
+[WINDOWS]
+Main="Quick Key Help","toc.hhc",,"QuickKey Overview.htm","QuickKey Overview.htm",,,,,0x2100,,0x204e,[271,372,991,912],,0x8,,,,,0
+
+
+[FILES]
+QuickKey Overview.htm
+
+[INFOTYPES]
+
