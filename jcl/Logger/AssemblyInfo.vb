@@ -30,7 +30,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("Logger")> 
 <Assembly: AssemblyDescription("Reusable error logger")> 
-<Assembly: AssemblyCompany("Jones Software Co.")> 
+<Assembly: AssemblyCompany("Nathanael Jones")> 
 <Assembly: AssemblyProduct("Logger")> 
 <Assembly: AssemblyCopyright("Copyright (c) 2005")> 
 <Assembly: AssemblyTrademark("")> 

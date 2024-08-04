@@ -1,0 +1,88 @@
+Changelog
+
+2-20-06
+
+Utils:
+Added FindNextWindow API to APIS.Declarations
+
+Event Log Viewer:
+Defaulted to five instances, added copy button, changed RichTextBox to a Text Box, set it to scroll down automatically
+
+CharacterGrid:
+Added CopyHTMLCode feature to context menu, and the property to hide it.
+
+
+Removed some old commented code
+Removed class-local filter array, now references UnicodeFilters.
+
+Factored out the Pasting code, and added some data validity checks to most clipboard methods
+Added RaiseEvent CharsLoaded call
+Removed numerous unused events (all Before* and After* events, + Flatstylechanged
+
+Modified the method that consumes key shortcuts to set the e.handled property accordingly
+
+CharacterButton:
+The evidently unneccesary graphics.clear statement was removed.
+The MyBase.OnPaint was moved to a location after the "repaint neccesary" check.
+
+
+MouseSettingsClass:
+Changed the default mouse settings:
+Left now functions for sending as well as dragging.
+Middle copies
+Right displays the menu
+XButton1 now does drag-and-drop
+XButton2 selects
+
+FontDropDown:
+Modified FontComboBox to load fonts differently; font name extraction occurs in a separate for loop, and ComboBox.addrange is used instead of individual combobox.add commands. This change results in a .6 second cut in loading time.
+
+2-6-06
+      Changed tool-tips for characters
+1-25-06
+1. Included missing charset files in the new setup
+2. Fixed the titles on the character orientation menu
+3. Stopped the delete key from working in when the Toolbar has focus
+4. Made the Options dialog a little larger
+5. Rewrote the error handler
+6. Updated the version of the JCL being used:
+7. Modified PasteFocused() code to watch out for when no characters are loaded, so that focus is not applied to control (-1)
+8. Modified tooltip listing
+9. Modified “Do you want to display” dialog, and its conditions. Also changed “No Characters!” to “Click to display characters”
+10. Fixed multiple problems with pasting into a character set.
+11. Fixed pop-under warning message
+12. Solved more sending problems… Now using SendInput()
+5.1.2215.25544 1/24/2006
+1. All character sets were rebuilt to be compliant with the latest Unicode specification, as well as reorganized
+2. Made all icons embedded resources
+3. Upgraded toolbar icons
+4. Rebuilt Setup
+5. Defaulted the installation type to “everyone”
+6. Defaulted the toolbar to “on”
+5.1.2214.12845 1/23/2006
+7. Options dialog bug fixed
+8. Inserted delay to fix keystroke sending
+5.1.2210.14702 1/19/2004
+9. System Shutdown Bug mitigated
+5.1.0 5/17/2004
+1. Better error handling for missing resources and access denied scenarios. 
+2. Improved clipboard code. Menu items disabled when unusable
+3. Tips System
+5.1.0 1/17/2004
+1. Font change error – When selecting a font for the first time, the font name in the font box may appear normal, but the characters will not change their appearance. 
+5.0.1 1/4/2004
+1. Window Error – While using one of the import dialog boxes, you may encounter an error stating “Cannot create window handle” or “Cannot reference to disposed object”.  If This happens, click abort and restart the program. 
+5.0.1 12/29/2003
+2. Unreliability in character sending due to the antiquated system API’s dictated by the format of the .NET Framework
+3. Character Operations Bug on Bottom and Right Character Orientation – dragging and dropping or cut and paste operations may have unexpected results if performed while character orientation is set to bottom or right. To modify the character list, select a different orientation until all necessary modifications are complete. 
+4. Event Log Viewer – Here is the event Log Viewer at last. Not exactly as I envisioned it, but it should work as a temporary bug tracking utility.
+5.0.1 11/24/2003
+1. Keyword Support and character sending
+2. Larger Help File
+3. System Startup Bug Fix
+
+Once again, please notify me of any problems Quick Key may exhibit and send any suggestions or comments to nathanaeljones@users.sourceforge.net  
+
+			Thank You,
+				Nathanael Jones
+

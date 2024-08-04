@@ -28,7 +28,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("UIElements")> 
 <Assembly: AssemblyDescription("Commonly used controls")> 
-<Assembly: AssemblyCompany("Jones Software Co.")> 
+<Assembly: AssemblyCompany("Nathanael Jones")> 
 <Assembly: AssemblyProduct("UIElements")> 
 <Assembly: AssemblyCopyright("Copyright (c) 2005")> 
 <Assembly: AssemblyTrademark("")> 

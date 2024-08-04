@@ -19,6 +19,50 @@
 Imports System.Windows.Forms
 Imports System.Drawing
 
+#Region "Character EventArgs"
+Public Class CharEventArgs
+    Inherits EventArgs
+
+    Public Sub New(ByRef cb As CharacterButton, ByVal c As String, ByVal index As Integer)
+        Character = c
+        Me.Index = index
+        Me.Button = cb
+    End Sub
+
+    Private characterValue As String = ""
+    Public Property Character() As String
+        Get
+            Return characterValue
+        End Get
+        Set(ByVal value As String)
+            characterValue = value
+        End Set
+    End Property
+    Private indexValue As Integer = -1
+    Public Property Index() As Integer
+        Get
+            Return indexValue
+        End Get
+        Set(ByVal value As Integer)
+            indexValue = value
+        End Set
+    End Property
+    Private ButtonValue As CharacterButton = Nothing
+    Public Property Button() As CharacterButton
+        Get
+            Return ButtonValue
+        End Get
+        Set(ByVal value As CharacterButton)
+            ButtonValue = value
+        End Set
+    End Property
+
+
+
+End Class
+#End Region
+
+
 #Region "Character Display Control"
 
 Public Class CharacterDisplay
@@ -27,57 +71,129 @@ Public Class CharacterDisplay
 #Region "Event Declarations"
 
     Public Event CharacterListChanged(ByVal sender As CharacterDisplay)
+
+
+    ''' <summary>
+    ''' This event occurs when the character leaves a character button, or the main area.
+    ''' This event can occur multiple times
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <remarks></remarks>
     Public Event OffCharacter(ByVal sender As CharacterDisplay)
-    Public Event OnCharacter(ByVal sender As CharacterDisplay, ByVal c As Char, ByVal AnsiiCode As String, ByVal UnicodeCode As String, ByVal UnicodeCategory As String, ByVal UnicodeDefinition As String)
+
+    ''' <summary>
+    ''' This event occurs when the cursor enters the client region of a character button
+    ''' This event can be used to display a tool-tip, etc.
+    ''' </summary>
+    ''' <param name="sender">The CharacterDisplay instace</param>
+    ''' <param name="e">The character that was enteresd</param>
+    ''' <remarks></remarks>
+    Public Event OnCharacter(ByVal sender As CharacterDisplay, ByVal e As CharEventArgs)
+
+
+
     Public Event LoadingChars(ByVal sender As CharacterDisplay)
     Public Event CharsLoaded(ByVal sender As CharacterDisplay)
     Public Event ResizingChars(ByVal sender As CharacterDisplay)
     Public Event CharsResized(ByVal sender As CharacterDisplay)
     Public Event NoChars(ByVal sender As CharacterDisplay)
     Public Event SomeChars(ByVal sender As CharacterDisplay)
-    Public Event FlatStyleChanged(ByVal sender As CharacterDisplay)
 
-    Public Event CharsInserted(ByVal sender As CharacterDisplay, ByVal intChar As Integer, ByVal c As String)
-    Public Event CharDeleted(ByVal sender As CharacterDisplay, ByVal intChar As Integer)
+    ''' <summary>
+    ''' Occurs when characters are inserted into the character list
+    ''' </summary>
+    ''' <param name="sender">The CharacterDisplay instace</param>
+    ''' <param name="e">The button and index to insert after, and the text to insert</param>
+    ''' <remarks></remarks>
+    Public Event CharsInserted(ByVal sender As CharacterDisplay, ByVal e As CharEventArgs)
+    ''' <summary>
+    ''' Occurs when a character is deleted (or moved, which is a insert/delete combination)
+    ''' </summary>
+    ''' <param name="sender">The CharacterDisplay instace</param>
+    ''' <param name="e">The deleted character</param>
+    ''' <remarks></remarks>
+    Public Event CharDeleted(ByVal sender As CharacterDisplay, ByVal e As CharEventArgs)
 
-    Public Event AfterCharacterClick(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
-    Public Event BeforeCharacterClick(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
+    ''' <summary>
+    ''' The parent should disable all context menu commands in viewonly mode
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Public Event ViewOnlyChanged(ByVal sender As CharacterDisplay, ByVal e As System.EventArgs)
+
+    ''' <summary>
+    ''' The parent should disable all non-readonly commands in non-editable mode
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Public Event EditableChanged(ByVal sender As CharacterDisplay, ByVal e As System.EventArgs)
-    Public Event AfterCharacterDrag(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
 
-    Public Event AfterCharacterCopy(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
-    Public Event AfterCharacterSend(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
-    Public Event AfterCharacterSelect(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
-    Public Event AfterCharacterMenu(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
-
-    Public Event BeforeCharacterDrag(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
-    Public Event BeforeCharacterCopy(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
-    Public Event BeforeCharacterSend(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
-    Public Event BeforeCharacterSelect(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
-    Public Event BeforeCharacterMenu(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
-
-    Public Event SendCharacter(ByVal sender As CharacterDisplay, ByVal intChar As Integer, ByVal c As Char)
-    Public Event CharacterProperties(ByVal sender As CharacterDisplay, ByVal intChar As Integer, ByVal c As Char)
-    Public Event MouseSettingsClicked(ByVal sender As CharacterDisplay, ByVal e As EventArgs)
+    ''' <summary>
+    ''' This event tells the parent to perform a send operation on the specified character
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Public Event SendCharacter(ByVal sender As CharacterDisplay, ByVal e As CharEventArgs)
+    'Public Event CharacterProperties(byval sender As CharacterDisplay, ByVal intChar As Integer, ByVal c As Char)
+    'Public Event MouseSettingsClicked(byval sender As CharacterDisplay, ByVal e As EventArgs)
 
     Public Event FocusedColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
     Public Event LightEdgeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
     Public Event DarkEdgeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
     Public Event NormalOutlineColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-    'Public Event BackColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-    'Public Event TextColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+
     Public Event ButtonColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+
+    ''' <summary>
+    ''' This event tells the parent to display a context menu for the character
+    ''' </summary>
+    ''' <param name="sender">The CharacterDisplay instace</param>
+    ''' <param name="e">The character that was right-clicked</param>
+    ''' <remarks></remarks>
+    Public Event ShowCharMenu(ByVal sender As CharacterDisplay, ByVal e As CharEventArgs)
+
+    ''' <summary>
+    ''' This event tells the parent that the context menu for the "No Chars" message should be shown
+    ''' </summary>
+    ''' <param name="sender">The CharacterDisplay instace</param>
+    ''' <remarks></remarks>
+    Public Event ShowNoCharsMenu(ByVal sender As CharacterDisplay)
+#Region "old"
+
+    'Public Event FlatStyleChanged(byref sender As CharacterDisplay)
+
+    'Public Event AfterCharacterClick(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+    'Public Event BeforeCharacterClick(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+    'Public Event BackColorChanged(byref sender As Object, ByVal e As System.EventArgs)
+    'Public Event TextColorChanged(byref sender As Object, ByVal e As System.EventArgs)
+    'Public Event AfterCharacterDrag(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+    'Public Event AfterCharacterCopy(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+    'Public Event AfterCharacterSend(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+    'Public Event AfterCharacterSelect(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+    'Public Event AfterCharacterMenu(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+
+    'Public Event BeforeCharacterDrag(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+    'Public Event BeforeCharacterCopy(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+    'Public Event BeforeCharacterSend(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+    'Public Event BeforeCharacterSelect(byref sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+    'Public Event BeforeCharacterMenu(ByVal sender As CharacterDisplay, ByVal Buttons As MouseButtons, ByVal ModifierKeys As Keys, ByVal CharacterNumber As Integer, ByVal Character As Char)
+
+#End Region
+
+
 #End Region
 
 #Region "New Subroutine"
@@ -85,6 +201,7 @@ Public Class CharacterDisplay
     Public Sub New()
         MyBase.New()
 
+		Me.DoubleBuffered = True
         'Me.Visible = False
         'This call is required by the Windows Form Designer.
         InitializeComponents()
@@ -103,18 +220,7 @@ Public Class CharacterDisplay
     Friend WithEvents lblBack As System.Windows.Forms.Label
     Protected WithEvents pnlBack As System.Windows.Forms.Panel
     Protected WithEvents tmrSize As System.Windows.Forms.Timer
-    Protected WithEvents ttTips As System.Windows.Forms.ToolTip
     Protected WithEvents lblSep As Label
-    Protected WithEvents cmCharMenu As ContextMenu
-    Protected WithEvents mnuSelect As System.Windows.Forms.MenuItem
-    Protected WithEvents mnuSend As System.Windows.Forms.MenuItem
-    Protected WithEvents mnuCut As System.Windows.Forms.MenuItem
-    Protected WithEvents mnuCopy As System.Windows.Forms.MenuItem
-    Protected WithEvents mnuPaste As System.Windows.Forms.MenuItem
-    'Protected WithEvents mnuPasteAfterThisChar As System.Windows.Forms.MenuItem
-    Protected WithEvents mnuDelete As System.Windows.Forms.MenuItem
-    Protected WithEvents mnuProperties As System.Windows.Forms.MenuItem
-    Protected WithEvents mnuSettings As System.Windows.Forms.MenuItem
 #End Region
 
 #Region "Component Initialization Procedure"
@@ -124,50 +230,6 @@ Public Class CharacterDisplay
         Me.pnlBack = New System.Windows.Forms.Panel()
         Me.tmrSize = New System.Windows.Forms.Timer()
         Me.lblBack = New System.Windows.Forms.Label()
-        Me.ttTips = New System.Windows.Forms.ToolTip()
-
-        ttTips.ShowAlways = True
-
-        cmCharMenu = New ContextMenu()
-        mnuSelect = New MenuItem("Select")
-        mnuSend = New MenuItem("&Send")
-        mnuCut = New MenuItem("Cut")
-        mnuCopy = New MenuItem("Copy")
-        mnuPaste = New MenuItem("Paste")
-        'mnuPasteAfterThisChar = New MenuItem("Paste Here")
-        mnuDelete = New MenuItem("Delete")
-        mnuProperties = New MenuItem("Properties")
-        mnuSettings = New MenuItem("Mouse Settings...")
-        'mnuSend.Enabled = False
-        mnuCut.Shortcut = Shortcut.CtrlX 'Or Shortcut.ShiftDel
-        mnuCopy.Shortcut = Shortcut.CtrlC 'Or Shortcut.CtrlIns
-        mnuPaste.Shortcut = Shortcut.CtrlV 'Or Shortcut.ShiftIns
-        mnuDelete.Shortcut = Shortcut.Del
-        ' mnuproperties.Shortcut = shortcut.ctr
-
-        cmCharMenu.MenuItems.Add(mnuSelect)
-        cmCharMenu.MenuItems.Add("-")
-        cmCharMenu.MenuItems.Add(mnuSend)
-        cmCharMenu.MenuItems.Add("-")
-        cmCharMenu.MenuItems.Add(mnuCut)
-        'cmCharMenu.MenuItems.Add("-")
-        cmCharMenu.MenuItems.Add(mnuCopy)
-        'cmCharMenu.MenuItems.Add("-")
-        cmCharMenu.MenuItems.Add(mnuPaste)
-        'cmCharMenu.MenuItems.Add("-")
-        cmCharMenu.MenuItems.Add(mnuDelete)
-        cmCharMenu.MenuItems.Add("-")
-
-        'cmCharMenu.MenuItems.Add(mnuPasteAfterThisChar)
-        'cmCharMenu.MenuItems.Add("-")
-
-        cmCharMenu.MenuItems.Add(mnuProperties)
-
-        cmCharMenu.MenuItems.Add("-")
-
-
-
-        cmCharMenu.MenuItems.Add(mnuSettings)
 
         Me.lblSep = New Label()
         Me.SuspendLayout()
@@ -189,9 +251,10 @@ Public Class CharacterDisplay
         Me.lblBack.Name = "lblBack"
         Me.lblBack.Size = New System.Drawing.Size(280, 192)
         Me.lblBack.TabIndex = 1
-        Me.lblBack.Text = "Loding Characters..."
+        Me.lblBack.Text = My.Resources.NoCharacters
         Me.lblBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         lblBack.AllowDrop = m_blnEditable
+
 
 
 
@@ -210,30 +273,12 @@ Public Class CharacterDisplay
         lblBack.BringToFront()
         lblSep.BringToFront()
         Me.Name = "CharacterDisplay"
+        Me.BackColor = SystemColors.Window
         Me.Size = New System.Drawing.Size(280, 192)
         Me.AllowDrop = True
         Me.ResumeLayout(False)
 
     End Sub
-
-#End Region
-
-#Region "Status Strings"
-
-    Private Const cm_strLoadingCharacters As String = "Loading Characters..."
-    Private Const cm_strNoCharacters As String = "No Characters!"
-    Private Const cm_strResizingCharacters As String = "Resizing Characters..."
-
-#End Region
-
-#Region "Last Focused Char Property (Readonly)"
-
-    Public ReadOnly Property LastFocusedChar() As CharacterButton
-        Get
-            Return Me.m_cbLastFocused
-        End Get
-
-    End Property
 
 #End Region
 
@@ -262,13 +307,6 @@ Public Class CharacterDisplay
                 lblBack.AllowDrop = Value
             Catch
             End Try
-            'lblSep.AllowDrop = Value
-
-            mnuCut.Enabled = Value
-            mnuPaste.Enabled = Value
-            'mnuPasteAfterThisChar.Enabled = Value
-            mnuDelete.Enabled = Value
-            mnuProperties.Enabled = Value
 
             If Value Then
                 ViewOnly = False
@@ -288,13 +326,13 @@ Public Class CharacterDisplay
         End Get
         Set(ByVal Value As Boolean)
             m_blnViewOnly = Value
-            mnuSend.Enabled = Not Value
-            mnuCopy.Enabled = Not Value
-            mnuCut.Enabled = Not Value
-            mnuPaste.Enabled = Not Value
-            mnuSend.Enabled = Not Value
-            'mnuPasteAfterThisChar.Enabled = Not Value
-            mnuDelete.Enabled = Not Value
+            'mnuSend.Enabled = Not Value
+            'mnuCopy.Enabled = Not Value
+            'mnuCut.Enabled = Not Value
+            'mnuPaste.Enabled = Not Value
+            'mnuSend.Enabled = Not Value
+            ''mnuPasteAfterThisChar.Enabled = Not Value
+            'mnuDelete.Enabled = Not Value
 
             If Value Then
                 Editable = False
@@ -302,84 +340,6 @@ Public Class CharacterDisplay
             RaiseEvent ViewOnlyChanged(Me, Nothing)
         End Set
     End Property
-
-#End Region
-
-#Region "SizeWheel Property"
-
-    Private m_blnSizeWheel As Boolean = True
-    Public Property SizeWheel() As Boolean
-        Get
-            Return m_blnSizeWheel
-        End Get
-        Set(ByVal Value As Boolean)
-            m_blnSizeWheel = Value
-
-        End Set
-    End Property
-
-#End Region
-
-#Region "ShowPropertiesMenu Property"
-
-    Public Property ShowPropertiesMenu() As Boolean
-        Get
-            Return mnuProperties.Visible
-        End Get
-        Set(ByVal Value As Boolean)
-            mnuProperties.Visible = Value
-            cmCharMenu.MenuItems(cmCharMenu.MenuItems.IndexOf(mnuProperties) - 1).Visible = Value
-        End Set
-    End Property
-
-#End Region
-
-#Region "ShowMouseSettingsMenu Property"
-
-    Public Property ShowMouseSettingsMenu() As Boolean
-        Get
-            Return mnuSettings.Visible
-        End Get
-        Set(ByVal Value As Boolean)
-            mnuSettings.Visible = Value
-            cmCharMenu.MenuItems(cmCharMenu.MenuItems.IndexOf(mnuSettings) - 1).Visible = Value
-        End Set
-    End Property
-
-#End Region
-
-#Region "SizeWheelIncrement Property"
-
-    Private m_sngSizeWheelIncrement As Single = 2
-    Public Property SizeWheelIncrement() As Single
-        Get
-            Return m_sngSizeWheelIncrement
-        End Get
-        Set(ByVal Value As Single)
-            m_sngSizeWheelIncrement = Value
-
-        End Set
-    End Property
-
-#End Region
-
-#Region "Button Back Color"
-
-    Private m_cButtonBackcolor As Color = Me.BackColor
-
-    Public Property ButtonBackcolor() As Color
-        Get
-            Return m_cButtonBackcolor
-        End Get
-        Set(ByVal Value As Color)
-            m_cButtonBackcolor = Value
-            Dim ctrlTemplate As Control
-            For Each ctrlTemplate In pnlBack.Controls
-                CType(ctrlTemplate, CharacterButton).BackColor = Value
-            Next
-        End Set
-    End Property
-
 
 #End Region
 
@@ -399,8 +359,10 @@ Public Class CharacterDisplay
             Return m_Orientation
         End Get
         Set(ByVal Value As OrientationDirection)
-            m_Orientation = Value
-            ResizeCharacters()
+            If m_Orientation <> Value Then
+                m_Orientation = Value
+                ResizeCharactersNow()
+            End If
         End Set
     End Property
 
@@ -431,7 +393,7 @@ Public Class CharacterDisplay
                 Else
                     tmrSize.Interval = 100
                 End If
-                'Update Captions and ToolTips Of Buttons
+                'Update Captions and ToolTips Of Buttons, and modifieds the number of such if neccesary
                 m_UpdateCharacters()
                 'Update Positions Of Buttons
                 m_ResizeCharacters()
@@ -472,6 +434,31 @@ Public Class CharacterDisplay
 
 #Region "Character Display ---- Resize Event Calls ResizeCharacters to Enable Timer"
 
+
+
+    Private Sub CharacterDisplay_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+        If Not e.Handled Then
+            If (e.Control And e.KeyCode = Keys.V) Or (e.Shift And e.KeyCode = Keys.Insert) Then
+                Me.PasteFocused()
+                e.Handled = True
+            End If
+            If (e.Control And e.KeyCode = Keys.X) Or (e.Shift And e.KeyCode = Keys.Delete) Then
+                Me.CutFocused()
+                e.Handled = True
+            End If
+            If (e.Control And e.KeyCode = Keys.C) Or (e.Control And e.KeyCode = Keys.Insert) Then
+                Me.CopyFocused()
+                e.Handled = True
+            End If
+            If (e.KeyCode = Keys.Delete) Then
+                Me.DeleteFocused()
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
+
+
     Private Sub CharacterDisplay_Resize(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Resize
         tmrSize.Stop()
         tmrSize.Start()
@@ -502,10 +489,6 @@ Public Class CharacterDisplay
 #Region "Internal Update Characters Subroutine"
 
     Private Sub m_UpdateCharacters()
-        'If Not tResize Is Nothing Then
-        '    tResize.Abort()
-        '    blnResizing = False
-        'End If
         'Disable Resizing To Eliminate Threading Errors
         m_blnResize = False
 
@@ -528,147 +511,116 @@ Public Class CharacterDisplay
 
                 Dim blnLoadCharset As Boolean = True
 
-                If m_strCharacterList.Length > 2000 Then
-                    If MessageBox.Show("This is a very large charset (" & m_strCharacterList.Length & " Characters), and may take several minutes to display!" & ControlChars.NewLine & "Do you wish to display characters?", "Large Charset", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                    Else
-                        blnLoadCharset = False
+                If Math.Abs(m_strCharacterList.Length - pnlBack.Controls.Count) > 750 And m_strCharacterList.Length > 100 Then
+					Dim result As DialogResult = DialogResult.No
+					If Math.Abs(m_strCharacterList.Length - pnlBack.Controls.Count) < pnlBack.Controls.Count Then
+						result = DialogResult.Yes
+					End If
+					Dim messagetext As String = My.Resources.LargeCharsetPart1 & m_strCharacterList.Length & My.Resources.LargeCharsetPart2
 
-                    End If
-                End If
+					If (Me.ParentForm Is Nothing) Then
+						result = MessageBox.Show(messagetext, My.Resources.LargeCharsetTitle, _
+						  MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+					Else
+						If Me.ParentForm.Visible Then
+							result = MessageBox.Show(Me.ParentForm, messagetext, My.Resources.LargeCharsetTitle, _
+							  MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
-                If blnLoadCharset Then
-                    RaiseEvent LoadingChars(Me)
-					'If (m_strCharacterList.Length - pnlBack.Controls.Count - 1) > 5 Or _
-					'            (pnlBack.Controls.Count - m_strCharacterList.Length - 1) > 5 Then
-					'    lblBack.Text = cm_strLoadingCharacters
-					'    lblBack.Show()
-					'    pnlBack.Visible = False
-					'End If
-                    Dim intLastCount As Integer = pnlBack.Controls.Count
-                    Dim intCharAdd As Integer
-                    For intCharAdd = 0 To (m_strCharacterList.Length - pnlBack.Controls.Count) - 1
-                        Dim btnNewButton As New CharacterButton()
-
-
-                        btnNewButton.AllowDrop = True
-                        AddHandler btnNewButton.QueryContinueDrag, AddressOf CharacterButton_QueryContinueDrag
-                        AddHandler btnNewButton.MouseDown, AddressOf CharacterButton_MouseDown
-                        AddHandler btnNewButton.MouseUp, AddressOf CharacterButton_MouseUp
-                        AddHandler btnNewButton.DragDrop, AddressOf CharacterButton_DragDrop
-                        AddHandler btnNewButton.DragOver, AddressOf CharacterButton_DragOver
-                        AddHandler btnNewButton.DragEnter, AddressOf CharacterButton_DragEnter
-                        AddHandler btnNewButton.DragLeave, AddressOf CharacterButton_DragLeave
-                        AddHandler btnNewButton.KeyDown, AddressOf CharacterButton_KeyDown
-                        AddHandler btnNewButton.ArrowKeyPressed, AddressOf CharacterButton_KeyDown
-                        'AddHandler btnNewButton.MouseMove, AddressOf CharacterButton_MouseOver
-                        AddHandler btnNewButton.MouseEnter, AddressOf CharacterButton_MouseEnter
-                        AddHandler btnNewButton.MouseLeave, AddressOf CharacterButton_MouseLeave
-                        AddHandler btnNewButton.Enter, AddressOf CharacterButton_Enter
-                        'btnNewButton.Hide()
-
-                        btnNewButton.PressMouseButtons = Windows.Forms.MouseButtons.Left Or Windows.Forms.MouseButtons.Middle Or _
-        Windows.Forms.MouseButtons.Right Or Windows.Forms.MouseButtons.XButton1 Or Windows.Forms.MouseButtons.XButton2
-                        'btnNewButton.PressKeys = Keys.None
-
-                        btnNewButton.Name = "btnCharacter" & (intLastCount + intCharAdd).ToString
-                        btnNewButton.AllowDrop = blnOrigEditable
-                        btnNewButton.Font = Me.Font
-                        btnNewButton.BackColor = Me.BackColor
-                        btnNewButton.ForeColor = Me.ForeColor
-                        btnNewButton.ButtonColor = Me.ButtonColor
-                        btnNewButton.NormalOutlineColor = Me.NormalOutlineColor
-                        btnNewButton.FocusedColor = Me.FocusedColor
-                        btnNewButton.LightEdgeColor = Me.LightEdgeColor
-                        btnNewButton.DarkEdgeColor = Me.DarkEdgeColor
-                        pnlBack.Controls.Add(btnNewButton)
-                        pnlBack.Controls.SetChildIndex(btnNewButton, intLastCount + intCharAdd)
-
-                    Next
-
-                    Dim intCharSub As Integer
-                    For intCharSub = 0 To (pnlBack.Controls.Count - m_strCharacterList.Length) - 1 Step 1
-                        If Not pnlBack.Controls(pnlBack.Controls.Count - 1) Is Nothing Then
-                            'Dim intIndex As Integer = 
-                            'Dim ctrlControl As Control = pnlBack.Controls(intIndex)
-                            pnlBack.Controls.RemoveAt(pnlBack.Controls.Count - 1)
-                            'ctrlcontrol.Dispose()
-                        End If
-                    Next
-
-
-                    'Create variable to loop through each character
-                    Dim intCharacterLoop As Integer
-                    'Loop through each character in CharacterList
-                    For intCharacterLoop = 0 To m_strCharacterList.Length - 1
-
-                        'Create new button for this character
-                        'Dim btnNewButton As CharacterButton
-
-                        'btnNewButton = CType(pnlBack.Controls(intCharacterLoop), CharacterButton)
-
-                        'Set Visible Property 
-                        'btnNewButton.hide()
-                        'btnnewbutton.PressedDown = False
-                        'pnlBack.Controls(intCharacterLoop).Hide()
-
-                        'btnNewButton.Text = m_strCharacterList.Substring(intCharacterLoop, 1)
-                        If pnlBack.Controls(intCharacterLoop).Text <> m_strCharacterList.Chars(intCharacterLoop) Then
-                            pnlBack.Controls(intCharacterLoop).Text = m_strCharacterList.Chars(intCharacterLoop)
-                        End If
-                        Dim chChar As Char = m_strCharacterList.Chars(intCharacterLoop)
-                        Dim chCat As Globalization.UnicodeCategory = System.Char.GetUnicodeCategory(chChar)
-                        Dim strCatName As String = chCat.ToString
-                        Dim strFriendly As String = ""
-
-                        Dim intLoop As Integer
-                        For intLoop = 0 To strCatName.Length - 1
-                            If Char.IsUpper(strCatName, intLoop) And intLoop > 0 Then
-                                strFriendly &= " "
-                            End If
-                            strFriendly &= strCatName.Chars(intLoop)
-                        Next
+						End If
+					End If
 
 
 
-                        Dim strKeys As String
-                        strKeys = "Alt + NumPad " & AscW(chChar).ToString.PadLeft(4, CChar("0"))
+					If result = DialogResult.Yes Then
+					Else
+						blnLoadCharset = False
+
+					End If
+				End If
+
+				If blnLoadCharset Then
+					RaiseEvent LoadingChars(Me)
 
 
+					Dim intLastCount As Integer = pnlBack.Controls.Count
+					Dim intCharAdd As Integer
+					For intCharAdd = 0 To (m_strCharacterList.Length - pnlBack.Controls.Count) - 1
+						Dim btnNewButton As New CharacterButton()
+						btnNewButton.SuspendRedraw = True
 
-                        If Array.IndexOf(m_strFilterTitles, strCatName) > -1 Then
-                            ttTips.SetToolTip(pnlBack.Controls(intCharacterLoop), "Character: ' " & chChar & "'" & ControlChars.CrLf & _
-                             "Keystroke: " & strKeys & vbCrLf & _
-                             "Ansii Code: " & CStr(Asc(chChar)) & vbCrLf & _
-                             "Unicode: U+" & Hex(AscW(chChar)) & " (" & AscW(chChar).ToString & ")" & vbCrLf & _
-                             "Unicode Category: " & strFriendly & vbCrLf & _
-                             "Unicode Definition: " & m_strFilterDefinitions(Array.IndexOf(m_strFilterTitles, strCatName)))
+						btnNewButton.AllowDrop = True
+						AddHandler btnNewButton.QueryContinueDrag, AddressOf CharacterButton_QueryContinueDrag
+						AddHandler btnNewButton.MouseDown, AddressOf CharacterButton_MouseDown
+						AddHandler btnNewButton.MouseUp, AddressOf CharacterButton_MouseUp
+						AddHandler btnNewButton.DragDrop, AddressOf CharacterButton_DragDrop
+						AddHandler btnNewButton.DragOver, AddressOf CharacterButton_DragOver
+						AddHandler btnNewButton.DragEnter, AddressOf CharacterButton_DragEnter
+						AddHandler btnNewButton.DragLeave, AddressOf CharacterButton_DragLeave
+						AddHandler btnNewButton.KeyDown, AddressOf CharacterButton_KeyDown
+						AddHandler btnNewButton.ArrowKeyPressed, AddressOf CharacterButton_KeyDown
+						'AddHandler btnNewButton.MouseMove, AddressOf CharacterButton_MouseOver
+						AddHandler btnNewButton.MouseEnter, AddressOf CharacterButton_MouseEnter
+						AddHandler btnNewButton.MouseLeave, AddressOf CharacterButton_MouseLeave
+						AddHandler btnNewButton.Enter, AddressOf CharacterButton_Enter
+						'btnNewButton.Hide()
 
-                        Else
-                            ttTips.SetToolTip(pnlBack.Controls(intCharacterLoop), "Character: ' " & chChar & "'" & ControlChars.CrLf & _
-                             "Keystroke: " & strKeys & vbCrLf & _
-                             "Ansii Code: " & CStr(Asc(chChar)) & vbCrLf & _
-                             "Unicode: U+" & Hex(AscW(chChar)) & " (" & AscW(chChar).ToString & ")" & vbCrLf & _
-                             "Unicode Category: " & strFriendly)
+						btnNewButton.PressMouseButtons = Windows.Forms.MouseButtons.Left Or Windows.Forms.MouseButtons.Middle Or _
+				  Windows.Forms.MouseButtons.Right Or Windows.Forms.MouseButtons.XButton1 Or Windows.Forms.MouseButtons.XButton2
+						'btnNewButton.PressKeys = Keys.None
 
-                        End If
+						btnNewButton.Name = "btnCharacter" & (intLastCount + intCharAdd).ToString
+						btnNewButton.AllowDrop = blnOrigEditable
+						btnNewButton.Font = Me.Font
+						btnNewButton.BackColor = Me.ButtonColor
+						btnNewButton.ForeColor = Me.ForeColor
+						btnNewButton.RimColor = Me.BackColor
+						btnNewButton.NormalOutlineColor = Me.NormalOutlineColor
+						btnNewButton.FocusedColor = Me.FocusedColor
+						btnNewButton.LightEdgeColor = Me.LightEdgeColor
+						btnNewButton.DarkEdgeColor = Me.DarkEdgeColor
+
+						pnlBack.Controls.Add(btnNewButton)
+						pnlBack.Controls.SetChildIndex(btnNewButton, intLastCount + intCharAdd)
+
+					Next
+
+					Dim intCharSub As Integer
+					For intCharSub = 0 To (pnlBack.Controls.Count - m_strCharacterList.Length) - 1 Step 1
+						If Not pnlBack.Controls(pnlBack.Controls.Count - 1) Is Nothing Then
+							'Dim intIndex As Integer = 
+							'Dim ctrlControl As Control = pnlBack.Controls(intIndex)
+							pnlBack.Controls.RemoveAt(pnlBack.Controls.Count - 1)
+							'ctrlcontrol.Dispose()
+						End If
+					Next
 
 
+					'Create variable to loop through each character
+					Dim intCharacterLoop As Integer
+					'Loop through each character in CharacterList
+					For intCharacterLoop = 0 To m_strCharacterList.Length - 1
+						If pnlBack.Controls(intCharacterLoop).Text <> m_strCharacterList.Chars(intCharacterLoop) Then
+							CType(pnlBack.Controls(intCharacterLoop), CharacterButton).SuspendRedraw = True
+							pnlBack.Controls(intCharacterLoop).Text = m_strCharacterList.Chars(intCharacterLoop)
+						End If
+					Next
+					Editable = blnOrigEditable
+					pnlBack.ResumeLayout()
 
-                    Next
-                    Editable = blnOrigEditable
-
-                    If intSelectedIndex > 0 Then
-                        If pnlBack.Controls.Count > intSelectedIndex Then
+					If intSelectedIndex > 0 Then
+						If pnlBack.Controls.Count > intSelectedIndex Then
 							pnlBack.Controls(intSelectedIndex).Focus()
-                        ElseIf pnlBack.Controls.Count > 0 Then
+						ElseIf pnlBack.Controls.Count > 0 Then
 							pnlBack.Controls(pnlBack.Controls.Count - 1).Focus()
-                        End If
-                    End If
-				Else
+						End If
+					End If
 
+					RaiseEvent CharsLoaded(Me)
+
+				Else
+					'User opted out of displaying characters
 					Me.m_cbLastFocused = Nothing
-					lblBack.Text = cm_strNoCharacters
-					lblBack.Visible = True
+
 					'Remove old Buttons
 					'Application.DoEvents()
 					Dim ctrlDelControl As Control
@@ -680,13 +632,14 @@ Public Class CharacterDisplay
 					Next
 					pnlBack.Controls.Clear()
 					Editable = blnOrigEditable
+
+					lblBack.Visible = True
 					RaiseEvent NoChars(Me)
 				End If
 			Else
 
 				Me.m_cbLastFocused = Nothing
-				lblBack.Text = cm_strNoCharacters
-				lblBack.Visible = True
+
 				'Remove old Buttons
 				'Application.DoEvents()
 				Dim ctrlControl As Control
@@ -698,14 +651,13 @@ Public Class CharacterDisplay
 				Next
 				pnlBack.Controls.Clear()
 				Editable = blnOrigEditable
+
+				lblBack.Visible = True
 				RaiseEvent NoChars(Me)
 			End If
 
 		Else
 			Me.m_cbLastClicked = Nothing
-
-			lblBack.Text = cm_strNoCharacters
-			lblBack.Visible = True
 			'Remove old Buttons
 			'Application.DoEvents()
 			Dim ctrlControl As Control
@@ -732,17 +684,18 @@ Public Class CharacterDisplay
 
     Private m_blnAutoResize As Boolean = False
 
+    ''' <summary>
+    ''' TODO: Make this enable checks that change the font size if a factor of 2 out of place
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Property Autoresize() As Boolean
         Get
             Return m_blnAutoResize
         End Get
         Set(ByVal Value As Boolean)
-
-            If m_blnAutoResize <> Value Then
-                m_blnAutoResize = Value
-
-                Me.m_ResizeCharacters()
-            End If
+            m_blnAutoResize = Value
         End Set
     End Property
 #End Region
@@ -790,372 +743,326 @@ Public Class CharacterDisplay
 
     Private blnResizing As Boolean = False
 
-    Private m_intLastChars As Integer
+
+    Private m_strLastChars As String = ""
 
     Private m_LastOrientation As OrientationDirection = OrientationDirection.Top
 
-    Private tResize As Threading.Thread
-
-    Private Sub m_ResizeCharactersThread()
-
-		If Not Me.ParentForm Is Nothing Then
-			If Not blnResizing And m_blnResize Then
-				blnResizing = True
-				tResize = New Threading.Thread(AddressOf m_ResizeCharactersThread)
-				tResize.Start()
-			Else
-				If Not tResize Is Nothing Then
-
-					If blnResizing And m_blnResize = False Then
-						tResize.Abort()
-						blnResizing = True
-						tResize = New Threading.Thread(AddressOf m_ResizeCharactersThread)
-						tResize.Start()
-					End If
-
-				End If
-			End If
-		End If
-
-    End Sub
-
     Private Sub m_ResizeCharacters()
-		If Me.ParentForm Is Nothing Then Exit Sub
+        If Me.ParentForm Is Nothing Then Exit Sub
 
-		'Use this variable to compute time taken for each loading section.
-		Dim lt As Date = Now
+        'Use this variable to compute time taken for each loading section.
+		Dim lt As Date = DateTime.Now
 
-		lt = Now
-		'Log.LogMinorInfo("+Resizing Characters...")
+		lt = DateTime.Now
+        'Log.LogMinorInfo("+Resizing Characters...")
 
-		Dim blnOrigEditable As Boolean = Editable
-		Editable = False
+        Dim blnOrigEditable As Boolean = Editable
+        Editable = False
 
-		'Create Variable to First containt the length of th character list, and then how many actual character button exist
-		Dim intCharacters As Integer = m_strCharacterList.Length
+        'Create Variable to First containt the length of th character list, and then how many actual character button exist
+        Dim intCharacters As Integer = m_strCharacterList.Length
 
-		'Calculate Area of pnlBack
-		Dim intBackArea As Integer = (pnlBack.Width - cm_intBetweenSpace) * (pnlBack.Height - cm_intBetweenSpace)
+        'Calculate Area of pnlBack
+        Dim intBackArea As Integer = (pnlBack.Width - cm_intBetweenSpace) * (pnlBack.Height - cm_intBetweenSpace)
 
-		'If Character List String Contains Characters, and There is some room in pnlBack, and m_blnResize is true then
-		If intCharacters > 0 And intBackArea > 0 And m_blnResize Then
+        'If Character List String Contains Characters, and There is some room in pnlBack, and m_blnResize is true then
+        If intCharacters > 0 And intBackArea > 0 And m_blnResize Then
 
-			'Stop Resizing In Other Threads
-			m_blnResize = False
+            'Stop Resizing In Other Threads
+            m_blnResize = False
 
-			'Get Number Of Buttons
-			intCharacters = pnlBack.Controls.Count
+            'Get Number Of Buttons
+            intCharacters = pnlBack.Controls.Count
 
-			'If There Are Any Actual Buttons, Then Resize Them
-			If intCharacters > 0 Then
+            'If There Are Any Actual Buttons, Then Resize Them
+            If intCharacters > 0 Then
 
-				RaiseEvent ResizingChars(Me)
-				Dim intSelectedIndex As Integer = -1
-				If Not m_cbLastFocused Is Nothing Then
-					If pnlBack.Controls.Contains(m_cbLastFocused) Then
-						intSelectedIndex = pnlBack.Controls.GetChildIndex(m_cbLastFocused)
-					End If
-				End If
+                RaiseEvent ResizingChars(Me)
 
-				'Set Text to Resizing Chars String
-				lblBack.Text = cm_strResizingCharacters
-				lblBack.Show()
+                Dim intSelectedIndex As Integer = -1
+                If Not m_cbLastFocused Is Nothing Then
+                    If pnlBack.Controls.Contains(m_cbLastFocused) Then
+                        intSelectedIndex = pnlBack.Controls.GetChildIndex(m_cbLastFocused)
+                    End If
+                End If
 
-				'Hide pnlBack to Speed Resizing, and to show lblBack Behind It
-				pnlBack.Visible = False
+                'Set Text to Resizing Chars String
 
+                'Hide pnlBack to Speed Resizing, and to show lblBack Behind It
+                pnlBack.Visible = False
 
 
-				Dim intCharacterCols As Integer
-				Dim intCharacterRows As Integer
 
-				'This algorithm based whether to optimize sizes for width or height based on the orientation; the one afterwards works based on whether the width is bigger than the height, or vice versa
-				'If m_Orientation = OrientationDirection.Left Or _
-				'    m_Orientation = OrientationDirection.Right Then
-				'    intCharacterRows = CInt(System.Math.Round( _
-				'                pnlBack.Height / _
-				'            System.Math.Sqrt(intBackArea / intCharacters)))
+                Dim intCharacterCols As Integer
+                Dim intCharacterRows As Integer
 
-				'    intCharacterCols = Utils.Math.URound(intCharacters / intCharacterRows)
+                If pnlBack.Width > pnlBack.Height Then
+                    intCharacterRows = CInt(System.Math.Round( _
+                     pnlBack.Height / _
+                     System.Math.Sqrt(intBackArea / intCharacters)))
 
-				'    m_intLastCharRow = intCharacters - ((intCharacterRows - 1) * intCharacterCols)
-				'ElseIf m_Orientation = OrientationDirection.Top Or _
-				'        m_Orientation = OrientationDirection.Bottom Then
+                    intCharacterCols = Utils.Math.URound(intCharacters / intCharacterRows)
 
-				'    intCharacterCols = CInt(System.Math.Round( _
-				'                                            pnlBack.Width / _
-				'                                        System.Math.Sqrt(intBackArea / intCharacters)))
+                    m_intLastCharRow = intCharacters - ((intCharacterRows - 1) * intCharacterCols)
 
-				'    intCharacterRows = Utils.Math.URound(intCharacters / intCharacterCols)
+                Else
+                    intCharacterCols = CInt(System.Math.Round( _
+                       pnlBack.Width / _
+                      System.Math.Sqrt(intBackArea / intCharacters)))
 
-				'    m_intLastCharRow = intCharacters - ((intCharacterCols - 1) * intCharacterRows)
-				'End If
-				If pnlBack.Width > pnlBack.Height Then
-					intCharacterRows = CInt(System.Math.Round( _
-					 pnlBack.Height / _
-					 System.Math.Sqrt(intBackArea / intCharacters)))
+                    intCharacterRows = Utils.Math.URound(intCharacters / intCharacterCols)
 
-					intCharacterCols = Utils.Math.URound(intCharacters / intCharacterRows)
+                    m_intLastCharRow = intCharacters - ((intCharacterCols - 1) * intCharacterRows)
+                End If
 
-					m_intLastCharRow = intCharacters - ((intCharacterRows - 1) * intCharacterCols)
 
-				Else
-					intCharacterCols = CInt(System.Math.Round( _
-					   pnlBack.Width / _
-					  System.Math.Sqrt(intBackArea / intCharacters)))
+                Dim dblCharacterWidth As Double = ((pnlBack.Width - cm_intBetweenSpace) / intCharacterCols)
 
-					intCharacterRows = Utils.Math.URound(intCharacters / intCharacterCols)
+                Dim dblCharacterHeight As Double = ((pnlBack.Height - cm_intBetweenSpace) / intCharacterRows)
 
-					m_intLastCharRow = intCharacters - ((intCharacterCols - 1) * intCharacterRows)
-				End If
+                Dim blnLastRowOnly As Boolean = False
 
+                If m_dblCharWidth = dblCharacterWidth And m_dblCharHeight = dblCharacterHeight And m_intCharRows = m_intCharRows And _
+                  m_intCharCols = m_intCharCols And m_strLastChars.Length >= intCharacters And m_LastOrientation = Me.Orientation Then
+                    Dim ctrl As CharacterButton
+                    For Each ctrl In pnlBack.Controls
+                        If Not ctrl Is Nothing Then
+                            If Not ctrl.Visible Then
+                                ctrl.Visible = True
+                            End If
+                            ctrl.SuspendRedraw = False
+                            ctrl.PressedDown = False
+                        End If
+                    Next
 
-				Dim dblCharacterWidth As Double = ((pnlBack.Width - cm_intBetweenSpace) / intCharacterCols)
+                    If Not pnlBack.Visible Then
+                        pnlBack.Show()
+                    End If
 
-				Dim dblCharacterHeight As Double = ((pnlBack.Height - cm_intBetweenSpace) / intCharacterRows)
 
-				Dim blnLastRowOnly As Boolean = False
+                    Editable = blnOrigEditable
+                    lblBack.Hide()
+
+                    If intSelectedIndex > -1 Then
+                        If pnlBack.Controls.Count > intSelectedIndex Then
+                            pnlBack.Controls(intSelectedIndex).Focus()
+                        ElseIf pnlBack.Controls.Count > 0 Then
+                            pnlBack.Controls(pnlBack.Controls.Count - 1).Focus()
 
-				If m_dblCharWidth = dblCharacterWidth And m_dblCharHeight = dblCharacterHeight And m_intCharRows = m_intCharRows And _
-				  m_intCharCols = m_intCharCols And m_intLastChars >= Me.CharacterList.Length And m_LastOrientation = Me.Orientation Then
-					Dim ctrl As CharacterButton
-					For Each ctrl In pnlBack.Controls
-						If Not ctrl Is Nothing Then
-							If Not ctrl.Visible Then
-								ctrl.Visible = True
-							End If
-							'ctrl.Visible = True
-							ctrl.Autosize = Autosize
-							ctrl.PressedDown = False
-						End If
-					Next
-
-					If Not pnlBack.Visible Then
-						pnlBack.Show()
-					End If
-
-
-					Editable = blnOrigEditable
-					lblBack.Hide()
-
-					If intSelectedIndex > -1 Then
-						If pnlBack.Controls.Count > intSelectedIndex Then
-							pnlBack.Controls(intSelectedIndex).Select()
-						ElseIf pnlBack.Controls.Count > 0 Then
-							pnlBack.Controls(pnlBack.Controls.Count - 1).Select()
-
-						End If
-					End If
-
-					RaiseEvent CharsResized(Me)
-
-					RaiseEvent SomeChars(Me)
-					m_blnResize = True
-					blnResizing = False
-					m_intLastChars = Me.CharacterList.Length
-
-					'Log.LogMinorInfo("-Completed Resizing Characters.", "Time: (" & lt.op_Subtraction(Now, lt).ToString & ")")
-					Exit Sub
-				ElseIf m_dblCharWidth = dblCharacterWidth And m_dblCharHeight = dblCharacterHeight And m_intCharRows = m_intCharRows And _
-				 m_intCharCols = m_intCharCols And m_LastOrientation = Me.Orientation Then
-					blnLastRowOnly = True
-				End If
-				m_LastOrientation = Me.Orientation
-				m_dblCharWidth = dblCharacterWidth
-				m_dblCharHeight = dblCharacterHeight
-
-				m_intCharCols = intCharacterCols
-				m_intCharRows = intCharacterRows
-
-				m_intLastChars = Me.CharacterList.Length
-				Dim intCols As Long = 0
-
-				Dim intRows As Long = 0
-				pnlBack.SuspendLayout()
-
-				Select Case m_Orientation
-					''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-					'''''''''''''''''''''''''''Top Orinetation''''''''''''''''''''''''''''
-					''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-				Case OrientationDirection.Top
-
-						Dim dblComingRows As Double = 0
-
-						For intRows = 0 + (Math.Abs(CInt(blnLastRowOnly)) * (intCharacterRows - 1)) To intCharacterRows - 1
-							Dim dblComingCols As Double = 0
-
-							For intCols = 0 To intCharacterCols - 1
-								Dim intCN As Integer = CInt((intRows * intCharacterCols) + intCols)
-
-								If intcn < intCharacters Then
-									'pnlBack.Controls.Item(CInt((intRows * intCharacterCols) + intCols)).Visible = False
-									If intcn < pnlBack.Controls.Count Then
-										With CType(pnlBack.Controls.Item(intcn), CharacterButton)
-											.Left = CInt(System.Math.Round(intCols * (dblCharacterWidth))) + cm_intBetweenSpace
-											.Top = CInt(System.Math.Round(intRows * (dblCharacterHeight))) + cm_intBetweenSpace
-											.Width = (CInt(System.Math.Round(dblCharacterWidth * (intCols + 1)) - pnlBack.Controls.Item(intcn).Left)) - cm_intBetweenSpace
-											.Height = (CInt(System.Math.Round(dblCharacterHeight * (intRows + 1)) - pnlBack.Controls.Item(intcn).Top)) - cm_intBetweenSpace
-											.Visible = True
-											.Autosize = Autosize
-											.PressedDown = False
-										End With
-									End If
-								End If
-							Next
-						Next
-						''''''''''''''''''''''''''''''''''''''''''''''''''''
-						''''''''''''''''''''''Left Orientation''''''''''''''
-						''''''''''''''''''''''''''''''''''''''''''''''''''''
-					Case OrientationDirection.Left
-
-						Dim dblComingcols As Double = 0
-
-						For intCols = 0 + (Math.Abs(CInt(blnLastRowOnly)) * (intCharacterCols - 1)) To intCharacterCols - 1
-							Dim dblComingrows As Double = 0
-
-							For intRows = 0 To intCharacterRows - 1
-								Dim intCN As Integer = CInt((intCols * intCharacterRows) + intRows)
-								If intCN < intCharacters Then
-									'pnlBack.Controls.Item(CInt((intRows * intCharacterCols) + intCols)).Visible = False
-									If intcn < pnlBack.Controls.Count Then
-										With CType(pnlBack.Controls.Item(intcn), CharacterButton)
-
-											.Left = (CInt(System.Math.Round((intCols) * (dblCharacterWidth)))) + cm_intBetweenSpace
-											.Top = (CInt(System.Math.Round((intRows) * (dblCharacterHeight)))) + cm_intBetweenSpace
-											.Width = (CInt(System.Math.Round(dblCharacterWidth * (intCols + 1)) - (CInt(System.Math.Round(intCols * (dblCharacterWidth))) + cm_intBetweenSpace))) - cm_intBetweenSpace
-											.Height = (CInt(System.Math.Round(dblCharacterHeight * (intRows + 1)) - (CInt(System.Math.Round(intRows * (dblCharacterHeight))) + cm_intBetweenSpace))) - cm_intBetweenSpace
-											.Visible = True
-											.Autosize = Autosize
-											.PressedDown = False
-										End With
-									End If
-								End If
-							Next
-						Next
-						''''''''''''''''''''''''''''''''''''''''''''''''''''
-						''''''''''''''''''''''Right Orientation''''''''''''''
-						''''''''''''''''''''''''''''''''''''''''''''''''''''
-					Case OrientationDirection.Right
-
-						Dim dblComingcols As Double = 0
-
-						For intCols = 0 + (Math.Abs(CInt(blnLastRowOnly)) * (intCharacterCols - 1)) To intCharacterCols - 1
-							Dim dblComingrows As Double = 0
-
-							For intRows = 0 To intCharacterRows - 1
-								Dim intCN As Integer = CInt((intCols * intCharacterRows) + intRows)
-								If intCN < intCharacters Then
-									'pnlBack.Controls.Item(CInt((intRows * intCharacterCols) + intCols)).Visible = False
-									If intcn < pnlBack.Controls.Count Then
-										With CType(pnlBack.Controls.Item(intcn), CharacterButton)
-
-											.Left = Me.Width - (CInt(System.Math.Round((intCols + 1) * (dblCharacterWidth))))
-											.Top = Me.Height - (CInt(System.Math.Round((intRows + 1) * (dblCharacterHeight))))
-											.Width = (CInt(System.Math.Round(dblCharacterWidth * (intCols + 1)) - (CInt(System.Math.Round(intCols * (dblCharacterWidth))) + cm_intBetweenSpace))) - cm_intBetweenSpace
-											.Height = (CInt(System.Math.Round(dblCharacterHeight * (intRows + 1)) - (CInt(System.Math.Round(intRows * (dblCharacterHeight))) + cm_intBetweenSpace))) - cm_intBetweenSpace
-											.Visible = True
-											.Autosize = Autosize
-											.PressedDown = False
-										End With
-									End If
-								End If
-							Next
-						Next
-
-						''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-						''''''''''''''''''''''''Bottom Orientation''''''''''''''''''
-						''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-					Case OrientationDirection.Bottom
-
-						Dim dblComingRows As Double = 0
-
-						For intRows = 0 + (Math.Abs(CInt(blnLastRowOnly)) * (intCharacterRows - 1)) To intCharacterRows - 1
-							Dim dblComingCols As Double = 0
-
-							For intCols = 0 To intCharacterCols - 1
-								Dim intCN As Integer = CInt((intRows * intCharacterCols) + intCols)
-								If intCN < intCharacters Then
-									'pnlBack.Controls.Item(CInt((intRows * intCharacterCols) + intCols)).Visible = False
-									If intcn < pnlBack.Controls.Count Then
-										With CType(pnlBack.Controls.Item(intcn), CharacterButton)
-
-											.Left = Me.Width - (CInt(System.Math.Round((intCols + 1) * (dblCharacterWidth))))
-											.Top = Me.Height - (CInt(System.Math.Round((intRows + 1) * (dblCharacterHeight))))
-											.Width = (CInt(System.Math.Round(dblCharacterWidth * (intCols + 1)) - (CInt(System.Math.Round(intCols * (dblCharacterWidth))) + cm_intBetweenSpace))) - cm_intBetweenSpace
-											.Height = (CInt(System.Math.Round(dblCharacterHeight * (intRows + 1)) - (CInt(System.Math.Round(intRows * (dblCharacterHeight))) + cm_intBetweenSpace))) - cm_intBetweenSpace
-											.Visible = True
-											.Autosize = Autosize
-											.PressedDown = False
-										End With
-									End If
-								End If
-							Next
-						Next
-
-
-				End Select
-				pnlBack.ResumeLayout()
-
-				'Show Panel, Now That We're Done
-				If Not pnlBack.Visible Then pnlBack.Show()
-				Editable = blnOrigEditable
-				lblBack.Hide()
-
-				If intSelectedIndex > -1 Then
-					If pnlBack.Controls.Count > intSelectedIndex Then
-						pnlBack.Controls(intSelectedIndex).Select()
-					ElseIf pnlBack.Controls.Count > 0 Then
-						pnlBack.Controls(pnlBack.Controls.Count - 1).Select()
-
-					End If
-				End If
-
-				RaiseEvent CharsResized(Me)
-
-				RaiseEvent SomeChars(Me)
-			Else
-				Me.m_dblCharHeight = 0
-				Me.m_dblCharWidth = 0
-				Me.m_intCharCols = 0
-				Me.m_intCharRows = 0
-				'Set Display String to No Chars
-				lblBack.Text = cm_strNoCharacters
-
-				'Hide Panel to show lblBack's Message
-				lblBack.Show()
-				pnlBack.Show()
-				Editable = blnOrigEditable
-				RaiseEvent NoChars(Me)
-			End If
-		Else
-			Me.m_dblCharHeight = 0
-			Me.m_dblCharWidth = 0
-			Me.m_intCharCols = 0
-			Me.m_intCharRows = 0
-			'Set Display String to No Chars
-			lblBack.Text = cm_strNoCharacters
-
-			'Hide Panel to show lblBack's Message
-			lblBack.Show()
-			pnlBack.Show()
-			Editable = blnOrigEditable
-
-			''Remove old Buttons
-			'Dim ctrlControl As Control
-			'For Each ctrlControl In pnlBack.Controls
-			'    If Not ctrlControl Is Nothing Then
-			'        ctrlControl.Dispose()
-			'        'ctrlControl = Nothing
-			'    End If
-			'Next
-			'pnlBack.Controls.Clear()
-
-			RaiseEvent NoChars(Me)
-		End If
-		m_blnResize = True
-		blnResizing = False
-
-		'Log.LogMinorInfo("-Completed Resizing Characters.", "Time: (" & lt.op_Subtraction(Now, lt).ToString & ")")
+                        End If
+                    End If
+
+                    If Not m_strLastChars.Substring(0, intCharacters) = m_strCharacterList Then
+                        'Me.Refresh()
+                    End If
+
+                    RaiseEvent CharsResized(Me)
+
+                    RaiseEvent SomeChars(Me)
+                    m_blnResize = True
+                    blnResizing = False
+                    m_strLastChars = String.Copy(Me.CharacterList)
+
+                    'Log.LogMinorInfo("-Completed Resizing Characters.", "Time: (" & lt.op_Subtraction(Now, lt).ToString & ")")
+                    Exit Sub
+                ElseIf m_dblCharWidth = dblCharacterWidth And m_dblCharHeight = dblCharacterHeight And m_intCharRows = m_intCharRows And _
+                 m_intCharCols = m_intCharCols And m_LastOrientation = Me.Orientation Then
+                    blnLastRowOnly = True
+                End If
+                m_LastOrientation = Me.Orientation
+                m_dblCharWidth = dblCharacterWidth
+                m_dblCharHeight = dblCharacterHeight
+
+                m_intCharCols = intCharacterCols
+                m_intCharRows = intCharacterRows
+
+                m_strLastChars = String.Copy(Me.CharacterList)
+                Dim intCols As Long = 0
+
+                Dim intRows As Long = 0
+                pnlBack.SuspendLayout()
+
+                Select Case m_Orientation
+                    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                    '''''''''''''''''''''''''''Top Orinetation''''''''''''''''''''''''''''
+                    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                    Case OrientationDirection.Top
+
+                        Dim dblComingRows As Double = 0
+
+                        For intRows = 0 + (Math.Abs(CInt(blnLastRowOnly)) * (intCharacterRows - 1)) To intCharacterRows - 1
+                            Dim dblComingCols As Double = 0
+
+                            For intCols = 0 To intCharacterCols - 1
+                                Dim intCN As Integer = CInt((intRows * intCharacterCols) + intCols)
+
+                                If intCN < intCharacters Then
+                                    'pnlBack.Controls.Item(CInt((intRows * intCharacterCols) + intCols)).Visible = False
+                                    If intCN < pnlBack.Controls.Count Then
+                                        With CType(pnlBack.Controls.Item(intCN), CharacterButton)
+                                            .Left = CInt(System.Math.Round(intCols * (dblCharacterWidth))) + cm_intBetweenSpace
+                                            .Top = CInt(System.Math.Round(intRows * (dblCharacterHeight))) + cm_intBetweenSpace
+                                            .Width = (CInt(System.Math.Round(dblCharacterWidth * (intCols + 1)) - pnlBack.Controls.Item(intCN).Left)) - cm_intBetweenSpace
+                                            .Height = (CInt(System.Math.Round(dblCharacterHeight * (intRows + 1)) - pnlBack.Controls.Item(intCN).Top)) - cm_intBetweenSpace
+                                            .Visible = True
+                                            '.Autosize = Autosize
+                                            .PressedDown = False
+                                        End With
+                                    End If
+                                End If
+                            Next
+                        Next
+                        ''''''''''''''''''''''''''''''''''''''''''''''''''''
+                        ''''''''''''''''''''''Left Orientation''''''''''''''
+                        ''''''''''''''''''''''''''''''''''''''''''''''''''''
+                    Case OrientationDirection.Left
+
+                        Dim dblComingcols As Double = 0
+
+                        For intCols = 0 + (Math.Abs(CInt(blnLastRowOnly)) * (intCharacterCols - 1)) To intCharacterCols - 1
+                            Dim dblComingrows As Double = 0
+
+                            For intRows = 0 To intCharacterRows - 1
+                                Dim intCN As Integer = CInt((intCols * intCharacterRows) + intRows)
+                                If intCN < intCharacters Then
+                                    'pnlBack.Controls.Item(CInt((intRows * intCharacterCols) + intCols)).Visible = False
+                                    If intCN < pnlBack.Controls.Count Then
+                                        With CType(pnlBack.Controls.Item(intCN), CharacterButton)
+
+                                            .Left = (CInt(System.Math.Round((intCols) * (dblCharacterWidth)))) + cm_intBetweenSpace
+                                            .Top = (CInt(System.Math.Round((intRows) * (dblCharacterHeight)))) + cm_intBetweenSpace
+                                            .Width = (CInt(System.Math.Round(dblCharacterWidth * (intCols + 1)) - (CInt(System.Math.Round(intCols * (dblCharacterWidth))) + cm_intBetweenSpace))) - cm_intBetweenSpace
+                                            .Height = (CInt(System.Math.Round(dblCharacterHeight * (intRows + 1)) - (CInt(System.Math.Round(intRows * (dblCharacterHeight))) + cm_intBetweenSpace))) - cm_intBetweenSpace
+                                            .Visible = True
+                                            '.Autosize = Autosize
+                                            .PressedDown = False
+                                        End With
+                                    End If
+                                End If
+                            Next
+                        Next
+                        ''''''''''''''''''''''''''''''''''''''''''''''''''''
+                        ''''''''''''''''''''''Right Orientation''''''''''''''
+                        ''''''''''''''''''''''''''''''''''''''''''''''''''''
+                    Case OrientationDirection.Right
+
+                        Dim dblComingcols As Double = 0
+
+                        For intCols = 0 + (Math.Abs(CInt(blnLastRowOnly)) * (intCharacterCols - 1)) To intCharacterCols - 1
+                            Dim dblComingrows As Double = 0
+
+                            For intRows = 0 To intCharacterRows - 1
+                                Dim intCN As Integer = CInt((intCols * intCharacterRows) + intRows)
+                                If intCN < intCharacters Then
+                                    'pnlBack.Controls.Item(CInt((intRows * intCharacterCols) + intCols)).Visible = False
+                                    If intCN < pnlBack.Controls.Count Then
+                                        With CType(pnlBack.Controls.Item(intCN), CharacterButton)
+
+                                            .Left = Me.Width - (CInt(System.Math.Round((intCols + 1) * (dblCharacterWidth))))
+                                            .Top = Me.Height - (CInt(System.Math.Round((intRows + 1) * (dblCharacterHeight))))
+                                            .Width = (CInt(System.Math.Round(dblCharacterWidth * (intCols + 1)) - (CInt(System.Math.Round(intCols * (dblCharacterWidth))) + cm_intBetweenSpace))) - cm_intBetweenSpace
+                                            .Height = (CInt(System.Math.Round(dblCharacterHeight * (intRows + 1)) - (CInt(System.Math.Round(intRows * (dblCharacterHeight))) + cm_intBetweenSpace))) - cm_intBetweenSpace
+                                            .Visible = True
+                                            '.Autosize = Autosize
+                                            .PressedDown = False
+                                        End With
+                                    End If
+                                End If
+                            Next
+                        Next
+
+                        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                        ''''''''''''''''''''''''Bottom Orientation''''''''''''''''''
+                        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                    Case OrientationDirection.Bottom
+
+                        Dim dblComingRows As Double = 0
+
+                        For intRows = 0 + (Math.Abs(CInt(blnLastRowOnly)) * (intCharacterRows - 1)) To intCharacterRows - 1
+                            Dim dblComingCols As Double = 0
+
+                            For intCols = 0 To intCharacterCols - 1
+                                Dim intCN As Integer = CInt((intRows * intCharacterCols) + intCols)
+                                If intCN < intCharacters Then
+                                    'pnlBack.Controls.Item(CInt((intRows * intCharacterCols) + intCols)).Visible = False
+                                    If intCN < pnlBack.Controls.Count Then
+                                        With CType(pnlBack.Controls.Item(intCN), CharacterButton)
+
+                                            .Left = Me.Width - (CInt(System.Math.Round((intCols + 1) * (dblCharacterWidth))))
+                                            .Top = Me.Height - (CInt(System.Math.Round((intRows + 1) * (dblCharacterHeight))))
+                                            .Width = (CInt(System.Math.Round(dblCharacterWidth * (intCols + 1)) - (CInt(System.Math.Round(intCols * (dblCharacterWidth))) + cm_intBetweenSpace))) - cm_intBetweenSpace
+                                            .Height = (CInt(System.Math.Round(dblCharacterHeight * (intRows + 1)) - (CInt(System.Math.Round(intRows * (dblCharacterHeight))) + cm_intBetweenSpace))) - cm_intBetweenSpace
+                                            .Visible = True
+                                            '.Autosize = Autosize
+                                            .PressedDown = False
+                                        End With
+                                    End If
+                                End If
+                            Next
+                        Next
+
+
+                End Select
+                pnlBack.ResumeLayout()
+
+                'Show Panel, Now That We're Done
+                If Not pnlBack.Visible Then pnlBack.Show()
+                Editable = blnOrigEditable
+                lblBack.Hide()
+
+                If intSelectedIndex > -1 Then
+                    If pnlBack.Controls.Count > intSelectedIndex Then
+                        pnlBack.Controls(intSelectedIndex).Focus()
+                    ElseIf pnlBack.Controls.Count > 0 Then
+                        pnlBack.Controls(pnlBack.Controls.Count - 1).Focus()
+
+                    End If
+                End If
+
+                Me.SuspendCharRedraw = False
+                'Me.Refresh()
+
+                RaiseEvent CharsResized(Me)
+
+                RaiseEvent SomeChars(Me)
+
+            Else
+                Me.m_dblCharHeight = 0
+                Me.m_dblCharWidth = 0
+                Me.m_intCharCols = 0
+                Me.m_intCharRows = 0
+
+                'Set Display String to Hidden Chars
+                'lblBack.Text = cm_strNoCharacters
+
+                'Hide Panel to show lblBack's Message
+                Editable = blnOrigEditable
+                RaiseEvent NoChars(Me)
+                lblBack.Show()
+            End If
+        Else
+            If m_blnResize Then
+                Me.m_dblCharHeight = 0
+                Me.m_dblCharWidth = 0
+                Me.m_intCharCols = 0
+                Me.m_intCharRows = 0
+
+                'Hide Panel to show lblBack's Message
+
+                'pnlBack.Show()
+                Editable = blnOrigEditable
+
+
+                RaiseEvent NoChars(Me)
+                lblBack.Show()
+            End If
+
+        End If
+        m_blnResize = True
+        blnResizing = False
+
+        'Log.LogMinorInfo("-Completed Resizing Characters.", "Time: (" & lt.op_Subtraction(Now, lt).ToString & ")")
 
     End Sub
 
@@ -1185,54 +1092,6 @@ Public Class CharacterDisplay
 
 #End Region
 
-#Region "Filter Titles"
-
-    Private m_strFilterTitles() As String = _
-                {"ClosePunctuation", "ConnectorPunctuation", "Control", "CurrencySymbol", "DashPunctuation", _
-                "DecimalDigitNumber", "EnclosingMark", "FinalQuotePunctuation", "Format", _
-                "InitialQuotePunctuation", "LetterNumber", "LineSeparator", "LowercaseLetter", "MathSymbol", _
-                "ModifierLetter", "ModifierSymbol", "NonSpacingMark", "OpenPunctuation", "OtherLetter", _
-                "OtherNotAssigned", "OtherNumber", "OtherPunctuation", "OtherSymbol", "ParagraphSeparator", _
-                "PrivateUse", "SpaceSeparator", "SpacingCombiningMark", "Surrogate", "TitlecaseLetter", "UppercaseLetter"}
-
-#End Region
-
-#Region "Filter Definitions"
-
-    Private m_strFilterDefinitions() As String = _
-               {"ClosePunctuation Indicates that the character is the closing character of one of the paired punctuation marks, such as parentheses, square brackets, and braces. Signified by the Unicode designation ""Pe"" (punctuation, close)", _
-               "ConnectorPunctuation Indicates that the character is a connector punctuation, which connects two characters. Signified by the Unicode designation ""Pc"" (punctuation, connector).", _
-               "Control Indicates that the character is a control code, whose Unicode value is U+007F or in the range U+0000 through U+001F or U+0080 through U+009F. Signified by the Unicode designation ""Cc"" (other, control).", _
-               "CurrencySymbol Indicates that the character is a currency symbol. Signified by the Unicode designation ""Sc"" (symbol, currency).", _
-               "DashPunctuation Indicates that the character is a dash or a hyphen. Signified by the Unicode designation ""Pd"" (punctuation, dash).", _
-               "DecimalDigitNumber Indicates that the character is a decimal digit; that is, in the range 0 through 9. Signified by the Unicode designation ""Nd"" (number, decimal digit).", _
-               "EnclosingMark Indicates that the character is an enclosing mark, which is a nonspacing combining character that surrounds all previous characters up to and including a base character. Signified by the Unicode designation ""Me"" (mark, enclosing).", _
-               "FinalQuotePunctuation Indicates that the character is a closing or final quotation mark. Signified by the Unicode designation ""Pf"" (punctuation, final quote).", _
-               "Format Indicates that the character is a format character, which is not normally rendered but affects the layout of text or the operation of text processes. Signified by the Unicode designation ""Cf"" (other, format).", _
-               "InitialQuotePunctuation Indicates that the character is an opening or initial quotation mark. Signified by the Unicode designation ""Pi"" (punctuation, initial quote).", _
-               "LetterNumber Indicates that the character is a number represented by a letter, instead of a decimal digit; for example, the Roman numeral for five, which is 'V'. Signified by the Unicode designation ""Nl"" (number, letter).", _
-               "LineSeparator Indicates that the character is used to separate lines of text. Signified by the Unicode designation ""Zl"" (separator, line).", _
-               "LowercaseLetter Indicates that the character is a lowercase letter. Signified by the Unicode designation ""Ll"" (letter, lowercase).", _
-               "MathSymbol Indicates that the character is a mathematical symbol, such as '+' or '= '. Signified by the Unicode designation ""Sm"" (symbol, math).", _
-               "ModifierLetter Indicates that the character is a modifier letter, which is free-standing spacing character that indicates modifications of a preceding letter. Signified by the Unicode designation ""Lm"" (letter, modifier).", _
-               "ModifierSymbol Indicates that the character is a modifier symbol, which indicates modifications of surrounding characters; for example, the fraction slash indicates that the number to the left is the numerator and the number to the right is the denominator. Signified by the Unicode designation ""Sk"" (symbol, modifier).", _
-               "NonSpacingMark Indicates that the character is a nonspacing character, which indicates modifications of a base character. Signified by the Unicode designation ""Mn"" (mark, non-spacing).", _
-               "OpenPunctuation Indicates that the character is the opening character of one of the paired punctuation marks, such as parentheses, square brackets, and braces. Signified by the Unicode designation ""Ps"" (punctuation, open).", _
-               "OtherLetter Indicates that the character is a letter that is not an uppercase letter, a lowercase letter, a titlecase letter, or a modifier letter. Signified by the Unicode designation ""Lo"" (letter, other).", _
-               "OtherNotAssigned Indicates that the character is not assigned to any Unicode category. Signified by the Unicode designation ""Cn"" (other, not assigned).", _
-               "OtherNumber Indicates that the character is a number that is neither a decimal digit nor a letter number; for example, the fraction 1/2. Signified by the Unicode designation ""No"" (number, other).", _
-               "OtherPunctuation Indicates that the character is a punctuation that is not a connector punctuation, a dash punctuation, an open punctuation, a close punctuation, an initial quote punctuation, or a final quote punctuation. Signified by the Unicode designation ""Po"" (punctuation, other).", _
-               "OtherSymbol Indicates that the character is a symbol that is not a mathematical symbol, a currency symbol or a modifier symbol. Signified by the Unicode designation ""So"" (symbol, other).", _
-               "ParagraphSeparator Indicates that the character is used to separate paragraphs. Signified by the Unicode designation ""Zp"" (separator, paragraph).", _
-               "PrivateUse Indicates that the character is a private-use character, whose Unicode value is in the range U+E000 through U+F8FF. Signified by the Unicode designation ""Co"" (other, private use).", _
-               "SpaceSeparator Indicates that the character is a space character, which has no glyph but is not a control or format character. Signified by the Unicode designation ""Zs"" (separator, space).", _
-               "SpacingCombiningMark Indicates that the character is a spacing character, which indicates modifications of a base character and affects the width of the glyph for that base character. Signified by the Unicode designation ""Mc"" (mark, spacing combining).", _
-               "Surrogate Indicates that the character is a high-surrogate or a low-surrogate. Surrogate code values are in the range U+D800 through U+DFFF. Signified by the Unicode designation ""Cs"" (other, surrogate).", _
-               "TitlecaseLetter Indicates that the character is a titlecase letter. Signified by the Unicode designation ""Lt"" (letter, titlecase).", _
-               "UppercaseLetter Indicates that the character is an uppercase letter. Signified by the Unicode designation ""Lu"" (letter, uppercase)."}
-
-#End Region
-
 #Region "MouseSettings Property"
 
     Private m_msMouseSettings As New MouseSettingsClass()
@@ -1249,240 +1108,305 @@ Public Class CharacterDisplay
 
 #Region "Clipboard and editing Methods"
 
-
+#Region "Public methods (*Clicked, *Focused) (no real code)"
     Public Sub CutClicked()
         If Editable Then
-            If pnlBack.Controls.Count > 0 Then
-
-                If Not m_cbLastClicked Is Nothing Then
-                    If pnlBack.Controls.Contains(m_cbLastClicked) Then
-                        Clipboard.SetDataObject(Utils.GetDataFromString(m_cbLastClicked.Text))
-
-                        Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastClicked)
-
-                        RaiseEvent CharDeleted(Me, intIndex)
-
-
-                        If pnlBack.Controls.Count > intIndex And intIndex >= 0 Then
-                            pnlBack.Controls(intIndex - 1).Select()
-                        ElseIf pnlBack.Controls.Count > intIndex Then
-                            pnlBack.Controls(intIndex).Select()
-                        Else
-
-                            pnlBack.Controls(pnlBack.Controls.Count - 1).Focus()
-                        End If
-                    End If
-                End If
-            End If
+            Cut(m_cbLastClicked)
         End If
     End Sub
 
     Public Sub CopyClicked()
         If Not ViewOnly Then
-
-
-
-            If Not m_cbLastClicked Is Nothing Then
-                If pnlBack.Controls.Contains(m_cbLastClicked) Then
-                    Clipboard.SetDataObject(Utils.GetDataFromString(m_cbLastClicked.Text))
-                End If
-            End If
+            Copy(m_cbLastClicked)
         End If
-
     End Sub
 
     Public Sub PasteClicked()
-        If Not Clipboard.GetDataObject Is Nothing Then
-            If Utils.GetStringFromData(Clipboard.GetDataObject).Length > 0 Then
-                Dim strText As String = Utils.GetStringFromData(Clipboard.GetDataObject)
-
-
-
-                If Editable And Not m_cbLastFocused Is Nothing Then
-
-                    Dim intIndex As Integer
-                    If pnlBack.Controls.Contains(m_cbLastClicked) Then
-                        intIndex = Me.pnlBack.Controls.GetChildIndex(m_cbLastClicked) + 1
-                    Else
-                        intIndex = pnlBack.Controls.Count - 1
-                    End If
-                    If intIndex > pnlBack.Controls.Count Then
-                        intIndex = 0
-                    End If
-                    RaiseEvent CharsInserted(Me, intIndex, strText)
-
-                    If pnlBack.Controls.Count > intIndex + (strText.Length - 1) Then
-                        pnlBack.Controls(intIndex + (strText.Length - 1)).Focus()
-                    Else
-                        pnlBack.Controls(pnlBack.Controls.Count - 1).Focus()
-                    End If
-                End If
-            End If
+        If Editable Then
+            Paste(m_cbLastClicked)
         End If
     End Sub
 
     Public Sub DeleteClicked()
         If Editable Then
-            If pnlBack.Controls.Contains(m_cbLastClicked) Then
-                If pnlBack.Controls.Count > 0 Then
-                    If Not m_cbLastFocused Is Nothing Then
-
-                        Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastClicked)
-                        RaiseEvent CharDeleted(Me, intIndex)
-
-                        If pnlBack.Controls.Count > intIndex Then
-                            pnlBack.Controls(intIndex).Select()
-                        ElseIf pnlBack.Controls.Count > 0 Then
-
-                            pnlBack.Controls(pnlBack.Controls.Count - 1).Select()
-                        End If
-                    End If
-                End If
-            End If
+            Delete(m_cbLastClicked)
         End If
     End Sub
 
+    Public Sub FocusClicked()
+        FocusButton(m_cbLastFocused)
+    End Sub
+
+    Public Sub CopyHTMLClicked()
+        If Not ViewOnly Then
+            CopyHTML(m_cbLastClicked)
+        End If
+
+    End Sub
+
     Public Sub SendClicked()
-        If Not m_cbLastClicked Is Nothing Then
-
-            If pnlBack.Controls.Contains(m_cbLastClicked) Then
-                If Not ViewOnly Then
-                    Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastClicked)
-                    If intIndex >= pnlBack.Controls.Count Then
-                        intIndex = 0
-                    End If
-                    RaiseEvent SendCharacter(Me, intIndex, CharacterList.Chars(intIndex))
-                End If
-
-
-            End If
-
+        If Not ViewOnly Then
+            Send(m_cbLastClicked)
         End If
     End Sub
 
     Public Sub CutFocused()
         If Editable Then
-            If pnlBack.Controls.Count > 0 Then
-
-                If Not m_cbLastFocused Is Nothing Then
-                    If pnlBack.Controls.Contains(m_cbLastFocused) Then
-                        Clipboard.SetDataObject(Utils.GetDataFromString(m_cbLastFocused.Text))
-
-                        Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastFocused)
-
-                        RaiseEvent CharDeleted(Me, intIndex)
-                        'm_strCharacterList = m_strCharacterList.Remove(intIndex, 1)
-                        ' m_UpdateCharacters()
-                        ' ResizeCharactersNow()
-
-                        If pnlBack.Controls.Count > intIndex And intIndex >= 0 Then
-                            pnlBack.Controls(intIndex - 1).Select()
-                        ElseIf pnlBack.Controls.Count > intIndex Then
-                            pnlBack.Controls(intIndex).Select()
-                        Else
-
-                            pnlBack.Controls(pnlBack.Controls.Count - 1).Focus()
-                        End If
-                    End If
-                End If
-            End If
+            Cut(m_cbLastFocused)
         End If
     End Sub
 
     Public Sub CopyFocused()
         If Not ViewOnly Then
+            Copy(m_cbLastFocused)
+        End If
 
+    End Sub
 
-
-            If Not m_cbLastFocused Is Nothing Then
-                If pnlBack.Controls.Contains(m_cbLastFocused) Then
-                    Clipboard.SetDataObject(Utils.GetDataFromString(m_cbLastFocused.Text))
-                End If
-            End If
+    Public Sub CopyHTMLFocused()
+        If Not ViewOnly Then
+            CopyHTML(m_cbLastFocused)
         End If
 
     End Sub
 
     Public Sub PasteFocused()
-        If Not Clipboard.GetDataObject Is Nothing Then
-            If Utils.GetStringFromData(Clipboard.GetDataObject).Length > 0 Then
-                Dim strText As String = Utils.GetStringFromData(Clipboard.GetDataObject)
-
-
-
-                If Editable And Not m_cbLastFocused Is Nothing Then
-
-                    Dim intIndex As Integer
-                    If pnlBack.Controls.Contains(m_cbLastFocused) Then
-                        intIndex = Me.pnlBack.Controls.GetChildIndex(m_cbLastFocused) + 1
-                    Else
-                        intIndex = pnlBack.Controls.Count - 1
-                    End If
-                    If intIndex > pnlBack.Controls.Count Then
-                        intIndex = 0
-                    End If
-                    RaiseEvent CharsInserted(Me, intIndex, strText)
-                    'm_strCharacterList = m_strCharacterList.Insert(intIndex, strText)
-                    'm_UpdateCharacters()
-                    'ResizeCharactersNow()
-
-                    If pnlBack.Controls.Count > intIndex + (strText.Length - 1) Then
-                        pnlBack.Controls(intIndex + (strText.Length - 1)).Focus()
-                    Else
-                        pnlBack.Controls(pnlBack.Controls.Count - 1).Focus()
-                    End If
-                End If
-            End If
+        If Editable Then
+            Paste(m_cbLastFocused)
         End If
     End Sub
 
     Public Sub DeleteFocused()
         If Editable Then
-            If pnlBack.Controls.Contains(m_cbLastFocused) Then
-                If pnlBack.Controls.Count > 0 Then
-                    If Not m_cbLastFocused Is Nothing Then
-
-                        Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastFocused)
-                        RaiseEvent CharDeleted(Me, intIndex)
-                        'm_strCharacterList = m_strCharacterList.Remove(intIndex, 1)
-                        'm_UpdateCharacters()
-                        'ResizeCharacters()
-                        If pnlBack.Controls.Count > intIndex Then
-                            pnlBack.Controls(intIndex).Select()
-                        ElseIf pnlBack.Controls.Count > 0 Then
-
-                            pnlBack.Controls(pnlBack.Controls.Count - 1).Select()
-                        End If
-                    End If
-                End If
-            End If
+            Delete(m_cbLastFocused)
         End If
     End Sub
 
     Public Sub SendFocused()
-        If Not m_cbLastFocused Is Nothing Then
-
-            If pnlBack.Controls.Contains(m_cbLastFocused) Then
-                If Not ViewOnly Then
-                    Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastFocused)
-                    If intIndex >= pnlBack.Controls.Count Then
-                        intIndex = 0
-                    End If
-                    RaiseEvent SendCharacter(Me, intIndex, CharacterList.Chars(intIndex))
-                End If
-
-
-            End If
-
+        If Not ViewOnly Then
+            Send(m_cbLastFocused)
         End If
     End Sub
 #End Region
 
+#Region "Protected mechanics"
+
+    Protected Sub Cut(ByVal button As CharacterButton)
+        If pnlBack.Controls.Count > 0 Then
+            If Not button Is Nothing Then
+                If pnlBack.Controls.Contains(button) Then
+                    Clipboard.SetDataObject(Utils.GetDataFromString(button.Text))
+
+                    Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(button)
+
+                    RaiseEvent CharDeleted(Me, New CharEventArgs(button, button.Text, intIndex))
+
+
+                    If pnlBack.Controls.Count > intIndex And intIndex >= 0 Then
+                        pnlBack.Controls(intIndex - 1).Focus()
+                    ElseIf pnlBack.Controls.Count > intIndex Then
+                        pnlBack.Controls(intIndex).Focus()
+                    Else
+                        pnlBack.Controls(pnlBack.Controls.Count - 1).Focus()
+                    End If
+
+                End If
+            End If
+        End If
+    End Sub
+
+    Protected Sub Copy(ByVal button As CharacterButton)
+        If pnlBack.Controls.Count > 0 Then
+            If Not button Is Nothing Then
+                If pnlBack.Controls.Contains(button) Then
+                    If button.Text.Length > 0 Then
+                        Clipboard.SetDataObject(Utils.GetDataFromString(button.Text))
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Protected Sub CopyHTML(ByVal button As CharacterButton)
+        If pnlBack.Controls.Count > 0 Then
+            If Not button Is Nothing Then
+                If pnlBack.Controls.Contains(button) Then
+                    If (button.Text.Length > 0) Then
+                        Dim codes As String = ""
+                        Dim i As Integer
+                        For i = 0 To button.Text.Length - 1
+                            codes += ChrW(38) & ChrW(35) & AscW(button.Text.Chars(i)) & ";"
+                        Next
+                        Clipboard.SetDataObject(Utils.GetDataFromString(codes))
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Protected Sub Paste(ByRef button As CharacterButton)
+        If Not Clipboard.GetDataObject Is Nothing Then
+            If Utils.GetStringFromData(Clipboard.GetDataObject).Length > 0 Then
+                Dim strText As String = Utils.GetStringFromData(Clipboard.GetDataObject)
+                If (strText.Length > 2) Then
+                    If (strText.Substring(0, 2) = ChrW(38) & ChrW(35)) Then
+                        Dim number As String = strText.Substring(2, strText.Length - 3)
+                        Dim ascval As Integer = 0
+                        If Integer.TryParse(number, ascval) Then
+                            If (ascval > 0) Then
+                                strText = ChrW(ascval)
+                            End If
+                        End If
+                    End If
+                End If
+                Dim intIndex As Integer
+                intIndex = pnlBack.Controls.Count
+                If (Not button Is Nothing) Then
+                    If (Me.pnlBack.Controls.Contains(button)) Then
+                        intIndex = Me.pnlBack.Controls.GetChildIndex(button) + 1
+                    End If
+                End If
+                If intIndex > pnlBack.Controls.Count Then
+                    intIndex = pnlBack.Controls.Count
+                End If
+                If intIndex < 0 Then
+                    intIndex = 0
+                End If
+                'intIndex will generally refer to a nonexistent index until after this point
+                RaiseEvent CharsInserted(Me, New CharEventArgs(button, strText, intIndex))
+
+                'Make the last character pasted get the focus
+                intIndex += (strText.Length - 1)
+
+                If intIndex > pnlBack.Controls.Count - 1 Then intIndex = pnlBack.Controls.Count - 1
+                If (intIndex < 0) Then intIndex = 0
+                If (pnlBack.Controls.Count > 0) Then
+                    pnlBack.Controls(intIndex).Focus()
+                End If
+            End If
+        End If
+    End Sub
+
+    Protected Sub Delete(ByVal button As CharacterButton)
+        If pnlBack.Controls.Count > 0 Then
+            If Not button Is Nothing Then
+                If pnlBack.Controls.Contains(button) Then
+                    Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(button)
+                    RaiseEvent CharDeleted(Me, New CharEventArgs(button, button.Text, intIndex))
+
+                    If pnlBack.Controls.Count > intIndex Then
+                        pnlBack.Controls(intIndex).Focus()
+                    ElseIf pnlBack.Controls.Count > 0 Then
+
+                        pnlBack.Controls(pnlBack.Controls.Count - 1).Focus()
+
+                    End If
+
+                End If
+            End If
+        End If
+    End Sub
+
+    Protected Sub FocusButton(ByVal button As CharacterButton)
+        If pnlBack.Controls.Count > 0 Then
+            If Not button Is Nothing Then
+                If pnlBack.Controls.Contains(button) Then
+                    button.Focus()
+
+                End If
+            End If
+        End If
+    End Sub
+
+    Protected Sub Send(ByVal button As CharacterButton)
+        If pnlBack.Controls.Count > 0 Then
+            If Not button Is Nothing Then
+                If pnlBack.Controls.Contains(button) Then
+                    If button.Text.Length > 0 Then
+                        Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(button)
+                        If intIndex >= pnlBack.Controls.Count Then
+                            Exit Sub
+                        End If
+                        RaiseEvent SendCharacter(Me, New CharEventArgs(button, button.Text, intIndex))
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+#End Region
+
+#End Region
+
     Dim m_blnFirstDrag As Boolean = True
+
+#Region "Colors"
+
+    Private Sub CharacterDisplay_ButtonColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ButtonColorChanged
+        Dim ctrl As CharacterButton
+        For Each ctrl In pnlBack.Controls
+            ctrl.BackColor = Me.ButtonColor
+        Next
+    End Sub
+
+    Private Sub CharacterDisplay_DarkEdgeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DarkEdgeColorChanged
+        Dim ctrl As CharacterButton
+        For Each ctrl In pnlBack.Controls
+            ctrl.DarkEdgeColor = Me.DarkEdgeColor
+        Next
+
+    End Sub
+
+    Private Sub CharacterDisplay_FocusedColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.FocusedColorChanged
+        Dim ctrl As CharacterButton
+        For Each ctrl In pnlBack.Controls
+            ctrl.FocusedColor = Me.FocusedColor
+        Next
+
+    End Sub
+
+    Private Sub CharacterDisplay_LightEdgeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LightEdgeColorChanged
+        Dim ctrl As CharacterButton
+        For Each ctrl In pnlBack.Controls
+            ctrl.LightEdgeColor = Me.LightEdgeColor
+        Next
+
+    End Sub
+
+    Private Sub CharacterDisplay_NormalOutlineColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.NormalOutlineColorChanged
+        Dim ctrl As CharacterButton
+        For Each ctrl In pnlBack.Controls
+            ctrl.NormalOutlineColor = Me.NormalOutlineColor
+        Next
+
+    End Sub
+
+    Private Sub CharacterDisplay_BackColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.BackColorChanged
+        pnlBack.BackColor = Me.BackColor
+        lblBack.BackColor = Me.BackColor
+        If Me.BackColor.GetBrightness < 0.5 Then
+            lblSep.BackColor = Color.White
+        Else
+            lblSep.BackColor = Color.Black
+        End If
+        Dim ctrl As CharacterButton
+        For Each ctrl In pnlBack.Controls
+            ctrl.RimColor = Me.BackColor
+        Next
+    End Sub
+    Private Sub CharacterDisplay_ForeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.ForeColorChanged
+        Dim ctrl As CharacterButton
+        For Each ctrl In pnlBack.Controls
+            ctrl.ForeColor = Me.ForeColor
+        Next
+        pnlBack.ForeColor = Me.ForeColor
+        lblBack.ForeColor = Me.ForeColor
+    End Sub
+
 
 #Region "FocusedColor Property"
 
-    Private m_cFocusedColor As Color = SystemColors.ControlLightLight
+    Private m_cFocusedColor As Color = SystemColors.ControlText
 
     Public Property FocusedColor() As Color
         Get
@@ -1491,11 +1415,6 @@ Public Class CharacterDisplay
         Set(ByVal Value As Color)
             If Not m_cFocusedColor.Equals(Value) Then
                 m_cFocusedColor = Value
-                Dim ctrl As CharacterButton
-                For Each ctrl In pnlBack.Controls
-                    ctrl.FocusedColor = Value
-                Next
-
                 RaiseEvent FocusedColorChanged(Me, Nothing)
             End If
 
@@ -1506,7 +1425,7 @@ Public Class CharacterDisplay
 
 #Region "LightEdgeColor Property"
 
-    Private m_cLightEdgeColor As Color = SystemColors.ControlLightLight
+    Private m_cLightEdgeColor As Color = SystemColors.ButtonHighlight
 
     Public Property LightEdgeColor() As Color
         Get
@@ -1515,11 +1434,6 @@ Public Class CharacterDisplay
         Set(ByVal Value As Color)
             If Not m_cLightEdgeColor.Equals(Value) Then
                 m_cLightEdgeColor = Value
-                Dim ctrl As CharacterButton
-                For Each ctrl In pnlBack.Controls
-                    ctrl.LightEdgeColor = Value
-                Next
-
                 RaiseEvent LightEdgeColorChanged(Me, Nothing)
             End If
         End Set
@@ -1529,7 +1443,7 @@ Public Class CharacterDisplay
 
 #Region "DarkEdgeColor Property"
 
-    Private m_cDarkEdgeColor As Color = SystemColors.ControlDarkDark
+    Private m_cDarkEdgeColor As Color = SystemColors.ButtonShadow
 
     Public Property DarkEdgeColor() As Color
         Get
@@ -1538,11 +1452,6 @@ Public Class CharacterDisplay
         Set(ByVal Value As Color)
             If Not m_cDarkEdgeColor.Equals(Value) Then
                 m_cDarkEdgeColor = Value
-                Dim ctrl As CharacterButton
-                For Each ctrl In pnlBack.Controls
-                    ctrl.DarkEdgeColor = Value
-                Next
-
                 RaiseEvent DarkEdgeColorChanged(Me, Nothing)
             End If
         End Set
@@ -1552,7 +1461,7 @@ Public Class CharacterDisplay
 
 #Region "NormalOutlineColor Property"
 
-    Private m_cNormalOutlineColor As Color = SystemColors.ControlDark
+    Private m_cNormalOutlineColor As Color = SystemColors.Window
 
     Public Property NormalOutlineColor() As Color
         Get
@@ -1561,11 +1470,6 @@ Public Class CharacterDisplay
         Set(ByVal Value As Color)
             If Not m_cNormalOutlineColor.Equals(Value) Then
                 m_cNormalOutlineColor = Value
-                Dim ctrl As CharacterButton
-                For Each ctrl In pnlBack.Controls
-                    ctrl.NormalOutlineColor = Value
-                Next
-
                 RaiseEvent NormalOutlineColorChanged(Me, Nothing)
             End If
         End Set
@@ -1573,11 +1477,9 @@ Public Class CharacterDisplay
 
 #End Region
 
-
-
 #Region "ButtonColor Property"
 
-    Private m_cButtonColor As Color = SystemColors.Control
+    Private m_cButtonColor As Color = SystemColors.ButtonFace
 
     Public Property ButtonColor() As Color
         Get
@@ -1586,12 +1488,6 @@ Public Class CharacterDisplay
         Set(ByVal Value As Color)
             If Not m_cButtonColor.Equals(Value) Then
                 m_cButtonColor = Value
-                Dim ctrl As CharacterButton
-                For Each ctrl In pnlBack.Controls
-                    ctrl.ButtonColor = Value
-                Next
-                pnlBack.BackColor = Me.ButtonColor
-                lblBack.BackColor = Me.ButtonColor
                 RaiseEvent ButtonColorChanged(Me, Nothing)
             End If
         End Set
@@ -1599,11 +1495,78 @@ Public Class CharacterDisplay
 
 #End Region
 
+
+#End Region
+
+#Region "SuspendCharRedraw Property"
+
+    Private m_blnSuspendCharRedraw As Boolean = False
+
+    Public Property SuspendCharRedraw() As Boolean
+        Get
+            Return m_blnSuspendCharRedraw
+        End Get
+        Set(ByVal value As Boolean)
+            m_blnSuspendCharRedraw = value
+            Dim ctrl As CharacterButton
+            For Each ctrl In pnlBack.Controls
+                ctrl.SuspendRedraw = value
+            Next
+        End Set
+    End Property
+
+#End Region
+
+
+#Region "Last Focused Char Property (Readonly)"
+
+    Public ReadOnly Property LastFocusedChar() As CharacterButton
+        Get
+            Return Me.m_cbLastFocused
+        End Get
+
+    End Property
+
+#End Region
+
+#Region "Last Clicked Char Property (Readonly)"
+
+    Public ReadOnly Property LastClickedChar() As CharacterButton
+        Get
+            Return Me.m_cbLastClicked
+        End Get
+
+    End Property
+
+#End Region
+
+#Region "Last Clicked Char Index Property (Readonly)"
+
+    Public ReadOnly Property LastClickedCharIndex() As Integer
+        Get
+            If Not m_cbLastClicked Is Nothing Then
+                If (pnlBack.Controls.Contains(m_cbLastClicked)) Then
+                    Return pnlBack.Controls.IndexOf(m_cbLastClicked)
+                Else
+                    Return -1
+                End If
+            Else
+                Return -1
+            End If
+        End Get
+
+    End Property
+
+#End Region
+
+#Region "Button array events"
+
 #Region "Character Button MouseDown Event"
 
     Private Sub CharacterButton_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
 
         m_cbLastClicked = CType(sender, CharacterButton)
+        Dim intIndex As Integer = pnlBack.Controls.IndexOf(m_cbLastClicked)
         Dim blnLeftDown As Boolean = ((e.Button And Windows.Forms.MouseButtons.Left) <> 0)
         Dim blnMiddleDown As Boolean = ((e.Button And Windows.Forms.MouseButtons.Middle) <> 0)
         Dim blnRightDown As Boolean = ((e.Button And Windows.Forms.MouseButtons.Right) <> 0)
@@ -1635,70 +1598,40 @@ Public Class CharacterDisplay
 
 
         If blnSelect Then
-
-            CType(sender, CharacterButton).Focus()
+            m_cbLastClicked.Focus()
         End If
 
         If blnCopy Then
-
-			Dim dData As DataObject = Utils.Convert.GetDataFromString(CType(sender, CharacterButton).Text)
-
-            If Not ViewOnly Then
-                CType(sender, CharacterButton).PressedDown = True
-                Clipboard.SetDataObject(dData, True)
-            End If
-
+            CopyClicked()
+            m_cbLastClicked.PressedDown = True
         End If
 
         If blnSend Then
-            If Not ViewOnly Then
-                RaiseEvent SendCharacter(Me, pnlBack.Controls.IndexOf(CType(sender, CharacterButton)), CChar(CType(sender, CharacterButton).Text))
-            End If
+            SendClicked()
         End If
 
         If blnMenu Then
-            mnuPaste.Enabled = (Not Clipboard.GetDataObject Is Nothing)
-            If mnuPaste.Enabled Then
-                mnuPaste.Enabled = (Utils.GetStringFromData(Clipboard.GetDataObject).Length > 0)
-
-            End If
-            If Me.Editable = False Then
-                mnuPaste.Enabled = False
-            End If
-
-            Try
-                If Not CType(sender, CharacterButton).FindForm Is Nothing Then
-                    If CType(sender, CharacterButton).FindForm.Visible Then
-                        cmCharMenu.Show(CType(sender, CharacterButton), New Point(e.X, e.Y))
-                    End If
-                End If
-            Catch
-
-            End Try
-
-            CType(sender, CharacterButton).PressedDown = False
-
+            RaiseEvent ShowCharMenu(Me, New CharEventArgs(m_cbLastClicked, m_cbLastClicked.Text, intIndex))
+            m_cbLastClicked.PressedDown = False
         End If
 
         If blnDrag Then
-
-            Dim dData As DataObject = Utils.Convert.GetDataFromString(CType(sender, CharacterButton).Text)
-
+            Dim dData As DataObject = Utils.Convert.GetDataFromString(m_cbLastClicked.Text)
             If Editable Then
                 Me.m_blnDropHere = True
                 Me.m_blnDragSourceHere = True
-                Me.m_intDragSourceChar = pnlBack.Controls.IndexOf(CType(sender, CharacterButton))
+                Me.m_intDragSourceChar = intIndex
             End If
 
             If Not ViewOnly Then
                 If Not m_blnFirstDrag Then
-                    CType(sender, CharacterButton).PressedDown = True
+                    m_cbLastClicked.PressedDown = True
 
                 End If
                 m_blnFirstDrag = False
-                CType(sender, CharacterButton).DoDragDrop(dData, DragDropEffects.Copy Or DragDropEffects.Move Or DragDropEffects.None)
+                m_cbLastClicked.DoDragDrop(dData, DragDropEffects.Copy Or DragDropEffects.Move Or DragDropEffects.None)
             Else
-                CType(sender, CharacterButton).PressedDown = False
+                m_cbLastClicked.PressedDown = False
             End If
 
         End If
@@ -1717,13 +1650,18 @@ Public Class CharacterDisplay
 
 #End Region
 
+
 #Region "Character Button DragDrop Event"
 
     Private Sub CharacterButton_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs)
+        Dim button As CharacterButton
+        button = CType(sender, CharacterButton)
+
+
         blnDragDrop = True
         lblSep.Visible = False
 
-        CType(sender, CharacterButton).PressedDown = False
+        button.PressedDown = False
         'If pnlBack.Controls.Count >= 1 Then
         '    CType(pnlBack.Controls(0), CharacterButton).PressedDown = False
         'End If
@@ -1746,7 +1684,7 @@ Public Class CharacterDisplay
             strAddString = CStr(e.Data.GetData(DataFormats.OemText, True))
         End If
 
-        Dim intThisIndex As Integer = pnlBack.Controls.IndexOf(CType(sender, CharacterButton))
+        Dim intThisIndex As Integer = pnlBack.Controls.IndexOf(button)
         If m_intDragSourceChar >= 0 Then
             CType(pnlBack.Controls(m_intDragSourceChar), CharacterButton).PressedDown = False
         End If
@@ -1762,81 +1700,80 @@ Public Class CharacterDisplay
 
         Select Case Orientation
             Case OrientationDirection.Left
-                If CType(sender, CharacterButton).PointToClient(New Point(0, e.Y)).Y < (CType(sender, CharacterButton).Height / 2) Then
+                If button.PointToClient(New Point(0, e.Y)).Y < (button.Height / 2) Then
 
                     m_strCharacterList = m_strCharacterList.Substring(0, intThisIndex) & strAddString & m_strCharacterList.Substring(intThisIndex, m_strCharacterList.Length - intThisIndex)
-                    RaiseEvent CharsInserted(Me, intThisIndex, strAddString)
+                    RaiseEvent CharsInserted(Me, New CharEventArgs(button, strAddString, intThisIndex))
                 Else
                     m_strCharacterList = m_strCharacterList.Substring(0, intThisIndex + 1) & strAddString & m_strCharacterList.Substring(intThisIndex + 1, m_strCharacterList.Length - (intThisIndex + 1))
-                    RaiseEvent CharsInserted(Me, intThisIndex + 1, strAddString)
+                    RaiseEvent CharsInserted(Me, New CharEventArgs(button, strAddString, intThisIndex + 1))
                 End If
             Case OrientationDirection.Right
-                If CType(sender, CharacterButton).PointToClient(New Point(0, e.Y)).Y > (CType(sender, CharacterButton).Height / 2) Then
+                If button.PointToClient(New Point(0, e.Y)).Y > (button.Height / 2) Then
                     m_strCharacterList = m_strCharacterList.Substring(0, intThisIndex) & strAddString & m_strCharacterList.Substring(intThisIndex, m_strCharacterList.Length - intThisIndex)
-                    RaiseEvent CharsInserted(Me, intThisIndex + 1, strAddString)
+                    RaiseEvent CharsInserted(Me, New CharEventArgs(button, strAddString, intThisIndex + 1))
                 Else
                     m_strCharacterList = m_strCharacterList.Substring(0, intThisIndex + 1) & strAddString & m_strCharacterList.Substring(intThisIndex + 1, m_strCharacterList.Length - (intThisIndex + 1))
-                    RaiseEvent CharsInserted(Me, intThisIndex, strAddString)
+                    RaiseEvent CharsInserted(Me, New CharEventArgs(button, strAddString, intThisIndex))
                 End If
             Case OrientationDirection.Top
-                If CType(sender, CharacterButton).PointToClient(New Point(e.X, 0)).X < (CType(sender, CharacterButton).Width / 2) Then
+                If button.PointToClient(New Point(e.X, 0)).X < (button.Width / 2) Then
                     m_strCharacterList = m_strCharacterList.Substring(0, intThisIndex) & strAddString & m_strCharacterList.Substring(intThisIndex, m_strCharacterList.Length - intThisIndex)
-                    RaiseEvent CharsInserted(Me, intThisIndex, strAddString)
+                    RaiseEvent CharsInserted(Me, New CharEventArgs(button, strAddString, intThisIndex))
                 Else
                     m_strCharacterList = m_strCharacterList.Substring(0, intThisIndex + 1) & strAddString & m_strCharacterList.Substring(intThisIndex + 1, m_strCharacterList.Length - (intThisIndex + 1))
-                    RaiseEvent CharsInserted(Me, intThisIndex + 1, strAddString)
+                    RaiseEvent CharsInserted(Me, New CharEventArgs(button, strAddString, intThisIndex + 1))
                 End If
             Case OrientationDirection.Bottom
-                If CType(sender, CharacterButton).PointToClient(New Point(e.X, 0)).X > (CType(sender, CharacterButton).Width / 2) Then
+                If button.PointToClient(New Point(e.X, 0)).X > (button.Width / 2) Then
                     m_strCharacterList = m_strCharacterList.Substring(0, intThisIndex) & strAddString & m_strCharacterList.Substring(intThisIndex, m_strCharacterList.Length - intThisIndex)
-                    RaiseEvent CharsInserted(Me, intThisIndex + 1, strAddString)
+                    RaiseEvent CharsInserted(Me, New CharEventArgs(button, strAddString, intThisIndex + 1))
                 Else
                     m_strCharacterList = m_strCharacterList.Substring(0, intThisIndex + 1) & strAddString & m_strCharacterList.Substring(intThisIndex + 1, m_strCharacterList.Length - (intThisIndex + 1))
-                    RaiseEvent CharsInserted(Me, intThisIndex, strAddString)
+                    RaiseEvent CharsInserted(Me, New CharEventArgs(button, strAddString, intThisIndex))
                 End If
         End Select
 
         If m_blnDragSourceHere Then
             If m_intDragSourceChar > intThisIndex Then
                 m_strCharacterList = m_strCharacterList.Remove(m_intDragSourceChar + strAddString.Length, 1)
-                RaiseEvent CharDeleted(Me, m_intDragSourceChar + strAddString.Length)
+                RaiseEvent CharDeleted(Me, New CharEventArgs(button, button.Text, m_intDragSourceChar + strAddString.Length))
             Else
                 m_strCharacterList = m_strCharacterList.Remove(m_intDragSourceChar, 1)
-                RaiseEvent CharDeleted(Me, m_intDragSourceChar)
+                RaiseEvent CharDeleted(Me, New CharEventArgs(button, button.Text, m_intDragSourceChar))
             End If
+        End If
+
+
+        If m_strCharacterList.Length <> strOriginalChars.Length Then
+            m_UpdateCharacters()
+            ResizeCharactersNow()
+        Else
+
+            Dim intChar As Integer = 0
+            Dim ctrl As CharacterButton
+            For Each ctrl In pnlBack.Controls
+                If m_strCharacterList.Length > intChar Then
+                    ctrl.SuspendRedraw = True
+                    ctrl.Text = m_strCharacterList.Chars(intChar)
+                    ctrl.SuspendRedraw = False
+                    intChar += 1
+                End If
+            Next
+            Dim intStart As Integer = intThisIndex
+            If m_intDragSourceChar < intStart Then intStart = m_intDragSourceChar
+            Dim intEnd As Integer = Math.Abs(intThisIndex - m_intDragSourceChar) + 1 + intStart
+            If intStart < 0 Then intStart = 0
+            If intEnd >= pnlBack.Controls.Count - 1 Then intEnd = pnlBack.Controls.Count - 1
+            Dim i As Integer
+            For i = intStart To intEnd
+                pnlBack.Controls(i).Refresh()
+            Next
         End If
         m_blnDragSourceHere = False
         m_intDragSourceChar = -1
         m_blnDropHere = False
         blnDragDrop = False
-
-        If m_strCharacterList.Length <> strOriginalChars.Length Then
-            m_UpdateCharacters()
-
-            ResizeCharactersNow()
-        Else
-            Dim intChar As Integer
-            Dim ctrl As CharacterButton
-            For Each ctrl In pnlBack.Controls
-                If m_strCharacterList.Length > intChar Then
-                    ctrl.Text = m_strCharacterList.Chars(intChar)
-                    If Array.IndexOf(m_strFilterTitles, System.Char.GetUnicodeCategory(CChar(m_strCharacterList.Substring(intChar, 1))).ToString) > -1 Then
-                        ttTips.SetToolTip(ctrl, "Character: ' " & m_strCharacterList.Substring(intChar, 1) & "'" & ControlChars.CrLf & "Ansii Code: " & CStr(Asc(m_strCharacterList.Substring(intChar, 1))) & vbCrLf & _
-                         "Unicode: U+" & Hex(AscW(m_strCharacterList.Substring(intChar, 1))) & " (" & AscW(m_strCharacterList.Substring(intChar, 1)).ToString & ")" & vbCrLf & _
-                         "Unicode Category: " & System.Char.GetUnicodeCategory(CChar(m_strCharacterList.Substring(intChar, 1))).ToString & vbCrLf & _
-                         "Unicode Definition: " & m_strFilterDefinitions(Array.IndexOf(m_strFilterTitles, System.Char.GetUnicodeCategory(CChar(m_strCharacterList.Substring(intChar, 1))).ToString)))
-
-                    Else
-                        ttTips.SetToolTip(ctrl, "Character: ' " & m_strCharacterList.Substring(intChar, 1) & "'" & ControlChars.CrLf & "Ansii Code: " & CStr(Asc(m_strCharacterList.Substring(intChar, 1))) & vbCrLf & _
-                         "Unicode: U+" & Hex(AscW(m_strCharacterList.Substring(intChar, 1))) & " (" & AscW(m_strCharacterList.Substring(intChar, 1)).ToString & ")" & vbCrLf & _
-                         "Unicode Category: " & System.Char.GetUnicodeCategory(CChar(m_strCharacterList.Substring(intChar, 1))).ToString)
-
-                    End If
-                    intChar += 1
-                End If
-            Next
-        End If
-
 
     End Sub
 
@@ -1919,6 +1856,7 @@ Public Class CharacterDisplay
 
 #End Region
 
+
 #Region "Character Button QueryContinueDrag Event"
 
     Private Sub CharacterButton_QueryContinueDrag(ByVal sender As Object, ByVal e As System.Windows.Forms.QueryContinueDragEventArgs)
@@ -1931,15 +1869,14 @@ Public Class CharacterDisplay
 
 #End Region
 
+
 #Region "Character Button Mouse Enter Event"
 
     Private Sub CharacterButton_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs)
-
+        Dim intThisIndex As Integer = pnlBack.Controls.IndexOf(CType(sender, CharacterButton))
         Dim strChar As String = CType(sender, CharacterButton).Text
         If strChar.Length > 0 Then
-            RaiseEvent OnCharacter(Me, CChar(strChar), CStr(Asc(strChar)), "U+" & Hex(AscW(strChar)), _
-                System.Char.GetUnicodeCategory(CChar(strChar)).ToString, _
-                m_strFilterDefinitions(Array.IndexOf(m_strFilterTitles, System.Char.GetUnicodeCategory(CChar(strChar)).ToString)))
+            RaiseEvent OnCharacter(Me, New CharEventArgs(CType(sender, CharacterButton), strChar, intThisIndex))
         End If
     End Sub
 
@@ -2015,206 +1952,21 @@ Public Class CharacterDisplay
 
 #End Region
 
-
-#Region "Character Button Keypress Event"
-
-    Private Sub CharacterButton_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-
-
-        'If e.Control And e.KeyCode = Keys.Insert Or e.Control And e.KeyCode = Keys.C Then
-        '    Me.Copy()
-        'ElseIf e.Shift And e.KeyCode = Keys.Insert Or e.Control And e.KeyCode = Keys.V Then
-        '    Me.Paste()
-        'ElseIf e.Shift And e.KeyCode = Keys.Delete Or e.Control And e.KeyCode = Keys.X Then
-        '    Me.Cut()
-        'ElseIf e.KeyCode = Keys.Delete And Not e.Shift And Not e.Control And Not e.Alt Then
-        '    Me.Delete()
-        'ElseIf e.KeyCode = Keys.Down Or e.KeyCode = Keys.Up Or e.KeyCode = Keys.Right Or e.KeyCode = Keys.Left Then
-        '    Dim intKey As Integer
-        '    Select Case e.KeyData
-        '        Case Keys.Up
-        '            intKey = 0
-        '        Case Keys.Right
-        '            intKey = 1
-        '        Case Keys.Down
-        '            intKey = 2
-        '        Case Keys.Left
-        '            intKey = 3
-        '    End Select
-
-        '    Select Case intKey
-        '        Case 0
-        '            If pnlBack.Controls.IndexOf(m_cbLastFocused) >= m_intCharCols Then
-        '                pnlBack.Controls(pnlBack.Controls.IndexOf(m_cbLastFocused) - m_intCharCols).Focus()
-        '            End If
-        '        Case 1
-        '            If pnlBack.Controls.IndexOf(m_cbLastFocused) < pnlBack.Controls.Count - 1 Then
-        '                pnlBack.Controls(pnlBack.Controls.IndexOf(m_cbLastFocused) + 1).Focus()
-        '            End If
-        '        Case 2
-        '            If pnlBack.Controls.Count > pnlBack.Controls.IndexOf(m_cbLastFocused) + m_intCharCols Then
-        '                pnlBack.Controls(pnlBack.Controls.IndexOf(m_cbLastFocused) + m_intCharCols).Focus()
-        '            End If
-        '        Case 3
-        '            If pnlBack.Controls.IndexOf(m_cbLastFocused) > 0 Then
-        '                pnlBack.Controls(pnlBack.Controls.IndexOf(m_cbLastFocused) - 1).Focus()
-        '            End If
-        '    End Select
-        '    e.Handled = True
-        'ElseIf (e.KeyCode = Keys.Enter) Then
-        '    Me.Send()
-        'End If
-
-    End Sub
-
-#End Region
-
-#Region "Old Character Display DragandDrop Event Handlers"
-    '#Region "Character Display DragEnter Event"
-
-    '    Private Sub CharacterDisplay_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles MyBase.DragEnter
-    '        m_blnDropHere = True
-    '        If e.Data.GetDataPresent(DataFormats.UnicodeText, True) Or _
-    '            e.Data.GetDataPresent(DataFormats.StringFormat, True) Or _
-    '            e.Data.GetDataPresent(DataFormats.Text, True) Or _
-    '             e.Data.GetDataPresent(DataFormats.Rtf, True) Or _
-    '             e.Data.GetDataPresent(DataFormats.OemText, True) Or _
-    '             e.Data.GetDataPresent(DataFormats.Html, True) And Editable Then
-
-    '            If m_blnDragSourceHere Then
-    '                e.Effect = DragDropEffects.Move
-    '            Else
-    '                e.Effect = DragDropEffects.Move Or DragDropEffects.Copy
-    '            End If
-    '        Else
-    '            e.Effect = DragDropEffects.None
-    '        End If
-    '        ' e.Effect = DragDropEffects.None
-    '    End Sub
-
-    '#End Region
-
-    '#Region "Character Display DragLeave Event"
-
-    '    Private Sub CharacterDisplay_DragLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.DragLeave
-    '        m_blnDropHere = False
-    '        lblSep.Visible = False
-    '    End Sub
-
-    '#End Region
-
-    '#Region "Character Display DragOver Event"
-
-    '    Private Sub CharacterDisplay_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles MyBase.DragOver
-    '        m_blnDropHere = True
-    '        If m_intLastCharRow > 0 And pnlBack.Controls.Count = CharacterList.Length And m_blnResize Then
-
-
-
-
-    '            Dim btnLastButton As CharacterButton = CType(pnlBack.Controls(CharacterList.Length - (m_intLastCharRow + 1)), CharacterButton)
-
-    '            If Me.Orientation = OrientationDirection.Left Or Me.Orientation = OrientationDirection.Right Then
-    '                If Me.Orientation = OrientationDirection.Left Then
-    '                    lblSep.Left = btnLastButton.Left
-    '                    lblSep.Top = btnLastButton.Top - (cm_intBetweenSpace * 2)
-    '                    lblSep.Width = btnLastButton.Width
-    '                    lblSep.Height = cm_intBetweenSpace * 2
-    '                    lblSep.BringToFront()
-    '                    lblSep.Visible = True
-    '                Else
-    '                    lblSep.Left = btnLastButton.Left
-    '                    lblSep.Top = btnLastButton.Top + btnLastButton.Height
-    '                    lblSep.Width = btnLastButton.Width
-    '                    lblSep.Height = cm_intBetweenSpace * 2
-    '                    lblSep.BringToFront()
-    '                    lblSep.Visible = True
-    '                End If
-    '            ElseIf Me.Orientation = OrientationDirection.Top Or Me.Orientation = OrientationDirection.Bottom Then
-    '                If Me.Orientation = OrientationDirection.Bottom Then
-
-    '                    lblSep.Left = btnLastButton.Left - (cm_intBetweenSpace * 2)
-    '                    lblSep.Top = btnLastButton.Top
-    '                    lblSep.Width = cm_intBetweenSpace * 2
-    '                    lblSep.Height = btnLastButton.Height
-    '                    lblSep.Visible = True
-    '                Else
-    '                    lblSep.Left = btnLastButton.Left + btnLastButton.Width
-    '                    lblSep.Top = btnLastButton.Top
-    '                    lblSep.Width = cm_intBetweenSpace * 2
-    '                    lblSep.Height = btnLastButton.Height
-    '                    lblSep.Visible = True
-    '                End If
-    '            End If
-    '        End If
-    '    End Sub
-
-    '#End Region
-
-    '#Region "Character Display DragDrop Event"
-
-    '    Private Sub CharacterDisplay_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles MyBase.DragDrop
-    '        lblSep.Visible = False
-
-    '        Dim strOriginalChars As String = m_strCharacterList
-
-    '        Dim strAddString As String = ""
-
-    '        If e.Data.GetDataPresent(DataFormats.UnicodeText, True) Then
-    '            strAddString = CStr(e.Data.GetData(DataFormats.UnicodeText, True))
-    '        ElseIf e.Data.GetDataPresent(DataFormats.StringFormat, True) Then
-    '            strAddString = CStr(e.Data.GetData(DataFormats.StringFormat, True))
-    '        ElseIf e.Data.GetDataPresent(DataFormats.Rtf, True) Then
-    '            strAddString = CStr(e.Data.GetData(DataFormats.Rtf, True))
-    '        ElseIf e.Data.GetDataPresent(DataFormats.Text, True) Then
-    '            strAddString = CStr(e.Data.GetData(DataFormats.Text, True))
-    '        ElseIf e.Data.GetDataPresent(DataFormats.Html, True) Then
-    '            strAddString = CStr(e.Data.GetData(DataFormats.Html, True))
-    '        ElseIf e.Data.GetDataPresent(DataFormats.OemText, True) Then
-    '            strAddString = CStr(e.Data.GetData(DataFormats.OemText, True))
-    '        End If
-
-    '        m_strCharacterList = m_strCharacterList.Substring(0, m_strCharacterList.Length - m_intLastCharRow) & _
-    '                      strAddString & m_strCharacterList.Substring(m_strCharacterList.Length - m_intLastCharRow, m_intLastCharRow)
-
-    '        If m_blnDragSourceHere Then
-    '            If m_intDragSourceChar > (m_strCharacterList.Length - (m_intLastCharRow + strAddString.Length)) Then
-    '                m_strCharacterList = m_strCharacterList.Remove(m_intDragSourceChar + strAddString.Length, 1)
-    '            Else
-    '                m_strCharacterList = m_strCharacterList.Remove(m_intDragSourceChar, 1)
-    '            End If
-    '        End If
-
-    '        If m_strCharacterList <> strOriginalChars Then
-    '            m_UpdateCharacters()
-
-    '            ResizeCharactersNow()
-
-    '        End If
-    '        CType(sender, CharacterButton).PressedDown = False
-
-    '        m_blnDragSourceHere = False
-    '        m_intDragSourceChar = -1
-    '        m_blnDropHere = False
-
-    '    End Sub
-
-    '#End Region
-
-    '#Region "Character Display QueryContinueDrag Event"
-
-    '    Private Sub CharacterDisplay_QueryContinueDrag(ByVal sender As Object, ByVal e As System.Windows.Forms.QueryContinueDragEventArgs) Handles MyBase.QueryContinueDrag
-    '        If e.Action = DragAction.Cancel Or e.Action = DragAction.Drop And Not m_blnDropHere Then
-    '            Me.m_blnDragSourceHere = False
-    '            Me.m_intDragSourceChar = -1
-    '            CType(sender, CharacterButton).PressedDown = False
-    '        End If
-    '    End Sub
-
-    '#End Region
 #End Region
 
 #Region "lblBack DragEnter Event Handler"
+
+    Private Sub lblBack_MouseClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lblBack.MouseClick
+        If (e.Button = Windows.Forms.MouseButtons.Left) Then
+            Me.m_UpdateCharacters()
+            ResizeCharactersNow()
+        ElseIf (e.Button = Windows.Forms.MouseButtons.Right) Then
+            If Me.CharacterList.Length = 0 Then
+                RaiseEvent ShowNoCharsMenu(Me)
+            End If
+        End If
+
+    End Sub
 
     Private Sub lblBack_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lblBack.DragEnter
         If e.Data.GetDataPresent(DataFormats.UnicodeText, True) Or _
@@ -2252,140 +2004,18 @@ Public Class CharacterDisplay
             strAddString = CStr(e.Data.GetData(DataFormats.OemText, True))
         End If
         CharacterList &= strAddString
-        RaiseEvent CharsInserted(Me, CharacterList.Length - 1, strAddString)
-    End Sub
-
-#End Region
-
-#Region "Mouse Wheel Event Handler"
-
-    Protected Overrides Sub OnMouseWheel(ByVal e As System.Windows.Forms.MouseEventArgs)
-
-        Dim sngCurrentSize As Single = Me.Font.Size
-        sngCurrentSize += ((e.Delta * CSng(SystemInformation.MouseWheelScrollLines)) / 360) * SizeWheelIncrement
-        If sngCurrentSize > 0 Then
-            Me.Font = New Font(Me.Font.FontFamily, sngCurrentSize, Me.Font.Style, Me.Font.Unit, Me.Font.GdiCharSet, Me.Font.GdiVerticalFont)
+        If (pnlBack.Controls.Count > 0) Then
+            Dim button As CharacterButton = CType(pnlBack.Controls.Item(pnlBack.Controls.Count - 1), CharacterButton)
+            RaiseEvent CharsInserted(Me, New CharEventArgs(button, strAddString, pnlBack.Controls.Count - 1))
+        Else
+            RaiseEvent CharsInserted(Me, New CharEventArgs(Nothing, strAddString, pnlBack.Controls.Count - 1))
         End If
 
     End Sub
 
 #End Region
 
-#Region "Popup Menu Handlers"
-    Private Sub mnuCopy_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuCopy.Click
-        'If Not m_cbLastClicked Is Nothing Then
-        '    Dim dData As DataObject = Utils.Convert.GetDataFromString(m_cbLastClicked.Text)
-
-        '    If Not ViewOnly Then
-        '        Clipboard.SetDataObject(dData, True)
-        '    End If
-        'End If
-        CopyClicked()
-    End Sub
-
-    Private Sub mnuSelect_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuSelect.Click
-        If Not m_cbLastClicked Is Nothing Then
-            m_cbLastClicked.Focus()
-        End If
-    End Sub
-
-    Private Sub mnuCut_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuCut.Click
-        'If Not m_cbLastClicked Is Nothing Then
-        '    Dim dData As DataObject = Utils.Convert.GetDataFromString(m_cbLastClicked.Text)
-
-        '    If Not ViewOnly Then
-        '        Clipboard.SetDataObject(dData, True)
-        '        If Editable Then
-        '            Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastClicked)
-        '            RaiseEvent CharDeleted(Me, intIndex)
-        '            'm_strCharacterList = m_strCharacterList.Remove(intIndex, 1)
-        '            m_UpdateCharacters()
-        '            ResizeCharactersNow()
-
-        '        End If
-        '    End If
-        'End If
-        CutClicked()
-    End Sub
-
-    Private Sub mnuDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuDelete.Click
-        'If Not m_cbLastClicked Is Nothing Then
-
-        '    If Editable Then
-        '        Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastClicked)
-        '        RaiseEvent CharDeleted(Me, intIndex)
-        '        'm_strCharacterList = m_strCharacterList.Remove(intIndex, 1)
-        '        m_UpdateCharacters()
-        '        ResizeCharactersNow()
-        '    End If
-
-        'End If
-        DeleteClicked()
-    End Sub
-
-    Private Sub mnuPaste_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuPaste.Click
-        'If Not m_cbLastClicked Is Nothing Then
-        '    Dim strText As String = Utils.Convert.GetStringFromData(Clipboard.GetDataObject)
-
-
-        '    If Editable Then
-        '        Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastClicked) + 1
-        '        If intIndex > pnlBack.Controls.Count Then
-        '            intIndex = 0
-        '        End If
-        '        RaiseEvent CharsInserted(Me, intIndex, strText)
-        '        'm_strCharacterList = m_strCharacterList.Insert(intIndex, strText)
-        '        m_UpdateCharacters()
-        '        ResizeCharactersNow()
-        '    End If
-
-        'End If
-        PasteClicked()
-    End Sub
-    Private Sub mnuSend_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuSend.Click
-        'If Not m_cbLastClicked Is Nothing Then
-        '    If Not ViewOnly Then
-        '        Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastClicked)
-        '        If intIndex >= pnlBack.Controls.Count Then
-        '            intIndex = 0
-        '        End If
-        '        RaiseEvent SendCharacter(Me, intIndex, CharacterList.Chars(intIndex))
-        '    End If
-
-
-
-
-        'End If
-        SendClicked()
-    End Sub
-    Private Sub mnuProperties_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuProperties.Click
-        If Not m_cbLastClicked Is Nothing Then
-            If Editable Then
-                Dim intIndex As Integer = Me.pnlBack.Controls.GetChildIndex(m_cbLastClicked)
-                If intIndex >= pnlBack.Controls.Count Then
-                    intIndex = 0
-                End If
-                RaiseEvent CharacterProperties(Me, intIndex, CharacterList.Chars(intIndex))
-            End If
-
-
-
-
-        End If
-    End Sub
-#End Region
-
-    Private Sub pnlBack_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlBack.MouseLeave
-        RaiseEvent OffCharacter(Me)
-    End Sub
-
-    Private Sub lblSep_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lblSep.DragDrop
-        If m_intDragSourceChar > 0 Then
-            CType(pnlBack.Controls(m_intDragSourceChar), CharacterButton).PressedDown = False
-        End If
-        'CharacterButton_DragDrop(pnlBack.GetChildAtPoint(New Point(lblSep.Left, lblSep.Top)), _
-        'New DragEventArgs(e.Data, e.KeyState, lblSep.Left, lblSep.Top, e.AllowedEffect, e.Effect))
-    End Sub
+#Region "lblSep DrageEnter Event Handler"
 
     Private Sub lblSep_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lblSep.DragEnter
         lblSep.Visible = False
@@ -2407,42 +2037,75 @@ Public Class CharacterDisplay
     End Sub
 
 
-    Private Sub mnuSettings_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles mnuSettings.Click
-        RaiseEvent MouseSettingsClicked(Me, Nothing)
+#End Region
+
+	Private sizeWheelIncrementValue As Integer = 1
+	Public Property SizeWheelIncrement() As Integer
+		Get
+			Return sizeWheelIncrementValue
+		End Get
+		Set(ByVal value As Integer)
+			sizeWheelIncrementValue = value
+		End Set
+	End Property
+
+
+    Private Sub pnlBack_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlBack.MouseLeave
+        RaiseEvent OffCharacter(Me)
     End Sub
 
-    Private Sub CharacterDisplay_BackColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.BackColorChanged
+    Private Sub lblSep_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lblSep.DragDrop
+        If m_intDragSourceChar > 0 Then
+            CType(pnlBack.Controls(m_intDragSourceChar), CharacterButton).PressedDown = False
+        End If
+        'CharacterButton_DragDrop(pnlBack.GetChildAtPoint(New Point(lblSep.Left, lblSep.Top)), _
+        'New DragEventArgs(e.Data, e.KeyState, lblSep.Left, lblSep.Top, e.AllowedEffect, e.Effect))
+    End Sub
 
-        Dim ctrl As CharacterButton
-        For Each ctrl In pnlBack.Controls
-            ctrl.BackColor = Me.BackColor
-        Next
-        If Me.BackColor.GetBrightness < 0.5 Then
-            lblSep.BackColor = Color.White
-        Else
-            lblSep.BackColor = Color.Black
+    Private Sub CharacterDisplay_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Enter
+        If Me.m_cbLastFocused Is Nothing Then
+            If Me.pnlBack.Controls.Count > 0 Then
+                Me.pnlBack.Controls(0).Focus()
+            End If
         End If
     End Sub
 
-    Private Sub CharacterDisplay_ForeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.ForeColorChanged
-        Dim ctrl As CharacterButton
-        For Each ctrl In pnlBack.Controls
-            ctrl.ForeColor = Me.ForeColor
-        Next
-        pnlBack.ForeColor = Me.ForeColor
-        lblBack.ForeColor = Me.ForeColor
+#Region "Status messages"
+    Private Sub CharacterDisplay_ResizingChars(ByVal sender As CharacterDisplay) Handles Me.ResizingChars
+        lblBack.Text = My.Resources.ResizingChars
+        Application.DoEvents()
     End Sub
 
-	Private Sub CharacterDisplay_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Enter
-		If Me.m_cbLastFocused Is Nothing Then
-			If Me.pnlBack.Controls.Count > 0 Then
-				Me.pnlBack.Controls(0).Focus()
-			End If
-		End If
-	End Sub
+    Private Sub CharacterDisplay_NoChars(ByVal sender As CharacterDisplay) Handles Me.NoChars
+        If Me.CharacterList.Length = 0 Then
+            lblBack.Text = My.Resources.NoCharacters
+        Else
+            lblBack.Text = My.Resources.ClickToShowChars
+        End If
+        Application.DoEvents()
+    End Sub
+
+    Private Sub CharacterDisplay_LoadingChars(ByVal sender As CharacterDisplay) Handles Me.LoadingChars
+        lblBack.Text = My.Resources.LoadingChars
+        Application.DoEvents()
+    End Sub
+#End Region
+
+    Private Sub pnlBack_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlBack.MouseUp
+        Dim ctrl As CharacterButton
+        For Each ctrl In pnlBack.Controls
+            ctrl.PressedDown = False
+        Next
+    End Sub
+
+    Private Sub lblBack_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblBack.MouseDown
+        m_cbLastClicked = Nothing
+    End Sub
+
 End Class
 
 #End Region
+
 
 #Region "Character Button Control"
 
@@ -2461,7 +2124,7 @@ Public Class CharacterButton
         Set(ByVal Value As Color)
             If Not Value.Equals(m_cFocusedColor) Then
                 m_cFocusedColor = Value
-                Me.Refresh()
+                SomethingChanged()
                 RaiseEvent FocusedColorChanged(Me, Nothing)
             End If
         End Set
@@ -2480,7 +2143,7 @@ Public Class CharacterButton
         Set(ByVal Value As Color)
             If Not Value.Equals(m_cLightEdgeColor) Then
                 m_cLightEdgeColor = Value
-                Me.Refresh()
+                SomethingChanged()
                 RaiseEvent LightEdgeColorChanged(Me, Nothing)
             End If
         End Set
@@ -2499,7 +2162,7 @@ Public Class CharacterButton
         Set(ByVal Value As Color)
             If Not Value.Equals(m_cDarkEdgeColor) Then
                 m_cDarkEdgeColor = Value
-                Me.Refresh()
+                SomethingChanged()
                 RaiseEvent DarkEdgeColorChanged(Me, Nothing)
             End If
         End Set
@@ -2518,27 +2181,27 @@ Public Class CharacterButton
         Set(ByVal Value As Color)
             If Not Value.Equals(m_cNormalOutlineColor) Then
                 m_cNormalOutlineColor = Value
-                Me.Refresh()
+                SomethingChanged()
                 RaiseEvent NormalOutlineColorChanged(Me, Nothing)
             End If
-           
+
         End Set
     End Property
 
 #End Region
 
-#Region "ButtonColor Property"
+#Region "RimColor Property"
 
-    Private m_cButtonColor As Color = SystemColors.Control
+    Private m_cRimColor As Color = SystemColors.Control
 
-    Public Property ButtonColor() As Color
+    Public Property RimColor() As Color
         Get
-            Return m_cButtonColor
+            Return m_cRimColor
         End Get
         Set(ByVal Value As Color)
-            If Not Value.Equals(m_cButtonColor) Then
-                m_cButtonColor = Value
-                Me.Refresh()
+            If Not Value.Equals(m_cRimColor) Then
+                m_cRimColor = Value
+                SomethingChanged()
 
                 RaiseEvent ButtonColorChanged(Me, Nothing)
             End If
@@ -2551,22 +2214,45 @@ Public Class CharacterButton
     Public Event LightEdgeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
     Public Event DarkEdgeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
     Public Event NormalOutlineColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-    'Public Event CharBackColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-    ' Public Event TextColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
     Public Event ButtonColorChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+
+
+    Private Sub CharacterButton_BackColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.BackColorChanged
+        SomethingChanged()
+    End Sub
+
+    Private Sub CharacterButton_ForeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.ForeColorChanged
+        SomethingChanged()
+    End Sub
+
+    Private Sub SomethingChanged()
+        If Not m_blnSuspendRedraw Then
+			Me.Invalidate()
+        End If
+    End Sub
+
+
+#Region "SuspendRedraw Property"
+
+    Private m_blnSuspendRedraw As Boolean = False
+
+    Public Property SuspendRedraw() As Boolean
+        Get
+            Return m_blnSuspendRedraw
+        End Get
+        Set(ByVal value As Boolean)
+            m_blnSuspendRedraw = value
+        End Set
+    End Property
+
+#End Region
+
 
 #Region "New Sub"
 
     Public Sub New()
         MyBase.New()
-
-        'Add any initialization after the InitializeComponent() call
         Me.Name = "CharacterButton"
-        Me.Size = New Size(18, 18)
-
-        'tmrDrag = New Timer()
-        'tmrDrag.Interval = 1000
-        'Me.Invalidate()
     End Sub
 
 #End Region
@@ -2581,7 +2267,7 @@ Public Class CharacterButton
         End Get
         Set(ByVal Value As System.Drawing.Image)
             m_picPicture = Value
-            Me.Refresh()
+            SomethingChanged()
         End Set
     End Property
 
@@ -2592,32 +2278,27 @@ Public Class CharacterButton
 
     Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
 
+        If m_blnSuspendRedraw Then Exit Sub
+		If Not Me.CanSelect Or Not Me.Parent.Visible Or Not Me.Visible Then
+			Exit Sub
+		End If
         MyBase.OnPaint(e)
-        If Not Me.CanSelect Or Me.Parent.Visible = False Or Me.Visible = False Then
-            Exit Sub
-        End If
-        'Static Dim ints As Integer = 0
 
-        'ints += 1
-        'If Me.Parent.Controls.IndexOf(Me) = 0 Then
-        'Debug.WriteLine("Paint #" & ints)
-        '  End If 
 
         e.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighSpeed
         Const intBorder As Integer = 1
         Const intBorderx2 As Integer = intBorder * 2
+		e.Graphics.Clear(Me.BackColor)
 
-
-        e.Graphics.Clear(ButtonColor)
-        If Not ButtonColor.Equals(BackColor) Then
-            e.Graphics.DrawRectangle(New Pen(BackColor), New Rectangle(0, 0, Me.ClientSize.Width - 1, Me.ClientSize.Height - 1))
+        If Not RimColor.Equals(BackColor) Then
+            e.Graphics.DrawRectangle(New Pen(RimColor), New Rectangle(0, 0, Me.ClientSize.Width - 1, Me.ClientSize.Height - 1))
         End If
         If Me.Text.Length > 0 Then
             Dim sfFormat As New StringFormat
             sfFormat.Alignment = StringAlignment.Center
             sfFormat.LineAlignment = StringAlignment.Center
-            If Autosize Then
+            If AutoSize Then
                 'TODO Improve Algorithim
                 Dim s As Single = CSng(Me.Height - 4 - (Me.Height / 16))
                 If Me.Height > 40 Then
@@ -2652,26 +2333,36 @@ Public Class CharacterButton
         End If
 
         If Me.m_blnMouseDown Or Me.m_blnKeyDown Or Me.PressedDown Then
+            If (DarkEdgeColor.Equals(LightEdgeColor)) Then
+                e.Graphics.DrawRectangle(New Pen(DarkEdgeColor), New Rectangle(intBorder, intBorder, Me.Width - (1 + intBorderx2), Me.Height - (1 + intBorderx2)))
+            Else
+                e.Graphics.DrawLine(New Pen(DarkEdgeColor), intBorder, intBorder, Me.Width - (1 + intBorderx2), intBorder)
+                e.Graphics.DrawLine(New Pen(DarkEdgeColor), intBorder, intBorder, intBorder, Me.Height - (1 + intBorderx2))
+                e.Graphics.DrawLine(New Pen(LightEdgeColor), Me.Width - (intBorderx2), 1 + intBorder, Me.Width - (intBorderx2), Me.Height - (intBorderx2))
+                e.Graphics.DrawLine(New Pen(LightEdgeColor), 1 + intBorder, Me.Height - (intBorderx2), Me.Width - (intBorderx2), Me.Height - (intBorderx2))
 
-            e.Graphics.DrawLine(New Pen(DarkEdgeColor), intBorder, intBorder, Me.Width - (1 + intBorderx2), intBorder)
-            e.Graphics.DrawLine(New Pen(DarkEdgeColor), intBorder, intBorder, intBorder, Me.Height - (1 + intBorderx2))
-            e.Graphics.DrawLine(New Pen(LightEdgeColor), Me.Width - (intBorderx2), 1 + intBorder, Me.Width - (intBorderx2), Me.Height - (intBorderx2))
-            e.Graphics.DrawLine(New Pen(LightEdgeColor), 1 + intBorder, Me.Height - (intBorderx2), Me.Width - (intBorderx2), Me.Height - (intBorderx2))
+            End If
+
 
         ElseIf m_blnMouseOver Then
-            e.Graphics.DrawLine(New Pen(LightEdgeColor), intBorder, intBorder, Me.Width - (1 + intBorderx2), intBorder)
-            e.Graphics.DrawLine(New Pen(LightEdgeColor), intBorder, intBorder, intBorder, Me.Height - (1 + intBorderx2))
-            e.Graphics.DrawLine(New Pen(DarkEdgeColor), Me.Width - (intBorderx2), 1 + intBorder, Me.Width - (intBorderx2), Me.Height - (intBorderx2))
-            e.Graphics.DrawLine(New Pen(DarkEdgeColor), 1 + intBorder, Me.Height - (intBorderx2), Me.Width - (intBorderx2), Me.Height - (intBorderx2))
+            If (DarkEdgeColor.Equals(LightEdgeColor)) Then
+                e.Graphics.DrawRectangle(New Pen(DarkEdgeColor), New Rectangle(intBorder, intBorder, Me.Width - (1 + intBorderx2), Me.Height - (1 + intBorderx2)))
+            Else
+                e.Graphics.DrawLine(New Pen(LightEdgeColor), intBorder, intBorder, Me.Width - (1 + intBorderx2), intBorder)
+                e.Graphics.DrawLine(New Pen(LightEdgeColor), intBorder, intBorder, intBorder, Me.Height - (1 + intBorderx2))
+                e.Graphics.DrawLine(New Pen(DarkEdgeColor), Me.Width - (intBorderx2), 1 + intBorder, Me.Width - (intBorderx2), Me.Height - (intBorderx2))
+                e.Graphics.DrawLine(New Pen(DarkEdgeColor), 1 + intBorder, Me.Height - (intBorderx2), Me.Width - (intBorderx2), Me.Height - (intBorderx2))
+            End If
+		ElseIf Me.BetweenFocusEvents Then
+			'Dim bHasFocus As New SolidBrush(SystemColors.ControlLightLight)
 
-        ElseIf Me.ContainsFocus Then
-            'Dim bHasFocus As New SolidBrush(SystemColors.ControlLightLight)
-
-            e.Graphics.DrawRectangle(New Pen(FocusedColor), New Rectangle(intBorder, intBorder, Me.Width - (1 + intBorderx2), Me.Height - (1 + intBorderx2)))
+			e.Graphics.DrawRectangle(New Pen(FocusedColor), New Rectangle(intBorder, intBorder, Me.Width - (1 + intBorderx2), Me.Height - (1 + intBorderx2)))
         Else
             ' Dim bHasFocus As New SolidBrush(SystemColors.ControlDark)
+            If Not NormalOutlineColor.Equals(BackColor) Then
+                e.Graphics.DrawRectangle(New Pen(NormalOutlineColor), New Rectangle(intBorder, intBorder, Me.Width - (1 + intBorderx2), Me.Height - (1 + intBorderx2)))
 
-            e.Graphics.DrawRectangle(New Pen(NormalOutlineColor), New Rectangle(intBorder, intBorder, Me.Width - (1 + intBorderx2), Me.Height - (1 + intBorderx2)))
+            End If
 
         End If
 
@@ -2679,50 +2370,16 @@ Public Class CharacterButton
 
     End Sub
 
-#End Region
-
-#Region "Public Property Autosize"
-
-    Protected p_blnAutoresize As Boolean = True
-
-    Public Property Autoresize() As Boolean
-        Get
-            Return p_blnAutoresize
-        End Get
-        Set(ByVal Value As Boolean)
-            If p_blnAutoresize <> Value Then
-                p_blnAutoresize = Value
-                Me.Refresh()
-            End If
-        End Set
-    End Property
 #End Region
 
     Dim m_strLastText As String = ""
-    Private Sub CharacterButton_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.TextChanged
-        If Me.Text <> m_strLastText Then
-            m_strLastText = Me.Text
-            Me.Refresh()
-        End If
-    End Sub
-    ' Friend WithEvents tmrDrag As Timer
-    ' Private Sub CharacterButton_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles MyBase.DragOver
-    ' tmrDrag.Stop()
-    'tmrDrag.Start()
-    'End Sub
+	Private Sub CharacterButton_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.TextChanged
+		If Me.Text <> m_strLastText Then
+			m_strLastText = Me.Text
+			SomethingChanged()
+		End If
+	End Sub
 
-    'Private Sub tmrDrag_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles tmrDrag.Tick
-    '  PressedDown = False
-    ' tmrDrag.Stop()
-    'End Sub
-
-    Private Sub CharacterButton_BackColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.BackColorChanged
-        Me.Refresh()
-    End Sub
-
-    Private Sub CharacterButton_ForeColorChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.ForeColorChanged
-        Me.Refresh()
-    End Sub
 End Class
 
 #End Region
@@ -2787,38 +2444,69 @@ End Class
 #End Region
 
 #Region "Filter Definitions"
-
     Private Shared m_strFilterDefinitions() As String = _
-               {"ClosePunctuation Indicates that the character is the closing character of one of the paired punctuation marks, such as parentheses, square brackets, and braces. Signified by the Unicode designation ""Pe"" (punctuation, close)", _
-               "ConnectorPunctuation Indicates that the character is a connector punctuation, which connects two characters. Signified by the Unicode designation ""Pc"" (punctuation, connector).", _
-               "Control Indicates that the character is a control code, whose Unicode value is U+007F or in the range U+0000 through U+001F or U+0080 through U+009F. Signified by the Unicode designation ""Cc"" (other, control).", _
-               "CurrencySymbol Indicates that the character is a currency symbol. Signified by the Unicode designation ""Sc"" (symbol, currency).", _
-               "DashPunctuation Indicates that the character is a dash or a hyphen. Signified by the Unicode designation ""Pd"" (punctuation, dash).", _
-               "DecimalDigitNumber Indicates that the character is a decimal digit; that is, in the range 0 through 9. Signified by the Unicode designation ""Nd"" (number, decimal digit).", _
-               "EnclosingMark Indicates that the character is an enclosing mark, which is a nonspacing combining character that surrounds all previous characters up to and including a base character. Signified by the Unicode designation ""Me"" (mark, enclosing).", _
-               "FinalQuotePunctuation Indicates that the character is a closing or final quotation mark. Signified by the Unicode designation ""Pf"" (punctuation, final quote).", _
-               "Format Indicates that the character is a format character, which is not normally rendered but affects the layout of text or the operation of text processes. Signified by the Unicode designation ""Cf"" (other, format).", _
-               "InitialQuotePunctuation Indicates that the character is an opening or initial quotation mark. Signified by the Unicode designation ""Pi"" (punctuation, initial quote).", _
-               "LetterNumber Indicates that the character is a number represented by a letter, instead of a decimal digit; for example, the Roman numeral for five, which is 'V'. Signified by the Unicode designation ""Nl"" (number, letter).", _
-               "LineSeparator Indicates that the character is used to separate lines of text. Signified by the Unicode designation ""Zl"" (separator, line).", _
-               "LowercaseLetter Indicates that the character is a lowercase letter. Signified by the Unicode designation ""Ll"" (letter, lowercase).", _
-               "MathSymbol Indicates that the character is a mathematical symbol, such as '+' or '= '. Signified by the Unicode designation ""Sm"" (symbol, math).", _
-               "ModifierLetter Indicates that the character is a modifier letter, which is free-standing spacing character that indicates modifications of a preceding letter. Signified by the Unicode designation ""Lm"" (letter, modifier).", _
-               "ModifierSymbol Indicates that the character is a modifier symbol, which indicates modifications of surrounding characters; for example, the fraction slash indicates that the number to the left is the numerator and the number to the right is the denominator. Signified by the Unicode designation ""Sk"" (symbol, modifier).", _
-               "NonSpacingMark Indicates that the character is a nonspacing character, which indicates modifications of a base character. Signified by the Unicode designation ""Mn"" (mark, non-spacing).", _
-               "OpenPunctuation Indicates that the character is the opening character of one of the paired punctuation marks, such as parentheses, square brackets, and braces. Signified by the Unicode designation ""Ps"" (punctuation, open).", _
-               "OtherLetter Indicates that the character is a letter that is not an uppercase letter, a lowercase letter, a titlecase letter, or a modifier letter. Signified by the Unicode designation ""Lo"" (letter, other).", _
-               "OtherNotAssigned Indicates that the character is not assigned to any Unicode category. Signified by the Unicode designation ""Cn"" (other, not assigned).", _
-               "OtherNumber Indicates that the character is a number that is neither a decimal digit nor a letter number; for example, the fraction 1/2. Signified by the Unicode designation ""No"" (number, other).", _
-               "OtherPunctuation Indicates that the character is a punctuation that is not a connector punctuation, a dash punctuation, an open punctuation, a close punctuation, an initial quote punctuation, or a final quote punctuation. Signified by the Unicode designation ""Po"" (punctuation, other).", _
-               "OtherSymbol Indicates that the character is a symbol that is not a mathematical symbol, a currency symbol or a modifier symbol. Signified by the Unicode designation ""So"" (symbol, other).", _
-               "ParagraphSeparator Indicates that the character is used to separate paragraphs. Signified by the Unicode designation ""Zp"" (separator, paragraph).", _
-               "PrivateUse Indicates that the character is a private-use character, whose Unicode value is in the range U+E000 through U+F8FF. Signified by the Unicode designation ""Co"" (other, private use).", _
-               "SpaceSeparator Indicates that the character is a space character, which has no glyph but is not a control or format character. Signified by the Unicode designation ""Zs"" (separator, space).", _
-               "SpacingCombiningMark Indicates that the character is a spacing character, which indicates modifications of a base character and affects the width of the glyph for that base character. Signified by the Unicode designation ""Mc"" (mark, spacing combining).", _
-               "Surrogate Indicates that the character is a high-surrogate or a low-surrogate. Surrogate code values are in the range U+D800 through U+DFFF. Signified by the Unicode designation ""Cs"" (other, surrogate).", _
-               "TitlecaseLetter Indicates that the character is a titlecase letter. Signified by the Unicode designation ""Lt"" (letter, titlecase).", _
-               "UppercaseLetter Indicates that the character is an uppercase letter. Signified by the Unicode designation ""Lu"" (letter, uppercase)."}
+               {"Indicates that the character is the closing character of one of the paired punctuation marks, such as parentheses, square brackets, and braces. Signified by the Unicode designation ""Pe"" (punctuation, close).", _
+               "Indicates that the character is a connector punctuation, which connects two characters. Signified by the Unicode designation ""Pc"" (punctuation, connector).", _
+               "Indicates that the character is a control code, whose Unicode value is U+007F or in the range U+0000 through U+001F or U+0080 through U+009F. Signified by the Unicode designation ""Cc"" (other, control).", _
+               "Indicates that the character is a currency symbol. Signified by the Unicode designation ""Sc"" (symbol, currency).", _
+               "Indicates that the character is a dash or a hyphen. Signified by the Unicode designation ""Pd"" (punctuation, dash).", _
+               "Indicates that the character is a decimal digit; that is, in the range 0 through 9. Signified by the Unicode designation ""Nd"" (number, decimal digit).", _
+               "Indicates that the character is an enclosing mark, which is a nonspacing combining character that surrounds all previous characters up to and including a base character. Signified by the Unicode designation ""Me"" (mark, enclosing).", _
+               "Indicates that the character is a closing or final quotation mark. Signified by the Unicode designation ""Pf"" (punctuation, final quote).", _
+               "Indicates that the character is a format character, which is not normally rendered but affects the layout of text or the operation of text processes. Signified by the Unicode designation ""Cf"" (other, format).", _
+               "Indicates that the character is an opening or initial quotation mark. Signified by the Unicode designation ""Pi"" (punctuation, initial quote).", _
+               "Indicates that the character is a number represented by a letter, instead of a decimal digit; for example, the Roman numeral for five, which is ""V"". Signified by the Unicode designation ""Nl"" (number, letter).", _
+               "Indicates that the character is used to separate lines of text. Signified by the Unicode designation ""Zl"" (separator, line).", _
+               "Indicates that the character is a lowercase letter. Signified by the Unicode designation ""Ll"" (letter, lowercase).", _
+               "Indicates that the character is a mathematical symbol, such as ""+"" or ""="". Signified by the Unicode designation ""Sm"" (symbol, math).", _
+               "Indicates that the character is a modifier letter, which is free-standing spacing character that indicates modifications of a preceding letter. Signified by the Unicode designation ""Lm"" (letter, modifier).", _
+               "Indicates that the character is a modifier symbol, which indicates modifications of surrounding characters; for example, the fraction slash indicates that the number to the left is the numerator and the number to the right is the denominator. Signified by the Unicode designation ""Sk"" (symbol, modifier).", _
+               "Indicates that the character is a nonspacing character, which indicates modifications of a base character. Signified by the Unicode designation ""Mn"" (mark, nonspacing).", _
+               "Indicates that the character is the opening character of one of the paired punctuation marks, such as parentheses, square brackets, and braces. Signified by the Unicode designation ""Ps"" (punctuation, open).", _
+               "Indicates that the character is a letter that is not an uppercase letter, a lowercase letter, a titlecase letter, or a modifier letter. Signified by the Unicode designation ""Lo"" (letter, other).", _
+               "Indicates that the character is not assigned to any Unicode category. Signified by the Unicode designation ""Cn"" (other, not assigned).", _
+               "Indicates that the character is a number that is neither a decimal digit nor a letter number; for example, the fraction 1/2. Signified by the Unicode designation ""No"" (number, other).", _
+               "Indicates that the character is a punctuation that is not a connector punctuation, a dash punctuation, an open punctuation, a close punctuation, an initial quote punctuation, or a final quote punctuation. Signified by the Unicode designation ""Po"" (punctuation, other).", _
+               "Indicates that the character is a symbol that is not a mathematical symbol, a currency symbol or a modifier symbol. Signified by the Unicode designation ""So"" (symbol, other).", _
+               "Indicates that the character is used to separate paragraphs. Signified by the Unicode designation ""Zp"" (separator, paragraph).", _
+               "Indicates that the character is a private-use character, whose Unicode value is in the range U+E000 through U+F8FF. Signified by the Unicode designation ""Co"" (other, private use).", _
+               "Indicates that the character is a space character, which has no glyph but is not a control or format character. Signified by the Unicode designation ""Zs"" (separator, space).", _
+               "Indicates that the character is a spacing character, which indicates modifications of a base character and affects the width of the glyph for that base character. Signified by the Unicode designation ""Mc"" (mark, spacing combining).", _
+               "Indicates that the character is a high-surrogate or a low-surrogate. Surrogate code values are in the range U+D800 through U+DFFF. Signified by the Unicode designation ""Cs"" (other, surrogate).", _
+               "Indicates that the character is a titlecase letter. Signified by the Unicode designation ""Lt"" (letter, titlecase).", _
+               "Indicates that the character is an uppercase letter. Signified by the Unicode designation ""Lu"" (letter, uppercase)."}
+
+
+    '{"ClosePunctuation Indicates that the character is the closing character of one of the paired punctuation marks, such as parentheses, square brackets, and braces. Signified by the Unicode designation ""Pe"" (punctuation, close)", _
+    '"ConnectorPunctuation Indicates that the character is a connector punctuation, which connects two characters. Signified by the Unicode designation ""Pc"" (punctuation, connector).", _
+    '"Control Indicates that the character is a control code, whose Unicode value is U+007F or in the range U+0000 through U+001F or U+0080 through U+009F. Signified by the Unicode designation ""Cc"" (other, control).", _
+    '"CurrencySymbol Indicates that the character is a currency symbol. Signified by the Unicode designation ""Sc"" (symbol, currency).", _
+    '"DashPunctuation Indicates that the character is a dash or a hyphen. Signified by the Unicode designation ""Pd"" (punctuation, dash).", _
+    '"DecimalDigitNumber Indicates that the character is a decimal digit; that is, in the range 0 through 9. Signified by the Unicode designation ""Nd"" (number, decimal digit).", _
+    '"EnclosingMark Indicates that the character is an enclosing mark, which is a nonspacing combining character that surrounds all previous characters up to and including a base character. Signified by the Unicode designation ""Me"" (mark, enclosing).", _
+    '"FinalQuotePunctuation Indicates that the character is a closing or final quotation mark. Signified by the Unicode designation ""Pf"" (punctuation, final quote).", _
+    '"Format Indicates that the character is a format character, which is not normally rendered but affects the layout of text or the operation of text processes. Signified by the Unicode designation ""Cf"" (other, format).", _
+    '"InitialQuotePunctuation Indicates that the character is an opening or initial quotation mark. Signified by the Unicode designation ""Pi"" (punctuation, initial quote).", _
+    '"LetterNumber Indicates that the character is a number represented by a letter, instead of a decimal digit; for example, the Roman numeral for five, which is 'V'. Signified by the Unicode designation ""Nl"" (number, letter).", _
+    '"LineSeparator Indicates that the character is used to separate lines of text. Signified by the Unicode designation ""Zl"" (separator, line).", _
+    '"LowercaseLetter Indicates that the character is a lowercase letter. Signified by the Unicode designation ""Ll"" (letter, lowercase).", _
+    '"MathSymbol Indicates that the character is a mathematical symbol, such as '+' or '= '. Signified by the Unicode designation ""Sm"" (symbol, math).", _
+    '"ModifierLetter Indicates that the character is a modifier letter, which is free-standing spacing character that indicates modifications of a preceding letter. Signified by the Unicode designation ""Lm"" (letter, modifier).", _
+    '"ModifierSymbol Indicates that the character is a modifier symbol, which indicates modifications of surrounding characters; for example, the fraction slash indicates that the number to the left is the numerator and the number to the right is the denominator. Signified by the Unicode designation ""Sk"" (symbol, modifier).", _
+    '"NonSpacingMark Indicates that the character is a nonspacing character, which indicates modifications of a base character. Signified by the Unicode designation ""Mn"" (mark, non-spacing).", _
+    '"OpenPunctuation Indicates that the character is the opening character of one of the paired punctuation marks, such as parentheses, square brackets, and braces. Signified by the Unicode designation ""Ps"" (punctuation, open).", _
+    '"OtherLetter Indicates that the character is a letter that is not an uppercase letter, a lowercase letter, a titlecase letter, or a modifier letter. Signified by the Unicode designation ""Lo"" (letter, other).", _
+    '"OtherNotAssigned Indicates that the character is not assigned to any Unicode category. Signified by the Unicode designation ""Cn"" (other, not assigned).", _
+    '"OtherNumber Indicates that the character is a number that is neither a decimal digit nor a letter number; for example, the fraction 1/2. Signified by the Unicode designation ""No"" (number, other).", _
+    '"OtherPunctuation Indicates that the character is a punctuation that is not a connector punctuation, a dash punctuation, an open punctuation, a close punctuation, an initial quote punctuation, or a final quote punctuation. Signified by the Unicode designation ""Po"" (punctuation, other).", _
+    '"OtherSymbol Indicates that the character is a symbol that is not a mathematical symbol, a currency symbol or a modifier symbol. Signified by the Unicode designation ""So"" (symbol, other).", _
+    '"ParagraphSeparator Indicates that the character is used to separate paragraphs. Signified by the Unicode designation ""Zp"" (separator, paragraph).", _
+    '"PrivateUse Indicates that the character is a private-use character, whose Unicode value is in the range U+E000 through U+F8FF. Signified by the Unicode designation ""Co"" (other, private use).", _
+    '"SpaceSeparator Indicates that the character is a space character, which has no glyph but is not a control or format character. Signified by the Unicode designation ""Zs"" (separator, space).", _
+    '"SpacingCombiningMark Indicates that the character is a spacing character, which indicates modifications of a base character and affects the width of the glyph for that base character. Signified by the Unicode designation ""Mc"" (mark, spacing combining).", _
+    '"Surrogate Indicates that the character is a high-surrogate or a low-surrogate. Surrogate code values are in the range U+D800 through U+DFFF. Signified by the Unicode designation ""Cs"" (other, surrogate).", _
+    '"TitlecaseLetter Indicates that the character is a titlecase letter. Signified by the Unicode designation ""Lt"" (letter, titlecase).", _
+    '"UppercaseLetter Indicates that the character is an uppercase letter. Signified by the Unicode designation ""Lu"" (letter, uppercase)."}
 
 #End Region
 
@@ -2923,6 +2611,229 @@ End Class
 
 #End Region
 
+#Region "CharacterInformation Class"
+
+Public Class CharacterInformation
+
+    Public Sub New(ByVal character As String)
+        If (Not character.Length > 0) Then Exit Sub
+        characterValue = character
+
+        numericValue = AscW(character)
+
+        categoryValue = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(character, 0)
+
+        Dim strCatName As String = Category.ToString()
+        Dim intSecondWord As Integer = -1
+        Dim intLoop As Integer
+        For intLoop = 0 To strCatName.Length - 1
+            If Char.IsUpper(strCatName, intLoop) And intLoop > 0 Then
+                intSecondWord = intLoop
+            End If
+        Next
+        If intSecondWord > 0 Then
+            friendlyCategoryNameValue = strCatName.Substring(0, intSecondWord) & " " & _
+                                    strCatName.Substring(intSecondWord, strCatName.Length - intSecondWord)
+        Else
+            friendlyCategoryNameValue = strCatName
+        End If
+
+        If Array.IndexOf(UnicodeFilters.FilterTitles, Category.ToString()) > -1 Then
+            categoryDescriptionValue = UnicodeFilters.FilterDefinitions(Array.IndexOf(UnicodeFilters.FilterTitles, Category.ToString()))
+            Dim intFirstPeriod As Integer = CategoryDescription.IndexOf(".")
+            Dim intThe As Integer = CategoryDescription.IndexOf("the")
+            If (intFirstPeriod > 0 And intThe > 0) Then
+                shortCategoryDescriptionValue = "T" & CategoryDescription.Substring(intThe + 1, intFirstPeriod - intThe)
+            End If
+        End If
+
+        Const linelength As Integer = 50
+        If (shortCategoryDescriptionValue.Length > linelength + 1) Then
+            Dim tooltipCDesc As String = ""
+            Dim i As Integer
+            Dim lastindex As Integer = 0
+            For i = 0 To CInt((shortCategoryDescriptionValue.Length) / linelength)
+                If (lastindex + linelength >= shortCategoryDescriptionValue.Length) Then
+                    tooltipCDesc += shortCategoryDescriptionValue.Substring(lastindex, shortCategoryDescriptionValue.Length - lastindex)
+                    Exit For
+                Else
+                    Dim thisindex As Integer = shortCategoryDescriptionValue.IndexOf(CChar(" "), lastindex + linelength)
+                    If (thisindex > lastindex) Then
+                        tooltipCDesc += shortCategoryDescriptionValue.Substring(lastindex, thisindex - lastindex) & ControlChars.NewLine
+                    Else
+                        tooltipCDesc += shortCategoryDescriptionValue.Substring(lastindex, shortCategoryDescriptionValue.Length - lastindex)
+                        Exit For
+                    End If
+                    lastindex = thisindex
+                End If
+
+            Next
+            tooltipCategoryDescriptionValue = tooltipCDesc
+        Else
+            tooltipCategoryDescriptionValue = shortCategoryDescriptionValue
+        End If
+
+
+		codePointValue = "U+" & Numeric.ToString("X")
+
+        If (Numeric < 127) Then
+            altCodeValue = "Alt + NumPad " & Numeric.ToString()
+        ElseIf (Numeric < 256) Then
+            altCodeValue = "Alt + NumPad 0" & Numeric.ToString()
+        Else
+            altCodeValue = "Alt + NumPad " & Numeric.ToString()
+        End If
+
+
+
+        decimalHTMLCodeValue = "&#" & Numeric.ToString() & ";"
+        hexadecimalHTMLCodeValue = "&#x" & Numeric.ToString() & ";"
+
+        'Tooltip.Append("Alt + NumPad ")
+        'If (AscW(chChar) > 255) Then
+        '    Tooltip.Append(AscW(chChar).ToString())
+        'Else
+        '    Tooltip.Append(AscW(chChar).ToString.PadLeft(4, CChar("0")))
+        'End If
+        'Tooltip.Append(ControlChars.NewLine)
+        'Tooltip.Append(Hex(AscW(chChar)))
+        'Tooltip.Append(", Alt-X")
+        'Tooltip.Append(ControlChars.NewLine)
+        'Tooltip.Append(ControlChars.NewLine)
+        'Tooltip.Append("Decimal code: ")
+        'Tooltip.Append(AscW(chChar))
+        'Tooltip.Append(ControlChars.NewLine)
+        'Tooltip.Append("Hexadecimal code: ")
+        'Tooltip.Append(Hex(AscW(chChar)))
+        'Tooltip.Append(ControlChars.NewLine)
+        'Tooltip.Append("HTML code: &#")
+        'Tooltip.Append(AscW(chChar))
+        'Tooltip.Append(" or &#x")
+        'Tooltip.Append(Hex(AscW(chChar)))
+        'If (Asc(chChar) > 255) Then
+        '    Tooltip.Append(" (Use the UTF-8 charset) ")
+        'End If
+
+    End Sub
+
+
+    Private friendlyCategoryNameValue As String = ""
+    Public ReadOnly Property FriendlyCategoryName() As String
+        Get
+            Return friendlyCategoryNameValue
+        End Get
+    End Property
+
+    Private categoryValue As Globalization.UnicodeCategory
+    Public ReadOnly Property Category() As Globalization.UnicodeCategory
+        Get
+            Return categoryValue
+        End Get
+    End Property
+
+    Private characterValue As String = ""
+    Public ReadOnly Property Character() As String
+        Get
+            Return CharacterValue
+        End Get
+    End Property
+
+    Private categoryDescriptionValue As String = ""
+    Public ReadOnly Property CategoryDescription() As String
+        Get
+            Return CategoryDescriptionValue
+        End Get
+    End Property
+
+    Private shortCategoryDescriptionValue As String = ""
+    Public ReadOnly Property ShortCategoryDescription() As String
+        Get
+            Return shortCategoryDescriptionValue
+        End Get
+    End Property
+
+    Private tooltipCategoryDescriptionValue As String = ""
+    Public ReadOnly Property ToolTipCategoryDescription() As String
+        Get
+            Return tooltipCategoryDescriptionValue
+        End Get
+    End Property
+
+    Private codePointValue As String = ""
+    Public ReadOnly Property CodePoint() As String
+        Get
+            Return codePointValue
+        End Get
+    End Property
+
+    Private numericValue As Integer = 0
+    Public ReadOnly Property Numeric() As Integer
+        Get
+            Return numericValue
+        End Get
+    End Property
+    Private altCodeValue As String = ""
+    Public ReadOnly Property AltCode() As String
+        Get
+            Return altCodeValue
+        End Get
+    End Property
+
+    Private decimalHTMLCodeValue As String = ""
+    Public ReadOnly Property DecimalHTMLCode() As String
+        Get
+            Return decimalHTMLCodeValue
+        End Get
+    End Property
+    Private hexadecimalHTMLCodeValue As String = ""
+    Public ReadOnly Property HexadecimalHTMLCode() As String
+        Get
+            Return hexadecimalHTMLCodeValue
+        End Get
+    End Property
+
+
+End Class
+
+
+
+
+#End Region
+
+#Region "UnicodeProvider Class"
+
+''' <summary>
+''' Provides detailed information about unicode characters.
+''' </summary>
+''' <remarks></remarks>
+Public Class UnicodeProvider
+
+    Public Sub New()
+
+    End Sub
+
+    Public Sub New(ByVal UnicodeDatabaseFilename As String)
+        LoadDatabase(UnicodeDatabaseFilename)
+
+    End Sub
+
+    Public Sub LoadDatabase(ByVal UnicodeDatabaseFilename As String)
+
+    End Sub
+
+
+
+    Public Function GetInformation(ByVal character As String) As CharacterInformation
+        Dim ci As New CharacterInformation(character)
+
+        Return ci
+    End Function
+
+End Class
+
+
+#End Region
+
 #Region "MouseSettingsClass"
 
 <Serializable()> Public Class MouseSettingsClass
@@ -2982,7 +2893,7 @@ End Class
 #Region "Left Button Action Variable and Property"
 
     'Variable to hold value
-    Private m_aLeft As Action = Action.Drag
+    Private m_aLeft As Action = Action.Drag Or Action.Send
 
     'Public Property
     Public Property Left() As Action
@@ -3002,7 +2913,7 @@ End Class
 #Region "Middle Button Action Variable and Property"
 
     'Variable to hold value
-    Private m_aMiddle As Action = Action.Send
+    Private m_aMiddle As Action = Action.Copy
 
     'Public Property
     Public Property Middle() As Action
@@ -3022,7 +2933,7 @@ End Class
 #Region "Right Button Action Variable and Property"
 
     'Variable to hold value
-    Private m_aRight As Action = Action.Focus Or Action.Menu
+    Private m_aRight As Action = Action.Menu
 
     'Public Property
     Public Property Right() As Action
@@ -3042,7 +2953,7 @@ End Class
 #Region "XButton1 Button Action Variable and Property"
 
     'Variable to hold value
-    Private m_aXButton1 As Action = Action.Copy
+    Private m_aXButton1 As Action = Action.Drag
 
     'Public Property
     Public Property XButton1() As Action
@@ -3094,9 +3005,14 @@ Public Class GraphicButton
         MyBase.New()
 
         'Set Name Property So that all instances of this control will have their name property set to Graphi Button
-        Me.Name = "GraphicButton"
-        Me.ResizeRedraw = True
-    End Sub
+		Me.Name = "GraphicButton"
+		Me.SetStyle(ControlStyles.AllPaintingInWmPaint Or _
+		 ControlStyles.CacheText Or _
+		 ControlStyles.OptimizedDoubleBuffer Or _
+		 ControlStyles.Selectable Or _
+		  ControlStyles.UserPaint, True)
+
+	End Sub
 
 #End Region
 
@@ -3149,20 +3065,14 @@ Public Class GraphicButton
         MyBase.OnMouseEnter(e)
 
         m_blnMouseOver = True
-        Me.Refresh()
+		Me.Invalidate()
     End Sub
 
     Protected Overrides Sub OnMouseLeave(ByVal e As System.EventArgs)
         MyBase.OnMouseLeave(e)
 
         m_blnMouseOver = False
-        Me.Refresh()
-    End Sub
-
-    Protected Overrides Sub OnLostFocus(ByVal e As System.EventArgs)
-        MyBase.OnLostFocus(e)
-
-        Me.Refresh()
+		Me.Invalidate()
     End Sub
 
     Protected Overrides Sub OnMouseDown(ByVal e As System.Windows.Forms.MouseEventArgs)
@@ -3186,7 +3096,8 @@ Public Class GraphicButton
             If Me.Capture Then
                 m_blnMouseDown = True
                 Try
-                    Me.Refresh()
+					Me.Invalidate()
+					Me.Update()
                 Catch
                 End Try
             End If
@@ -3201,23 +3112,18 @@ Public Class GraphicButton
 
         If (e.Button And PressMouseButtons) <> 0 Then
             m_blnMouseDown = False
-            Me.Refresh()
-   
+			Me.Invalidate()
+			Me.Update()
+
         End If
     End Sub
 
     Protected Overrides Sub OnKeyDown(ByVal e As System.Windows.Forms.KeyEventArgs)
 
-
-        'If e.KeyCode = Keys.Enter Or e.KeyCode = Keys.Space Then
-        '    m_blnKeyDown = True
-        '    Me.Refresh()
-        '    e.Handled() = True
-        'Else
-            If e.KeyCode = Keys.Down Or e.KeyCode = Keys.Up Or e.KeyCode = Keys.Left Or e.KeyCode = Keys.Right Then
-                RaiseEvent ArrowKeyPressed(Me, e)
-                e.Handled = True
-            End If
+        If e.KeyCode = Keys.Down Or e.KeyCode = Keys.Up Or e.KeyCode = Keys.Left Or e.KeyCode = Keys.Right Then
+            RaiseEvent ArrowKeyPressed(Me, e)
+            e.Handled = True
+        End If
         MyBase.OnKeyDown(e)
     End Sub
 
@@ -3226,33 +3132,45 @@ Public Class GraphicButton
 
         If e.KeyCode = Keys.Enter Or e.KeyCode = Keys.Space Then
             m_blnKeyDown = False
-            Me.Refresh()
+			Me.Invalidate()
             e.Handled() = True
 
         End If
     End Sub
 
+	Protected Overrides Sub OnPaintBackground(ByVal pevent As System.Windows.Forms.PaintEventArgs)
+		'MyBase.OnPaintBackground(pevent)
+	End Sub
     Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
         MyBase.OnPaint(e)
 
-    End Sub
+	End Sub
 
-    Protected Overrides Sub OnChangeUICues(ByVal e As System.Windows.Forms.UICuesEventArgs)
-        MyBase.OnChangeUICues(e)
+	Protected BetweenFocusEvents As Boolean = False
+	Protected Overrides Sub OnGotFocus(ByVal e As System.EventArgs)
+		MyBase.OnGotFocus(e)
+		BetweenFocusEvents = True
+		If Me.ShowFocusCues Then
+			Me.Invalidate()
+		End If
+	End Sub
+	Protected Overrides Sub OnLostFocus(ByVal e As System.EventArgs)
+		MyBase.OnGotFocus(e)
+		BetweenFocusEvents = False
+		If Me.ShowFocusCues Then
+			Me.Invalidate()
+		End If
+	End Sub
 
-        Me.Refresh()
-    End Sub
 
-    Protected Overrides Sub OnGotFocus(ByVal e As System.EventArgs)
-        MyBase.OnGotFocus(e)
-
-        Me.Refresh()
-    End Sub
-
-
+	Protected Overrides Sub OnSystemColorsChanged(ByVal e As System.EventArgs)
+		MyBase.OnSystemColorsChanged(e)
+		Me.Invalidate()
+	End Sub
 
     Private Sub GraphicButton_EnabledChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.EnabledChanged
-        Me.Refresh()
+		Me.Invalidate()
+		Me.Update()
     End Sub
 End Class
 
@@ -3336,7 +3254,8 @@ Public Class ClickButton
         Set(ByVal Value As Boolean)
             If m_blnPressedDown <> Value Then
                 m_blnPressedDown = Value
-                Me.Refresh()
+				Me.Invalidate()
+				Me.Update()
             End If
         End Set
     End Property
@@ -3464,7 +3383,7 @@ Public Class HideButton
             e.Graphics.DrawRectangle(New Pen(bNoFocus), New Rectangle(0, 0, Me.Width - 1, Me.Height - 1))
         End If
 
-        If (Me.m_blnKeyDown Or Me.m_blnMouseDown) And m_blnMouseover Then
+        If (Me.m_blnKeyDown Or Me.m_blnMouseDown) And m_blnMouseOver Then
             e.Graphics.DrawLine(SystemPens.ControlDarkDark, 1, 1, Me.Width - 2, 1)
             e.Graphics.DrawLine(SystemPens.ControlDarkDark, 1, 1, 1, Me.Height - 2)
             e.Graphics.DrawLine(SystemPens.ControlLightLight, Me.Width - 2, 2, Me.Width - 2, Me.Height - 2)
@@ -3528,7 +3447,7 @@ Public Class HoverButton
         End Get
         Set(ByVal Value As System.Drawing.Image)
             m_picPicture = Value
-            Me.Refresh()
+			Me.Invalidate()
         End Set
     End Property
 
@@ -3536,6 +3455,9 @@ Public Class HoverButton
 
 #Region "OnPaint"
 
+	Protected Overrides Sub OnPaintBackground(ByVal pevent As System.Windows.Forms.PaintEventArgs)
+		'MyBase.OnPaintBackground(pevent)
+	End Sub
     Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
 
 
@@ -3569,10 +3491,10 @@ Public Class HoverButton
             Dim bMouseOver As New Drawing2D.HatchBrush(Drawing.Drawing2D.HatchStyle.Percent50, SystemColors.ControlDarkDark, SystemColors.ControlLightLight)
 
             e.Graphics.DrawRectangle(New Pen(bMouseOver), New Rectangle(0, 0, Me.Width - 1, Me.Height - 1))
-        ElseIf Me.ContainsFocus Then
-            Dim bHasFocus As New Drawing2D.HatchBrush(Drawing.Drawing2D.HatchStyle.Percent50, SystemColors.Highlight, SystemColors.ControlDark)
+		ElseIf BetweenFocusEvents Then
+			Dim bHasFocus As New Drawing2D.HatchBrush(Drawing.Drawing2D.HatchStyle.Percent50, SystemColors.Highlight, SystemColors.ControlDark)
 
-            e.Graphics.DrawRectangle(New Pen(bHasFocus), New Rectangle(0, 0, Me.Width - 1, Me.Height - 1))
+			e.Graphics.DrawRectangle(New Pen(bHasFocus), New Rectangle(0, 0, Me.Width - 1, Me.Height - 1))
         End If
 
         MyBase.OnPaint(e)
@@ -4859,11 +4781,11 @@ Public Class ComboBoxPopup
         FocusedItem = iTempFocusedItem
 
 
-        If p_rLocation.Top + p_rlocation.Height + Me.Height > Screen.PrimaryScreen.Bounds.Height Then
+        If p_rLocation.Top + p_rLocation.Height + Me.Height > Screen.PrimaryScreen.Bounds.Height Then
             If Screen.PrimaryScreen.Bounds.Height < Me.Height Then
                 Me.Top = p_rLocation.Top + p_rLocation.Height
             Else
-                Me.Top = p_rlocation.Top - Me.Height
+                Me.Top = p_rLocation.Top - Me.Height
             End If
         Else
             Me.Top = p_rLocation.Top + p_rLocation.Height
@@ -4899,7 +4821,7 @@ Public Class ComboBoxPopup
     Private Sub p_lvList_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles p_lvList.Enter
         'p_frmparent.Focus()
         'p_ctrlparent.Focus()
-        'p_ctrlparent.Select()
+        'p_ctrlparent.Focus()
     End Sub
 
     Private Sub p_lvList_ItemSelected(ByVal sender As Object, ByVal e As ComboBoxItemEventArgs) Handles p_lvList.ItemSelected
@@ -6608,145 +6530,145 @@ End Class
 #Region "Arrow Button Control"
 
 Public Class ArrowButton
-	Inherits ClickButton
+    Inherits ClickButton
 
 #Region "Public Constructor Method"
 
-	Public Sub New()
-		MyBase.New()
+    Public Sub New()
+        MyBase.New()
 
-		Me.TabStop = False
+        Me.TabStop = False
 
-	End Sub
+    End Sub
 
 #End Region
 
 #Region "ArrowWidth Property"
 
-	Protected p_intArrowWidth As Integer = 8
+    Protected p_intArrowWidth As Integer = 8
 
-	Public Property ArrowWidth() As Integer
-		Get
-			Return p_intArrowWidth
-		End Get
-		Set(ByVal Value As Integer)
-			If Value >= 0 Then
-				p_intArrowWidth = Value
-				Me.Refresh()
-			End If
-		End Set
-	End Property
+    Public Property ArrowWidth() As Integer
+        Get
+            Return p_intArrowWidth
+        End Get
+        Set(ByVal Value As Integer)
+            If Value >= 0 Then
+                p_intArrowWidth = Value
+                Me.Refresh()
+            End If
+        End Set
+    End Property
 
 #End Region
 
 #Region "ArrowHeight Property"
 
-	Protected p_intArrowHeight As Integer = 4
+    Protected p_intArrowHeight As Integer = 4
 
-	Public Property ArrowHeight() As Integer
-		Get
-			Return p_intArrowHeight
-		End Get
-		Set(ByVal Value As Integer)
-			If Value >= 0 Then
-				p_intArrowHeight = Value
-				Me.Refresh()
-			End If
-		End Set
-	End Property
+    Public Property ArrowHeight() As Integer
+        Get
+            Return p_intArrowHeight
+        End Get
+        Set(ByVal Value As Integer)
+            If Value >= 0 Then
+                p_intArrowHeight = Value
+                Me.Refresh()
+            End If
+        End Set
+    End Property
 
 #End Region
 
 #Region "OnPaint Override Method"
 
-	Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
-		MyBase.OnPaint(e)
+    Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
+        MyBase.OnPaint(e)
 
 
 
-		If (Me.m_blnKeyDown Or Me.m_blnMouseDown) And m_blnMouseover Or PressedDown Then
-			e.Graphics.DrawRectangle(SystemPens.ControlDark, New Rectangle(0, 0, Me.Width - 1, Me.Height - 1))
+        If (Me.m_blnKeyDown Or Me.m_blnMouseDown) And m_blnMouseOver Or PressedDown Then
+            e.Graphics.DrawRectangle(SystemPens.ControlDark, New Rectangle(0, 0, Me.Width - 1, Me.Height - 1))
 
-			'Dim bArrowBackGround
-			e.Graphics.FillRectangle(New SolidBrush(Me.BackColor), New Rectangle(1, 1, Me.Width - 2, Me.Height - 2))
+            'Dim bArrowBackGround
+            e.Graphics.FillRectangle(New SolidBrush(Me.BackColor), New Rectangle(1, 1, Me.Width - 2, Me.Height - 2))
 
-			Dim pPoints(2) As PointF
+            Dim pPoints(2) As PointF
 
-			pPoints(0).X = CSng(((Me.Width - ArrowWidth) / 2) + 1)
-			pPoints(1).X = CSng(((Me.Width + ArrowWidth) / 2) + 1)
-			pPoints(2).X = CSng(((Me.Width) / 2) + 1)
+            pPoints(0).X = CSng(((Me.Width - ArrowWidth) / 2) + 1)
+            pPoints(1).X = CSng(((Me.Width + ArrowWidth) / 2) + 1)
+            pPoints(2).X = CSng(((Me.Width) / 2) + 1)
 
-			pPoints(0).Y = CSng(((Me.Height - ArrowHeight) / 2) + 1)
-			pPoints(1).Y = CSng(((Me.Height - ArrowHeight) / 2) + 1)
-			pPoints(2).Y = CSng(((Me.Height + ArrowHeight) / 2) + 1)
+            pPoints(0).Y = CSng(((Me.Height - ArrowHeight) / 2) + 1)
+            pPoints(1).Y = CSng(((Me.Height - ArrowHeight) / 2) + 1)
+            pPoints(2).Y = CSng(((Me.Height + ArrowHeight) / 2) + 1)
 
-			e.Graphics.FillPolygon(New SolidBrush(SystemColors.ControlText), pPoints)
+            e.Graphics.FillPolygon(New SolidBrush(SystemColors.ControlText), pPoints)
 
-		Else
-			e.Graphics.DrawLine(SystemPens.ControlLightLight, 1, 1, Me.Width - 2, 1)
-			e.Graphics.DrawLine(SystemPens.ControlLightLight, 1, 1, 1, Me.Height - 2)
-			e.Graphics.DrawLine(SystemPens.ControlDark, Me.Width - 2, 2, Me.Width - 2, Me.Height - 2)
-			e.Graphics.DrawLine(SystemPens.ControlDark, 2, Me.Height - 2, Me.Width - 2, Me.Height - 2)
+        Else
+            e.Graphics.DrawLine(SystemPens.ControlLightLight, 1, 1, Me.Width - 2, 1)
+            e.Graphics.DrawLine(SystemPens.ControlLightLight, 1, 1, 1, Me.Height - 2)
+            e.Graphics.DrawLine(SystemPens.ControlDark, Me.Width - 2, 2, Me.Width - 2, Me.Height - 2)
+            e.Graphics.DrawLine(SystemPens.ControlDark, 2, Me.Height - 2, Me.Width - 2, Me.Height - 2)
 
-			e.Graphics.DrawLine(SystemPens.Control, 0, 0, Me.Width - 1, 0)
-			e.Graphics.DrawLine(SystemPens.Control, 0, 0, 0, Me.Height - 1)
-			e.Graphics.DrawLine(SystemPens.ControlDarkDark, Me.Width - 1, 1, Me.Width - 1, Me.Height - 1)
-			e.Graphics.DrawLine(SystemPens.ControlDarkDark, 1, Me.Height - 1, Me.Width - 1, Me.Height - 1)
+            e.Graphics.DrawLine(SystemPens.Control, 0, 0, Me.Width - 1, 0)
+            e.Graphics.DrawLine(SystemPens.Control, 0, 0, 0, Me.Height - 1)
+            e.Graphics.DrawLine(SystemPens.ControlDarkDark, Me.Width - 1, 1, Me.Width - 1, Me.Height - 1)
+            e.Graphics.DrawLine(SystemPens.ControlDarkDark, 1, Me.Height - 1, Me.Width - 1, Me.Height - 1)
 
-			'Dim bArrowBackGround
-			e.Graphics.FillRectangle(New SolidBrush(Me.BackColor), New Rectangle(2, 2, Me.Width - 4, Me.Height - 4))
+            'Dim bArrowBackGround
+            e.Graphics.FillRectangle(New SolidBrush(Me.BackColor), New Rectangle(2, 2, Me.Width - 4, Me.Height - 4))
 
-			If Not Me.Enabled Then
+            If Not Me.Enabled Then
 
-				Dim pPoints2(2) As PointF
+                Dim pPoints2(2) As PointF
 
-				pPoints2(0).X = CSng(((Me.Width - ArrowWidth) / 2) + 1)
-				pPoints2(1).X = CSng(((Me.Width + ArrowWidth) / 2) + 1)
-				pPoints2(2).X = CSng(((Me.Width) / 2) + 1)
+                pPoints2(0).X = CSng(((Me.Width - ArrowWidth) / 2) + 1)
+                pPoints2(1).X = CSng(((Me.Width + ArrowWidth) / 2) + 1)
+                pPoints2(2).X = CSng(((Me.Width) / 2) + 1)
 
-				pPoints2(0).Y = CSng(((Me.Height - ArrowHeight) / 2) + 1)
-				pPoints2(1).Y = CSng(((Me.Height - ArrowHeight) / 2) + 1)
-				pPoints2(2).Y = CSng(((Me.Height + ArrowHeight) / 2) + 1)
+                pPoints2(0).Y = CSng(((Me.Height - ArrowHeight) / 2) + 1)
+                pPoints2(1).Y = CSng(((Me.Height - ArrowHeight) / 2) + 1)
+                pPoints2(2).Y = CSng(((Me.Height + ArrowHeight) / 2) + 1)
 
-				Dim pPoints(2) As PointF
+                Dim pPoints(2) As PointF
 
-				pPoints(0).X = CSng((Me.Width - ArrowWidth) / 2)
-				pPoints(1).X = CSng((Me.Width + ArrowWidth) / 2)
-				pPoints(2).X = CSng((Me.Width) / 2)
+                pPoints(0).X = CSng((Me.Width - ArrowWidth) / 2)
+                pPoints(1).X = CSng((Me.Width + ArrowWidth) / 2)
+                pPoints(2).X = CSng((Me.Width) / 2)
 
-				pPoints(0).Y = CSng((Me.Height - ArrowHeight) / 2)
-				pPoints(1).Y = CSng((Me.Height - ArrowHeight) / 2)
-				pPoints(2).Y = CSng((Me.Height + ArrowHeight) / 2)
-				e.Graphics.FillPolygon(SystemBrushes.ControlLightLight, pPoints2)
+                pPoints(0).Y = CSng((Me.Height - ArrowHeight) / 2)
+                pPoints(1).Y = CSng((Me.Height - ArrowHeight) / 2)
+                pPoints(2).Y = CSng((Me.Height + ArrowHeight) / 2)
+                e.Graphics.FillPolygon(SystemBrushes.ControlLightLight, pPoints2)
 
-				e.Graphics.FillPolygon(SystemBrushes.ControlDark, pPoints)
+                e.Graphics.FillPolygon(SystemBrushes.ControlDark, pPoints)
 
-			Else
+            Else
 
-				Dim pPoints(2) As PointF
+                Dim pPoints(2) As PointF
 
-				pPoints(0).X = CSng((Me.Width - ArrowWidth) / 2)
-				pPoints(1).X = CSng((Me.Width + ArrowWidth) / 2)
-				pPoints(2).X = CSng((Me.Width) / 2)
+                pPoints(0).X = CSng((Me.Width - ArrowWidth) / 2)
+                pPoints(1).X = CSng((Me.Width + ArrowWidth) / 2)
+                pPoints(2).X = CSng((Me.Width) / 2)
 
-				pPoints(0).Y = CSng((Me.Height - ArrowHeight) / 2)
-				pPoints(1).Y = CSng((Me.Height - ArrowHeight) / 2)
-				pPoints(2).Y = CSng((Me.Height + ArrowHeight) / 2)
-				e.Graphics.FillPolygon(New SolidBrush(SystemColors.ControlText), pPoints)
+                pPoints(0).Y = CSng((Me.Height - ArrowHeight) / 2)
+                pPoints(1).Y = CSng((Me.Height - ArrowHeight) / 2)
+                pPoints(2).Y = CSng((Me.Height + ArrowHeight) / 2)
+                e.Graphics.FillPolygon(New SolidBrush(SystemColors.ControlText), pPoints)
 
-			End If
+            End If
 
-		End If
+        End If
 
-	End Sub
+    End Sub
 
 #End Region
 
 #Region "Event Handlers for focus events"
 
-	Private Sub ArrowButton_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Enter
-		Me.SelectNextControl(Me, True, True, True, True)
-	End Sub
+    Private Sub ArrowButton_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Enter
+        Me.SelectNextControl(Me, True, True, True, True)
+    End Sub
 
 #End Region
 
@@ -6758,77 +6680,80 @@ End Class
 #Region "Font Drop Down Control"
 
 Public Class FontDropDown
-	Inherits ContainerControl
+    Inherits ContainerControl
 
 #Region "Control Event Declarations"
 
-	Public Event SelectedFontSetByClick(ByVal sender As Object, ByVal NewFontName As String, ByVal NewFontFamily As FontFamily)
-	Public Event SelectedFontSetByProperty(ByVal sender As Object, ByVal NewFontName As String, ByVal NewFontFamily As FontFamily)
+    Public Event SelectedFontSetByClick(ByVal sender As Object, ByVal NewFontName As String, ByVal NewFontFamily As FontFamily)
+    Public Event SelectedFontSetByProperty(ByVal sender As Object, ByVal NewFontName As String, ByVal NewFontFamily As FontFamily)
 
-	Public Event SelectedFontChangedByClick(ByVal sender As Object, ByVal NewFontName As String, ByVal NewFontFamily As FontFamily)
-	Public Event SelectedFontChangedByProperty(ByVal sender As Object, ByVal NewFontName As String, ByVal NewFontFamily As FontFamily)
+    Public Event SelectedFontChangedByClick(ByVal sender As Object, ByVal NewFontName As String, ByVal NewFontFamily As FontFamily)
+    Public Event SelectedFontChangedByProperty(ByVal sender As Object, ByVal NewFontName As String, ByVal NewFontFamily As FontFamily)
 
 #End Region
 
 #Region "m_blnPropertyChange Variable allows Combo SelectedChangeEvent Whether it was changed by user or by property"
 
-	Protected m_blnPropertyChange As Boolean = False
+    Protected m_blnPropertyChange As Boolean = False
 
 #End Region
 
 #Region "New Subroutine Initializes code and settings"
 
-	Public Sub New()
-		MyBase.New()
+    Public Sub New()
+        MyBase.New()
 
-		'Do error handling
-		Try
+        'Do error handling
+        Try
 
-			'Set our control's name property
-			Me.Name = "FontDropDown"
+            'Set our control's name property
+            Me.Name = "FontDropDown"
 
-			'Instantaniate Font Combo
-			cmbFont = New System.Windows.Forms.ComboBox
+            'Instantaniate Font Combo
+            cmbFont = New System.Windows.Forms.ComboBox
 
-			'Set the name property
-			cmbFont.Name = "cmbFont"
+            'Set the name property
+            cmbFont.Name = "cmbFont"
 
-			'Set dock to top so that when the user resizes our control, 
-			'the font combo box is resized along with it. 
-			cmbFont.Dock = System.Windows.Forms.DockStyle.Fill
+            'Set dock to top so that when the user resizes our control, 
+            'the font combo box is resized along with it. 
+            cmbFont.Dock = System.Windows.Forms.DockStyle.Fill
 
-			'Initializa to our default, Complex DropDown
-			cmbFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
+            'Initializa to our default, Complex DropDown
+            cmbFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
 
-			'Give a generous default max drop down count so that the drop down will be large enough to see
-			'all fonts properly
-			cmbFont.MaxDropDownItems = 30
-
-			'Add our Combo Box to our form
-			Me.Controls.Add(cmbFont)
+            'Give a generous default max drop down count so that the drop down will be large enough to see
+            'all fonts properly
+            cmbFont.MaxDropDownItems = 30
 
 
-			'Create a varible to loop through the fonts
-            Dim intFontLoop As Integer
+
+
+
 
 
             'Dim g As System.Drawing.Graphics = Me.CreateGraphics()
 
             'cmbFont.Items.AddRange(System.Drawing.FontFamily.GetFamilies(g))
 
+            Dim families() As FontFamily = System.Drawing.FontFamily.GetFamilies(Me.CreateGraphics)
 
+            Dim names(families.GetUpperBound(0)) As String
 
-            'Loop through the fonts
-            For intFontLoop = System.Drawing.FontFamily.Families.GetLowerBound(0) To _
-              System.Drawing.FontFamily.Families.GetUpperBound(0)
-                'Add the name property of each fontfamily to out list
-                cmbFont.Items.Add(System.Drawing.FontFamily.Families(intFontLoop).Name)
+            'Create a varible to loop through the fonts
+            Dim intFontLoop As Integer
+
+            For intFontLoop = names.GetLowerBound(0) To names.GetUpperBound(0)
+                names(intFontLoop) = families(intFontLoop).Name
             Next
 
+            cmbFont.Items.AddRange(names)
 
             'Set the text property of our combo box to a generic serif font, generally Times New Roman
             cmbFont.Text = System.Drawing.FontFamily.GenericSerif.Name
 
+            'Add our Combo Box to our form
+            Me.Controls.Add(cmbFont)
 
             'Set a default size
             Me.Size = New System.Drawing.Size(150, 50)
@@ -6838,516 +6763,516 @@ Public Class FontDropDown
         Catch ex As Exception
             HandleError("Error Initializing Control", ex, , MessageBoxButtons.OK)
         End Try
-	End Sub
+    End Sub
 
 
-	Private WithEvents cmbFont As System.Windows.Forms.ComboBox
+    Private WithEvents cmbFont As System.Windows.Forms.ComboBox
 
 #End Region
 
 #Region "Private m_strLastValidFont Variable"
 
-	'This Holds the last valid font name in case of invalid input
-	'Initialized to a generic Serif, usually Times New Roman
-	Private m_strLastValidFont As String = (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name
+    'This Holds the last valid font name in case of invalid input
+    'Initialized to a generic Serif, usually Times New Roman
+    Private m_strLastValidFont As String = (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name
 
 #End Region
 
 #Region "Simple Drop Down Property"
 
-	'SimpleDropDown Property Switches Between a simple dropDownBox and a regular drop DOwn
-	Public Property SimpleDropDown() As Boolean
-		Get
-			'Try get
-			Try
-				'Check to see if cmbFont has been initaialized yet
-				If Not cmbFont Is Nothing Then
-					'If combo Box is in simple style then return true
-					If cmbFont.DropDownStyle = ComboBoxStyle.Simple Then
-						Return True
-					Else
-						Return False
-					End If
-				End If
-				'If we caught a exception, report it
-			Catch ex As Exception
-				HandleError("Error Getting SimpleDropDown Property", ex, _
-				   "Combo DropDownSyle: " & cmbFont.DropDownStyle, MessageBoxButtons.OK)
-			End Try
-		End Get
-		Set(ByVal Value As Boolean)
-			'Try to set Property
-			Try
-				'Check to see if cmbFont has been initaialized yet
-				If Not cmbFont Is Nothing Then
-					'If we're setting it to true then set combo to simple style, 
-					'otherwise set it to DropDown
-					If Value Then
-						cmbFont.DropDownStyle = ComboBoxStyle.Simple
-					Else
-						cmbFont.DropDownStyle = ComboBoxStyle.DropDown
-					End If
-				End If
-				'If we caught an exception, report it
-			Catch ex As Exception
-				HandleError("Error Setting SimpleDropDown Property", ex, _
-				   "Value to set: " & Value.ToString & _
-				   "Combo DropDownSyle: " & cmbFont.DropDownStyle, MessageBoxButtons.OK)
-			End Try
+    'SimpleDropDown Property Switches Between a simple dropDownBox and a regular drop DOwn
+    Public Property SimpleDropDown() As Boolean
+        Get
+            'Try get
+            Try
+                'Check to see if cmbFont has been initaialized yet
+                If Not cmbFont Is Nothing Then
+                    'If combo Box is in simple style then return true
+                    If cmbFont.DropDownStyle = ComboBoxStyle.Simple Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                End If
+                'If we caught a exception, report it
+            Catch ex As Exception
+                HandleError("Error Getting SimpleDropDown Property", ex, _
+                   "Combo DropDownSyle: " & cmbFont.DropDownStyle, MessageBoxButtons.OK)
+            End Try
+        End Get
+        Set(ByVal Value As Boolean)
+            'Try to set Property
+            Try
+                'Check to see if cmbFont has been initaialized yet
+                If Not cmbFont Is Nothing Then
+                    'If we're setting it to true then set combo to simple style, 
+                    'otherwise set it to DropDown
+                    If Value Then
+                        cmbFont.DropDownStyle = ComboBoxStyle.Simple
+                    Else
+                        cmbFont.DropDownStyle = ComboBoxStyle.DropDown
+                    End If
+                End If
+                'If we caught an exception, report it
+            Catch ex As Exception
+                HandleError("Error Setting SimpleDropDown Property", ex, _
+                   "Value to set: " & Value.ToString & _
+                   "Combo DropDownSyle: " & cmbFont.DropDownStyle, MessageBoxButtons.OK)
+            End Try
 
-		End Set
-	End Property
+        End Set
+    End Property
 
 #End Region
 
 #Region "Max Drop Down Items Property"
 
-	'This Property Exposes the MaxDropDownItems Integer Property of Our combo Box.
-	'This Sets the amout of items in a drop down shown before a scrollbar appears
-	Public Property MaxDropDownItems() As Integer
-		Get
-			'Try get
-			Try
-				'Check to see if cmbFont has been initaialized yet
-				If Not cmbFont Is Nothing Then
-					'Return Combo's Property
-					Return cmbFont.MaxDropDownItems
-				End If
-				'If we caught a exception, report it
-			Catch ex As Exception
-				HandleError("Error Getting MaxDropDownItems Property", ex, _
-				   "Combo MaxDropDownItems: " & cmbFont.MaxDropDownItems, MessageBoxButtons.OK)
-			End Try
-		End Get
-		Set(ByVal Value As Integer)
-			If Value > 0 And Value < 101 Then
-				cmbFont.MaxDropDownItems = Value
-			End If
-			'Try to set Property
-			Try
-				'Check to see if cmbFont has been initaialized yet
-				If Not cmbFont Is Nothing Then
-					'Check to see if Value falls inside the valid ranges
-					If Value >= 1 And Value <= 100 Then
-						'Set it to Value
-						cmbFont.MaxDropDownItems = Value
-					End If
-				End If
-				'If we caught an exception, report it
-			Catch ex As Exception
-				HandleError("Error Setting MaxDropDownItems Property", ex, _
-				   "Value to set: " & Value.ToString & _
-				   "Combo MaxDropDoenItems: " & cmbFont.MaxDropDownItems, MessageBoxButtons.OK)
-			End Try
-		End Set
-	End Property
+    'This Property Exposes the MaxDropDownItems Integer Property of Our combo Box.
+    'This Sets the amout of items in a drop down shown before a scrollbar appears
+    Public Property MaxDropDownItems() As Integer
+        Get
+            'Try get
+            Try
+                'Check to see if cmbFont has been initaialized yet
+                If Not cmbFont Is Nothing Then
+                    'Return Combo's Property
+                    Return cmbFont.MaxDropDownItems
+                End If
+                'If we caught a exception, report it
+            Catch ex As Exception
+                HandleError("Error Getting MaxDropDownItems Property", ex, _
+                   "Combo MaxDropDownItems: " & cmbFont.MaxDropDownItems, MessageBoxButtons.OK)
+            End Try
+        End Get
+        Set(ByVal Value As Integer)
+            If Value > 0 And Value < 101 Then
+                cmbFont.MaxDropDownItems = Value
+            End If
+            'Try to set Property
+            Try
+                'Check to see if cmbFont has been initaialized yet
+                If Not cmbFont Is Nothing Then
+                    'Check to see if Value falls inside the valid ranges
+                    If Value >= 1 And Value <= 100 Then
+                        'Set it to Value
+                        cmbFont.MaxDropDownItems = Value
+                    End If
+                End If
+                'If we caught an exception, report it
+            Catch ex As Exception
+                HandleError("Error Setting MaxDropDownItems Property", ex, _
+                   "Value to set: " & Value.ToString & _
+                   "Combo MaxDropDoenItems: " & cmbFont.MaxDropDownItems, MessageBoxButtons.OK)
+            End Try
+        End Set
+    End Property
 
 #End Region
 
 #Region "SelectedFontFamily as Font Family Property"
 
-	'This property Gets or sets the fontfamily that is currently selected.
-	'Just like the FontName property exceppt this property returns the font 
-	'as an object, not a string
-	Public Property SelectedFontFamily() As FontFamily
-		Get
-			'Try get
-			Try
-				'Check to see if cmbFont has been initaialized yet
-				If Not cmbFont Is Nothing Then
+    'This property Gets or sets the fontfamily that is currently selected.
+    'Just like the FontName property exceppt this property returns the font 
+    'as an object, not a string
+    Public Property SelectedFontFamily() As FontFamily
+        Get
+            'Try get
+            Try
+                'Check to see if cmbFont has been initaialized yet
+                If Not cmbFont Is Nothing Then
 
-					Try
-						'Return An instantaniated fonfamily
-						Return New FontFamily(cmbFont.Text)
+                    Try
+                        'Return An instantaniated fonfamily
+                        Return New FontFamily(cmbFont.Text)
 
-						'If font Dosen't Exist then use last valid font
-					Catch exas As System.ArgumentException
-						Try
-							'Use last valid font
-							Return New FontFamily(m_strLastValidFont)
+                        'If font Dosen't Exist then use last valid font
+                    Catch exas As System.ArgumentException
+                        Try
+                            'Use last valid font
+                            Return New FontFamily(m_strLastValidFont)
 
-						Catch AEx As System.ArgumentException
+                        Catch AEx As System.ArgumentException
 
-							'Obviosly last avlid font is not valid anymore, so use default
-							Return New FontFamily(Drawing.Text.GenericFontFamilies.Serif)
-						End Try
-						'If we caught a exception, report it
-					Catch ex As Exception
+                            'Obviosly last avlid font is not valid anymore, so use default
+                            Return New FontFamily(Drawing.Text.GenericFontFamilies.Serif)
+                        End Try
+                        'If we caught a exception, report it
+                    Catch ex As Exception
                         HandleError("Error Getting SelectedFontFamily Property", ex, _
                            "Combo Text: " & cmbFont.Text, MessageBoxButtons.OK)
                         Return Nothing
-					End Try
+                    End Try
                 Else
                     Return Nothing
                 End If
-				'If we caught a exception, report it
-			Catch ex As Exception
+                'If we caught a exception, report it
+            Catch ex As Exception
                 HandleError("Error Getting SelectedFontFamily Property", ex, _
                    "Combo Text: " & cmbFont.Text, MessageBoxButtons.OK)
                 Return Nothing
-			End Try
-		End Get
-		Set(ByVal Value As FontFamily)
-			'Try set
-			Try
+            End Try
+        End Get
+        Set(ByVal Value As FontFamily)
+            'Try set
+            Try
 
-				'Check to see if cmbFont has been initaialized yet
-				If Not cmbFont Is Nothing Then
-					'Return An instantaniated fonfamily
-					Try
+                'Check to see if cmbFont has been initaialized yet
+                If Not cmbFont Is Nothing Then
+                    'Return An instantaniated fonfamily
+                    Try
 
-						'Create a temporary variable to hold the combo text befor we set it,
-						'so later we know if it has actually ben changed
-						Dim strOriginalText As String = cmbFont.Text
+                        'Create a temporary variable to hold the combo text befor we set it,
+                        'so later we know if it has actually ben changed
+                        Dim strOriginalText As String = cmbFont.Text
 
-						'Tell Combo's Events Where it came from
-						m_blnPropertyChange = True
-						'Set text to fontfamily name property
-						cmbFont.Text = Value.Name
-
-
-						'Raise an event since we've set the text
-						RaiseEvent SelectedFontSetByProperty(Me, Value.Name, Value)
+                        'Tell Combo's Events Where it came from
+                        m_blnPropertyChange = True
+                        'Set text to fontfamily name property
+                        cmbFont.Text = Value.Name
 
 
-						'Check to see if text has actually been changed
-						If strOriginalText <> cmbFont.Text Then
+                        'Raise an event since we've set the text
+                        RaiseEvent SelectedFontSetByProperty(Me, Value.Name, Value)
 
 
-							'Raise an event since wev'e changed the text
-							RaiseEvent SelectedFontChangedByProperty(Me, Value.Name, Value)
-						End If
+                        'Check to see if text has actually been changed
+                        If strOriginalText <> cmbFont.Text Then
 
 
-						m_strLastValidFont = cmbFont.Text
+                            'Raise an event since wev'e changed the text
+                            RaiseEvent SelectedFontChangedByProperty(Me, Value.Name, Value)
+                        End If
 
-						'If we caught a exception, report it
-					Catch ex As Exception
-						HandleError("Error Setting SelectedFontFamily Property", ex, _
-						   "Combo Text: " & cmbFont.Text & _
-						   "FontFamily: " & Value.ToString, MessageBoxButtons.OK)
-					Finally
-						'Reset Booloean
-						m_blnPropertyChange = False
 
-					End Try
+                        m_strLastValidFont = cmbFont.Text
 
-				End If
-				'If we caught a exception, report it
-			Catch ex As Exception
-				HandleError("Error Setting SelectedFontFamily Property", ex, _
-				   "Combo Text: " & cmbFont.Text & _
-					 "FontFamily: " & Value.ToString, MessageBoxButtons.OK)
-			Finally
-				'Reset Booloean
-				m_blnPropertyChange = False
+                        'If we caught a exception, report it
+                    Catch ex As Exception
+                        HandleError("Error Setting SelectedFontFamily Property", ex, _
+                           "Combo Text: " & cmbFont.Text & _
+                           "FontFamily: " & Value.ToString, MessageBoxButtons.OK)
+                    Finally
+                        'Reset Booloean
+                        m_blnPropertyChange = False
 
-			End Try
-		End Set
-	End Property
+                    End Try
+
+                End If
+                'If we caught a exception, report it
+            Catch ex As Exception
+                HandleError("Error Setting SelectedFontFamily Property", ex, _
+                   "Combo Text: " & cmbFont.Text & _
+                  "FontFamily: " & Value.ToString, MessageBoxButtons.OK)
+            Finally
+                'Reset Booloean
+                m_blnPropertyChange = False
+
+            End Try
+        End Set
+    End Property
 
 #End Region
 
 #Region "SelectedFontName as string Property"
 
-	'This property Gets or sets the fontfamily that is currently selected.
-	'Just like the SelectedFontFamily property exceppt this property returns the font 
-	'as an string, not a object
-	Public Property SelectedFontName() As String
-		Get
-			'Try get
-			Try
-				'Check to see if cmbFont has been initaialized yet
-				If Not cmbFont Is Nothing Then
+    'This property Gets or sets the fontfamily that is currently selected.
+    'Just like the SelectedFontFamily property exceppt this property returns the font 
+    'as an string, not a object
+    Public Property SelectedFontName() As String
+        Get
+            'Try get
+            Try
+                'Check to see if cmbFont has been initaialized yet
+                If Not cmbFont Is Nothing Then
 
-					Try
-						'Return the name of the instantaniated fontfamily
-						Return (New FontFamily(cmbFont.Text)).Name
+                    Try
+                        'Return the name of the instantaniated fontfamily
+                        Return (New FontFamily(cmbFont.Text)).Name
 
-						'If font Dosen't Exist then use last valid font
-					Catch exas As System.ArgumentException
-						Try
-							'Use last Valid Font
-							Return (New FontFamily(m_strLastValidFont)).Name
+                        'If font Dosen't Exist then use last valid font
+                    Catch exas As System.ArgumentException
+                        Try
+                            'Use last Valid Font
+                            Return (New FontFamily(m_strLastValidFont)).Name
 
-						Catch AEx As System.ArgumentException
+                        Catch AEx As System.ArgumentException
 
-							'Obviosly last avlid font is not valid anymore, so use default
-							Return (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name
-						End Try
-						'If we caught a exception, report it
-					Catch ex As Exception
-						HandleError("Error Getting SelectedFontName Property", ex, _
-						   "Combo Text: " & cmbFont.Text, MessageBoxButtons.OK)
+                            'Obviosly last avlid font is not valid anymore, so use default
+                            Return (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name
+                        End Try
+                        'If we caught a exception, report it
+                    Catch ex As Exception
+                        HandleError("Error Getting SelectedFontName Property", ex, _
+                           "Combo Text: " & cmbFont.Text, MessageBoxButtons.OK)
                         Return Nothing
-					End Try
+                    End Try
                 Else
                     Return Nothing
                 End If
-				'If we caught a exception, report it
-			Catch ex As Exception
-				HandleError("Error Getting SelectedFontName Property", ex, _
-				   "Combo Text: " & cmbFont.Text, MessageBoxButtons.OK)
+                'If we caught a exception, report it
+            Catch ex As Exception
+                HandleError("Error Getting SelectedFontName Property", ex, _
+                   "Combo Text: " & cmbFont.Text, MessageBoxButtons.OK)
                 Return Nothing
-			End Try
-		End Get
-		Set(ByVal Value As String)
-			'Try set
-			Try
-				'Check to see if cmbFont has been initaialized yet
-				If Not cmbFont Is Nothing Then
-					'Return An instantaniated fonfamily
-					Try
+            End Try
+        End Get
+        Set(ByVal Value As String)
+            'Try set
+            Try
+                'Check to see if cmbFont has been initaialized yet
+                If Not cmbFont Is Nothing Then
+                    'Return An instantaniated fonfamily
+                    Try
 
-						'Create a temporary variable to hold the combo text befor we set it,
-						'so later we know if it has actually ben changed
-						Dim strOriginalText As String = cmbFont.Text
+                        'Create a temporary variable to hold the combo text befor we set it,
+                        'so later we know if it has actually ben changed
+                        Dim strOriginalText As String = cmbFont.Text
 
-						'Tell Combo's Events Where it came from
-						m_blnPropertyChange = True
+                        'Tell Combo's Events Where it came from
+                        m_blnPropertyChange = True
 
-						'Set text to fontfamily name property
-						cmbFont.Text = (New FontFamily(Value)).Name
-
-
-
-						'Raise an event since we've set the text
-						RaiseEvent SelectedFontSetByProperty(Me, Value, New FontFamily(Value))
-
-
-						'Check to see if text has actually been changed
-						If strOriginalText <> cmbFont.Text Then
-
-
-							'Raise an event since wev'e changed the text
-							RaiseEvent SelectedFontChangedByProperty(Me, Value, New FontFamily(Value))
-						End If
-
-						m_strLastValidFont = cmbFont.Text
-						'If value is not valid, then set text to last valid font
-					Catch aex As ArgumentException
-
-						'try this too, so if the last valid font weirdly became invalid
-						'we can catch it and set it to defautls
-						Try
-							'Create a temporary variable to hold the combo text befor we set it,
-							'so later we know if it has actually ben changed
-							Dim strOriginalText As String = cmbFont.Text
-
-							'Tell Combo's Events Where it came from
-							m_blnPropertyChange = True
-							'Set text to fontfamily name property
-							cmbFont.Text = (New FontFamily(m_strLastValidFont)).Name
+                        'Set text to fontfamily name property
+                        cmbFont.Text = (New FontFamily(Value)).Name
 
 
 
-							'Raise an event since we've set the text
-							RaiseEvent SelectedFontSetByProperty(Me, _
-							  (New FontFamily(m_strLastValidFont)).Name, _
-							   (New FontFamily(m_strLastValidFont)))
+                        'Raise an event since we've set the text
+                        RaiseEvent SelectedFontSetByProperty(Me, Value, New FontFamily(Value))
 
 
-							'Check to see if text has actually been changed
-							If strOriginalText <> cmbFont.Text Then
+                        'Check to see if text has actually been changed
+                        If strOriginalText <> cmbFont.Text Then
 
 
-								'Raise an event since wev'e changed the text
-								RaiseEvent SelectedFontChangedByProperty(Me, _
-								 (New FontFamily(m_strLastValidFont)).Name, _
-								 (New FontFamily(m_strLastValidFont)))
-							End If
+                            'Raise an event since wev'e changed the text
+                            RaiseEvent SelectedFontChangedByProperty(Me, Value, New FontFamily(Value))
+                        End If
 
-						Catch exa As ArgumentException
-							'Create a temporary variable to hold the combo text befor we set it,
-							'so later we know if it has actually ben changed
-							Dim strOriginalText As String = cmbFont.Text
+                        m_strLastValidFont = cmbFont.Text
+                        'If value is not valid, then set text to last valid font
+                    Catch aex As ArgumentException
 
-							'Tell Combo's Events Where it came from
-							m_blnPropertyChange = True
-							'Set text to fontfamily name property
-							cmbFont.Text = (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name
+                        'try this too, so if the last valid font weirdly became invalid
+                        'we can catch it and set it to defautls
+                        Try
+                            'Create a temporary variable to hold the combo text befor we set it,
+                            'so later we know if it has actually ben changed
+                            Dim strOriginalText As String = cmbFont.Text
+
+                            'Tell Combo's Events Where it came from
+                            m_blnPropertyChange = True
+                            'Set text to fontfamily name property
+                            cmbFont.Text = (New FontFamily(m_strLastValidFont)).Name
 
 
 
-							'Raise an event since we've set the text
-							RaiseEvent SelectedFontSetByProperty(Me, _
-							  (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name, _
-							   (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)))
+                            'Raise an event since we've set the text
+                            RaiseEvent SelectedFontSetByProperty(Me, _
+                              (New FontFamily(m_strLastValidFont)).Name, _
+                               (New FontFamily(m_strLastValidFont)))
 
-							'Check to see if text has actually been changed
-							If strOriginalText <> cmbFont.Text Then
 
-								'Raise an event since wev'e changed the text
-								RaiseEvent SelectedFontChangedByProperty(Me, _
-								(New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name, _
-								(New FontFamily(Drawing.Text.GenericFontFamilies.Serif)))
-							End If
+                            'Check to see if text has actually been changed
+                            If strOriginalText <> cmbFont.Text Then
 
-						Finally
-							'Reset Booloean
-							m_blnPropertyChange = False
 
-						End Try
+                                'Raise an event since wev'e changed the text
+                                RaiseEvent SelectedFontChangedByProperty(Me, _
+                                 (New FontFamily(m_strLastValidFont)).Name, _
+                                 (New FontFamily(m_strLastValidFont)))
+                            End If
 
-						'If we caught a exception, report it
-					Catch ex As Exception
-						HandleError("Error Setting SelectedFontName Property", ex, _
-						   "Combo Text: " & cmbFont.Text & _
-						   "Value to set: " & Value, MessageBoxButtons.OK)
-					Finally
-						'Reset Booloean
-						m_blnPropertyChange = False
+                        Catch exa As ArgumentException
+                            'Create a temporary variable to hold the combo text befor we set it,
+                            'so later we know if it has actually ben changed
+                            Dim strOriginalText As String = cmbFont.Text
 
-					End Try
+                            'Tell Combo's Events Where it came from
+                            m_blnPropertyChange = True
+                            'Set text to fontfamily name property
+                            cmbFont.Text = (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name
 
-				End If
-				'If we caught a exception, report it
-			Catch ex As Exception
-				HandleError("Error Setting SelectedFontName Property", ex, _
-				   "Combo Text: " & cmbFont.Text & _
-				   "Value to set: " & Value, MessageBoxButtons.OK)
-			Finally
-				'Reset Booloean
-				m_blnPropertyChange = False
 
-			End Try
-		End Set
-	End Property
+
+                            'Raise an event since we've set the text
+                            RaiseEvent SelectedFontSetByProperty(Me, _
+                              (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name, _
+                               (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)))
+
+                            'Check to see if text has actually been changed
+                            If strOriginalText <> cmbFont.Text Then
+
+                                'Raise an event since wev'e changed the text
+                                RaiseEvent SelectedFontChangedByProperty(Me, _
+                                (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name, _
+                                (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)))
+                            End If
+
+                        Finally
+                            'Reset Booloean
+                            m_blnPropertyChange = False
+
+                        End Try
+
+                        'If we caught a exception, report it
+                    Catch ex As Exception
+                        HandleError("Error Setting SelectedFontName Property", ex, _
+                           "Combo Text: " & cmbFont.Text & _
+                           "Value to set: " & Value, MessageBoxButtons.OK)
+                    Finally
+                        'Reset Booloean
+                        m_blnPropertyChange = False
+
+                    End Try
+
+                End If
+                'If we caught a exception, report it
+            Catch ex As Exception
+                HandleError("Error Setting SelectedFontName Property", ex, _
+                   "Combo Text: " & cmbFont.Text & _
+                   "Value to set: " & Value, MessageBoxButtons.OK)
+            Finally
+                'Reset Booloean
+                m_blnPropertyChange = False
+
+            End Try
+        End Set
+    End Property
 
 #End Region
 
 #Region "Control base Class Event Sets Me.Height = cmbFont.height to make sure no room is left over"
 
-	Private Sub FontDropDown_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
-		'Do Error Handling
-		Try
-			'Check to make sure cmbFont Exists first
-			If Not cmbFont Is Nothing Then
+    Private Sub FontDropDown_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
+        'Do Error Handling
+        Try
+            'Check to make sure cmbFont Exists first
+            If Not cmbFont Is Nothing Then
 
-				'Make sure no room left
-				Me.Height = cmbFont.Height
-			End If
-			'If we catch an error, then handle it
-		Catch ex As Exception
-			'Check to see whether we can report of cmbFont, or is it uninstaniated
-			If cmbFont Is Nothing Then
-				HandleError("Error Resizing Control", ex, _
-					  "Control Height: " & Me.Height & "  Combo has not been instantaniated yet", MessageBoxButtons.OK)
+                'Make sure no room left
+                Me.Height = cmbFont.Height
+            End If
+            'If we catch an error, then handle it
+        Catch ex As Exception
+            'Check to see whether we can report of cmbFont, or is it uninstaniated
+            If cmbFont Is Nothing Then
+                HandleError("Error Resizing Control", ex, _
+                   "Control Height: " & Me.Height & "  Combo has not been instantaniated yet", MessageBoxButtons.OK)
 
-			Else
-				'We can report on cmbFont
-				HandleError("Error Resizing Control", ex, _
-					  "Control Height: " & Me.Height & "  Combo Height: " & cmbFont.Height, MessageBoxButtons.OK)
+            Else
+                'We can report on cmbFont
+                HandleError("Error Resizing Control", ex, _
+                   "Control Height: " & Me.Height & "  Combo Height: " & cmbFont.Height, MessageBoxButtons.OK)
 
-			End If
-		End Try
-	End Sub
+            End If
+        End Try
+    End Sub
 
 #End Region
 
 #Region "Combo Box Keydown Event Calls DoneTyping if key is enter key"
 
-	Private Sub cmbFont_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbFont.KeyDown
-		If e.KeyCode = Keys.Enter Then
-			DoneTyping()
-		End If
-	End Sub
+    Private Sub cmbFont_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbFont.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            DoneTyping()
+        End If
+    End Sub
 
 #End Region
 
 #Region "Private DoneTyping Procedure Validifies Text; should be called when the user presses enter or clicks a item"
 
-	Private Sub DoneTyping()
-		'Try set
-		Try
-			'Check to see if cmbFont has been initaialized yet
-			If Not cmbFont Is Nothing Then
-				'Return An instantaniated fonfamily
-				Try
+    Private Sub DoneTyping()
+        'Try set
+        Try
+            'Check to see if cmbFont has been initaialized yet
+            If Not cmbFont Is Nothing Then
+                'Return An instantaniated fonfamily
+                Try
 
-					'Save Selection
-					Dim intSaveSelStart As Integer = cmbFont.SelectionStart
-					Dim intSaveSelLength As Integer = cmbFont.SelectionLength
+                    'Save Selection
+                    Dim intSaveSelStart As Integer = cmbFont.SelectionStart
+                    Dim intSaveSelLength As Integer = cmbFont.SelectionLength
 
-					'Set text to fontfamily name property
-					cmbFont.Text = (New FontFamily(cmbFont.Text)).Name
+                    'Set text to fontfamily name property
+                    cmbFont.Text = (New FontFamily(cmbFont.Text)).Name
 
-					'Reload Selection
-					cmbFont.SelectionLength = intSaveSelLength
-					cmbFont.SelectionStart = intSaveSelStart
-
-
-
-					'Raise an event since we've set the text
-					RaiseEvent SelectedFontSetByClick(Me, cmbFont.Text, New FontFamily(cmbFont.Text))
-
-
-					'Check to see if text has actually been changed
-					If m_strLastValidFont <> cmbFont.Text Then
-
-						'Raise an event since wev'e changed the text
-						RaiseEvent SelectedFontChangedByClick(Me, cmbFont.Text, New FontFamily(cmbFont.Text))
-					End If
-
-
-					m_strLastValidFont = cmbFont.Text
-
-					'If value is not valid, then set text to last valid font
-				Catch aex As ArgumentException
-
-					'try this too, so if the last valid font weirdly became invalid
-					'we can catch it and set it to defautls
-					Try
-
-						'Set text to fontfamily name property
-						cmbFont.Text = (New FontFamily(m_strLastValidFont)).Name
-
-						'Raise an event since we've set the text
-						RaiseEvent SelectedFontSetByClick(Me, _
-						  (New FontFamily(m_strLastValidFont)).Name, _
-						   (New FontFamily(m_strLastValidFont)))
-
-					Catch exa As ArgumentException
-
-						'Set text to fontfamily name property
-						cmbFont.Text = (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name
+                    'Reload Selection
+                    cmbFont.SelectionLength = intSaveSelLength
+                    cmbFont.SelectionStart = intSaveSelStart
 
 
 
-						'Raise an event since we've set the text
-						RaiseEvent SelectedFontSetByClick(Me, _
-						  (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name, _
-						   (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)))
+                    'Raise an event since we've set the text
+                    RaiseEvent SelectedFontSetByClick(Me, cmbFont.Text, New FontFamily(cmbFont.Text))
+
+
+                    'Check to see if text has actually been changed
+                    If m_strLastValidFont <> cmbFont.Text Then
+
+                        'Raise an event since wev'e changed the text
+                        RaiseEvent SelectedFontChangedByClick(Me, cmbFont.Text, New FontFamily(cmbFont.Text))
+                    End If
+
+
+                    m_strLastValidFont = cmbFont.Text
+
+                    'If value is not valid, then set text to last valid font
+                Catch aex As ArgumentException
+
+                    'try this too, so if the last valid font weirdly became invalid
+                    'we can catch it and set it to defautls
+                    Try
+
+                        'Set text to fontfamily name property
+                        cmbFont.Text = (New FontFamily(m_strLastValidFont)).Name
+
+                        'Raise an event since we've set the text
+                        RaiseEvent SelectedFontSetByClick(Me, _
+                          (New FontFamily(m_strLastValidFont)).Name, _
+                           (New FontFamily(m_strLastValidFont)))
+
+                    Catch exa As ArgumentException
+
+                        'Set text to fontfamily name property
+                        cmbFont.Text = (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name
 
 
 
-						'Check to see if text has actually been changed
-						If m_strLastValidFont <> (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name Then
+                        'Raise an event since we've set the text
+                        RaiseEvent SelectedFontSetByClick(Me, _
+                          (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name, _
+                           (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)))
 
 
-							'Raise an event since wev'e changed the text
-							RaiseEvent SelectedFontChangedByClick(Me, _
-							 (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name, _
-							 (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)))
 
-						End If
+                        'Check to see if text has actually been changed
+                        If m_strLastValidFont <> (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name Then
 
-						m_strLastValidFont = (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name
-					End Try
 
-					'If we caught a exception, report it
-				Catch ex As Exception
-					HandleError("Error Changing Value By Unser Input", ex, _
-					   "Combo Text: """ & cmbFont.Text & """ Last Valid Font: """ & m_strLastValidFont & """", MessageBoxButtons.OK)
-				End Try
+                            'Raise an event since wev'e changed the text
+                            RaiseEvent SelectedFontChangedByClick(Me, _
+                             (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name, _
+                             (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)))
 
-			End If
-			'If we caught a exception, report it
-		Catch ex As Exception
-			HandleError("Error Changing Value By Unser Input", ex, _
-			   "Combo Text: """ & cmbFont.Text & """ Last Valid Font: """ & m_strLastValidFont & """", MessageBoxButtons.OK)
-		End Try
-	End Sub
+                        End If
+
+                        m_strLastValidFont = (New FontFamily(Drawing.Text.GenericFontFamilies.Serif)).Name
+                    End Try
+
+                    'If we caught a exception, report it
+                Catch ex As Exception
+                    HandleError("Error Changing Value By Unser Input", ex, _
+                       "Combo Text: """ & cmbFont.Text & """ Last Valid Font: """ & m_strLastValidFont & """", MessageBoxButtons.OK)
+                End Try
+
+            End If
+            'If we caught a exception, report it
+        Catch ex As Exception
+            HandleError("Error Changing Value By Unser Input", ex, _
+               "Combo Text: """ & cmbFont.Text & """ Last Valid Font: """ & m_strLastValidFont & """", MessageBoxButtons.OK)
+        End Try
+    End Sub
 
 #End Region
 
@@ -7355,101 +7280,101 @@ Public Class FontDropDown
 
 #Region "Logging Header&Ender Constants"
 
-	'Header and Ender for an Entry
-	Private Const cm_strEntryHeader As String = "LogEntry( "
-	Private Const cm_strEntryEnder As String = " )"
+    'Header and Ender for an Entry
+    Private Const cm_strEntryHeader As String = "LogEntry( "
+    Private Const cm_strEntryEnder As String = " )"
 
-	'Headers for Node Types
-	Private Const cm_strNewNode As String = "(NewNode) "
-	Private Const cm_strLastNode As String = "(LastNode) "
+    'Headers for Node Types
+    Private Const cm_strNewNode As String = "(NewNode) "
+    Private Const cm_strLastNode As String = "(LastNode) "
 
-	'Header Symbols fo Node Types
-	Private Const cm_strNewNodeSymbol As String = "+"
-	Private Const cm_strLastNodeSymbol As String = "-"
+    'Header Symbols fo Node Types
+    Private Const cm_strNewNodeSymbol As String = "+"
+    Private Const cm_strLastNodeSymbol As String = "-"
 
-	'Contains character that go between a header and an ender
-	Private Const cm_strSectionSeparator As String = "  "
+    'Contains character that go between a header and an ender
+    Private Const cm_strSectionSeparator As String = "  "
 
-	'Header and Ender for Error Data and Extra Data
-	Private Const cm_strAllDataHeader As String = "HEntry Data: { "
-	Private Const cm_strAllDataEnder As String = " }"
+    'Header and Ender for Error Data and Extra Data
+    Private Const cm_strAllDataHeader As String = "HEntry Data: { "
+    Private Const cm_strAllDataEnder As String = " }"
 
-	'Header and Ender for Extra Data
-	Private Const cm_strDataHeader As String = "HData: """
-	Private Const cm_strDataEnder As String = """"
+    'Header and Ender for Extra Data
+    Private Const cm_strDataHeader As String = "HData: """
+    Private Const cm_strDataEnder As String = """"
 
-	'Header and Ender for Error Data
-	Private Const cm_strErrorDataHeader As String = "HError Data: """
-	Private Const cm_strErrorDataEnder As String = """"
+    'Header and Ender for Error Data
+    Private Const cm_strErrorDataHeader As String = "HError Data: """
+    Private Const cm_strErrorDataEnder As String = """"
 
-	'Header and Ender for DateTime Stamp
-	Private Const cm_strDateTimeHeader As String = "HDateTime: """
-	Private Const cm_strDateTimeEnder As String = """"
+    'Header and Ender for DateTime Stamp
+    Private Const cm_strDateTimeHeader As String = "HDateTime: """
+    Private Const cm_strDateTimeEnder As String = """"
 
-	'Header and Ender for the Exception Section of Error Data
-	Private Const cm_strExceptionHeader As String = "HException String: """
-	Private Const cm_strExceptionEnder As String = """"
+    'Header and Ender for the Exception Section of Error Data
+    Private Const cm_strExceptionHeader As String = "HException String: """
+    Private Const cm_strExceptionEnder As String = """"
 
-	'Header and Ender for Category
-	Private Const cm_strCategoryHeader As String = "HEntry Category: """
-	Private Const cm_strCategoryEnder As String = """"
+    'Header and Ender for Category
+    Private Const cm_strCategoryHeader As String = "HEntry Category: """
+    Private Const cm_strCategoryEnder As String = """"
 
-	'Header and Ender for the Last DLL Error Section of Error Data
-	Private Const cm_strLastDllHeader As String = "HLast DLL Error: """
-	Private Const cm_strLastDllEnder As String = """"""
+    'Header and Ender for the Last DLL Error Section of Error Data
+    Private Const cm_strLastDllHeader As String = "HLast DLL Error: """
+    Private Const cm_strLastDllEnder As String = """"""
 
-	'Header and Ender for the Error Number section of Error Data
-	Private Const cm_strErrorNumberHeader As String = "HError Number: """
-	Private Const cm_strErrorNumberEnder As String = """"""
+    'Header and Ender for the Error Number section of Error Data
+    Private Const cm_strErrorNumberHeader As String = "HError Number: """
+    Private Const cm_strErrorNumberEnder As String = """"""
 
-	'Header and Ender for the Message Section
-	Private Const cm_strMessageHeader As String = "HMessage: """
-	Private Const cm_strMessageEnder As String = """"
+    'Header and Ender for the Message Section
+    Private Const cm_strMessageHeader As String = "HMessage: """
+    Private Const cm_strMessageEnder As String = """"
 
-	'Header and Ender for the Entry ID Section
-	Private Const cm_strIDHeader As String = "Entry ID: """
-	Private Const cm_strIDEnder As String = """"
+    'Header and Ender for the Entry ID Section
+    Private Const cm_strIDHeader As String = "Entry ID: """
+    Private Const cm_strIDEnder As String = """"
 
 #End Region
 
 #Region "Error to string utitlies"
 
 
-	''''''''''''''''''''''''''''''''''''''''''''''
-	'Takes:
-	' Exception Or Error Object 
-	' String for data that will be appended to return value
-	'
-	'Returns:
-	' Properties and information about object, and appended ExtraData
-	'
-	''''''''''''''''''''''''''''''''''''''''''''''
-	Private Overloads Function m_ErrorToString(ByVal exException As Exception, Optional ByVal ExtraData As String = "") As String
+    ''''''''''''''''''''''''''''''''''''''''''''''
+    'Takes:
+    ' Exception Or Error Object 
+    ' String for data that will be appended to return value
+    '
+    'Returns:
+    ' Properties and information about object, and appended ExtraData
+    '
+    ''''''''''''''''''''''''''''''''''''''''''''''
+    Private Overloads Function m_ErrorToString(ByVal exException As Exception, Optional ByVal ExtraData As String = "") As String
+        'Create String Variable to accumulate data
+        Dim strData As String = ""
+
+        'Set Data to exception description
+        strData = cm_strErrorDataHeader & cm_strSectionSeparator & _
+         cm_strExceptionHeader & exException.ToString & cm_strExceptionEnder
+
+        'If there is any characters in extradata then add it to strdata
+        If ExtraData.Length > 0 Then
+            strData += cm_strSectionSeparator & cm_strDataHeader & ExtraData & cm_strDataEnder
+        End If
+
+        'Add String Ender
+        strData += cm_strSectionSeparator & cm_strAllDataEnder
+
+        'Return string
+        Return strData
+    End Function
+	Private Overloads Function m_ErrorToString(ByVal errError As Microsoft.VisualBasic.ErrObject, Optional ByVal ExtraData As String = "") As String
 		'Create String Variable to accumulate data
 		Dim strData As String = ""
 
 		'Set Data to exception description
 		strData = cm_strErrorDataHeader & cm_strSectionSeparator & _
-			cm_strExceptionHeader & exException.ToString & cm_strExceptionEnder
-
-		'If there is any characters in extradata then add it to strdata
-		If ExtraData.Length > 0 Then
-			strData += cm_strSectionSeparator & cm_strDataHeader & ExtraData & cm_strDataEnder
-		End If
-
-		'Add String Ender
-		strData += cm_strSectionSeparator & cm_strAllDataEnder
-
-		'Return string
-		Return strData
-	End Function
-	Private Overloads Function m_ErrorToString(ByVal errError As ErrObject, Optional ByVal ExtraData As String = "") As String
-		'Create String Variable to accumulate data
-		Dim strData As String = ""
-
-		'Set Data to exception description
-		strData = cm_strErrorDataHeader & cm_strSectionSeparator & _
-			cm_strExceptionHeader & errError.GetException.ToString & cm_strExceptionEnder
+		 cm_strExceptionHeader & errError.GetException.ToString & cm_strExceptionEnder
 
 
 		'If there is any characters in extradata then add it to strdata
@@ -7468,13 +7393,13 @@ Public Class FontDropDown
 
 #Region "Message Box Header & Ender Constants"
 
-	'Header and Ender for Extra Data
-	Private Const cm_strMSGDataHeader As String = "Data: """
-	Private Const cm_strMSGDataEnder As String = """"
+    'Header and Ender for Extra Data
+    Private Const cm_strMSGDataHeader As String = "Data: """
+    Private Const cm_strMSGDataEnder As String = """"
 
-	'Header and Ender for Error Data
-	Private Const cm_strMSGErrorHeader As String = "Error: """
-	Private Const cm_strMSGErrorEnder As String = """"
+    'Header and Ender for Error Data
+    Private Const cm_strMSGErrorHeader As String = "Error: """
+    Private Const cm_strMSGErrorEnder As String = """"
 
 #End Region
 
@@ -7482,14 +7407,14 @@ Public Class FontDropDown
 
 	Public Overloads Function HandleError( _
 	 ByVal Message As String, _
-	 ByVal errError As ErrObject, _
+	 ByVal errError As Microsoft.VisualBasic.ErrObject, _
 	 Optional ByVal strData As String = "", _
 	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-			MessageBoxButtons.AbortRetryIgnore, _
+	  MessageBoxButtons.AbortRetryIgnore, _
 	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-			MessageBoxIcon.Error, _
+	  MessageBoxIcon.Error, _
 	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-			MessageBoxDefaultButton.Button3) _
+	  MessageBoxDefaultButton.Button3) _
 	 As System.Windows.Forms.DialogResult
 
 
@@ -7500,9 +7425,9 @@ Public Class FontDropDown
 		'Add error and data to message string
 		'If any data ten add that first
 		If strData.Length > 0 Then
-			Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
 		End If
-		Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(errError) & cm_strMSGErrorEnder
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(errError) & cm_strMSGErrorEnder
 
 		'Show message box and get return value
 		Result = System.Windows.Forms.MessageBox.Show(Message, _
@@ -7516,67 +7441,67 @@ Public Class FontDropDown
 		Return Result
 	End Function
 
-	Public Overloads Function HandleError( _
-	 ByVal Message As String, _
-	 ByVal exException As Exception, _
-	 Optional ByVal strData As String = "", _
-	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-			MessageBoxButtons.AbortRetryIgnore, _
-	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-			MessageBoxIcon.Error, _
-	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-			MessageBoxDefaultButton.Button3) _
-	 As System.Windows.Forms.DialogResult
+    Public Overloads Function HandleError( _
+     ByVal Message As String, _
+     ByVal exException As Exception, _
+     Optional ByVal strData As String = "", _
+     Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+      MessageBoxButtons.AbortRetryIgnore, _
+     Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+      MessageBoxIcon.Error, _
+     Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+      MessageBoxDefaultButton.Button3) _
+     As System.Windows.Forms.DialogResult
 
 
-		'Create variable to hold result of message box
-		Dim Result As System.Windows.Forms.DialogResult
+        'Create variable to hold result of message box
+        Dim Result As System.Windows.Forms.DialogResult
 
-		'Add error and data to message string
-		'If any data ten add that first
-		If strData.Length > 0 Then
-			Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+        'Add error and data to message string
+        'If any data ten add that first
+        If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
 		End If
-		Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
 
 
-		'Show message box and get return value
-		Result = System.Windows.Forms.MessageBox.Show(Message, _
-		 Application.ProductName, MessageButtons, _
-		 MessageIcon, _
-		 DefaultButton)
+        'Show message box and get return value
+        Result = System.Windows.Forms.MessageBox.Show(Message, _
+         Application.ProductName, MessageButtons, _
+         MessageIcon, _
+         DefaultButton)
 
 
 
-		'Retrun message box result
-		Return Result
-	End Function
+        'Retrun message box result
+        Return Result
+    End Function
 
-	Public Overloads Function HandleError( _
-	 ByVal Message As String, _
-	 Optional ByVal strData As String = "", _
-	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-			MessageBoxButtons.AbortRetryIgnore, _
-	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-			MessageBoxIcon.Error, _
-	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-			MessageBoxDefaultButton.Button3) _
-	 As System.Windows.Forms.DialogResult
-
-
-		'Create variable to hold result of message box
-		Dim Result As System.Windows.Forms.DialogResult
-
-		'Show message box and get return value
-		Result = System.Windows.Forms.MessageBox.Show(Message, _
-		 Application.ProductName, MessageButtons, _
-		 MessageIcon, _
-		 DefaultButton)
+    Public Overloads Function HandleError( _
+     ByVal Message As String, _
+     Optional ByVal strData As String = "", _
+     Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+      MessageBoxButtons.AbortRetryIgnore, _
+     Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+      MessageBoxIcon.Error, _
+     Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+      MessageBoxDefaultButton.Button3) _
+     As System.Windows.Forms.DialogResult
 
 
-		'Retrun message box result
-		Return Result
-	End Function
+        'Create variable to hold result of message box
+        Dim Result As System.Windows.Forms.DialogResult
+
+        'Show message box and get return value
+        Result = System.Windows.Forms.MessageBox.Show(Message, _
+         Application.ProductName, MessageButtons, _
+         MessageIcon, _
+         DefaultButton)
+
+
+        'Retrun message box result
+        Return Result
+    End Function
 
 #End Region
 
@@ -7584,34 +7509,34 @@ Public Class FontDropDown
 
 #Region "Old Dispose Code"
 
-	'#Region "Override Dispose Event to clean up components"
+    '#Region "Override Dispose Event to clean up components"
 
-	'    Public Overloads Overrides Sub Dispose()
-	'        MyBase.Dispose()
+    '    Public Overloads Overrides Sub Dispose()
+    '        MyBase.Dispose()
 
-	'        'Dispose cmbFont
-	'        cmbFont.Dispose()
-	'    End Sub
+    '        'Dispose cmbFont
+    '        cmbFont.Dispose()
+    '    End Sub
 
-	'#End Region
+    '#End Region
 
 #End Region
 
 #Region "Combo Box SelectedValueChanged Event calls DoneTyping To validify Text. Event occurs when an Drop Down item is selected."
 
-	Private Sub cmbFont_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbFont.SelectedValueChanged
-		If Not m_blnPropertyChange Then
-			DoneTyping()
-		End If
-	End Sub
+    Private Sub cmbFont_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbFont.SelectedValueChanged
+        If Not m_blnPropertyChange Then
+            DoneTyping()
+        End If
+    End Sub
 
 #End Region
 
 #Region "Combo Box Leave Event Calls DoneTyping"
 
-	Private Sub FontDropDown_Leave(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Leave
-		DoneTyping()
-	End Sub
+    Private Sub FontDropDown_Leave(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Leave
+        DoneTyping()
+    End Sub
 
 #End Region
 
@@ -7622,504 +7547,504 @@ End Class
 #Region "Size Drop Down Control"
 
 Public Class SizeDropDown
-	Inherits ContainerControl
+    Inherits ContainerControl
 
 #Region "Control Event Declarations"
 
-	Public Event SelectedSizeSetByClick(ByVal sender As Object, ByVal NewFontSize As Single)
-	Public Event SelectedSizeSetByProperty(ByVal sender As Object, ByVal NewFontSize As Single)
+    Public Event SelectedSizeSetByClick(ByVal sender As Object, ByVal NewFontSize As Single)
+    Public Event SelectedSizeSetByProperty(ByVal sender As Object, ByVal NewFontSize As Single)
 
-	Public Event SelectedSizeChangedByClick(ByVal sender As Object, ByVal NewFontSize As Single)
-	Public Event SelectedSizeChangedByProperty(ByVal sender As Object, ByVal NewFontSize As Single)
+    Public Event SelectedSizeChangedByClick(ByVal sender As Object, ByVal NewFontSize As Single)
+    Public Event SelectedSizeChangedByProperty(ByVal sender As Object, ByVal NewFontSize As Single)
 
 #End Region
 
 #Region "m_blnPropertyChange Variable allows Combo SelectedChangeEvent Whether it was changed by user or by property"
 
-	Protected m_blnPropertyChange As Boolean = False
+    Protected m_blnPropertyChange As Boolean = False
 
 #End Region
 
 #Region "New Subroutine Initializes code and settings"
 
-	Public Sub New()
-		MyBase.New()
+    Public Sub New()
+        MyBase.New()
 
-		'Do error handling
-		Try
+        'Do error handling
+        Try
 
-			'Set our control's name property
-			Me.Name = "SizeDropDown"
+            'Set our control's name property
+            Me.Name = "SizeDropDown"
 
-			'Instantaniate Font Combo
-			cmbSize = New System.Windows.Forms.ComboBox
+            'Instantaniate Font Combo
+            cmbSize = New System.Windows.Forms.ComboBox
 
-			'Set the name property
-			cmbSize.Name = "cmbSize"
+            'Set the name property
+            cmbSize.Name = "cmbSize"
 
-			'Set dock to top so that when the user resizes our control, 
-			'the font combo box is resized along with it. 
-			cmbSize.Dock = System.Windows.Forms.DockStyle.Fill
+            'Set dock to top so that when the user resizes our control, 
+            'the font combo box is resized along with it. 
+            cmbSize.Dock = System.Windows.Forms.DockStyle.Fill
 
-			'Initializa to our default, Complex DropDown
-			cmbSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
+            'Initializa to our default, Complex DropDown
+            cmbSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
 
-			'Give a generous default max drop down count so that the drop down will be large enough to see
-			'all Sizes properly
-			cmbSize.MaxDropDownItems = 30
+            'Give a generous default max drop down count so that the drop down will be large enough to see
+            'all Sizes properly
+            cmbSize.MaxDropDownItems = 30
 
-			cmbSize.Sorted = False
-
-
-			'Add our Combo Box to our form
-			Me.Controls.Add(cmbSize)
+            cmbSize.Sorted = False
 
 
-			m_PopulateList()
-
-			'If cmbsize Contains Items then set default to mimimum size
-			If cmbSize.Items.Count > 0 Then
-				'Set the index property of our combo box to a default size
-				cmbSize.SelectedIndex = 0
-
-			End If
-
-			'Set a default size
-			Me.Size = New System.Drawing.Size(75, 50)
-
-			'If we catch an error, handle it
-		Catch ex As Exception
-			HandleError("Error Initializing Control", ex, , MessageBoxButtons.OK)
-		End Try
-	End Sub
+            'Add our Combo Box to our form
+            Me.Controls.Add(cmbSize)
 
 
-	Private WithEvents cmbSize As System.Windows.Forms.ComboBox
+            m_PopulateList()
+
+            'If cmbsize Contains Items then set default to mimimum size
+            If cmbSize.Items.Count > 0 Then
+                'Set the index property of our combo box to a default size
+                cmbSize.SelectedIndex = 0
+
+            End If
+
+            'Set a default size
+            Me.Size = New System.Drawing.Size(75, 50)
+
+            'If we catch an error, handle it
+        Catch ex As Exception
+            HandleError("Error Initializing Control", ex, , MessageBoxButtons.OK)
+        End Try
+    End Sub
+
+
+    Private WithEvents cmbSize As System.Windows.Forms.ComboBox
 
 #End Region
 
 #Region "Private m_sngLastValidSize Variable"
 
-	'This Holds the last valid font Size in case of invalid input
-	Private m_sngLastValidSize As Single = 8
+    'This Holds the last valid font Size in case of invalid input
+    Private m_sngLastValidSize As Single = 8
 
 #End Region
 
 #Region "List Start Property"
 
-	Private m_sngSizeStart As Single = 2
+    Private m_sngSizeStart As Single = 2
 
-	Public Property SizeStart() As Single
-		Get
-			Return m_sngSizeStart
-		End Get
-		Set(ByVal Value As Single)
-			If Value > 0 Then
-				m_sngSizeStart = Value
-				m_PopulateList()
-			End If
-		End Set
-	End Property
+    Public Property SizeStart() As Single
+        Get
+            Return m_sngSizeStart
+        End Get
+        Set(ByVal Value As Single)
+            If Value > 0 Then
+                m_sngSizeStart = Value
+                m_PopulateList()
+            End If
+        End Set
+    End Property
 
 #End Region
 
 #Region "List End Property"
 
-	Private m_sngSizeEnd As Single = 72
-	Public Property SizeEnd() As Single
-		Get
-			Return m_sngSizeEnd
-		End Get
-		Set(ByVal Value As Single)
-			If Value > 0 Then
-				m_sngSizeEnd = Value
-			End If
-		End Set
-	End Property
+    Private m_sngSizeEnd As Single = 72
+    Public Property SizeEnd() As Single
+        Get
+            Return m_sngSizeEnd
+        End Get
+        Set(ByVal Value As Single)
+            If Value > 0 Then
+                m_sngSizeEnd = Value
+            End If
+        End Set
+    End Property
 
 #End Region
 
 #Region "List Increment Property"
 
-	Private m_sngSizeIncrement As Single = 2
-	Public Property SizeIncrement() As Single
-		Get
-			Return m_sngSizeIncrement
-		End Get
-		Set(ByVal Value As Single)
-			If Value > 0 Then
-				m_sngSizeIncrement = Value
-				m_PopulateList()
-			End If
-		End Set
-	End Property
+    Private m_sngSizeIncrement As Single = 2
+    Public Property SizeIncrement() As Single
+        Get
+            Return m_sngSizeIncrement
+        End Get
+        Set(ByVal Value As Single)
+            If Value > 0 Then
+                m_sngSizeIncrement = Value
+                m_PopulateList()
+            End If
+        End Set
+    End Property
 
 #End Region
 
 #Region "Private Populate List Procedure"
 
-	Private Sub m_PopulateList()
+    Private Sub m_PopulateList()
 
-		'Create temporary Variable to save text
-		Dim strOriginalSize As String = cmbSize.Text
+        'Create temporary Variable to save text
+        Dim strOriginalSize As String = cmbSize.Text
 
-		'Clear Items
-		cmbSize.Items.Clear()
+        'Clear Items
+        cmbSize.Items.Clear()
 
-		'Create Variable to Loop through sizes
-		Dim sngSizeLoop As Single
+        'Create Variable to Loop through sizes
+        Dim sngSizeLoop As Single
 
-		'Loop through sizes from start to end with increment
-		For sngSizeLoop = SizeStart To 12
-			cmbSize.Items.Add(sngSizeLoop)
-		Next
-		For sngSizeLoop = SizeStart To SizeEnd Step SizeIncrement
-			'Add item
-			If Not cmbSize.Items.Contains(sngSizeLoop) Then
-				cmbSize.Items.Add(sngSizeLoop)
-			End If
+        'Loop through sizes from start to end with increment
+        For sngSizeLoop = SizeStart To 12
+            cmbSize.Items.Add(sngSizeLoop)
+        Next
+        For sngSizeLoop = SizeStart To SizeEnd Step SizeIncrement
+            'Add item
+            If Not cmbSize.Items.Contains(sngSizeLoop) Then
+                cmbSize.Items.Add(sngSizeLoop)
+            End If
 
-		Next
+        Next
 
-		'Restore Original Text
-		cmbSize.Text = strOriginalSize
+        'Restore Original Text
+        cmbSize.Text = strOriginalSize
 
-	End Sub
+    End Sub
 
 #End Region
 
 #Region "Simple Drop Down Property"
 
-	'SimpleDropDown Property Switches Between a simple dropDownBox and a regular drop DOwn
-	Public Property SimpleDropDown() As Boolean
-		Get
-			'Try get
-			Try
-				'Check to see if cmbSize has been initaialized yet
-				If Not cmbSize Is Nothing Then
-					'If combo Box is in simple style then return true
-					If cmbSize.DropDownStyle = ComboBoxStyle.Simple Then
-						Return True
-					Else
-						Return False
-					End If
-				End If
-				'If we caught a exception, report it
-			Catch ex As Exception
-				HandleError("Error Getting SimpleDropDown Property", ex, _
-				   "Combo DropDownSyle: " & cmbSize.DropDownStyle, MessageBoxButtons.OK)
-			End Try
-		End Get
-		Set(ByVal Value As Boolean)
-			'Try to set Property
-			Try
-				'Check to see if cmbSize has been initaialized yet
-				If Not cmbSize Is Nothing Then
-					'If we're setting it to true then set combo to simple style, 
-					'otherwise set it to DropDown
-					If Value Then
-						cmbSize.DropDownStyle = ComboBoxStyle.Simple
-					Else
-						cmbSize.DropDownStyle = ComboBoxStyle.DropDown
-					End If
-				End If
-				'If we caught an exception, report it
-			Catch ex As Exception
-				HandleError("Error Setting SimpleDropDown Property", ex, _
-				   "Value to set: " & Value.ToString & _
-				   "Combo DropDownSyle: " & cmbSize.DropDownStyle, MessageBoxButtons.OK)
-			End Try
+    'SimpleDropDown Property Switches Between a simple dropDownBox and a regular drop DOwn
+    Public Property SimpleDropDown() As Boolean
+        Get
+            'Try get
+            Try
+                'Check to see if cmbSize has been initaialized yet
+                If Not cmbSize Is Nothing Then
+                    'If combo Box is in simple style then return true
+                    If cmbSize.DropDownStyle = ComboBoxStyle.Simple Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                End If
+                'If we caught a exception, report it
+            Catch ex As Exception
+                HandleError("Error Getting SimpleDropDown Property", ex, _
+                   "Combo DropDownSyle: " & cmbSize.DropDownStyle, MessageBoxButtons.OK)
+            End Try
+        End Get
+        Set(ByVal Value As Boolean)
+            'Try to set Property
+            Try
+                'Check to see if cmbSize has been initaialized yet
+                If Not cmbSize Is Nothing Then
+                    'If we're setting it to true then set combo to simple style, 
+                    'otherwise set it to DropDown
+                    If Value Then
+                        cmbSize.DropDownStyle = ComboBoxStyle.Simple
+                    Else
+                        cmbSize.DropDownStyle = ComboBoxStyle.DropDown
+                    End If
+                End If
+                'If we caught an exception, report it
+            Catch ex As Exception
+                HandleError("Error Setting SimpleDropDown Property", ex, _
+                   "Value to set: " & Value.ToString & _
+                   "Combo DropDownSyle: " & cmbSize.DropDownStyle, MessageBoxButtons.OK)
+            End Try
 
-		End Set
-	End Property
+        End Set
+    End Property
 
 #End Region
 
 #Region "Max Drop Down Items Property"
 
-	'This Property Exposes the MaxDropDownItems Integer Property of Our combo Box.
-	'This Sets the amout of items in a drop down shown before a scrollbar appears
-	Public Property MaxDropDownItems() As Integer
-		Get
-			'Try get
-			Try
-				'Check to see if cmbSize has been initaialized yet
-				If Not cmbSize Is Nothing Then
-					'Return Combo's Property
-					Return cmbSize.MaxDropDownItems
-				End If
-				'If we caught a exception, report it
-			Catch ex As Exception
-				HandleError("Error Getting MaxDropDownItems Property", ex, _
-				   "Combo MaxDropDownItems: " & cmbSize.MaxDropDownItems, MessageBoxButtons.OK)
-			End Try
-		End Get
-		Set(ByVal Value As Integer)
-			If Value > 0 And Value < 101 Then
-				cmbSize.MaxDropDownItems = Value
-			End If
-			'Try to set Property
-			Try
-				'Check to see if cmbSize has been initaialized yet
-				If Not cmbSize Is Nothing Then
-					'Check to see if Value falls inside the valid ranges
-					If Value >= 1 And Value <= 100 Then
-						'Set it to Value
-						cmbSize.MaxDropDownItems = Value
-					End If
-				End If
-				'If we caught an exception, report it
-			Catch ex As Exception
-				HandleError("Error Setting MaxDropDownItems Property", ex, _
-				   "Value to set: " & Value.ToString & _
-				   "Combo MaxDropDoenItems: " & cmbSize.MaxDropDownItems, MessageBoxButtons.OK)
-			End Try
-		End Set
-	End Property
+    'This Property Exposes the MaxDropDownItems Integer Property of Our combo Box.
+    'This Sets the amout of items in a drop down shown before a scrollbar appears
+    Public Property MaxDropDownItems() As Integer
+        Get
+            'Try get
+            Try
+                'Check to see if cmbSize has been initaialized yet
+                If Not cmbSize Is Nothing Then
+                    'Return Combo's Property
+                    Return cmbSize.MaxDropDownItems
+                End If
+                'If we caught a exception, report it
+            Catch ex As Exception
+                HandleError("Error Getting MaxDropDownItems Property", ex, _
+                   "Combo MaxDropDownItems: " & cmbSize.MaxDropDownItems, MessageBoxButtons.OK)
+            End Try
+        End Get
+        Set(ByVal Value As Integer)
+            If Value > 0 And Value < 101 Then
+                cmbSize.MaxDropDownItems = Value
+            End If
+            'Try to set Property
+            Try
+                'Check to see if cmbSize has been initaialized yet
+                If Not cmbSize Is Nothing Then
+                    'Check to see if Value falls inside the valid ranges
+                    If Value >= 1 And Value <= 100 Then
+                        'Set it to Value
+                        cmbSize.MaxDropDownItems = Value
+                    End If
+                End If
+                'If we caught an exception, report it
+            Catch ex As Exception
+                HandleError("Error Setting MaxDropDownItems Property", ex, _
+                   "Value to set: " & Value.ToString & _
+                   "Combo MaxDropDoenItems: " & cmbSize.MaxDropDownItems, MessageBoxButtons.OK)
+            End Try
+        End Set
+    End Property
 
 #End Region
 
 #Region "SelectedFontSize as single Property"
 
-	'This property Gets or sets the fontfamily that is currently selected.
-	'Just like the SelectedFontFamily property exceppt this property returns the font 
-	'as an string, not a object
-	Public Property SelectedFontSize() As Single
-		Get
-			'Try get
-			Try
-				'Check to see if cmbSize has been initaialized yet
-				If Not cmbSize Is Nothing Then
+    'This property Gets or sets the fontfamily that is currently selected.
+    'Just like the SelectedFontFamily property exceppt this property returns the font 
+    'as an string, not a object
+    Public Property SelectedFontSize() As Single
+        Get
+            'Try get
+            Try
+                'Check to see if cmbSize has been initaialized yet
+                If Not cmbSize Is Nothing Then
 
-					Try
-						'Return the name of the instantaniated fontfamily
-						Return CSng(cmbSize.Text)
+                    Try
+                        'Return the name of the instantaniated fontfamily
+                        Return CSng(cmbSize.Text)
 
-						'If font Dosen't Exist then use last valid font
-					Catch exas As System.InvalidCastException
+                        'If font Dosen't Exist then use last valid font
+                    Catch exas As System.InvalidCastException
 
-						'Use last Valid Font
-						Return CSng(m_sngLastValidSize)
+                        'Use last Valid Font
+                        Return CSng(m_sngLastValidSize)
 
-						'If we caught a exception, report it
-					Catch ex As Exception
-						HandleError("Error Getting SelectedFontSize Property", ex, _
-						   "Combo Text: " & cmbSize.Text, MessageBoxButtons.OK)
-					End Try
+                        'If we caught a exception, report it
+                    Catch ex As Exception
+                        HandleError("Error Getting SelectedFontSize Property", ex, _
+                           "Combo Text: " & cmbSize.Text, MessageBoxButtons.OK)
+                    End Try
 
-				End If
-				'If we caught a exception, report it
-			Catch ex As Exception
-				HandleError("Error Getting SelectedFontName Property", ex, _
-				   "Combo Text: " & cmbSize.Text, MessageBoxButtons.OK)
-			End Try
-		End Get
-		Set(ByVal Value As Single)
-
-
-			Try
-				'Check to see if cmbSize has been initaialized yet
-				If Not cmbSize Is Nothing And Value >= 0 Then
-					'Return An instantaniated fonfamily
-					Try				   '
-
-						'Create a temporary variable to hold the combo text befor we set it,
-						'so later we know if it has actually ben changed
-						Dim strOriginalText As String = cmbSize.Text
-
-						'Tell Combo's Events Where it came from
-						m_blnPropertyChange = True
-						'Set text to fontfamily name property
-						cmbSize.Text = CStr(Value)
+                End If
+                'If we caught a exception, report it
+            Catch ex As Exception
+                HandleError("Error Getting SelectedFontName Property", ex, _
+                   "Combo Text: " & cmbSize.Text, MessageBoxButtons.OK)
+            End Try
+        End Get
+        Set(ByVal Value As Single)
 
 
+            Try
+                'Check to see if cmbSize has been initaialized yet
+                If Not cmbSize Is Nothing And Value >= 0 Then
+                    'Return An instantaniated fonfamily
+                    Try                '
 
-						'Raise an event since we've set the text
-						RaiseEvent SelectedSizeSetByProperty(Me, Value)
+                        'Create a temporary variable to hold the combo text befor we set it,
+                        'so later we know if it has actually ben changed
+                        Dim strOriginalText As String = cmbSize.Text
 
-
-						'Check to see if text has actually been changed
-						If strOriginalText <> cmbSize.Text Then
-
-
-							'Raise an event since wev'e changed the text
-							RaiseEvent SelectedSizeChangedByProperty(Me, Value)
-						End If
+                        'Tell Combo's Events Where it came from
+                        m_blnPropertyChange = True
+                        'Set text to fontfamily name property
+                        cmbSize.Text = CStr(Value)
 
 
 
+                        'Raise an event since we've set the text
+                        RaiseEvent SelectedSizeSetByProperty(Me, Value)
 
-						'If we caught a exception, report it
-					Catch ex As Exception
-						HandleError("Error Setting SelectedFontName Property", ex, _
-						 "Combo Text: " & cmbSize.Text & _
-						 "  Value to set: " & Value & "  ", MessageBoxButtons.OK)
 
-					Finally
-						'Reset Booloean
-						m_blnPropertyChange = False
+                        'Check to see if text has actually been changed
+                        If strOriginalText <> cmbSize.Text Then
 
-					End Try
 
-				End If
-				'If we caught a exception, report it
-			Catch ex As Exception
-				HandleError("Error Setting SelectedFontName Property", ex, _
-					  "Combo Text: " & cmbSize.Text & _
-					  "Value to set: " & Value, MessageBoxButtons.OK)
-			Finally
-				'Reset Booloean
-				m_blnPropertyChange = False
+                            'Raise an event since wev'e changed the text
+                            RaiseEvent SelectedSizeChangedByProperty(Me, Value)
+                        End If
 
-			End Try
-		End Set
-	End Property
+
+
+
+                        'If we caught a exception, report it
+                    Catch ex As Exception
+                        HandleError("Error Setting SelectedFontName Property", ex, _
+                         "Combo Text: " & cmbSize.Text & _
+                         "  Value to set: " & Value & "  ", MessageBoxButtons.OK)
+
+                    Finally
+                        'Reset Booloean
+                        m_blnPropertyChange = False
+
+                    End Try
+
+                End If
+                'If we caught a exception, report it
+            Catch ex As Exception
+                HandleError("Error Setting SelectedFontName Property", ex, _
+                   "Combo Text: " & cmbSize.Text & _
+                   "Value to set: " & Value, MessageBoxButtons.OK)
+            Finally
+                'Reset Booloean
+                m_blnPropertyChange = False
+
+            End Try
+        End Set
+    End Property
 
 #End Region
 
 #Region "Control base Class Event Sets Me.Height = cmbSize.height to make sure no room is left over"
 
-	Private Sub FontDropDown_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
-		'Do Error Handling
-		Try
-			'Check to make sure cmbSize Exists first
-			If Not cmbSize Is Nothing Then
+    Private Sub FontDropDown_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
+        'Do Error Handling
+        Try
+            'Check to make sure cmbSize Exists first
+            If Not cmbSize Is Nothing Then
 
-				'Make sure no room left
-				Me.Height = cmbSize.Height
-			End If
-			'If we catch an error, then handle it
-		Catch ex As Exception
-			'Check to see whether we can report of cmbSize, or is it uninstaniated
-			If cmbSize Is Nothing Then
-				HandleError("Error Resizing Control", ex, _
-					  "Control Height: " & Me.Height & "  Combo has not been instantaniated yet", MessageBoxButtons.OK)
+                'Make sure no room left
+                Me.Height = cmbSize.Height
+            End If
+            'If we catch an error, then handle it
+        Catch ex As Exception
+            'Check to see whether we can report of cmbSize, or is it uninstaniated
+            If cmbSize Is Nothing Then
+                HandleError("Error Resizing Control", ex, _
+                   "Control Height: " & Me.Height & "  Combo has not been instantaniated yet", MessageBoxButtons.OK)
 
-			Else
-				'We can report on cmbSize
-				HandleError("Error Resizing Control", ex, _
-					  "Control Height: " & Me.Height & "  Combo Height: " & cmbSize.Height, MessageBoxButtons.OK)
+            Else
+                'We can report on cmbSize
+                HandleError("Error Resizing Control", ex, _
+                   "Control Height: " & Me.Height & "  Combo Height: " & cmbSize.Height, MessageBoxButtons.OK)
 
-			End If
-		End Try
-	End Sub
+            End If
+        End Try
+    End Sub
 
 #End Region
 
 #Region "Combo Box Keydown Event Calls DoneTyping if key is enter key"
 
-	Private Sub cmbSize_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbSize.KeyDown
-		If e.KeyCode = Keys.Enter Then
-			DoneTyping()
-		End If
-	End Sub
+    Private Sub cmbSize_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbSize.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            DoneTyping()
+        End If
+    End Sub
 
 #End Region
 
 #Region "Combo Box SelectedValueChanged Event calls DoneTyping To validify Text. Event occurs when an Drop Down item is selected."
 
-	Private Sub cmbSize_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbSize.SelectedValueChanged
-		If Not m_blnPropertyChange Then
-			DoneTyping()
-		End If
-	End Sub
+    Private Sub cmbSize_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbSize.SelectedValueChanged
+        If Not m_blnPropertyChange Then
+            DoneTyping()
+        End If
+    End Sub
 
 #End Region
 
 #Region "Combo Box Leave Event Calls DoneTyping"
 
-	Private Sub SizeDropDown_Leave(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Leave
-		DoneTyping()
-	End Sub
+    Private Sub SizeDropDown_Leave(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Leave
+        DoneTyping()
+    End Sub
 
 #End Region
 
 #Region "Private DoneTyping Procedure Validifies Text; should be called when the user presses enter or clicks a item"
 
-	Private Sub DoneTyping()
-		'Try set
-		If cmbSize.Text = m_sngLastValidSize.ToString Then
-			Exit Sub
-		End If
+    Private Sub DoneTyping()
+        'Try set
+        If cmbSize.Text = m_sngLastValidSize.ToString Then
+            Exit Sub
+        End If
 
-		Try
-			'Check to see if cmbSize has been initaialized yet
-			If Not cmbSize Is Nothing Then
-				'Return An instantaniated fonfamily
-				Try
+        Try
+            'Check to see if cmbSize has been initaialized yet
+            If Not cmbSize Is Nothing Then
+                'Return An instantaniated fonfamily
+                Try
 
-					'Save Selection
-					Dim intSaveSelStart As Integer = cmbSize.SelectionStart
-					Dim intSaveSelLength As Integer = cmbSize.SelectionLength
-
-
-					'
-					cmbSize.Text = CStr(CSng(cmbSize.Text))
-
-					'Reload Selection
-					cmbSize.SelectionLength = intSaveSelLength
-					cmbSize.SelectionStart = intSaveSelStart
+                    'Save Selection
+                    Dim intSaveSelStart As Integer = cmbSize.SelectionStart
+                    Dim intSaveSelLength As Integer = cmbSize.SelectionLength
 
 
+                    '
+                    cmbSize.Text = CStr(CSng(cmbSize.Text))
 
-					'Raise an event since we've set the text
-					RaiseEvent SelectedSizeSetByClick(Me, CSng(cmbSize.Text))
-
-
-					'Check to see if text has actually been changed
-					If CStr(m_sngLastValidSize) <> cmbSize.Text Then
-
-
-						'Raise an event since wev'e changed the text
-						RaiseEvent SelectedSizeChangedByClick(Me, CSng(cmbSize.Text))
-					End If
-
-
-					m_sngLastValidSize = CSng(cmbSize.Text)
-
-					'If value is not valid, then set text to last valid font
-				Catch aex As InvalidCastException
+                    'Reload Selection
+                    cmbSize.SelectionLength = intSaveSelLength
+                    cmbSize.SelectionStart = intSaveSelStart
 
 
 
-
-					'Set text to fontfamily name property
-					cmbSize.Text = CStr(CSng(CStr(m_sngLastValidSize)))
-
+                    'Raise an event since we've set the text
+                    RaiseEvent SelectedSizeSetByClick(Me, CSng(cmbSize.Text))
 
 
-					'Raise an event since we've set the text
-					RaiseEvent SelectedSizeSetByClick(Me, _
-					  CSng(cmbSize.Text))
+                    'Check to see if text has actually been changed
+                    If CStr(m_sngLastValidSize) <> cmbSize.Text Then
 
-					'If value is not valid, then set text to last valid font
-				Catch ax As ArgumentException
+
+                        'Raise an event since wev'e changed the text
+                        RaiseEvent SelectedSizeChangedByClick(Me, CSng(cmbSize.Text))
+                    End If
+
+
+                    m_sngLastValidSize = CSng(cmbSize.Text)
+
+                    'If value is not valid, then set text to last valid font
+                Catch aex As InvalidCastException
 
 
 
 
-					'Set text to fontfamily name property
-					cmbSize.Text = CStr(CSng(CStr(m_sngLastValidSize)))
+                    'Set text to fontfamily name property
+                    cmbSize.Text = CStr(CSng(CStr(m_sngLastValidSize)))
 
 
 
-					'Raise an event since we've set the text
-					RaiseEvent SelectedSizeSetByClick(Me, _
-					  CSng(cmbSize.Text))
+                    'Raise an event since we've set the text
+                    RaiseEvent SelectedSizeSetByClick(Me, _
+                      CSng(cmbSize.Text))
 
-					'If we caught a exception, report it
-				Catch ex As Exception
-					HandleError("Error Changing Value By User Input", ex, _
-					   "Combo Text: " & cmbSize.Text, MessageBoxButtons.OK)
-				End Try
+                    'If value is not valid, then set text to last valid font
+                Catch ax As ArgumentException
 
-			End If
-			'If we caught a exception, report it
-		Catch ex As Exception
-			HandleError("Error Changing Value By User Input", ex, _
-			   "Combo Text: " & cmbSize.Text, MessageBoxButtons.OK)
-		End Try
-	End Sub
+
+
+
+                    'Set text to fontfamily name property
+                    cmbSize.Text = CStr(CSng(CStr(m_sngLastValidSize)))
+
+
+
+                    'Raise an event since we've set the text
+                    RaiseEvent SelectedSizeSetByClick(Me, _
+                      CSng(cmbSize.Text))
+
+                    'If we caught a exception, report it
+                Catch ex As Exception
+                    HandleError("Error Changing Value By User Input", ex, _
+                       "Combo Text: " & cmbSize.Text, MessageBoxButtons.OK)
+                End Try
+
+            End If
+            'If we caught a exception, report it
+        Catch ex As Exception
+            HandleError("Error Changing Value By User Input", ex, _
+               "Combo Text: " & cmbSize.Text, MessageBoxButtons.OK)
+        End Try
+    End Sub
 
 #End Region
 
@@ -8127,101 +8052,101 @@ Public Class SizeDropDown
 
 #Region "Logging Header&Ender Constants"
 
-	'Header and Ender for an Entry
-	Private Const cm_strEntryHeader As String = "LogEntry( "
-	Private Const cm_strEntryEnder As String = " )"
+    'Header and Ender for an Entry
+    Private Const cm_strEntryHeader As String = "LogEntry( "
+    Private Const cm_strEntryEnder As String = " )"
 
-	'Headers for Node Types
-	Private Const cm_strNewNode As String = "(NewNode) "
-	Private Const cm_strLastNode As String = "(LastNode) "
+    'Headers for Node Types
+    Private Const cm_strNewNode As String = "(NewNode) "
+    Private Const cm_strLastNode As String = "(LastNode) "
 
-	'Header Symbols fo Node Types
-	Private Const cm_strNewNodeSymbol As String = "+"
-	Private Const cm_strLastNodeSymbol As String = "-"
+    'Header Symbols fo Node Types
+    Private Const cm_strNewNodeSymbol As String = "+"
+    Private Const cm_strLastNodeSymbol As String = "-"
 
-	'Contains character that go between a header and an ender
-	Private Const cm_strSectionSeparator As String = "  "
+    'Contains character that go between a header and an ender
+    Private Const cm_strSectionSeparator As String = "  "
 
-	'Header and Ender for Error Data and Extra Data
-	Private Const cm_strAllDataHeader As String = "HEntry Data: { "
-	Private Const cm_strAllDataEnder As String = " }"
+    'Header and Ender for Error Data and Extra Data
+    Private Const cm_strAllDataHeader As String = "HEntry Data: { "
+    Private Const cm_strAllDataEnder As String = " }"
 
-	'Header and Ender for Extra Data
-	Private Const cm_strDataHeader As String = "HData: """
-	Private Const cm_strDataEnder As String = """"
+    'Header and Ender for Extra Data
+    Private Const cm_strDataHeader As String = "HData: """
+    Private Const cm_strDataEnder As String = """"
 
-	'Header and Ender for Error Data
-	Private Const cm_strErrorDataHeader As String = "HError Data: """
-	Private Const cm_strErrorDataEnder As String = """"
+    'Header and Ender for Error Data
+    Private Const cm_strErrorDataHeader As String = "HError Data: """
+    Private Const cm_strErrorDataEnder As String = """"
 
-	'Header and Ender for DateTime Stamp
-	Private Const cm_strDateTimeHeader As String = "HDateTime: """
-	Private Const cm_strDateTimeEnder As String = """"
+    'Header and Ender for DateTime Stamp
+    Private Const cm_strDateTimeHeader As String = "HDateTime: """
+    Private Const cm_strDateTimeEnder As String = """"
 
-	'Header and Ender for the Exception Section of Error Data
-	Private Const cm_strExceptionHeader As String = "HException String: """
-	Private Const cm_strExceptionEnder As String = """"
+    'Header and Ender for the Exception Section of Error Data
+    Private Const cm_strExceptionHeader As String = "HException String: """
+    Private Const cm_strExceptionEnder As String = """"
 
-	'Header and Ender for Category
-	Private Const cm_strCategoryHeader As String = "HEntry Category: """
-	Private Const cm_strCategoryEnder As String = """"
+    'Header and Ender for Category
+    Private Const cm_strCategoryHeader As String = "HEntry Category: """
+    Private Const cm_strCategoryEnder As String = """"
 
-	'Header and Ender for the Last DLL Error Section of Error Data
-	Private Const cm_strLastDllHeader As String = "HLast DLL Error: """
-	Private Const cm_strLastDllEnder As String = """"""
+    'Header and Ender for the Last DLL Error Section of Error Data
+    Private Const cm_strLastDllHeader As String = "HLast DLL Error: """
+    Private Const cm_strLastDllEnder As String = """"""
 
-	'Header and Ender for the Error Number section of Error Data
-	Private Const cm_strErrorNumberHeader As String = "HError Number: """
-	Private Const cm_strErrorNumberEnder As String = """"""
+    'Header and Ender for the Error Number section of Error Data
+    Private Const cm_strErrorNumberHeader As String = "HError Number: """
+    Private Const cm_strErrorNumberEnder As String = """"""
 
-	'Header and Ender for the Message Section
-	Private Const cm_strMessageHeader As String = "HMessage: """
-	Private Const cm_strMessageEnder As String = """"
+    'Header and Ender for the Message Section
+    Private Const cm_strMessageHeader As String = "HMessage: """
+    Private Const cm_strMessageEnder As String = """"
 
-	'Header and Ender for the Entry ID Section
-	Private Const cm_strIDHeader As String = "Entry ID: """
-	Private Const cm_strIDEnder As String = """"
+    'Header and Ender for the Entry ID Section
+    Private Const cm_strIDHeader As String = "Entry ID: """
+    Private Const cm_strIDEnder As String = """"
 
 #End Region
 
 #Region "Error to string utitlies"
 
 
-	''''''''''''''''''''''''''''''''''''''''''''''
-	'Takes:
-	' Exception Or Error Object 
-	' String for data that will be appended to return value
-	'
-	'Returns:
-	' Properties and information about object, and appended ExtraData
-	'
-	''''''''''''''''''''''''''''''''''''''''''''''
-	Private Overloads Function m_ErrorToString(ByVal exException As Exception, Optional ByVal ExtraData As String = "") As String
+    ''''''''''''''''''''''''''''''''''''''''''''''
+    'Takes:
+    ' Exception Or Error Object 
+    ' String for data that will be appended to return value
+    '
+    'Returns:
+    ' Properties and information about object, and appended ExtraData
+    '
+    ''''''''''''''''''''''''''''''''''''''''''''''
+    Private Overloads Function m_ErrorToString(ByVal exException As Exception, Optional ByVal ExtraData As String = "") As String
+        'Create String Variable to accumulate data
+        Dim strData As String = ""
+
+        'Set Data to exception description
+        strData = cm_strErrorDataHeader & cm_strSectionSeparator & _
+         cm_strExceptionHeader & exException.ToString & cm_strExceptionEnder
+
+        'If there is any characters in extradata then add it to strdata
+        If ExtraData.Length > 0 Then
+            strData += cm_strSectionSeparator & cm_strDataHeader & ExtraData & cm_strDataEnder
+        End If
+
+        'Add String Ender
+        strData += cm_strSectionSeparator & cm_strAllDataEnder
+
+        'Return string
+        Return strData
+    End Function
+	Private Overloads Function m_ErrorToString(ByVal errError As Microsoft.VisualBasic.ErrObject, Optional ByVal ExtraData As String = "") As String
 		'Create String Variable to accumulate data
 		Dim strData As String = ""
 
 		'Set Data to exception description
 		strData = cm_strErrorDataHeader & cm_strSectionSeparator & _
-			cm_strExceptionHeader & exException.ToString & cm_strExceptionEnder
-
-		'If there is any characters in extradata then add it to strdata
-		If ExtraData.Length > 0 Then
-			strData += cm_strSectionSeparator & cm_strDataHeader & ExtraData & cm_strDataEnder
-		End If
-
-		'Add String Ender
-		strData += cm_strSectionSeparator & cm_strAllDataEnder
-
-		'Return string
-		Return strData
-	End Function
-	Private Overloads Function m_ErrorToString(ByVal errError As ErrObject, Optional ByVal ExtraData As String = "") As String
-		'Create String Variable to accumulate data
-		Dim strData As String = ""
-
-		'Set Data to exception description
-		strData = cm_strErrorDataHeader & cm_strSectionSeparator & _
-			cm_strExceptionHeader & errError.GetException.ToString & cm_strExceptionEnder
+		 cm_strExceptionHeader & errError.GetException.ToString & cm_strExceptionEnder
 
 		'If there is any characters in extradata then add it to strdata
 		If ExtraData.Length > 0 Then
@@ -8239,13 +8164,13 @@ Public Class SizeDropDown
 
 #Region "Message Box Header & Ender Constants"
 
-	'Header and Ender for Extra Data
-	Private Const cm_strMSGDataHeader As String = "Data: """
-	Private Const cm_strMSGDataEnder As String = """"
+    'Header and Ender for Extra Data
+    Private Const cm_strMSGDataHeader As String = "Data: """
+    Private Const cm_strMSGDataEnder As String = """"
 
-	'Header and Ender for Error Data
-	Private Const cm_strMSGErrorHeader As String = "Error: """
-	Private Const cm_strMSGErrorEnder As String = """"
+    'Header and Ender for Error Data
+    Private Const cm_strMSGErrorHeader As String = "Error: """
+    Private Const cm_strMSGErrorEnder As String = """"
 
 #End Region
 
@@ -8253,14 +8178,14 @@ Public Class SizeDropDown
 
 	Public Overloads Function HandleError( _
 	 ByVal Message As String, _
-	 ByVal errError As ErrObject, _
+	 ByVal errError As Microsoft.VisualBasic.ErrObject, _
 	 Optional ByVal strData As String = "", _
 	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-			MessageBoxButtons.AbortRetryIgnore, _
+	  MessageBoxButtons.AbortRetryIgnore, _
 	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-			MessageBoxIcon.Error, _
+	  MessageBoxIcon.Error, _
 	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-			MessageBoxDefaultButton.Button3) _
+	  MessageBoxDefaultButton.Button3) _
 	 As System.Windows.Forms.DialogResult
 
 
@@ -8271,9 +8196,9 @@ Public Class SizeDropDown
 		'Add error and data to message string
 		'If any data ten add that first
 		If strData.Length > 0 Then
-			Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
 		End If
-		Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(errError) & cm_strMSGErrorEnder
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(errError) & cm_strMSGErrorEnder
 
 		'Show message box and get return value
 		Result = System.Windows.Forms.MessageBox.Show(Message, _
@@ -8287,67 +8212,67 @@ Public Class SizeDropDown
 		Return Result
 	End Function
 
-	Public Overloads Function HandleError( _
-	 ByVal Message As String, _
-	 ByVal exException As Exception, _
-	 Optional ByVal strData As String = "", _
-	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-			MessageBoxButtons.AbortRetryIgnore, _
-	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-			MessageBoxIcon.Error, _
-	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-			MessageBoxDefaultButton.Button3) _
-	 As System.Windows.Forms.DialogResult
+    Public Overloads Function HandleError( _
+     ByVal Message As String, _
+     ByVal exException As Exception, _
+     Optional ByVal strData As String = "", _
+     Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+      MessageBoxButtons.AbortRetryIgnore, _
+     Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+      MessageBoxIcon.Error, _
+     Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+      MessageBoxDefaultButton.Button3) _
+     As System.Windows.Forms.DialogResult
 
 
-		'Create variable to hold result of message box
-		Dim Result As System.Windows.Forms.DialogResult
+        'Create variable to hold result of message box
+        Dim Result As System.Windows.Forms.DialogResult
 
-		'Add error and data to message string
-		'If any data ten add that first
-		If strData.Length > 0 Then
-			Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+        'Add error and data to message string
+        'If any data ten add that first
+        If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
 		End If
-		Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
 
 
-		'Show message box and get return value
-		Result = System.Windows.Forms.MessageBox.Show(Message, _
-		 Application.ProductName, MessageButtons, _
-		 MessageIcon, _
-		 DefaultButton)
+        'Show message box and get return value
+        Result = System.Windows.Forms.MessageBox.Show(Message, _
+         Application.ProductName, MessageButtons, _
+         MessageIcon, _
+         DefaultButton)
 
 
 
-		'Retrun message box result
-		Return Result
-	End Function
+        'Retrun message box result
+        Return Result
+    End Function
 
-	Public Overloads Function HandleError( _
-	 ByVal Message As String, _
-	 Optional ByVal strData As String = "", _
-	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-			MessageBoxButtons.AbortRetryIgnore, _
-	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-			MessageBoxIcon.Error, _
-	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-			MessageBoxDefaultButton.Button3) _
-	 As System.Windows.Forms.DialogResult
-
-
-		'Create variable to hold result of message box
-		Dim Result As System.Windows.Forms.DialogResult
-
-		'Show message box and get return value
-		Result = System.Windows.Forms.MessageBox.Show(Message, _
-		 Application.ProductName, MessageButtons, _
-		 MessageIcon, _
-		 DefaultButton)
+    Public Overloads Function HandleError( _
+     ByVal Message As String, _
+     Optional ByVal strData As String = "", _
+     Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+      MessageBoxButtons.AbortRetryIgnore, _
+     Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+      MessageBoxIcon.Error, _
+     Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+      MessageBoxDefaultButton.Button3) _
+     As System.Windows.Forms.DialogResult
 
 
-		'Retrun message box result
-		Return Result
-	End Function
+        'Create variable to hold result of message box
+        Dim Result As System.Windows.Forms.DialogResult
+
+        'Show message box and get return value
+        Result = System.Windows.Forms.MessageBox.Show(Message, _
+         Application.ProductName, MessageButtons, _
+         MessageIcon, _
+         DefaultButton)
+
+
+        'Retrun message box result
+        Return Result
+    End Function
 
 #End Region
 
@@ -8355,16 +8280,16 @@ Public Class SizeDropDown
 
 #Region "Old Dispose Code"
 
-	'#Region "Override Dispose Event to clean up components"
+    '#Region "Override Dispose Event to clean up components"
 
-	'    Public Overloads Overrides Sub Dispose()
-	'        MyBase.Dispose()
+    '    Public Overloads Overrides Sub Dispose()
+    '        MyBase.Dispose()
 
-	'        'Dispose cmbFont
-	'        cmbSize.Dispose()
-	'    End Sub
+    '        'Dispose cmbFont
+    '        cmbSize.Dispose()
+    '    End Sub
 
-	'#End Region
+    '#End Region
 
 #End Region
 

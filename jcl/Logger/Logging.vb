@@ -49,7 +49,7 @@ Public Class LogViewer
 	Public WithEvents ttTips As System.Windows.Forms.ToolTip
 	Public WithEvents btnOK As System.Windows.Forms.Button
 	Friend WithEvents btnRefresh As System.Windows.Forms.Button
-	Friend WithEvents rtbLog As System.Windows.Forms.RichTextBox
+    Friend WithEvents rtbLog As System.Windows.Forms.TextBox
 	Friend WithEvents chkMinor As System.Windows.Forms.CheckBox
 	Friend WithEvents lblDisplay As System.Windows.Forms.Label
 	Friend WithEvents optAll As System.Windows.Forms.RadioButton
@@ -60,15 +60,16 @@ Public Class LogViewer
 	Friend WithEvents optTen As System.Windows.Forms.RadioButton
 	Friend WithEvents optFive As System.Windows.Forms.RadioButton
 	Friend WithEvents optTwo As System.Windows.Forms.RadioButton
-	Friend WithEvents optOne As System.Windows.Forms.RadioButton
-	Friend WithEvents lblDisplayApps As System.Windows.Forms.Label
-	<System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+    Friend WithEvents optOne As System.Windows.Forms.RadioButton
+    Friend WithEvents btnCopy As System.Windows.Forms.Button
+    Friend WithEvents lblDisplayApps As System.Windows.Forms.Label
+    <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container
-		Dim resources As System.Resources.ResourceManager = New System.Resources.ResourceManager(GetType(LogViewer))
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LogViewer))
 		Me.ttTips = New System.Windows.Forms.ToolTip(Me.components)
 		Me.btnOK = New System.Windows.Forms.Button
 		Me.btnRefresh = New System.Windows.Forms.Button
-		Me.rtbLog = New System.Windows.Forms.RichTextBox
+		Me.rtbLog = New System.Windows.Forms.TextBox
 		Me.chkMinor = New System.Windows.Forms.CheckBox
 		Me.optAll = New System.Windows.Forms.RadioButton
 		Me.lblDisplay = New System.Windows.Forms.Label
@@ -81,191 +82,117 @@ Public Class LogViewer
 		Me.optTwo = New System.Windows.Forms.RadioButton
 		Me.optOne = New System.Windows.Forms.RadioButton
 		Me.lblDisplayApps = New System.Windows.Forms.Label
+		Me.btnCopy = New System.Windows.Forms.Button
 		Me.SuspendLayout()
 		'
 		'btnOK
 		'
-		Me.btnOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		resources.ApplyResources(Me.btnOK, "btnOK")
 		Me.btnOK.BackColor = System.Drawing.SystemColors.Control
 		Me.btnOK.Cursor = System.Windows.Forms.Cursors.Default
 		Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.Cancel
-		Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
 		Me.btnOK.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.btnOK.Location = New System.Drawing.Point(576, 400)
 		Me.btnOK.Name = "btnOK"
-		Me.btnOK.RightToLeft = System.Windows.Forms.RightToLeft.No
-		Me.btnOK.Size = New System.Drawing.Size(104, 24)
-		Me.btnOK.TabIndex = 1
-		Me.btnOK.Text = "&Ok"
+		Me.btnOK.UseVisualStyleBackColor = False
 		'
 		'btnRefresh
 		'
-		Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System
+		resources.ApplyResources(Me.btnRefresh, "btnRefresh")
 		Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.btnRefresh.Location = New System.Drawing.Point(576, 360)
 		Me.btnRefresh.Name = "btnRefresh"
-		Me.btnRefresh.Size = New System.Drawing.Size(104, 24)
-		Me.btnRefresh.TabIndex = 3
-		Me.btnRefresh.Text = "&Refresh"
 		'
 		'rtbLog
 		'
 		Me.rtbLog.AcceptsTab = True
-		Me.rtbLog.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.rtbLog.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.rtbLog.Location = New System.Drawing.Point(8, 8)
+		resources.ApplyResources(Me.rtbLog, "rtbLog")
 		Me.rtbLog.Name = "rtbLog"
 		Me.rtbLog.ReadOnly = True
-		Me.rtbLog.ShowSelectionMargin = True
-		Me.rtbLog.Size = New System.Drawing.Size(560, 416)
-		Me.rtbLog.TabIndex = 4
-		Me.rtbLog.Text = ""
-		Me.rtbLog.WordWrap = False
 		'
 		'chkMinor
 		'
-		Me.chkMinor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		resources.ApplyResources(Me.chkMinor, "chkMinor")
 		Me.chkMinor.Checked = True
 		Me.chkMinor.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.chkMinor.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.chkMinor.Location = New System.Drawing.Point(576, 48)
 		Me.chkMinor.Name = "chkMinor"
-		Me.chkMinor.Size = New System.Drawing.Size(104, 16)
-		Me.chkMinor.TabIndex = 5
-		Me.chkMinor.Text = "Minor Events"
 		'
 		'optAll
 		'
-		Me.optAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.optAll.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.optAll.Location = New System.Drawing.Point(576, 248)
+		resources.ApplyResources(Me.optAll, "optAll")
 		Me.optAll.Name = "optAll"
-		Me.optAll.Size = New System.Drawing.Size(104, 16)
-		Me.optAll.TabIndex = 11
-		Me.optAll.Text = "All"
 		'
 		'lblDisplay
 		'
-		Me.lblDisplay.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		resources.ApplyResources(Me.lblDisplay, "lblDisplay")
 		Me.lblDisplay.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.lblDisplay.Location = New System.Drawing.Point(576, 8)
 		Me.lblDisplay.Name = "lblDisplay"
-		Me.lblDisplay.Size = New System.Drawing.Size(104, 32)
-		Me.lblDisplay.TabIndex = 14
-		Me.lblDisplay.Text = "Choose which events to display"
 		'
 		'chkMajor
 		'
-		Me.chkMajor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		resources.ApplyResources(Me.chkMajor, "chkMajor")
 		Me.chkMajor.Checked = True
 		Me.chkMajor.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.chkMajor.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.chkMajor.Location = New System.Drawing.Point(576, 72)
 		Me.chkMajor.Name = "chkMajor"
-		Me.chkMajor.Size = New System.Drawing.Size(104, 16)
-		Me.chkMajor.TabIndex = 15
-		Me.chkMajor.Text = "Major Events"
 		'
 		'chkLifetime
 		'
-		Me.chkLifetime.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		resources.ApplyResources(Me.chkLifetime, "chkLifetime")
 		Me.chkLifetime.Checked = True
 		Me.chkLifetime.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.chkLifetime.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.chkLifetime.Location = New System.Drawing.Point(576, 96)
 		Me.chkLifetime.Name = "chkLifetime"
-		Me.chkLifetime.Size = New System.Drawing.Size(104, 16)
-		Me.chkLifetime.TabIndex = 16
-		Me.chkLifetime.Text = "Lifetime Events"
 		'
 		'chkError
 		'
-		Me.chkError.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		resources.ApplyResources(Me.chkError, "chkError")
 		Me.chkError.Checked = True
 		Me.chkError.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.chkError.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.chkError.Location = New System.Drawing.Point(576, 120)
 		Me.chkError.Name = "chkError"
-		Me.chkError.Size = New System.Drawing.Size(104, 16)
-		Me.chkError.TabIndex = 17
-		Me.chkError.Text = "Error Events"
 		'
 		'chkWarning
 		'
-		Me.chkWarning.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		resources.ApplyResources(Me.chkWarning, "chkWarning")
 		Me.chkWarning.Checked = True
 		Me.chkWarning.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.chkWarning.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.chkWarning.Location = New System.Drawing.Point(576, 144)
 		Me.chkWarning.Name = "chkWarning"
-		Me.chkWarning.TabIndex = 18
-		Me.chkWarning.Text = "Warning Events"
 		'
 		'optTen
 		'
-		Me.optTen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.optTen.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.optTen.Location = New System.Drawing.Point(576, 272)
+		resources.ApplyResources(Me.optTen, "optTen")
 		Me.optTen.Name = "optTen"
-		Me.optTen.Size = New System.Drawing.Size(104, 16)
-		Me.optTen.TabIndex = 20
-		Me.optTen.Text = "Last Ten"
 		'
 		'optFive
 		'
-		Me.optFive.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.optFive.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.optFive.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-		Me.optFive.Location = New System.Drawing.Point(576, 288)
+		resources.ApplyResources(Me.optFive, "optFive")
+		Me.optFive.Checked = True
 		Me.optFive.Name = "optFive"
-		Me.optFive.Size = New System.Drawing.Size(104, 16)
-		Me.optFive.TabIndex = 21
-		Me.optFive.Text = "Last Five"
+		Me.optFive.TabStop = True
 		'
 		'optTwo
 		'
-		Me.optTwo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.optTwo.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.optTwo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-		Me.optTwo.Location = New System.Drawing.Point(576, 304)
+		resources.ApplyResources(Me.optTwo, "optTwo")
 		Me.optTwo.Name = "optTwo"
-		Me.optTwo.Size = New System.Drawing.Size(104, 16)
-		Me.optTwo.TabIndex = 22
-		Me.optTwo.Text = "Last two"
 		'
 		'optOne
 		'
-		Me.optOne.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.optOne.Checked = True
-		Me.optOne.FlatStyle = System.Windows.Forms.FlatStyle.System
-		Me.optOne.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-		Me.optOne.Location = New System.Drawing.Point(576, 328)
+		resources.ApplyResources(Me.optOne, "optOne")
 		Me.optOne.Name = "optOne"
-		Me.optOne.Size = New System.Drawing.Size(104, 16)
-		Me.optOne.TabIndex = 23
-		Me.optOne.TabStop = True
-		Me.optOne.Text = "This instance"
 		'
 		'lblDisplayApps
 		'
-		Me.lblDisplayApps.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.lblDisplayApps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-		Me.lblDisplayApps.Location = New System.Drawing.Point(576, 192)
+		resources.ApplyResources(Me.lblDisplayApps, "lblDisplayApps")
 		Me.lblDisplayApps.Name = "lblDisplayApps"
-		Me.lblDisplayApps.Size = New System.Drawing.Size(104, 48)
-		Me.lblDisplayApps.TabIndex = 19
-		Me.lblDisplayApps.Text = "Choose which application instances to display"
+		'
+		'btnCopy
+		'
+		resources.ApplyResources(Me.btnCopy, "btnCopy")
+		Me.btnCopy.ForeColor = System.Drawing.SystemColors.ControlText
+		Me.btnCopy.Name = "btnCopy"
 		'
 		'LogViewer
 		'
 		Me.AcceptButton = Me.btnOK
-		Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
+		resources.ApplyResources(Me, "$this")
 		Me.CancelButton = Me.btnOK
-		Me.ClientSize = New System.Drawing.Size(688, 430)
+		Me.Controls.Add(Me.btnCopy)
 		Me.Controls.Add(Me.optOne)
 		Me.Controls.Add(Me.optTwo)
 		Me.Controls.Add(Me.optFive)
@@ -281,66 +208,79 @@ Public Class LogViewer
 		Me.Controls.Add(Me.rtbLog)
 		Me.Controls.Add(Me.btnRefresh)
 		Me.Controls.Add(Me.btnOK)
-		Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-		Me.Location = New System.Drawing.Point(11, 57)
 		Me.Name = "LogViewer"
-		Me.Text = "Log Viewer"
-		Me.TopMost = True
 		Me.ResumeLayout(False)
+		Me.PerformLayout()
 
 	End Sub
 #End Region
 
 
-	'Procedures
-	Public LogView As Logger
+    'Procedures
+    Public LogView As Logger
 
 
-	Private Sub btnRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRefresh.Click
-		RefreshLog()
-	End Sub
+    Private Sub btnRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRefresh.Click
+        RefreshLog()
+    End Sub
 
-	Public Sub RefreshLog()
-		If Not LogView Is Nothing Then
-			Dim intInstances As Integer = 1
-			If optOne.Checked Then
-				intInstances = 1
-			End If
-			If optTwo.Checked Then
-				intInstances = 2
-			End If
-			If optFive.Checked Then
-				intInstances = 5
-			End If
-			If optTen.Checked Then
-				intInstances = 10
-			End If
-			If optAll.Checked Then
-				intInstances = 0
-			End If
-			rtbLog.Text = LogView.GetTextDisplay(intInstances, chkMinor.Checked, chkMajor.Checked, chkLifetime.Checked, chkError.Checked, chkWarning.Checked)
-		End If
-	End Sub
+    Public Sub RefreshLog()
+        If Not LogView Is Nothing Then
+            Dim intInstances As Integer = 1
+            If optOne.Checked Then
+                intInstances = 1
+            End If
+            If optTwo.Checked Then
+                intInstances = 2
+            End If
+            If optFive.Checked Then
+                intInstances = 5
+            End If
+            If optTen.Checked Then
+                intInstances = 10
+            End If
+            If optAll.Checked Then
+                intInstances = 0
+            End If
+            rtbLog.Text = LogView.GetTextDisplay(intInstances, chkMinor.Checked, chkMajor.Checked, chkLifetime.Checked, chkError.Checked, chkWarning.Checked)
+            If (rtbLog.Text.length > 0) Then
+                rtbLog.Select(rtbLog.Text.Length - 1, 0)
+                rtbLog.ScrollToCaret()
+            End If
 
-	Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
-		Me.Close()
-	End Sub
+        End If
+    End Sub
+
+    Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
+        Me.Close()
+    End Sub
 
 
-	Private Sub EventFilters_Changed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkMinor.CheckedChanged, chkMajor.CheckedChanged, chkLifetime.CheckedChanged, chkError.CheckedChanged, chkWarning.CheckedChanged
-		RefreshLog()
-	End Sub
+    Private Sub EventFilters_Changed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkMinor.CheckedChanged, chkMajor.CheckedChanged, chkLifetime.CheckedChanged, chkError.CheckedChanged, chkWarning.CheckedChanged
+        RefreshLog()
+    End Sub
 
-	Private Sub InstanceFilters_Changed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optTen.CheckedChanged, optAll.CheckedChanged, optFive.CheckedChanged, optTwo.CheckedChanged, optOne.CheckedChanged
-		RefreshLog()
-	End Sub
+    Private Sub InstanceFilters_Changed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optTen.CheckedChanged, optAll.CheckedChanged, optFive.CheckedChanged, optTwo.CheckedChanged, optOne.CheckedChanged
+        RefreshLog()
+    End Sub
 
-	Private Sub LogViewer_VisibleChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.VisibleChanged
-		If Me.Visible Then
-			RefreshLog()
-		End If
-	End Sub
+    Private Sub LogViewer_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+        If (rtbLog.Text.length > 0) Then
+            rtbLog.Select(rtbLog.Text.Length - 1, 0)
+            rtbLog.ScrollToCaret()
+        End If
+
+    End Sub
+
+    Private Sub LogViewer_VisibleChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.VisibleChanged
+        If Me.Visible Then
+            RefreshLog()
+        End If
+    End Sub
+
+    Private Sub btnCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopy.Click
+        Clipboard.SetText(rtbLog.Text)
+    End Sub
 End Class
 
 #End Region
@@ -582,10 +522,10 @@ End Class
 		Private m_strAppEndEntry As String = "-Ending " & m_strAppName & "..."
 
 		'File to log to if m_blnFileLogging is true
-		Private m_strLogFile As String = "Debug.txt"
+    Private m_strLogFile As String = Application.ProductName & ".LOG"
 
 		'Directory logging file is stored in
-		Private m_strLogDir As String = System.IO.Path.GetDirectoryName(m_strAppEXE)
+    Private m_strLogDir As String = Application.LocalUserAppDataPath
 
 		Private m_strAppName As String = "App Logger"
 
@@ -758,7 +698,6 @@ End Class
 			End Get
 			Set(ByVal Value As String)
 			m_strAppEXE = Value
-			m_strLogDir = System.IO.Path.GetDirectoryName(m_strAppEXE)
 			End Set
 		End Property
 
@@ -897,7 +836,7 @@ End Class
 
 					'Loop through array and set values
 					For intArrayLoop = 0 To Data.Length - 1
-						bytChars(intArrayLoop) = CByte(Asc(Data.Substring(intArrayLoop, 1)))
+					bytChars(intArrayLoop) = CByte(Microsoft.VisualBasic.Asc(Data.Chars(intArrayLoop)))
 					Next
 
 
@@ -962,7 +901,7 @@ End Class
 								True, _
 								System.Text.Encoding.Default)
 
-							Dim strTimeFormat As String = Now.ToLongTimeString & " Ms:" & Now.Millisecond
+						Dim strTimeFormat As String = DateTime.Now.ToLongTimeString & " Ms:" & DateTime.Now.Millisecond
 
 							'Write to file
 							OutputStream.WriteLine(cm_strEntryHeader & strHeader & _
@@ -1030,34 +969,34 @@ End Class
 			'Return string
 			Return strData
 		End Function
-		Private Overloads Function m_ErrorToString(ByVal errError As ErrObject, Optional ByVal ExtraData As String = "") As String
-			'Create String Variable to aCDumulate data
-			Dim strData As String = ""
+	Private Overloads Function m_ErrorToString(ByVal errError As Microsoft.VisualBasic.ErrObject, Optional ByVal ExtraData As String = "") As String
+		'Create String Variable to aCDumulate data
+		Dim strData As String = ""
 
-			Dim strbException As New System.Text.StringBuilder(errError.GetException.ToString)
-			strbException.Replace("""", "''")
+		Dim strbException As New System.Text.StringBuilder(errError.GetException.ToString)
+		strbException.Replace("""", "''")
 
-			Dim strbExtraData As New System.Text.StringBuilder(ExtraData)
-			strbExtraData.Replace("""", "''")
-			ExtraData = strbExtraData.ToString
+		Dim strbExtraData As New System.Text.StringBuilder(ExtraData)
+		strbExtraData.Replace("""", "''")
+		ExtraData = strbExtraData.ToString
 
-			'Set Data to exception description
-			strData = cm_strErrorDataHeader & cm_strSectionSeparator & _
-					  cm_strExceptionHeader & strbException.ToString & cm_strExceptionEnder
+		'Set Data to exception description
+		strData = cm_strErrorDataHeader & cm_strSectionSeparator & _
+			 cm_strExceptionHeader & strbException.ToString & cm_strExceptionEnder
 
-			'TODO Add Other Err object properties
+		'TODO Add Other Err object properties
 
-			'If there is any characters in extradata then add it to strdata
-			If ExtraData.Length > 0 Then
-				strData += cm_strSectionSeparator & cm_strDataHeader & ExtraData & cm_strDataEnder
-			End If
+		'If there is any characters in extradata then add it to strdata
+		If ExtraData.Length > 0 Then
+			strData += cm_strSectionSeparator & cm_strDataHeader & ExtraData & cm_strDataEnder
+		End If
 
-			'Add String Ender
-			strData += cm_strSectionSeparator & cm_strErrorDataEnder
+		'Add String Ender
+		strData += cm_strSectionSeparator & cm_strErrorDataEnder
 
-			'Return string
-			Return strData
-		End Function
+		'Return string
+		Return strData
+	End Function
 
 
 		''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -1103,10 +1042,10 @@ End Class
 			AddEntry(m_strAppEndEntry, LogCat.LifetimeCategory, m_strEndData)
 		End Sub
 
-		Public Overloads Sub LogError(ByVal Message As String, ByVal errError As ErrObject, Optional ByVal strData As String = "")
-			'Write entry
-			AddEntry(Message, LogCat.ErrorCategory, m_ErrorToString(errError, strData))
-		End Sub
+	Public Overloads Sub LogError(ByVal Message As String, ByVal errError As Microsoft.VisualBasic.ErrObject, Optional ByVal strData As String = "")
+		'Write entry
+		AddEntry(Message, LogCat.ErrorCategory, m_ErrorToString(errError, strData))
+	End Sub
 		Public Overloads Sub LogError(ByVal Message As String, ByVal exException As Exception, Optional ByVal strData As String = "")
 			'Write Entry
 			AddEntry(Message, LogCat.ErrorCategory, m_ErrorToString(exException, strData))
@@ -1116,10 +1055,10 @@ End Class
 			AddEntry(Message, LogCat.ErrorCategory, cm_strDataHeader & strData & cm_strDataEnder)
 		End Sub
 
-		Public Overloads Sub LogWarning(ByVal Message As String, ByVal errError As ErrObject, Optional ByVal strData As String = "")
-			'Write entry
-			AddEntry(Message, LogCat.WarningCategory, m_ErrorToString(errError, strData))
-		End Sub
+	Public Overloads Sub LogWarning(ByVal Message As String, ByVal errError As Microsoft.VisualBasic.ErrObject, Optional ByVal strData As String = "")
+		'Write entry
+		AddEntry(Message, LogCat.WarningCategory, m_ErrorToString(errError, strData))
+	End Sub
 		Public Overloads Sub LogWarning(ByVal Message As String, ByVal exException As Exception, Optional ByVal strData As String = "")
 			'Write Entry
 			AddEntry(Message, LogCat.WarningCategory, m_ErrorToString(exException, strData))
@@ -1129,10 +1068,10 @@ End Class
 			AddEntry(Message, LogCat.WarningCategory, cm_strDataHeader & strData & cm_strDataEnder)
 		End Sub
 
-		Public Overloads Sub LogMajorInfo(ByVal Message As String, ByVal errError As ErrObject, Optional ByVal strData As String = "")
-			'Write entry
-			AddEntry(Message, LogCat.MajorInfoCategory, m_ErrorToString(errError, strData))
-		End Sub
+	Public Overloads Sub LogMajorInfo(ByVal Message As String, ByVal errError As Microsoft.VisualBasic.ErrObject, Optional ByVal strData As String = "")
+		'Write entry
+		AddEntry(Message, LogCat.MajorInfoCategory, m_ErrorToString(errError, strData))
+	End Sub
 		Public Overloads Sub LogMajorInfo(ByVal Message As String, ByVal exException As Exception, Optional ByVal strData As String = "")
 			'Write Entry
 			AddEntry(Message, LogCat.MajorInfoCategory, m_ErrorToString(exException, strData))
@@ -1142,10 +1081,10 @@ End Class
 			AddEntry(Message, LogCat.MajorInfoCategory, cm_strDataHeader & strData & cm_strDataEnder)
 		End Sub
 
-		Public Overloads Sub LogMinorInfo(ByVal Message As String, ByVal errError As ErrObject, Optional ByVal strData As String = "")
-			'Write entry
-			AddEntry(Message, LogCat.MinorInfoCategory, m_ErrorToString(errError, strData))
-		End Sub
+	Public Overloads Sub LogMinorInfo(ByVal Message As String, ByVal errError As Microsoft.VisualBasic.ErrObject, Optional ByVal strData As String = "")
+		'Write entry
+		AddEntry(Message, LogCat.MinorInfoCategory, m_ErrorToString(errError, strData))
+	End Sub
 		Public Overloads Sub LogMinorInfo(ByVal Message As String, ByVal exException As Exception, Optional ByVal strData As String = "")
 			'Write Entry
 			AddEntry(Message, LogCat.MinorInfoCategory, m_ErrorToString(exException, strData))
@@ -1159,458 +1098,458 @@ End Class
 
 #Region "Error Handling Routines"
 
-		Public Overloads Function HandleError( _
-				ByVal Message As String, _
-				ByVal errError As ErrObject, _
-				Optional ByVal strData As String = "", _
-				Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-											MessageBoxButtons.AbortRetryIgnore, _
-				Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-											MessageBoxIcon.Error, _
-				Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-											MessageBoxDefaultButton.Button3) _
-				As System.Windows.Forms.DialogResult
+	Public Overloads Function HandleError( _
+	  ByVal Message As String, _
+	  ByVal errError As Microsoft.VisualBasic.ErrObject, _
+	  Optional ByVal strData As String = "", _
+	  Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+				MessageBoxButtons.AbortRetryIgnore, _
+	  Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+				MessageBoxIcon.Error, _
+	  Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+				MessageBoxDefaultButton.Button3) _
+	  As System.Windows.Forms.DialogResult
 
-			'Write entry containing all data and error
-			AddEntry(cm_strNewNodeSymbol & Message, _
-						LogCat.ErrorCategory, _
-						m_ErrorToString(errError, strData))
+		'Write entry containing all data and error
+		AddEntry(cm_strNewNodeSymbol & Message, _
+			LogCat.ErrorCategory, _
+			m_ErrorToString(errError, strData))
 
-			'Create variable to hold result of message box
-			Dim Result As System.Windows.Forms.DialogResult
+		'Create variable to hold result of message box
+		Dim Result As System.Windows.Forms.DialogResult
 
-			'Add error and data to message string
-			'If any data ten add that first
-			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
-			Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(errError) & cm_strMSGErrorEnder
+		'Add error and data to message string
+		'If any data ten add that first
+		If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(errError) & cm_strMSGErrorEnder
 
-			'Show message box and get return value
-			Result = System.Windows.Forms.MessageBox.Show(Message, _
-			 m_strAppName, MessageButtons, _
-			 MessageIcon, _
-			 DefaultButton)
-
-			'Add entry to finish node started previosly depending upon which button was pressed
-			Select Case Result
-
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.ErrorCategory)
-
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.ErrorCategory)
-
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.ErrorCategory)
-
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.ErrorCategory)
-
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.ErrorCategory)
-
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.ErrorCategory)
-
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.ErrorCategory)
-
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.ErrorCategory)
-
-			End Select
-
-			'Retrun message box result
-			Return Result
-		End Function
-
-		Public Overloads Function HandleError( _
-			ByVal Message As String, _
-			ByVal exException As Exception, _
-			Optional ByVal strData As String = "", _
-			Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-										MessageBoxButtons.AbortRetryIgnore, _
-			Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-										MessageBoxIcon.Error, _
-			Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-										MessageBoxDefaultButton.Button3) _
-			As System.Windows.Forms.DialogResult
-
-			'Write entry containing all data and error
-			AddEntry(cm_strNewNodeSymbol & Message, _
-						LogCat.ErrorCategory, _
-						m_ErrorToString(exException, strData))
-
-			'Create variable to hold result of message box
-			Dim Result As System.Windows.Forms.DialogResult
-
-			'Add error and data to message string
-			'If any data ten add that first
-			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
-			Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
-
-
-			'Show message box and get return value
-			Result = System.Windows.Forms.MessageBox.Show(Message, _
-			 m_strAppName, MessageButtons, _
-			 MessageIcon, _
-			 DefaultButton)
-
-			'Add entry to finish nod started previosly depending upon which button was pressed
-			Select Case Result
-
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.ErrorCategory)
-
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.ErrorCategory)
-
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.ErrorCategory)
-
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.ErrorCategory)
-
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.ErrorCategory)
-
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.ErrorCategory)
-
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.ErrorCategory)
-
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.ErrorCategory)
-
-			End Select
-
-			'Retrun message box result
-			Return Result
-		End Function
-
-		Public Overloads Function HandleError( _
-			ByVal Message As String, _
-			Optional ByVal strData As String = "", _
-			Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-										MessageBoxButtons.AbortRetryIgnore, _
-			Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-										MessageBoxIcon.Error, _
-			Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-										MessageBoxDefaultButton.Button3) _
-			As System.Windows.Forms.DialogResult
-
-			'Write entry containing all data and error
-			AddEntry(cm_strNewNodeSymbol & Message, _
-						LogCat.ErrorCategory, strData)
-
-			'Create variable to hold result of message box
-			Dim Result As System.Windows.Forms.DialogResult
-
-			'Show message box and get return value
+		'Show message box and get return value
 		Result = System.Windows.Forms.MessageBox.Show(Message, _
-	   m_strAppName, MessageButtons, MessageIcon, _
-	   DefaultButton)
+		 m_strAppName, MessageButtons, _
+		 MessageIcon, _
+		 DefaultButton)
 
-			'Add entry to finish nod started previosly depending upon which button was pressed
-			Select Case Result
+		'Add entry to finish node started previosly depending upon which button was pressed
+		Select Case Result
 
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.ErrorCategory)
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.ErrorCategory)
 
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.ErrorCategory)
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.ErrorCategory)
 
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.ErrorCategory)
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.ErrorCategory)
 
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.ErrorCategory)
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.ErrorCategory)
 
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.ErrorCategory)
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.ErrorCategory)
 
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.ErrorCategory)
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.ErrorCategory)
 
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.ErrorCategory)
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.ErrorCategory)
 
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.ErrorCategory)
-
-			End Select
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.ErrorCategory)
 
-			'Retrun message box result
-			Return Result
-		End Function
+		End Select
 
-		Public Overloads Function HandleWarning( _
-			ByVal Message As String, _
-			ByVal errWarning As ErrObject, _
-			Optional ByVal strData As String = "", _
-			Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-										MessageBoxButtons.OK, _
-			Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-										MessageBoxIcon.Warning, _
-			Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-										MessageBoxDefaultButton.Button1) _
-			As System.Windows.Forms.DialogResult
+		'Retrun message box result
+		Return Result
+	End Function
 
-			'Write entry containing all data and Warning
-			AddEntry(cm_strNewNodeSymbol & Message, _
-						LogCat.WarningCategory, _
-						m_ErrorToString(errWarning, strData))
+	Public Overloads Function HandleError( _
+	 ByVal Message As String, _
+	 ByVal exException As Exception, _
+	 Optional ByVal strData As String = "", _
+	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+			  MessageBoxButtons.AbortRetryIgnore, _
+	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+			  MessageBoxIcon.Error, _
+	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+			  MessageBoxDefaultButton.Button3) _
+	 As System.Windows.Forms.DialogResult
 
-			'Create variable to hold result of message box
-			Dim Result As System.Windows.Forms.DialogResult
+		'Write entry containing all data and error
+		AddEntry(cm_strNewNodeSymbol & Message, _
+			LogCat.ErrorCategory, _
+			m_ErrorToString(exException, strData))
 
-			'Show message box and get return value
-			Result = System.Windows.Forms.MessageBox.Show(Message, _
-			 m_strAppName, MessageButtons, _
-			 MessageIcon, _
-			 DefaultButton)
+		'Create variable to hold result of message box
+		Dim Result As System.Windows.Forms.DialogResult
 
-			'Add error and data to message string
-			'If any data ten add that first
-			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
-			Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(errWarning) & cm_strMSGErrorEnder
+		'Add error and data to message string
+		'If any data ten add that first
+		If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
 
 
-			'Add entry to finish nod started previosly depending upon which button was pressed
-			Select Case Result
+		'Show message box and get return value
+		Result = System.Windows.Forms.MessageBox.Show(Message, _
+		 m_strAppName, MessageButtons, _
+		 MessageIcon, _
+		 DefaultButton)
 
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.WarningCategory)
+		'Add entry to finish nod started previosly depending upon which button was pressed
+		Select Case Result
 
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.WarningCategory)
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.ErrorCategory)
 
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.WarningCategory)
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.ErrorCategory)
 
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.WarningCategory)
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.ErrorCategory)
 
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.WarningCategory)
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.ErrorCategory)
 
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.WarningCategory)
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.ErrorCategory)
 
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.WarningCategory)
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.ErrorCategory)
 
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.WarningCategory)
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.ErrorCategory)
 
-			End Select
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.ErrorCategory)
 
-			'Retrun message box result
-			Return Result
-		End Function
-
-		Public Overloads Function HandleWarning( _
-			ByVal Message As String, _
-			ByVal exException As Exception, _
-			Optional ByVal strData As String = "", _
-			Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-										MessageBoxButtons.OK, _
-			Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-										MessageBoxIcon.Warning, _
-			Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-										MessageBoxDefaultButton.Button1) _
-			As System.Windows.Forms.DialogResult
-
-			'Write entry containing all data and Warning
-			AddEntry(cm_strNewNodeSymbol & Message, _
-						LogCat.WarningCategory, _
-						m_ErrorToString(exException, strData))
-
-			'Create variable to hold result of message box
-			Dim Result As System.Windows.Forms.DialogResult
-
-			'Add error and data to message string
-			'If any data ten add that first
-			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
-			Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
+		End Select
 
+		'Retrun message box result
+		Return Result
+	End Function
+
+	Public Overloads Function HandleError( _
+	 ByVal Message As String, _
+	 Optional ByVal strData As String = "", _
+	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+			  MessageBoxButtons.AbortRetryIgnore, _
+	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+			  MessageBoxIcon.Error, _
+	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+			  MessageBoxDefaultButton.Button3) _
+	 As System.Windows.Forms.DialogResult
+
+		'Write entry containing all data and error
+		AddEntry(cm_strNewNodeSymbol & Message, _
+			LogCat.ErrorCategory, strData)
 
-			'Show message box and get return value
-			Result = System.Windows.Forms.MessageBox.Show(Message, _
-			 m_strAppName, MessageButtons, _
-			 MessageIcon, _
-			 DefaultButton)
+		'Create variable to hold result of message box
+		Dim Result As System.Windows.Forms.DialogResult
 
-			'Add entry to finish nod started previosly depending upon which button was pressed
-			Select Case Result
-
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.WarningCategory)
-
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.WarningCategory)
-
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.WarningCategory)
-
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.WarningCategory)
-
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.WarningCategory)
-
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.WarningCategory)
-
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.WarningCategory)
-
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.WarningCategory)
-
-			End Select
-
-			'Retrun message box result
-			Return Result
-		End Function
-
-		Public Overloads Function HandleWarning( _
-			ByVal Message As String, _
-			Optional ByVal strData As String = "", _
-			Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-										MessageBoxButtons.OK, _
-			Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-										MessageBoxIcon.Warning, _
-			Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-										MessageBoxDefaultButton.Button1) _
-			As System.Windows.Forms.DialogResult
-
-			'Write entry containing all data and Warning
-			AddEntry(cm_strNewNodeSymbol & Message, _
-						LogCat.WarningCategory, strData)
-
-			'Create variable to hold result of message box
-			Dim Result As System.Windows.Forms.DialogResult
-
-			'Add error and data to message string
-			'If any data ten add that first
-			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
-
-			'Show message box and get return value
-			Result = System.Windows.Forms.MessageBox.Show(Message, _
-			 m_strAppName, MessageButtons, _
-			 MessageIcon, _
-			 DefaultButton)
+		'Show message box and get return value
+		Result = System.Windows.Forms.MessageBox.Show(Message, _
+		  m_strAppName, MessageButtons, MessageIcon, _
+		  DefaultButton)
 
-			'Add entry to finish nod started previosly depending upon which button was pressed
-			Select Case Result
+		'Add entry to finish nod started previosly depending upon which button was pressed
+		Select Case Result
 
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.WarningCategory)
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.ErrorCategory)
 
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.WarningCategory)
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.ErrorCategory)
+
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.ErrorCategory)
+
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.ErrorCategory)
+
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.ErrorCategory)
+
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.ErrorCategory)
+
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.ErrorCategory)
+
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.ErrorCategory)
+
+		End Select
+
+		'Retrun message box result
+		Return Result
+	End Function
+
+	Public Overloads Function HandleWarning( _
+	 ByVal Message As String, _
+	 ByVal errWarning As Microsoft.VisualBasic.ErrObject, _
+	 Optional ByVal strData As String = "", _
+	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+		 MessageBoxButtons.OK, _
+	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+		 MessageBoxIcon.Warning, _
+	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+		 MessageBoxDefaultButton.Button1) _
+	 As System.Windows.Forms.DialogResult
+
+		'Write entry containing all data and Warning
+		AddEntry(cm_strNewNodeSymbol & Message, _
+		 LogCat.WarningCategory, _
+		 m_ErrorToString(errWarning, strData))
 
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.WarningCategory)
+		'Create variable to hold result of message box
+		Dim Result As System.Windows.Forms.DialogResult
 
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.WarningCategory)
+		'Show message box and get return value
+		Result = System.Windows.Forms.MessageBox.Show(Message, _
+		 m_strAppName, MessageButtons, _
+		 MessageIcon, _
+		 DefaultButton)
 
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.WarningCategory)
+		'Add error and data to message string
+		'If any data ten add that first
+		If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(errWarning) & cm_strMSGErrorEnder
 
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.WarningCategory)
 
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.WarningCategory)
+		'Add entry to finish nod started previosly depending upon which button was pressed
+		Select Case Result
 
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.WarningCategory)
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.WarningCategory)
 
-			End Select
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.WarningCategory)
+
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.WarningCategory)
+
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.WarningCategory)
+
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.WarningCategory)
+
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.WarningCategory)
+
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.WarningCategory)
+
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.WarningCategory)
+
+		End Select
+
+		'Retrun message box result
+		Return Result
+	End Function
+
+	Public Overloads Function HandleWarning( _
+	 ByVal Message As String, _
+	 ByVal exException As Exception, _
+	 Optional ByVal strData As String = "", _
+	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+			  MessageBoxButtons.OK, _
+	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+			  MessageBoxIcon.Warning, _
+	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+			  MessageBoxDefaultButton.Button1) _
+	 As System.Windows.Forms.DialogResult
+
+		'Write entry containing all data and Warning
+		AddEntry(cm_strNewNodeSymbol & Message, _
+			LogCat.WarningCategory, _
+			m_ErrorToString(exException, strData))
 
-			'Retrun message box result
-			Return Result
-		End Function
+		'Create variable to hold result of message box
+		Dim Result As System.Windows.Forms.DialogResult
 
-		Public Overloads Function HandleMajorInfo( _
-			ByVal Message As String, _
-			ByVal errMajorInfo As ErrObject, _
-			Optional ByVal strData As String = "", _
-			Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-									MessageBoxButtons.OK, _
-			Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-									MessageBoxIcon.Information, _
-			Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-									MessageBoxDefaultButton.Button1) _
-		As System.Windows.Forms.DialogResult
+		'Add error and data to message string
+		'If any data ten add that first
+		If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
 
-			'Write entry containing all data and MajorInfo
-			AddEntry(cm_strNewNodeSymbol & Message, _
-						LogCat.MajorInfoCategory, _
-						m_ErrorToString(errMajorInfo, strData))
 
-			'Create variable to hold result of message box
-			Dim Result As System.Windows.Forms.DialogResult
+		'Show message box and get return value
+		Result = System.Windows.Forms.MessageBox.Show(Message, _
+		 m_strAppName, MessageButtons, _
+		 MessageIcon, _
+		 DefaultButton)
 
-			'Show message box and get return value
-			Result = System.Windows.Forms.MessageBox.Show(Message, _
-			 m_strAppName, MessageButtons, _
-			 MessageIcon, _
-			 DefaultButton)
+		'Add entry to finish nod started previosly depending upon which button was pressed
+		Select Case Result
 
-			'Add error and data to message string
-			'If any data ten add that first
-			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
-			Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(errMajorInfo) & cm_strMSGErrorEnder
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.WarningCategory)
+
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.WarningCategory)
+
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.WarningCategory)
+
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.WarningCategory)
+
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.WarningCategory)
+
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.WarningCategory)
+
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.WarningCategory)
+
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.WarningCategory)
+
+		End Select
+
+		'Retrun message box result
+		Return Result
+	End Function
+
+	Public Overloads Function HandleWarning( _
+	 ByVal Message As String, _
+	 Optional ByVal strData As String = "", _
+	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+			  MessageBoxButtons.OK, _
+	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+			  MessageBoxIcon.Warning, _
+	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+			  MessageBoxDefaultButton.Button1) _
+	 As System.Windows.Forms.DialogResult
 
+		'Write entry containing all data and Warning
+		AddEntry(cm_strNewNodeSymbol & Message, _
+			LogCat.WarningCategory, strData)
 
-			'Add entry to finish nod started previosly depending upon which button was pressed
-			Select Case Result
+		'Create variable to hold result of message box
+		Dim Result As System.Windows.Forms.DialogResult
 
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.MajorInfoCategory)
+		'Add error and data to message string
+		'If any data ten add that first
+		If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
 
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.MajorInfoCategory)
+		'Show message box and get return value
+		Result = System.Windows.Forms.MessageBox.Show(Message, _
+		 m_strAppName, MessageButtons, _
+		 MessageIcon, _
+		 DefaultButton)
 
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.MajorInfoCategory)
+		'Add entry to finish nod started previosly depending upon which button was pressed
+		Select Case Result
 
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.MajorInfoCategory)
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.WarningCategory)
 
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.MajorInfoCategory)
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.WarningCategory)
 
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.MajorInfoCategory)
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.WarningCategory)
 
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.MajorInfoCategory)
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.WarningCategory)
 
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.MajorInfoCategory)
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.WarningCategory)
 
-			End Select
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.WarningCategory)
 
-			'Retrun message box result
-			Return Result
-		End Function
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.WarningCategory)
+
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.WarningCategory)
+
+		End Select
+
+		'Retrun message box result
+		Return Result
+	End Function
+
+	Public Overloads Function HandleMajorInfo( _
+	 ByVal Message As String, _
+	 ByVal errMajorInfo As Microsoft.VisualBasic.ErrObject, _
+	 Optional ByVal strData As String = "", _
+	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+			 MessageBoxButtons.OK, _
+	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+			 MessageBoxIcon.Information, _
+	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+			 MessageBoxDefaultButton.Button1) _
+	As System.Windows.Forms.DialogResult
+
+		'Write entry containing all data and MajorInfo
+		AddEntry(cm_strNewNodeSymbol & Message, _
+			LogCat.MajorInfoCategory, _
+			m_ErrorToString(errMajorInfo, strData))
+
+		'Create variable to hold result of message box
+		Dim Result As System.Windows.Forms.DialogResult
+
+		'Show message box and get return value
+		Result = System.Windows.Forms.MessageBox.Show(Message, _
+		 m_strAppName, MessageButtons, _
+		 MessageIcon, _
+		 DefaultButton)
+
+		'Add error and data to message string
+		'If any data ten add that first
+		If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(errMajorInfo) & cm_strMSGErrorEnder
+
+
+		'Add entry to finish nod started previosly depending upon which button was pressed
+		Select Case Result
+
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.MajorInfoCategory)
+
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.MajorInfoCategory)
+
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.MajorInfoCategory)
+
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.MajorInfoCategory)
+
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.MajorInfoCategory)
+
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.MajorInfoCategory)
+
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.MajorInfoCategory)
+
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.MajorInfoCategory)
+
+		End Select
+
+		'Retrun message box result
+		Return Result
+	End Function
 
 		Public Overloads Function HandleMajorInfo( _
 			ByVal Message As String, _
@@ -1635,9 +1574,9 @@ End Class
 			'Add error and data to message string
 			'If any data ten add that first
 			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
-			Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
 
 
 			'Show message box and get return value
@@ -1700,243 +1639,243 @@ End Class
 			'Add error and data to message string
 			'If any data ten add that first
 			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
 
-			'Show message box and get return value
-			Result = System.Windows.Forms.MessageBox.Show(Message, _
-				Application.ProductName, MessageButtons, _
-				MessageIcon, _
-				DefaultButton)
+		'Show message box and get return value
+		Result = System.Windows.Forms.MessageBox.Show(Message, _
+		 Application.ProductName, MessageButtons, _
+		 MessageIcon, _
+		 DefaultButton)
 
-			'Add entry to finish nod started previosly depending upon which button was pressed
-			Select Case Result
+		'Add entry to finish nod started previosly depending upon which button was pressed
+		Select Case Result
 
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.MajorInfoCategory)
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.MajorInfoCategory)
 
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.MajorInfoCategory)
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.MajorInfoCategory)
 
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.MajorInfoCategory)
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.MajorInfoCategory)
 
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.MajorInfoCategory)
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.MajorInfoCategory)
 
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.MajorInfoCategory)
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.MajorInfoCategory)
 
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.MajorInfoCategory)
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.MajorInfoCategory)
 
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.MajorInfoCategory)
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.MajorInfoCategory)
 
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.MajorInfoCategory)
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.MajorInfoCategory)
 
-			End Select
+		End Select
 
-			'Retrun message box result
-			Return Result
-		End Function
+		'Retrun message box result
+		Return Result
+	End Function
 
-		Public Overloads Function HandleMinorInfo( _
-			   ByVal Message As String, _
-			   ByVal errMinorInfo As ErrObject, _
-			   Optional ByVal strData As String = "", _
-			   Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-									   MessageBoxButtons.OK, _
-			   Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-									   MessageBoxIcon.Information, _
-			   Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-									   MessageBoxDefaultButton.Button1) _
-		   As System.Windows.Forms.DialogResult
+	Public Overloads Function HandleMinorInfo( _
+	  ByVal Message As String, _
+	  ByVal errMinorInfo As Microsoft.VisualBasic.ErrObject, _
+	  Optional ByVal strData As String = "", _
+	  Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+		 MessageBoxButtons.OK, _
+	  Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+		 MessageBoxIcon.Information, _
+	  Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+		 MessageBoxDefaultButton.Button1) _
+	 As System.Windows.Forms.DialogResult
 
-			'Write entry containing all data and MinorInfo
-			AddEntry(cm_strNewNodeSymbol & Message, _
-						LogCat.MinorInfoCategory, _
-						m_ErrorToString(errMinorInfo, strData))
+		'Write entry containing all data and MinorInfo
+		AddEntry(cm_strNewNodeSymbol & Message, _
+		 LogCat.MinorInfoCategory, _
+		 m_ErrorToString(errMinorInfo, strData))
 
-			'Create variable to hold result of message box
-			Dim Result As System.Windows.Forms.DialogResult
+		'Create variable to hold result of message box
+		Dim Result As System.Windows.Forms.DialogResult
 
-			'Add error and data to message string
-			'If any data ten add that first
-			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
-			Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(errMinorInfo) & cm_strMSGErrorEnder
+		'Add error and data to message string
+		'If any data ten add that first
+		If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(errMinorInfo) & cm_strMSGErrorEnder
 
 
-			'Show message box and get return value
-			Result = System.Windows.Forms.MessageBox.Show(Message, _
-				Application.ProductName, MessageButtons, _
-				MessageIcon, _
-				DefaultButton)
+		'Show message box and get return value
+		Result = System.Windows.Forms.MessageBox.Show(Message, _
+		 Application.ProductName, MessageButtons, _
+		 MessageIcon, _
+		 DefaultButton)
 
-			'Add entry to finish nod started previosly depending upon which button was pressed
-			Select Case Result
+		'Add entry to finish nod started previosly depending upon which button was pressed
+		Select Case Result
 
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.MinorInfoCategory)
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.MinorInfoCategory)
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.MinorInfoCategory)
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.MinorInfoCategory)
 
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.MinorInfoCategory)
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.MinorInfoCategory)
 
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.MinorInfoCategory)
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.MinorInfoCategory)
 
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.MinorInfoCategory)
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.MinorInfoCategory)
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.MinorInfoCategory)
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.MinorInfoCategory)
 
-			End Select
+		End Select
 
-			'Retrun message box result
-			Return Result
-		End Function
+		'Retrun message box result
+		Return Result
+	End Function
 
-		Public Overloads Function HandleMinorInfo( _
-			ByVal Message As String, _
-			ByVal exException As Exception, _
-			Optional ByVal strData As String = "", _
-			Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-										MessageBoxButtons.OK, _
-			Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-										MessageBoxIcon.Information, _
-			Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-										MessageBoxDefaultButton.Button1) _
-			As System.Windows.Forms.DialogResult
+	Public Overloads Function HandleMinorInfo( _
+	 ByVal Message As String, _
+	 ByVal exException As Exception, _
+	 Optional ByVal strData As String = "", _
+	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+			  MessageBoxButtons.OK, _
+	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+			  MessageBoxIcon.Information, _
+	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+			  MessageBoxDefaultButton.Button1) _
+	 As System.Windows.Forms.DialogResult
 
-			'Write entry containing all data and MinorInfo
-			AddEntry(cm_strNewNodeSymbol & Message, _
-						LogCat.MinorInfoCategory, _
-						m_ErrorToString(exException, strData))
+		'Write entry containing all data and MinorInfo
+		AddEntry(cm_strNewNodeSymbol & Message, _
+			LogCat.MinorInfoCategory, _
+			m_ErrorToString(exException, strData))
 
-			'Create variable to hold result of message box
-			Dim Result As System.Windows.Forms.DialogResult
+		'Create variable to hold result of message box
+		Dim Result As System.Windows.Forms.DialogResult
 
-			'Add error and data to message string
-			'If any data ten add that first
-			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
-			Message &= vbCrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
+		'Add error and data to message string
+		'If any data ten add that first
+		If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
+		Message &= ControlChars.CrLf & cm_strMSGErrorHeader & m_ErrorToString(exException) & cm_strMSGErrorEnder
 
-			'Show message box and get return value
-			Result = System.Windows.Forms.MessageBox.Show(Message, _
-				Application.ProductName, MessageButtons, _
-				MessageIcon, _
-				DefaultButton)
+		'Show message box and get return value
+		Result = System.Windows.Forms.MessageBox.Show(Message, _
+		 Application.ProductName, MessageButtons, _
+		 MessageIcon, _
+		 DefaultButton)
 
-			'Add entry to finish nod started previosly depending upon which button was pressed
-			Select Case Result
+		'Add entry to finish nod started previosly depending upon which button was pressed
+		Select Case Result
 
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.MinorInfoCategory)
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.MinorInfoCategory)
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.MinorInfoCategory)
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.MinorInfoCategory)
 
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.MinorInfoCategory)
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.MinorInfoCategory)
 
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.MinorInfoCategory)
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.MinorInfoCategory)
 
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.MinorInfoCategory)
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.MinorInfoCategory)
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.MinorInfoCategory)
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.MinorInfoCategory)
 
-			End Select
+		End Select
 
-			'Retrun message box result
-			Return Result
-		End Function
+		'Retrun message box result
+		Return Result
+	End Function
 
-		Public Overloads Function HandleMinorInfo( _
-			ByVal Message As String, _
-			Optional ByVal strData As String = "", _
-			Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
-										MessageBoxButtons.OK, _
-			Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
-										MessageBoxIcon.Information, _
-			Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
-										MessageBoxDefaultButton.Button1) _
-			As System.Windows.Forms.DialogResult
+	Public Overloads Function HandleMinorInfo( _
+	 ByVal Message As String, _
+	 Optional ByVal strData As String = "", _
+	 Optional ByVal MessageButtons As System.Windows.Forms.MessageBoxButtons = _
+			  MessageBoxButtons.OK, _
+	 Optional ByVal MessageIcon As System.Windows.Forms.MessageBoxIcon = _
+			  MessageBoxIcon.Information, _
+	 Optional ByVal DefaultButton As System.Windows.Forms.MessageBoxDefaultButton = _
+			  MessageBoxDefaultButton.Button1) _
+	 As System.Windows.Forms.DialogResult
 
-			'Write entry containing all data and MinorInfo
-			AddEntry(cm_strNewNodeSymbol & Message, _
-						LogCat.MinorInfoCategory, strData)
+		'Write entry containing all data and MinorInfo
+		AddEntry(cm_strNewNodeSymbol & Message, _
+			LogCat.MinorInfoCategory, strData)
 
-			'Create variable to hold result of message box
-			Dim Result As System.Windows.Forms.DialogResult
+		'Create variable to hold result of message box
+		Dim Result As System.Windows.Forms.DialogResult
 
-			'Add error and data to message string
-			'If any data ten add that first
-			If strData.Length > 0 Then
-				Message &= vbCrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
-			End If
+		'Add error and data to message string
+		'If any data ten add that first
+		If strData.Length > 0 Then
+			Message &= ControlChars.CrLf & cm_strMSGDataHeader & strData & cm_strMSGDataEnder
+		End If
 
-			'Show message box and get return value
-			Result = System.Windows.Forms.MessageBox.Show(Message, _
-				Application.ProductName, MessageButtons, _
-				MessageIcon, _
-				DefaultButton)
+		'Show message box and get return value
+		Result = System.Windows.Forms.MessageBox.Show(Message, _
+		 Application.ProductName, MessageButtons, _
+		 MessageIcon, _
+		 DefaultButton)
 
-			'Add entry to finish nod started previosly depending upon which button was pressed
-			Select Case Result
+		'Add entry to finish nod started previosly depending upon which button was pressed
+		Select Case Result
 
-				Case DialogResult.Abort
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.MinorInfoCategory)
+			Case DialogResult.Abort
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogAbort, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Cancel
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.MinorInfoCategory)
+			Case DialogResult.Cancel
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogCancel, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Ignore
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.MinorInfoCategory)
+			Case DialogResult.Ignore
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogIgnore, LogCat.MinorInfoCategory)
 
-				Case DialogResult.No
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.MinorInfoCategory)
+			Case DialogResult.No
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNo, LogCat.MinorInfoCategory)
 
-				Case DialogResult.None
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.MinorInfoCategory)
+			Case DialogResult.None
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogNone, LogCat.MinorInfoCategory)
 
-				Case DialogResult.OK
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.MinorInfoCategory)
+			Case DialogResult.OK
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogOK, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Retry
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.MinorInfoCategory)
+			Case DialogResult.Retry
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogRetry, LogCat.MinorInfoCategory)
 
-				Case DialogResult.Yes
-					AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.MinorInfoCategory)
+			Case DialogResult.Yes
+				AddEntry(cm_strLastNodeSymbol & cm_strDialogYes, LogCat.MinorInfoCategory)
 
-			End Select
+		End Select
 
-			'Retrun message box result
-			Return Result
-		End Function
+		'Retrun message box result
+		Return Result
+	End Function
 
 
 #End Region
@@ -2257,8 +2196,8 @@ End Class
 									strbID = New System.Text.StringBuilder
 								End If
 							End If
-						End If
-						strbFile.Append(ChrW(bytBytes(intByte)))
+					End If
+					strbFile.Append(CChar(Microsoft.VisualBasic.ChrW(bytBytes(intByte))))
 					Next
 					Dim intFindFileBeginning As Integer = 0
 					If DisplayInstances > 0 And Not intInstances Is Nothing Then
@@ -2369,28 +2308,28 @@ End Class
 									End If
 								End If
 								Dim blnValid As Boolean = False
-								Select Case Val(strCategory)
-									Case LogCat.MinorInfoCategory
-										If DisplayMinorEvents Then
-											blnValid = True
-										End If
-									Case LogCat.MajorInfoCategory
-										If DisplayMajorEvents Then
-											blnValid = True
-										End If
-									Case LogCat.LifetimeCategory
-										If DisplayLifetimeEvents Then
-											blnValid = True
-										End If
-									Case LogCat.ErrorCategory
-										If DisplayErrorEvents Then
-											blnValid = True
-										End If
-									Case LogCat.WarningCategory
-										If DisplayWarningEvents Then
-											blnValid = True
-										End If
-								End Select
+							Select Case Integer.Parse(strCategory)
+								Case LogCat.MinorInfoCategory
+									If DisplayMinorEvents Then
+										blnValid = True
+									End If
+								Case LogCat.MajorInfoCategory
+									If DisplayMajorEvents Then
+										blnValid = True
+									End If
+								Case LogCat.LifetimeCategory
+									If DisplayLifetimeEvents Then
+										blnValid = True
+									End If
+								Case LogCat.ErrorCategory
+									If DisplayErrorEvents Then
+										blnValid = True
+									End If
+								Case LogCat.WarningCategory
+									If DisplayWarningEvents Then
+										blnValid = True
+									End If
+							End Select
 								If blnValid Then
 									Dim strID As String = ""
 									If strEntry.StartsWith(cm_strIDHeader) Then
@@ -2486,28 +2425,28 @@ End Class
 
 									Try
 										If strID.Length > 0 Then
-											If blnNewNode And Val(strID) = 0 Then
-												strbText.Append(CChar("|"), 200)
-												strbText.Append(ControlChars.NewLine)
-											End If
+										If blnNewNode And Integer.Parse(strID) = 0 Then
+											strbText.Append(CChar("|"), 200)
+											strbText.Append(ControlChars.NewLine)
+										End If
 										End If
 									Catch
 									End Try
 
-									Select Case CShort(Val(strCategory))
-										Case LogCat.ErrorCategory
-											strbText.Append("!")
-										Case LogCat.LifetimeCategory
-											intLevel = 0
-											strbText.Append("$")
-										Case LogCat.MajorInfoCategory
-											strbText.Append("=")
-										Case LogCat.MinorInfoCategory
-											strbText.Append("-")
-										Case LogCat.WarningCategory
-											strbText.Append("?")
+								Select Case CShort(Integer.Parse(strCategory))
+									Case LogCat.ErrorCategory
+										strbText.Append("!")
+									Case LogCat.LifetimeCategory
+										intLevel = 0
+										strbText.Append("$")
+									Case LogCat.MajorInfoCategory
+										strbText.Append("=")
+									Case LogCat.MinorInfoCategory
+										strbText.Append("-")
+									Case LogCat.WarningCategory
+										strbText.Append("?")
 
-									End Select
+								End Select
 									Const ExtraDataChars As Integer = 60
 									strbText.Append("| ")
 									strbText.Append(CInt(strID).ToString())
